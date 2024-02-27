@@ -1,22 +1,35 @@
 { 
-  description = "Flake for my old white computer";
+  description = "My main configuration";
 
   inputs = {
       nixpkgs.url = "nixpkgs/nixos-23.05";
+      home-manager = {
+        url = "github:nix-community/home-manager/release-23.05";
+        inputs.nixpkgs.follows = "nixpkgs"; # Tell home-manager to follow nix release
+      };
   };
 
-  outputs = { self, nixpkgs, ... }: 
+  outputs = { self, nixpkgs, home-manager, ... }: 
     let
+      system = "x86_64-linux";
       lib = nixpkgs.lib;
-    in 
-    {
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      # system-wide configuration :
       nixosConfigurations = {
-        # all the computers are list here,
-        # usually named by their hostname
-        nixos = lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [ ./configuration.nix ];
+        # all machines are list here named by their hostname:
+        white = lib.nixosSystem {
+          inherit system;
+          modules = [ ./hosts/white/configuration.nix ];
+        };
+      };
+      # Per user home-manager configuration :
+      homeConfigurations = {
+        # all users are list here:
+        alex = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home.nix ];
+        };
       };
     };
-  };
 }
