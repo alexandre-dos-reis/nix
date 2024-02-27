@@ -1,10 +1,13 @@
+let
+      release-version = "23.11";
+ in
 { 
   description = "My main configuration";
 
   inputs = {
-      nixpkgs.url = "nixpkgs/nixos-23.11";
+      nixpkgs.url = "nixpkgs/nixos-${release-version}";
       home-manager = {
-        url = "github:nix-community/home-manager/master";
+        url = "github:nix-community/home-manager/release-${release-version}";
         inputs.nixpkgs.follows = "nixpkgs"; # Tell home-manager to follow nix release
       };
   };
@@ -14,13 +17,11 @@
       system = "x86_64-linux";
       lib = nixpkgs.lib;
       pkgs = nixpkgs.legacyPackages.${system};
-      makeOs = lib.nixosSystem;
-      makeHome = home-manager.lib.homeManagerConfiguration;
     in {
       # system-wide configuration :
       nixosConfigurations = {
         # all machines are list here named by their hostname:
-        white = makeOs {
+        white = lib.nixosSystem {
           inherit system;
           modules = [ ./hosts/white/configuration.nix ];
         };
@@ -28,7 +29,7 @@
       # Per user home-manager configuration :
       homeConfigurations = {
         # all users are list here:
-        alex = makeHome {
+        alex = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [ ./home.nix ];
         };
