@@ -14,6 +14,7 @@
 - [Nix Flake writing guide](https://nixos-and-flakes.thiscute.world/introduction/)
 - [LibrePheonix nixos series](https://www.youtube.com/watch?v=Qull6TMQm4Q&list=PL_WcXIXdDWWpuypAEKzZF2b5PijTluxRG&index=5)
 - [Nix-starter-configs](https://github.com/Misterio77/nix-starter-configs/tree/main)
+- [Manage tmux with Home-Manager](https://haseebmajid.dev/posts/2023-07-10-setting-up-tmux-with-nix-home-manager/)
 
 ### Some flake users
 

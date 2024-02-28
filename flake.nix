@@ -1,5 +1,5 @@
 { 
-  description = "My configuration flake";
+  description = "My config";
 
   outputs = { self, nixpkgs, ... } @ inputs: let
     inherit (self) outputs;
@@ -7,7 +7,7 @@
     globals = {
       username = "alex";
       email = "ajm.dosreis.daponte@gmail.com";
-      };
+    };
 
   in {
     nixosConfigurations = {

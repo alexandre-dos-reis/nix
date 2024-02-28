@@ -1,13 +1,22 @@
-{
+let 
+  keyboardLocale = "en_US.UTF-8";
+  geoLocale = "fr_FR.UTF-8";
+  timeZone = "Europe/Paris";
+in {
+  time.timeZone = timeZone;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Paris";
-
-  # Select internationalisation properties.
   i18n = {
-    defaultLocale = "en_US.UTF-8";
+    defaultLocale = keyboardLocale;
     extraLocaleSettings = {
-      LC_TIME = "fr_FR.UTF-8";
+      LC_ADDRESS = geoLocale;
+      LC_IDENTIFICATION = geoLocale;
+      LC_MEASUREMENT = geoLocale;
+      LC_MONETARY = geoLocale;
+      LC_NAME = geoLocale;
+      LC_NUMERIC = geoLocale;
+      LC_PAPER = geoLocale;
+      LC_TELEPHONE = geoLocale;
+      LC_TIME = geoLocale;
     };
   };
 }
