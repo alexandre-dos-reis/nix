@@ -5,15 +5,18 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim
+    libgcc
+    zig
+    cargo
+    rustc
+    nodejs
     wget
     git
     age
     ansible
     bun
     chezmoi
-    dagger
     docker
-    exa
     eza
     fd
     fish
@@ -28,5 +31,6 @@
     gnupg
     timoni
     tmux
+    firefox
   ];
 }

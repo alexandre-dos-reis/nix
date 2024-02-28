@@ -1,8 +1,8 @@
 { globals, ...}: {
 
-  users.users.${globals.user} = {
+  users.users.${globals.username} = {
     isNormalUser = true;
-    description = "alex";
+    description = globals.username;
     extraGroups = [ "networkmanager" "wheel" ];
   };
 }

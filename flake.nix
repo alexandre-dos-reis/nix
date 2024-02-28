@@ -9,9 +9,8 @@
     inherit (self) outputs;
 
     globals = {
-      username = "Alex";
+      username = "alex";
       email = "ajm.dosreis.daponte@gmail.com";
-
       };
 
   in {
