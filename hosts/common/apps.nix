@@ -8,6 +8,8 @@
     libgcc
     zig
     cargo
+    gnumake
+    sqlite
     rustc
     nodejs
     wget
