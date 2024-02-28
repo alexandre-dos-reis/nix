@@ -1,12 +1,12 @@
 let 
-  keyboardLocale = "en_US.UTF-8";
+  langLocale = "en_US.UTF-8";
   geoLocale = "fr_FR.UTF-8";
   timeZone = "Europe/Paris";
 in {
   time.timeZone = timeZone;
 
   i18n = {
-    defaultLocale = keyboardLocale;
+    defaultLocale = langLocale;
     extraLocaleSettings = {
       LC_ADDRESS = geoLocale;
       LC_IDENTIFICATION = geoLocale;

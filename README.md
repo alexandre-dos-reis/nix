@@ -15,6 +15,7 @@
 - [LibrePheonix nixos series](https://www.youtube.com/watch?v=Qull6TMQm4Q&list=PL_WcXIXdDWWpuypAEKzZF2b5PijTluxRG&index=5)
 - [Nix-starter-configs](https://github.com/Misterio77/nix-starter-configs/tree/main)
 - [Manage tmux with Home-Manager](https://haseebmajid.dev/posts/2023-07-10-setting-up-tmux-with-nix-home-manager/)
+- [Ly Yang NixOS series](https://www.youtube.com/watch?v=9fWrxmEYGAs&list=PLLvdqTlFTmuKsiyAI8Q9FgHP4mY0ktPVq)
 
 ### Some flake users
 
@@ -26,3 +27,10 @@
 - [jakehamilton](https://github.com/jakehamilton/config)
   - [Is Darwin ?](https://github.com/jakehamilton/config/blob/main/modules/home/user/default.nix#L10)
   - [Gnome extension](https://github.com/jakehamilton/config/blob/main/modules/nixos/desktop/gnome/default.nix)
+- [nix-darwin-kickstarter](https://github.com/ryan4yin/nix-darwin-kickstarter)
+
+### Install home-manager on Ubuntu
+
+- [installing-home-manager-on-ubuntu](https://discourse.nixos.org/t/installing-home-manager-on-ubuntu/25957/8)
+- [How to use Nix on Ubuntu or any Linux Distro](https://www.youtube.com/watch?v=5Dd7rQPNDT8&t=1s)
+  - [Related article use above](https://tech.aufomm.com/my-nix-journey-use-nix-with-ubuntu/)
