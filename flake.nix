@@ -1,9 +1,5 @@
 { 
-  description = "My main configuration";
-
-  inputs = {
-      nixpkgs.url = "nixpkgs/nixos-unstable";
-  };
+  description = "My configuration flake";
 
   outputs = { self, nixpkgs, ... } @ inputs: let
     inherit (self) outputs;
@@ -22,5 +18,9 @@
         ];
       };
     };
+  };
+
+  inputs = {
+      nixpkgs.url = "nixpkgs/nixos-unstable";
   };
 }
