@@ -23,6 +23,7 @@
     };
 
   in {
+    # for NixOs
     nixosConfigurations = {
       "${globals.machine.white.name}" = lib.nixosSystem {
         specialArgs = {inherit inputs outputs globals;};
@@ -33,6 +34,7 @@
       };
     };
 
+    # For other linux OS
     homeConfigurations = {
       "${globals.username}@${globals.machines.work.name}" = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs.x86_64-linux;
@@ -41,6 +43,7 @@
       };
     };
 
+    # For MacOsx
     darwinConfigurations = {
       "${globals.machine.mbp2012.name}" = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit inputs outputs globals; };
