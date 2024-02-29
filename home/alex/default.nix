@@ -12,8 +12,10 @@
   username = (globals) username;
 in {
   imports = [
+    ./config
     ./packages
     ./programs
+    ./bin
   ];
 
   # Recommended for linux distros other than NixOS

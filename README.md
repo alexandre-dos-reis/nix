@@ -8,6 +8,11 @@
 
 ## Resources
 
+## Search
+
+- [packages](https://search.nixos.org/packages)
+- [home-manager](https://mipmip.github.io/home-manager-option-search/)
+
 ### Tutorials
 
 - [Nix Language](https://nixos.org/manual/nix/stable/language/index.html)
@@ -28,6 +33,7 @@
   - [Is Darwin ?](https://github.com/jakehamilton/config/blob/main/modules/home/user/default.nix#L10)
   - [Gnome extension](https://github.com/jakehamilton/config/blob/main/modules/nixos/desktop/gnome/default.nix)
 - [nix-darwin-kickstarter](https://github.com/ryan4yin/nix-darwin-kickstarter)
+- [SomeGuyNamedMay](https://github.com/SomeGuyNamedMay/users/blob/master/flake.nix)
 
 ### Install home-manager on Ubuntu
 
