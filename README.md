@@ -34,3 +34,7 @@
 - [installing-home-manager-on-ubuntu](https://discourse.nixos.org/t/installing-home-manager-on-ubuntu/25957/8)
 - [How to use Nix on Ubuntu or any Linux Distro](https://www.youtube.com/watch?v=5Dd7rQPNDT8&t=1s)
   - [Related article use above](https://tech.aufomm.com/my-nix-journey-use-nix-with-ubuntu/)
+
+## helpers
+
+- Get correct prefetch github values: `nix shell nixpkgs#nix-prefetch-github --command nix-prefetch-github --nix <user> <repo>`

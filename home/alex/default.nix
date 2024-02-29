@@ -3,21 +3,21 @@
   # outputs,
   # lib,
   # config,
-  pkgs,
   globals,
   ...
 }: let
-  isLinux = pkgs.stdenv.isLinux;
-  isDarwin = pkgs.stdenv.isDarwin;
+  isLinux = globals.utils.isLinux;
+  isDarwin = globals.utils.isDarwin;
+  isNixOs = globals.utils.isNixOs;
   username = (globals) username;
 in {
   imports = [
-    ./programs
     ./packages
+    ./programs
   ];
 
-  # TODO: We need to test if we are on NON-NIX-OS-LINUX-OS
-  targets.genericLinux.enable = if isLinux then true else false;
+  # Recommended for linux distros other than NixOS
+  targets.genericLinux.enable = !isNixOs && isLinux; 
 
   nixpkgs = {
     config = {
@@ -35,7 +35,6 @@ in {
   };
 
 
-  # Enable home-manager and git
   programs = {
     home-manager.enable = true;
   };

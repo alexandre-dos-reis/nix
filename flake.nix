@@ -8,9 +8,15 @@
     globals = {
       username = "alex";
       email = "ajm.dosreis.daponte@gmail.com";
+      fullname = "Alexandre Dos Reis";
       machines = {
         white.name = "white";
         work.name = "kavval";
+      };
+      utils = {
+        isLinux = pkgs.stdenv.isLinux;
+        isDarwin = pkgs.stdenv.isDarwin;
+        isNixOs = builtins.pathExists /etc/nixos;
       };
     };
 
@@ -20,7 +26,7 @@
         specialArgs = {inherit inputs outputs globals;};
         modules = [
           # TODO: import home-manager inside nixos where home config is ready !
-          ./hosts/${globals.whiteHostName}
+          ./hosts/${globals.machine.white.name}
         ];
       };
       homeConfigurations = {

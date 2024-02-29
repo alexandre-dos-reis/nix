@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+session=$(find ~ ~/.config ~/dev -mindepth 1 -maxdepth 1 -type d | fzf)
+session_name=$(basename "$session" | tr . _)
+
+if ! tmux list-windows -F '#W' | grep -q "$session"; then
+	tmux new-window -n "$session_name" -c "$session" -d #'nvim'
+	tmux split-window -h -t "$session_name" -c "$session"
+	tmux split-window -v -t "$session_name" -c "$session"
+fi
+
+tmux select-window -t "$session_name"
