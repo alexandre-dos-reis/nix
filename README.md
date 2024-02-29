@@ -13,7 +13,7 @@
 - [packages](https://search.nixos.org/packages)
 - [home-manager](https://mipmip.github.io/home-manager-option-search/)
 
-### Tutorials
+### Tutorials & Articles
 
 - [Nix Language](https://nixos.org/manual/nix/stable/language/index.html)
 - [Nix Flake writing guide](https://nixos-and-flakes.thiscute.world/introduction/)
@@ -21,6 +21,7 @@
 - [Nix-starter-configs](https://github.com/Misterio77/nix-starter-configs/tree/main)
 - [Manage tmux with Home-Manager](https://haseebmajid.dev/posts/2023-07-10-setting-up-tmux-with-nix-home-manager/)
 - [Ly Yang NixOS series](https://www.youtube.com/watch?v=9fWrxmEYGAs&list=PLLvdqTlFTmuKsiyAI8Q9FgHP4mY0ktPVq)
+- [Declarative GNOME configuration with NixOS](https://hoverbear.org/blog/declarative-gnome-configuration-in-nixos/)
 
 ### Some flake users
 
