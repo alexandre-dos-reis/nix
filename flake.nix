@@ -1,10 +1,11 @@
 { 
   description = "My config";
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs: let
+  outputs = { self, nixpkgs, home-manager, nix-darwin, ... } @ inputs: let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
     pkgs = nixpkgs.legacyPackages;
+
     globals = {
       username = "alex";
       email = "ajm.dosreis.daponte@gmail.com";
@@ -12,6 +13,7 @@
       machines = {
         white.name = "white";
         work.name = "kavval";
+        mbp2012.name = "mbp2012";
       };
       utils = {
         isLinux = pkgs.stdenv.isLinux;
@@ -29,18 +31,30 @@
           ./hosts/${globals.machine.white.name}
         ];
       };
-      homeConfigurations = {
-        "${globals.username}@${globals.machines.work.name}" = home-manager.lib.homeManagerConfiguration {
-            modules = [ ./home/${globals.username} ];
-            pkgs = pkgs.x86_64-linux;
-            extraSpecialArgs = { inherit inputs outputs globals; };
-        };
+    };
+
+    homeConfigurations = {
+      "${globals.username}@${globals.machines.work.name}" = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgs.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs globals; };
+          modules = [ ./home/${globals.username} ];
+      };
+    };
+
+    darwinConfigurations = {
+      "${globals.machine.mbp2012.name}" = nix-darwin.lib.darwinSystem {
+        specialArgs = { inherit inputs outputs globals; };
+        modules = [ ./hosts/${globals.machines.mbp2012.name} ];
       };
     };
   };
 
   inputs = {
       nixpkgs.url = "nixpkgs/nixos-unstable";
+      nix-darwin = {
+        url = "github:LnL7/nix-darwin";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
       home-manager = {
         url = "github:nix-community/home-manager";
         inputs.nixpkgs.follows = "nixpkgs";
