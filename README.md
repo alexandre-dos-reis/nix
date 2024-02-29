@@ -1,4 +1,4 @@
-# Nixos Configuration
+# Nix Configuration
 
 ## Updating the system
 
