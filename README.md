@@ -25,7 +25,7 @@
 - [Walkthrough of Nix Install and Setup on MacOS](https://www.youtube.com/watch?v=LE5JR4JcvMg&t=1662s)
 - [Tidying up your $HOME with Nix](https://juliu.is/tidying-your-home-with-nix/)
 
-### Some flake users
+### Some flakes users
 
 - [fufexan](https://github.com/fufexan/dotfiles/blob/main/home/editors/neovim/default.nix)
 - [librephoenix](https://github.com/librephoenix/nixos-config)
@@ -38,6 +38,7 @@
 - [nix-darwin-kickstarter](https://github.com/ryan4yin/nix-darwin-kickstarter)
 - [SomeGuyNamedMay](https://github.com/SomeGuyNamedMay/users/blob/master/flake.nix)
 - [Home-Manager Flake Template](https://github.com/juspay/nix-dev-home)
+- [dustinlyons macos oriented](https://github.com/dustinlyons/nixos-config)
 
 ### Install home-manager on Ubuntu
 

@@ -28,9 +28,10 @@
       };
     };
 
-    currentWorkSystem = "aarch64-darwin";
+    currentWorkingSystem = "aarch64-darwin";
   in {
-    formatter.${currentWorkSystem} = pkgs.${currentWorkSystem}.alejandra;
+    formatter.${currentWorkingSystem} = pkgs.${currentWorkingSystem}.alejandra;
+
     # for NixOs
     nixosConfigurations = {
       ${globals.machines.white.name} = lib.nixosSystem {
