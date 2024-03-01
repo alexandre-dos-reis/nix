@@ -8,4 +8,10 @@
       ];
     })
   ];
+
+
+  # keyboard layout
+  home.keyboard = {
+    # https://mipmip.github.io/home-manager-option-search/?query=keyboard
+  };
 }
