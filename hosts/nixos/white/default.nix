@@ -1,4 +1,4 @@
-{globals, ...}: {
+{vars, ...}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -13,7 +13,7 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = globals.white.name;
+  networking.hostName = vars.white.name;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;

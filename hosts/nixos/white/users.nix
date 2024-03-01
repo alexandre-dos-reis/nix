@@ -1,13 +1,13 @@
 {
-  globals,
+  vars,
   pkgs,
   ...
 }: let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
-  users.users.${globals.username} = {
+  users.users.${vars.username} = {
     isNormalUser = true;
-    description = globals.username;
+    description = vars.username;
     defaultUserShell = pkgs.fish;
     extraGroups =
       [

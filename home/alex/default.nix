@@ -4,13 +4,13 @@
   # lib,
   # config,
   # osConfig # Added by home-manager
-  globals,
+  vars,
   ...
 }: let
-  isLinux = globals.utils.isLinux;
-  isDarwin = globals.utils.isDarwin;
-  isNixOs = globals.utils.isNixOs;
-  username = globals username;
+  isLinux = vars.utils.isLinux;
+  isDarwin = vars.utils.isDarwin;
+  isNixOs = vars.utils.isNixOs;
+  username = vars username;
 in {
   imports = [
     ./config
