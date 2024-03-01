@@ -42,6 +42,7 @@
 - [Home-Manager Flake Template](https://github.com/juspay/nix-dev-home)
 - [dustinlyons macos oriented](https://github.com/dustinlyons/nixos-config)
 - [Zaney - NixOs wayland, hyprland, nix-colors, ...](https://gitlab.com/Zaney/zaneyos/-/blob/main/flake.nix)
+- [Yusef Cross Platform](https://github.com/yusefnapora/nix-config/tree/main)
 
 ### Install home-manager on Ubuntu
 
