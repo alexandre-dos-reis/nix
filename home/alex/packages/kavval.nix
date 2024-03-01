@@ -7,8 +7,10 @@
     docker-compose
     google-chrome
     ngrok
+
+    # NodeJS
     nodejs_18
-    nodePackages.yarn
+    corepack
     nodePackages.npm
     nodePackages.nodemon
     nodePackages.prettier
