@@ -13,7 +13,7 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = vars.white.name;
+  networking.hostName = vars.machines.white.name;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
