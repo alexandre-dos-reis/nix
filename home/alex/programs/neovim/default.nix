@@ -1,4 +1,4 @@
-let 
+let
   configPath = ".config/nvim";
 in {
   programs.neovim = {

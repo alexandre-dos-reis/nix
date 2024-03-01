@@ -1,4 +1,9 @@
-{ inputs, globals, ... }: inputs.home-manager.nixosModules.home-manager {
+{
+  inputs,
+  globals,
+  ...
+}:
+inputs.home-manager.nixosModules.home-manager {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

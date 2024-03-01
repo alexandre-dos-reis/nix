@@ -10,7 +10,7 @@
   isLinux = globals.utils.isLinux;
   isDarwin = globals.utils.isDarwin;
   isNixOs = globals.utils.isNixOs;
-  username = (globals) username;
+  username = globals username;
 in {
   imports = [
     ./config
@@ -20,7 +20,7 @@ in {
   ];
 
   # Recommended for linux distros other than NixOS
-  targets.genericLinux.enable = !isNixOs && isLinux; 
+  targets.genericLinux.enable = !isNixOs && isLinux;
 
   nixpkgs = {
     config = {
@@ -31,12 +31,11 @@ in {
 
   home = {
     inherit username;
-    homeDirectory = if isDarwin then 
-        "/Users/${username}"
-      else
-        "/home/${username}";
+    homeDirectory =
+      if isDarwin
+      then "/Users/${username}"
+      else "/home/${username}";
   };
-
 
   programs = {
     home-manager.enable = true;

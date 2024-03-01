@@ -1,4 +1,4 @@
-let 
+let
   filePath = "bin";
 in {
   # TODO: Add config folder...

@@ -1,4 +1,9 @@
-{ inputs, globals, ... }: inputs.home-manager.darwinModules.home-manager {
+{
+  inputs,
+  globals,
+  ...
+}:
+inputs.home-manager.darwinModules.home-manager {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

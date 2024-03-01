@@ -1,7 +1,13 @@
-{ 
+{
   description = "My config";
 
-  outputs = { self, nixpkgs, home-manager, nix-darwin, ... } @ inputs: let
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    nix-darwin,
+    ...
+  } @ inputs: let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
     pkgs = nixpkgs.legacyPackages;
@@ -22,14 +28,15 @@
       };
     };
 
+    currentWorkSystem = "aarch64-darwin";
   in {
+    formatter.${currentWorkSystem} = pkgs.${currentWorkSystem}.alejandra;
     # for NixOs
     nixosConfigurations = {
-      "${globals.machine.white.name}" = lib.nixosSystem {
+      ${globals.machines.white.name} = lib.nixosSystem {
         specialArgs = {inherit inputs outputs globals;};
         modules = [
-          # TODO: import home-manager inside nixos where home config is ready !
-          ./hosts/nixos/${globals.machine.white.name}
+          ./hosts/nixos/${globals.machines.work.name}
         ];
       };
     };
@@ -37,30 +44,30 @@
     # For other linux OS
     homeConfigurations = {
       "${globals.username}@${globals.machines.work.name}" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs globals; };
-          modules = [ ./home/${globals.username} ];
+        pkgs = pkgs.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs globals;};
+        modules = [./home/${globals.username}];
       };
     };
 
     # For MacOsx
     darwinConfigurations = {
-      "${globals.machine.mbp2012.name}" = nix-darwin.lib.darwinSystem {
-        specialArgs = { inherit inputs outputs globals; };
-        modules = [ ./hosts/darwin/${globals.machines.mbp2012.name} ];
+      ${globals.machines.mbp2012.name} = nix-darwin.lib.darwinSystem {
+        specialArgs = {inherit inputs outputs globals;};
+        modules = [./hosts/darwin/${globals.machines.mbp2012.name}];
       };
     };
   };
 
   inputs = {
-      nixpkgs.url = "nixpkgs/nixos-unstable";
-      nix-darwin = {
-        url = "github:LnL7/nix-darwin";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-      home-manager = {
-        url = "github:nix-community/home-manager";
-        inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }

@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   # https://mipmip.github.io/home-manager-option-search/?query=vscode
   programs.vscode = {
     enable = true;
@@ -10,7 +9,7 @@
         command = "multiCommand.makeRoom";
       }
     ];
-    
+
     # TODO:
     extensions = with pkgs.vscode-extensions; [
       astro-build.astro-vscode
@@ -124,6 +123,5 @@
       };
       "nxConsole.showNodeVersionOnStartup" = false;
     };
-
   };
 }

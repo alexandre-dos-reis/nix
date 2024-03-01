@@ -1,6 +1,4 @@
-
-{ globals , ...}: 
-{
+{globals, ...}: {
   programs.keychain = {
     enable = globals.utils.isLinux;
     enableFishIntegration = true;

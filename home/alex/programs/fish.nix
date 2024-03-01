@@ -1,5 +1,8 @@
-{ globals, pkgs , ...}: 
 {
+  globals,
+  pkgs,
+  ...
+}: {
   # https://github.com/alexandre-dos-reis/dotfiles/blob/main/dot_config/private_fish/config.fish
   # https://discourse.nixos.org/t/managing-fish-plugins-with-home-manager/22368
   programs.fish = {
@@ -23,44 +26,65 @@
     '';
 
     shellAbbrs = {
-        v = "nvim";
-        t = "tmux";
-        ta = "tmux attach";
-        tk = "tmux kill-session";
-        ll = "exa -l -g --icons";
-        lla = "ll --all";
-        llt = "ll --tree";
-        c = "clear";
-        b = "bat -p";
-        f = "~/bin/tmux-sessionizer";
-        fw = "~/bin/tmux-windownizer";
-        cs = "~/bin/cht.sh";
-        cm = "chezmoi";
-        cme = "chezmoi edit --apply";
-        d = "docker";
-        dcp = "docker compose";
-        ff = "fzf --preview 'bat --style=numbers --color=always {}'";
-        ffn = "ff | xargs nvim";
-        k = "kubectl";
-      };
+      v = "nvim";
+      t = "tmux";
+      ta = "tmux attach";
+      tk = "tmux kill-session";
+      ll = "exa -l -g --icons";
+      lla = "ll --all";
+      llt = "ll --tree";
+      c = "clear";
+      b = "bat -p";
+      f = "~/bin/tmux-sessionizer";
+      fw = "~/bin/tmux-windownizer";
+      cs = "~/bin/cht.sh";
+      cm = "chezmoi";
+      cme = "chezmoi edit --apply";
+      d = "docker";
+      dcp = "docker compose";
+      ff = "fzf --preview 'bat --style=numbers --color=always {}'";
+      ffn = "ff | xargs nvim";
+      k = "kubectl";
+    };
 
-      # https://search.nixos.org/packages?channel=unstable&show=fishPlugins.z&from=0&size=50&sort=relevance&type=packages&query=fishPlugins
-      plugins = with pkgs.fishPlugins; [
-        { name = "tide"; src = tide.src; }
-        { name = "autopair"; src = autopair.src; }
-        { name = "git"; src = plugin-git.src; }
-        { name = "z"; src = z.src; }
-        { name = "sponge"; src = sponge.src; }
-      ] ++ (if globals.utils.isDarwin then [
+    # https://search.nixos.org/packages?channel=unstable&show=fishPlugins.z&from=0&size=50&sort=relevance&type=packages&query=fishPlugins
+    plugins = with pkgs.fishPlugins;
+      [
         {
-          name = "ssh-agent-macos.fish";
-          src = pkgs.fetchFromGitHub {
-            owner =  "nifoc";
-            repo =  "ssh-agent-macos.fish";
-            rev =  "a9dde730a462b3b327cabf1a56a643a12b0aea3d";
-            hash =  "sha256-e0YrQzcgkHvFiYuXluS+TZ/hjDneK33xcWbo7sjXWNA=";
-          };
+          name = "tide";
+          src = tide.src;
         }
-      ] else []);
+        {
+          name = "autopair";
+          src = autopair.src;
+        }
+        {
+          name = "git";
+          src = plugin-git.src;
+        }
+        {
+          name = "z";
+          src = z.src;
+        }
+        {
+          name = "sponge";
+          src = sponge.src;
+        }
+      ]
+      ++ (
+        if globals.utils.isDarwin
+        then [
+          {
+            name = "ssh-agent-macos.fish";
+            src = pkgs.fetchFromGitHub {
+              owner = "nifoc";
+              repo = "ssh-agent-macos.fish";
+              rev = "a9dde730a462b3b327cabf1a56a643a12b0aea3d";
+              hash = "sha256-e0YrQzcgkHvFiYuXluS+TZ/hjDneK33xcWbo7sjXWNA=";
+            };
+          }
+        ]
+        else []
+      );
   };
 }

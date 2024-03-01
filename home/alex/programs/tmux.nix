@@ -1,6 +1,4 @@
-{pkgs, ...}:
-
-{
+{pkgs, ...}: {
   programs.tmux = {
     enable = true;
     prefix = "C-a";
@@ -75,10 +73,10 @@
       # Save: prefix + Ctrl-s
       # Restore: prefix + Ctrl-r
 
-      set -g @plugin 'tmux-plugins/tmux-continuum'  # auto saves session every 15 minutes 
+      set -g @plugin 'tmux-plugins/tmux-continuum'  # auto saves session every 15 minutes
 
       # set -g @plugin 'jimeh/tmux-themepack' # Install custom theme for tmux
-      # set -g @plugin 'catppuccin/tmux' # catppuccin theme 
+      # set -g @plugin 'catppuccin/tmux' # catppuccin theme
 
       set -g @themepack 'powerline/default/cyan'
 

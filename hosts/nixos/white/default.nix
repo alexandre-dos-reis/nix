@@ -1,21 +1,19 @@
-{ globals, ... }:
-
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../nixos-common
-      ./sound.nix
-      ./network.nix
-      ./users.nix
-    ];
+{globals, ...}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../nixos-common
+    ./sound.nix
+    ./network.nix
+    ./users.nix
+  ];
 
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = globals.white.name; 
+  networking.hostName = globals.white.name;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -34,6 +32,4 @@
   services.printing.enable = true;
 
   system.stateVersion = "23.11"; # Did you read the comment?
-
-
 }

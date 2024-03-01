@@ -1,4 +1,4 @@
-let 
+let
   langLocale = "en_US.UTF-8";
   geoLocale = "fr_FR.UTF-8";
   timeZone = "Europe/Paris";
