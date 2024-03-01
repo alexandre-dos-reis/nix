@@ -11,7 +11,6 @@
     # NodeJS
     nodejs_18
     corepack_18
-    nodePackages.npm
     nodePackages.nodemon
     nodePackages.prettier
   ];
