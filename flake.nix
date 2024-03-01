@@ -29,7 +29,7 @@
         specialArgs = {inherit inputs outputs globals;};
         modules = [
           # TODO: import home-manager inside nixos where home config is ready !
-          ./hosts/${globals.machine.white.name}
+          ./hosts/nixos/${globals.machine.white.name}
         ];
       };
     };
@@ -47,7 +47,7 @@
     darwinConfigurations = {
       "${globals.machine.mbp2012.name}" = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit inputs outputs globals; };
-        modules = [ ./hosts/${globals.machines.mbp2012.name} ];
+        modules = [ ./hosts/darwin/${globals.machines.mbp2012.name} ];
       };
     };
   };

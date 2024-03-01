@@ -3,6 +3,7 @@
   # outputs,
   # lib,
   # config,
+  # osConfig # Added by home-manager
   globals,
   ...
 }: let
@@ -24,7 +25,7 @@ in {
   nixpkgs = {
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = _: true;
+      # allowUnfreePredicate = _: true;
     };
   };
 
