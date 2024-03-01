@@ -10,7 +10,7 @@
 
     # NodeJS
     nodejs_18
-    corepack
+    corepack_18
     nodePackages.npm
     nodePackages.nodemon
     nodePackages.prettier
