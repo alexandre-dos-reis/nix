@@ -8,7 +8,9 @@
 
 ## Resources
 
-## Search
+- [Nix Colors Input]](https://github.com/Misterio77/nix-colors)
+
+### Search packages
 
 - [packages](https://search.nixos.org/packages)
 - [home-manager](https://mipmip.github.io/home-manager-option-search/)
@@ -39,6 +41,7 @@
 - [SomeGuyNamedMay](https://github.com/SomeGuyNamedMay/users/blob/master/flake.nix)
 - [Home-Manager Flake Template](https://github.com/juspay/nix-dev-home)
 - [dustinlyons macos oriented](https://github.com/dustinlyons/nixos-config)
+- [Zaney - NixOs wayland, hyprland, nix-colors, ...](https://gitlab.com/Zaney/zaneyos/-/blob/main/flake.nix)
 
 ### Install home-manager on Ubuntu
 
