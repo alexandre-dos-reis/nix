@@ -12,3 +12,6 @@ foo := if "2" == "2" { "Good!" } else { "1984" }
 
 bar:
   @echo "{{foo}}"
+
+nix-prefetech-github user repo:
+  nix shell nixpkgs#nix-prefetch-github --command nix-prefetch-github --nix {{user}} {{repo}}
