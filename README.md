@@ -43,6 +43,7 @@
 - [dustinlyons macos oriented](https://github.com/dustinlyons/nixos-config)
 - [Zaney - NixOs wayland, hyprland, nix-colors, ...](https://gitlab.com/Zaney/zaneyos/-/blob/main/flake.nix)
 - [Yusef Cross Platform](https://github.com/yusefnapora/nix-config/tree/main)
+- [JRMurr xdg example with home-manager](https://github.com/JRMurr/NixOsConfig/blob/main/flake.nix)
 
 ### Install home-manager on Ubuntu
 
