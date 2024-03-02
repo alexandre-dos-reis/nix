@@ -18,16 +18,14 @@
     nixpkgs,
     ...
   } @ inputs: let
-    pkgs = nixpkgs.legacyPackages;
+    vars = import ./vars.nix;
     helpers = import ./helpers.nix {
       inherit inputs vars;
       inherit (self) outputs;
     };
     inherit (helpers) mkNixos mkDarwin mkHome mkFormatter;
-
-    vars = import ./vars.nix pkgs;
-    inherit (vars) username;
-    inherit (vars.hosts) white mbp2012 work;
+    inherit (vars) username hosts;
+    inherit (hosts) white mbp2012 work;
   in {
     formatter = mkFormatter;
 
@@ -40,7 +38,7 @@
     };
 
     homeConfigurations = {
-      "${username}@${work}" = mkHome ./home/${username} pkgs.x86_64-linux;
+      "${username}@${work}" = mkHome ./home/${username} "x86_64-linux";
     };
   };
 }

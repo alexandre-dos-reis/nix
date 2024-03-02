@@ -6,21 +6,19 @@
 }: let
   lib = inputs.nixpkgs.lib // inputs.home-manager.lib;
   nixpkgs = inputs.nixpkgs;
-  stdenv = nixpkgs.legacyPackages.stdenv;
   utils = {
-    isLinux = stdenv.isLinux;
-    isDarwin = stdenv.isDarwin;
+    inherit (nixpkgs.legacyPackages.stdenv) isLinux isDarwin;
     isNixOs = builtins.pathExists /etc/nixos;
   };
-  allSystems = [
+  systems = [
     "aarch64-linux"
     "x86_64-linux"
     "aarch64-darwin"
     "x86_64-darwin"
   ];
-  forAllSystems = lib.genAttrs allSystems;
+  forSystems = lib.genAttrs systems;
 in {
-  mkFormatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+  mkFormatter = forSystems (s: nixpkgs.legacyPackages.${s}.alejandra);
 
   mkNixos = module:
     lib.nixosSystem {
@@ -34,9 +32,9 @@ in {
       modules = [module];
     };
 
-  mkHome = module: pkgs:
-    inputs.home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
+  mkHome = module: system:
+    lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.${system};
       extraSpecialArgs = {inherit inputs outputs vars utils;};
       modules = [module];
     };
