@@ -7,6 +7,7 @@
     docker-compose
     google-chrome
     ngrok
+    ack
 
     # NodeJS
     nodejs_18

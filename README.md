@@ -32,6 +32,7 @@
 - [Declarative GNOME configuration with NixOS](https://hoverbear.org/blog/declarative-gnome-configuration-in-nixos/)
 - [Walkthrough of Nix Install and Setup on MacOS](https://www.youtube.com/watch?v=LE5JR4JcvMg&t=1662s)
 - [Tidying up your $HOME with Nix](https://juliu.is/tidying-your-home-with-nix/)
+- [DevInsideYou - Nix Home Manager Tutorial](https://www.youtube.com/watch?v=utoj6annRK0)
 
 ### Some flakes users
 

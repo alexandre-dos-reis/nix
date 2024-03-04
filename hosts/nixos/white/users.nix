@@ -2,9 +2,10 @@
   vars,
   pkgs,
   config,
+  utils,
   ...
 }: let
-  ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
+  inherit (utils) ifTheyExist;
 in {
   users.users.${vars.username} = {
     isNormalUser = true;
@@ -17,7 +18,7 @@ in {
         "video"
         "audio"
       ]
-      ++ ifTheyExist [
+      ++ ifTheyExist config.users.groups [
         "docker"
         "git"
       ];

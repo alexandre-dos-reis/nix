@@ -8,8 +8,9 @@
   lib = nixpkgs.lib // inputs.home-manager.lib;
   pkgs = nixpkgs.legacyPackages;
   utils = {
-    inherit (pkgs.stdenv) isLinux isDarwin;
+    inherit (utils) isLinux isDarwin;
     isNixOs = builtins.pathExists /etc/nixos;
+    ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
   };
   systems = [
     "aarch64-linux"

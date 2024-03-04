@@ -5,18 +5,18 @@
   # config,
   # osConfig # Added by home-manager
   vars,
+  utils,
   ...
 }: let
-  isLinux = vars.utils.isLinux;
-  isDarwin = vars.utils.isDarwin;
-  isNixOs = vars.utils.isNixOs;
-  username = vars username;
+  inherit (utils) isDarwin isLinux isNixOs;
+  inherit (vars) username;
 in {
   imports = [
-    ./config
-    ./packages
+    ./config.nix
+    ./packages.nix
+    ./kavval-packages.nix
     ./programs
-    ./bin
+    ./files
   ];
 
   # Recommended for linux distros other than NixOS
@@ -25,7 +25,7 @@ in {
   nixpkgs = {
     config = {
       allowUnfree = true;
-      # allowUnfreePredicate = _: true;
+      allowUnfreePredicate = _: true;
     };
   };
 

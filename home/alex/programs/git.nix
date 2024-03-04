@@ -1,9 +1,13 @@
-{globals, ...}: {
+{
+  utils,
+  vars,
+  ...
+}: {
   programs.git = {
     enable = true;
 
-    userEmail = globals.email;
-    userName = globals.fullname;
+    userEmail = vars.email;
+    userName = vars.fullname;
 
     aliases = {
       cm = "commit -m";
@@ -47,7 +51,7 @@
         # https://www.reddit.com/r/NixOS/comments/qwu3d1/confused_about_git_gnomekeyring_and_libsecret/
         # https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage
         helper =
-          if globals.utils.isDarwin
+          if utils.isDarwin
           then "osxkeychain"
           else "";
       };

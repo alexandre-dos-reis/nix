@@ -1,5 +1,5 @@
 {
-  globals,
+  utils,
   pkgs,
   ...
 }: {
@@ -72,7 +72,7 @@
         }
       ]
       ++ (
-        if globals.utils.isDarwin
+        if utils.isDarwin
         then [
           {
             name = "ssh-agent-macos";
