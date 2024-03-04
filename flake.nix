@@ -29,16 +29,12 @@
   in {
     formatter = mkFormatter;
 
-    nixosConfigurations = {
-      white = mkNixos ./hosts/nixos/${white};
-    };
+    nixosConfigurations = mkNixos [white];
 
-    darwinConfigurations = {
-      mbp2012 = mkDarwin ./hosts/darwin/${mbp2012};
-    };
+    darwinConfigurations = mkDarwin [mbp2012];
 
     homeConfigurations = {
-      "${username}@${work}" = mkHome ./home/${username} "x86_64-linux";
+      "${username}@${work}" = mkHome username "x86_64-linux";
     };
   };
 }

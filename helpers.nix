@@ -4,10 +4,11 @@
   vars,
   ...
 }: let
-  lib = inputs.nixpkgs.lib // inputs.home-manager.lib;
   nixpkgs = inputs.nixpkgs;
+  lib = nixpkgs.lib // inputs.home-manager.lib;
+  pkgs = nixpkgs.legacyPackages;
   utils = {
-    inherit (nixpkgs.legacyPackages.stdenv) isLinux isDarwin;
+    inherit (pkgs.stdenv) isLinux isDarwin;
     isNixOs = builtins.pathExists /etc/nixos;
   };
   systems = [
@@ -18,24 +19,27 @@
   ];
   forSystems = lib.genAttrs systems;
 in {
-  mkFormatter = forSystems (s: nixpkgs.legacyPackages.${s}.alejandra);
+  mkFormatter = forSystems (s: pkgs.${s}.alejandra);
 
-  mkNixos = module:
-    lib.nixosSystem {
-      specialArgs = {inherit inputs outputs vars utils;};
-      modules = [module];
-    };
+  mkNixos = hosts: lib.genAttrs hosts (host:
+        lib.nixosSystem {
+          specialArgs = {inherit inputs outputs vars utils;};
+          modules = [./hosts/nixos/${host}];
+        }
+      );
 
-  mkDarwin = module:
-    inputs.nix-darwin.lib.darwinSystem {
-      specialArgs = {inherit inputs outputs vars utils;};
-      modules = [module];
-    };
+  mkDarwin = hosts: lib.genAttrs hosts (host:
+        inputs.nix-darwin.lib.darwinSystem {
+          specialArgs = {inherit inputs outputs vars utils;};
+          modules = [./hosts/darwin/${host}];
+        }
+      );
 
-  mkHome = module: system:
+ # TODO: Rearrange for concise
+ mkHome = username: system:
     lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.${system};
       extraSpecialArgs = {inherit inputs outputs vars utils;};
-      modules = [module];
+      modules = [./home/${username}];
     };
 }
