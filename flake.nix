@@ -29,12 +29,19 @@
   in {
     formatter = mkFormatter;
 
-    nixosConfigurations = mkNixos [white];
+    nixosConfigurations = mkNixos [
+      white
+    ];
 
-    darwinConfigurations = mkDarwin [mbp2012];
+    darwinConfigurations = mkDarwin [
+      mbp2012
+    ];
 
-    homeConfigurations = {
-      "${username}@${work}" = mkHome username "x86_64-linux";
-    };
+    homeConfigurations = mkHome [
+      {
+        user = username;
+        host = work;
+      }
+    ];
   };
 }

@@ -21,25 +21,45 @@
 in {
   mkFormatter = forSystems (s: pkgs.${s}.alejandra);
 
-  mkNixos = hosts: lib.genAttrs hosts (host:
-        lib.nixosSystem {
+  mkNixos = hosts:
+    builtins.listToAttrs
+    (builtins.map
+      (host: {
+        name = host.hostname;
+        value = lib.nixosSystem {
+          system = host.system;
           specialArgs = {inherit inputs outputs vars utils;};
-          modules = [./hosts/nixos/${host}];
-        }
-      );
+          modules = [./hosts/nixos/${host.folder}];
+        };
+      })
+      hosts);
 
-  mkDarwin = hosts: lib.genAttrs hosts (host:
-        inputs.nix-darwin.lib.darwinSystem {
+  mkDarwin = hosts:
+    builtins.listToAttrs
+    (builtins.map
+      (host: {
+        name = host.hostname;
+        value = inputs.nix-darwin.lib.darwinSystem {
+          system = host.system;
           specialArgs = {inherit inputs outputs vars utils;};
-          modules = [./hosts/darwin/${host}];
-        }
-      );
+          modules = [./hosts/nixos/${host.folder}];
+        };
+      })
+      hosts);
 
- # TODO: Rearrange for concise
- mkHome = username: system:
-    lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.${system};
-      extraSpecialArgs = {inherit inputs outputs vars utils;};
-      modules = [./home/${username}];
-    };
+  mkHome = hosts:
+    builtins.listToAttrs
+    (builtins.map
+      ({
+        username,
+        host,
+      }: {
+        name = "${username}@${host.hostname}";
+        value = inputs.nix-darwin.lib.darwinSystem {
+          pkgs = pkgs.${host.system};
+          extraSpecialArgs = {inherit inputs outputs vars utils;};
+          modules = [./hosts/nixos/${host.folder}];
+        };
+      })
+      hosts);
 }
