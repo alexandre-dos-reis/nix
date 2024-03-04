@@ -15,6 +15,12 @@
 - [packages](https://search.nixos.org/packages)
 - [home-manager](https://mipmip.github.io/home-manager-option-search/)
 
+### Docs
+
+- [lib.attrsets](https://ryantm.github.io/nixpkgs/functions/library/attrsets/#sec-functions-library-attrsets)
+- [builtins Functions](https://nixos.org/manual/nix/stable/language/builtins.html)
+- [Nix Cheat Sheet](https://jdheyburn.co.uk/blog/nix-cheat-sheet/)
+
 ### Tutorials & Articles
 
 - [Nix Language](https://nixos.org/manual/nix/stable/language/index.html)
