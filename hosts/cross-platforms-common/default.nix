@@ -10,6 +10,8 @@ in {
 
   nix.settings.experimental-features = "nix-command flakes";
 
+  users.users.alex.home = /Users/alex;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   #

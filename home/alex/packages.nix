@@ -31,15 +31,5 @@
       firefox
       tree
       unrar
-    ]
-    ++ (
-      if utils.isDarwin
-      then
-        with pkgs; [
-          # Packages for darwin
-          gnused # sed on darwin isn't the same as gnused.
-        ]
-      else [
-      ]
-    );
+    ];
 }

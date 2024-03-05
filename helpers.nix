@@ -7,7 +7,6 @@
   nixpkgs = inputs.nixpkgs;
   pkgs = nixpkgs.legacyPackages;
   utils = {
-    inherit (pkgs.stdenv) isLinux isDarwin;
     isNixOs = builtins.pathExists /etc/nixos;
     ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
   };
@@ -42,7 +41,14 @@ in {
         value = inputs.nix-darwin.lib.darwinSystem {
           system = host.system;
           specialArgs = {inherit inputs outputs vars utils host;};
-          modules = [./hosts/darwin/${host.folder}];
+          modules = [./hosts/darwin/siliconWork
+		inputs.home-manager.darwinModules.home-manager {
+		    home-manager.useGlobalPkgs = true;
+		    home-manager.useUserPackages = true;
+		    home-manager.users.alex.imports = [./home/alex];
+		    home-manager.extraSpecialArgs = { inherit inputs outputs vars utils host;};
+		}
+		];
         };
       })
       hosts);

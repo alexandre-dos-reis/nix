@@ -4,11 +4,13 @@
   # lib,
   # config,
   # osConfig # Added by home-manager
+  pkgs,
   vars,
   utils,
   ...
 }: let
-  inherit (utils) isDarwin isLinux isNixOs;
+  inherit (pkgs.stdenv) isLinux isDarwin;
+  inherit (utils)  isNixOs;
   inherit (vars) username;
 in {
   # imports = [
@@ -20,25 +22,19 @@ in {
   # ];
 
   # Recommended for linux distros other than NixOS
-  targets.genericLinux.enable = !isNixOs && isLinux;
+  #targets.genericLinux.enable = !isNixOs && isLinux;
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = _: true;
-    };
-  };
-
-  home = {
-    inherit username;
-    homeDirectory =
-      if isDarwin
-      then "/Users/${username}"
-      else "/home/${username}";
-  };
+  # home = {
+  #  inherit username;
+  #  homeDirectory =
+  #    if isDarwin
+  #    then "/Users/${username}"
+  #    else "/home/${username}";
+  #};
 
   programs = {
     home-manager.enable = true;
+   neovim.enable = true;
   };
 
   # Nicely reload system units when changing configs
@@ -46,5 +42,5 @@ in {
 
   # TODO: Replace this values with the generated one in "~/.config/home-manager/home.nix"
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  # home.stateVersion = "23.05";
+  home.stateVersion = "24.05";
 }

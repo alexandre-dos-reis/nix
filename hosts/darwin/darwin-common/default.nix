@@ -4,7 +4,6 @@
 }: {
   imports = [
     ../../cross-platforms-common
-    ./home-manager.nix
   ];
   # https://github.com/LnL7/nix-darwin/blob/master/modules/examples/flake/flake.nix
   programs.zsh.enable = true; # default shell on catalina
