@@ -14,5 +14,6 @@
     corepack_18
     nodePackages.nodemon
     nodePackages.prettier
+    nodePackages.vercel
   ];
 }
