@@ -18,7 +18,7 @@ nix-prefetech-github user repo:
 
 [macos]
 setup-darwin host:
-  nix run nix-darwin -- switch --flake ".#{{host}}"
+  nix --extra-experimental-features "nix-command flakes" build .#darwinConfigurations.{{host}}.system
 
 [macos]
 update-darwin host:
