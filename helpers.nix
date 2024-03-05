@@ -1,10 +1,11 @@
 {
   inputs,
-  self,
   vars,
+  outputs,
+  rev,
+  dirtyRev,
   ...
 }: let
-  inherit (self) outputs;
   nixpkgs = inputs.nixpkgs;
   lib = nixpkgs.lib // inputs.home-manager.lib;
   pkgs = nixpkgs.legacyPackages;
@@ -12,7 +13,7 @@
     inherit (pkgs.stdenv) isLinux isDarwin;
     isNixOs = builtins.pathExists /etc/nixos;
     ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
-    inherit (self) rev dirtyRev;
+    inherit rev dirtyRev;
   };
   systems = [
     "aarch64-linux"

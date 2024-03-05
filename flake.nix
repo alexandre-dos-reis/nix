@@ -21,11 +21,11 @@
     vars = import ./vars.nix;
     helpers = import ./helpers.nix {
       inherit inputs vars;
-      inherit self;
+      inherit (self) outputs rev dirtyRev;
     };
     inherit (helpers) mkNixos mkDarwin mkHome mkFormatter;
     inherit (vars) username;
-    inherit (import ./hosts.nix) white mbp2012 work;
+    inherit (import ./hosts.nix) white mbp2012 work siliconWork;
   in {
     formatter = mkFormatter;
 
@@ -35,6 +35,7 @@
 
     darwinConfigurations = mkDarwin [
       mbp2012
+      siliconWork
     ];
 
     homeConfigurations = mkHome [

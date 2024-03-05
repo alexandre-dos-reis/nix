@@ -1,6 +1,6 @@
 {
-  rev,
   utils,
+  ...
 }: {
   imports = [
     ../../cross-platforms-common
