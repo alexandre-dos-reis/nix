@@ -8,7 +8,7 @@
 
 ## Resources
 
-- [Nix Colors Input]](https://github.com/Misterio77/nix-colors)
+- [Nix Colors Input](https://github.com/Misterio77/nix-colors)
 
 ### Search packages
 
