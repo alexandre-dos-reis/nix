@@ -24,8 +24,8 @@
       inherit (self) outputs;
     };
     inherit (helpers) mkNixos mkDarwin mkHome mkFormatter;
-    inherit (vars) username hosts;
-    inherit (hosts) white mbp2012 work;
+    inherit (vars) username;
+    inherit (import ./hosts.nix) white mbp2012 work;
   in {
     formatter = mkFormatter;
 
@@ -38,10 +38,7 @@
     ];
 
     homeConfigurations = mkHome [
-      {
-        user = username;
-        host = work;
-      }
+      ({inherit username; host = work;})
     ];
   };
 }

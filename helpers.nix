@@ -8,7 +8,7 @@
   lib = nixpkgs.lib // inputs.home-manager.lib;
   pkgs = nixpkgs.legacyPackages;
   utils = {
-    inherit (utils) isLinux isDarwin;
+    inherit (pkgs.stdenv) isLinux isDarwin;
     isNixOs = builtins.pathExists /etc/nixos;
     ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
   };
@@ -29,7 +29,7 @@ in {
         name = host.hostname;
         value = lib.nixosSystem {
           system = host.system;
-          specialArgs = {inherit inputs outputs vars utils;};
+          specialArgs = {inherit inputs outputs vars utils host;};
           modules = [./hosts/nixos/${host.folder}];
         };
       })
@@ -42,8 +42,8 @@ in {
         name = host.hostname;
         value = inputs.nix-darwin.lib.darwinSystem {
           system = host.system;
-          specialArgs = {inherit inputs outputs vars utils;};
-          modules = [./hosts/nixos/${host.folder}];
+          specialArgs = {inherit inputs outputs vars utils host;};
+          modules = [./hosts/darwin/${host.folder}];
         };
       })
       hosts);
@@ -56,10 +56,10 @@ in {
         host,
       }: {
         name = "${username}@${host.hostname}";
-        value = inputs.nix-darwin.lib.darwinSystem {
+        value = lib.homeManagerConfigurations {
           pkgs = pkgs.${host.system};
-          extraSpecialArgs = {inherit inputs outputs vars utils;};
-          modules = [./hosts/nixos/${host.folder}];
+          extraSpecialArgs = {inherit inputs outputs vars utils host;};
+          modules = [./home/${username}];
         };
       })
       hosts);
