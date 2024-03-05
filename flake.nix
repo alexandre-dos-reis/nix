@@ -21,7 +21,7 @@
     vars = import ./vars.nix;
     helpers = import ./helpers.nix {
       inherit inputs vars;
-      inherit (self) outputs;
+      inherit self;
     };
     inherit (helpers) mkNixos mkDarwin mkHome mkFormatter;
     inherit (vars) username;
@@ -38,7 +38,10 @@
     ];
 
     homeConfigurations = mkHome [
-      ({inherit username; host = work;})
+      {
+        inherit username;
+        host = work;
+      }
     ];
   };
 }

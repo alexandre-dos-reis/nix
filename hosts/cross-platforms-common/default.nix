@@ -1,8 +1,15 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  host,
+  ...
+}: let
   langLocale = "en_US.UTF-8";
   geoLocale = "fr_FR.UTF-8";
   timeZone = "Europe/Paris";
 in {
+  nixpkgs.hostPlatform = host.platform;
+  networking.hostName = host.hostname;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
