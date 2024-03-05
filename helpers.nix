@@ -2,8 +2,6 @@
   inputs,
   vars,
   outputs,
-  rev,
-  dirtyRev,
   ...
 }: let
   nixpkgs = inputs.nixpkgs;
@@ -13,7 +11,6 @@
     inherit (pkgs.stdenv) isLinux isDarwin;
     isNixOs = builtins.pathExists /etc/nixos;
     ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
-    inherit rev dirtyRev;
   };
   systems = [
     "aarch64-linux"

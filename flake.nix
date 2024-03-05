@@ -21,7 +21,7 @@
     vars = import ./vars.nix;
     helpers = import ./helpers.nix {
       inherit inputs vars;
-      inherit (self) outputs rev dirtyRev;
+      inherit (self) outputs;
     };
     inherit (helpers) mkNixos mkDarwin mkHome mkFormatter;
     inherit (vars) username;
