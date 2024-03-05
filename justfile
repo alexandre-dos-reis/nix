@@ -34,3 +34,6 @@ update-home-manager host:
 
 setup-nixos host:
   sudo nixos-rebuild --flake ".#{{host}}"
+
+nix-diff gen1 gen2:
+  nix store diff-closures {{gen1}} {{gen2}}
