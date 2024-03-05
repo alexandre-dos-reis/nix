@@ -5,7 +5,6 @@
   ...
 }: let
   nixpkgs = inputs.nixpkgs;
-  lib = nixpkgs.lib // inputs.home-manager.lib;
   pkgs = nixpkgs.legacyPackages;
   utils = {
     inherit (pkgs.stdenv) isLinux isDarwin;
@@ -18,7 +17,7 @@
     "aarch64-darwin"
     "x86_64-darwin"
   ];
-  forSystems = lib.genAttrs systems;
+  forSystems = nixpkgs.lib.genAttrs systems;
 in {
   mkFormatter = forSystems (s: pkgs.${s}.alejandra);
 
@@ -27,7 +26,7 @@ in {
     (builtins.map
       (host: {
         name = host.hostname;
-        value = lib.nixosSystem {
+        value = nixpkgs.lib.nixosSystem {
           system = host.system;
           specialArgs = {inherit inputs outputs vars utils host;};
           modules = [./hosts/nixos/${host.folder}];
@@ -56,7 +55,7 @@ in {
         host,
       }: {
         name = "${username}@${host.hostname}";
-        value = lib.homeManagerConfigurations {
+        value = inputs.home-manager.lib.homeManagerConfigurations {
           pkgs = pkgs.${host.system};
           extraSpecialArgs = {inherit inputs outputs vars utils host;};
           modules = [./home/${username}];

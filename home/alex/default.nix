@@ -11,13 +11,13 @@
   inherit (utils) isDarwin isLinux isNixOs;
   inherit (vars) username;
 in {
-  imports = [
-    ./config.nix
-    ./packages.nix
-    ./kavval-packages.nix
-    ./programs
-    ./files
-  ];
+  # imports = [
+  #   ./config.nix
+  #   ./packages.nix
+  #   ./kavval-packages.nix
+  #   ./programs
+  #   ./files
+  # ];
 
   # Recommended for linux distros other than NixOS
   targets.genericLinux.enable = !isNixOs && isLinux;
@@ -46,5 +46,5 @@ in {
 
   # TODO: Replace this values with the generated one in "~/.config/home-manager/home.nix"
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  # home.stateVersion = "23.05";
 }
