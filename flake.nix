@@ -39,10 +39,7 @@
     };
 
     homeConfigurations = {
-      "alex@siliconWork" = mkHome {
-        inherit username;
-        host = work;
-      };
+      "alex@siliconWork" = mkHome username work;
     };
   };
 }

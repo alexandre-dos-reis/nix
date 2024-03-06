@@ -52,10 +52,7 @@ in {
       ];
     };
 
-  mkHome = {
-    username,
-    host,
-  }:
+  mkHome = username: host:
     inputs.home-manager.lib.homeManagerConfigurations {
       pkgs = pkgs.${host.system};
       extraSpecialArgs = {inherit inputs outputs vars utils host;};
