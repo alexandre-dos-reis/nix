@@ -13,13 +13,13 @@
   inherit (utils)  isNixOs;
   inherit (vars) username;
 in {
-  # imports = [
-  #   ./config.nix
-  #   ./packages.nix
-  #   ./kavval-packages.nix
-  #   ./programs
-  #   ./files
-  # ];
+  imports = [
+    ./programs
+    # ./config.nix
+    # ./packages.nix
+    # ./kavval-packages.nix
+    # ./files
+  ];
 
   # Recommended for linux distros other than NixOS
   #targets.genericLinux.enable = !isNixOs && isLinux;
