@@ -25,7 +25,7 @@
     };
     inherit (helpers) mkNixos mkDarwin mkHome mkFormatter readJsonFile;
     inherit (vars) username;
-    inherit (readJsonFile ./hosts.json) white mbp2012 work siliconWork;
+    inherit (import ./hosts.nix) white mbp2012 work siliconWork;
   in {
     formatter = mkFormatter;
 

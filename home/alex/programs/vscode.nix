@@ -10,36 +10,36 @@
       }
     ];
 
-    # TODO:
+    # TODO: build failed or packages unavailable for aarch64-darwin
     extensions = with pkgs.vscode-extensions; [
-      astro-build.astro-vscode
-      matthewpi.caddyfile-support
-      vadimcn.vscode-lldb
-      ms-azuretools.vscode-docker
-      p1c2u.docker-compose
-      dsznajder.es7-react-js-snippets
-      graphql.vscode-graphql
-      graphql.vscode-graphql-syntax
-      hashicorp.terraform
-      ms-kubernetes-tools.vscode-kubernetes-tools
-      ms-vscode.live-server
-      ms-vsliveshare.vsliveshare
-      ms-vsliveshare.vsliveshare-pack
-      pkief.material-icon-theme
-      unifiedjs.vscode-mdx
-      ryuta46.multi-command
-      nrwl.angular-console
-      fabiospampinato.vscode-open-in-github
-      pmndrs.pmndrs
-      esbenp.prettier-vscode
-      yoavbls.pretty-ts-errors
-      prisma.prisma
-      rust-lang.rust-analyzer
-      joe-re.sql-language-server
-      bradlc.vscode-tailwindcss
-      bourhaouta.tailwindshades
-      vscodevim.vim
-      redhat.vscode-yaml
+      #astro-build.astro-vscode
+      #matthewpi.caddyfile-support
+      #vadimcn.vscode-lldb
+      #ms-azuretools.vscode-docker
+      #p1c2u.docker-compose
+      #dsznajder.es7-react-js-snippets
+      #graphql.vscode-graphql
+      #graphql.vscode-graphql-syntax
+      #hashicorp.terraform
+      #ms-kubernetes-tools.vscode-kubernetes-tools
+      #ms-vscode.live-server
+      #ms-vsliveshare.vsliveshare
+      #ms-vsliveshare.vsliveshare-pack
+      #pkief.material-icon-theme
+      #unifiedjs.vscode-mdx
+      #ryuta46.multi-command
+      #nrwl.angular-console
+      #fabiospampinato.vscode-open-in-github
+      #pmndrs.pmndrs
+      #esbenp.prettier-vscode
+      #yoavbls.pretty-ts-errors
+      #prisma.prisma
+      #rust-lang.rust-analyzer
+      #joe-re.sql-language-server
+      #bradlc.vscode-tailwindcss
+      #bourhaouta.tailwindshades
+      #vscodevim.vim
+      #redhat.vscode-yaml
     ];
 
     userSettings = {

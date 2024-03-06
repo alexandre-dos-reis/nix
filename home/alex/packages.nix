@@ -10,6 +10,7 @@
     # libgcc Apparently, not a package, need to find an alternative.
     gnumake
     gnupg
+    bat
     jq
     wget
     sqlite

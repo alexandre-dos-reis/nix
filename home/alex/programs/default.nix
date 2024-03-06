@@ -5,8 +5,8 @@
     ./kitty.nix
     ./tmux.nix
     # ./utils.nix
-    # ./git.nix
+    ./git.nix
     # ./keychain.nix
-    # ./vscode.nix
+    ./vscode.nix
   ];
 }

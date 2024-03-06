@@ -2,6 +2,7 @@
   programs.tmux = {
     enable = true;
     prefix = "C-a";
+    shell = "\${pkgs.fish}/bin/fish";
     plugins = with pkgs.tmuxPlugins; [
       continuum
       vim-tmux-navigator

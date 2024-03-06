@@ -7,6 +7,7 @@
 in {
   # https://github.com/alexandre-dos-reis/dotfiles/blob/main/dot_config/private_fish/config.fish
   # https://discourse.nixos.org/t/managing-fish-plugins-with-home-manager/22368
+  # https://github.com/LnL7/nix-darwin/issues/122#issuecomment-1782971499
   programs.fish = {
     enable = true;
 

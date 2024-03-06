@@ -9,6 +9,7 @@
     };
     settings = {
       hide_window_decorations = "titlebar-only";
+      shell = "/run/current-system/sw/bin/fish";
     };
     # https://github.com/kovidgoyal/kitty-themes/tree/master/themes
     # https://github.com/kovidgoyal/kitty-themes/blob/master/themes.json

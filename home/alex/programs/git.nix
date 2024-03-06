@@ -1,13 +1,16 @@
 {
-  utils,
   vars,
+  pkgs,
   ...
-}: {
+}: let 
+  inherit (pkgs.stdenv) isDarwin;
+  inherit (vars) email fullname;
+in {
   programs.git = {
     enable = true;
 
-    userEmail = vars.email;
-    userName = vars.fullname;
+    userEmail = email;
+    userName = fullname;
 
     aliases = {
       cm = "commit -m";
@@ -51,7 +54,7 @@
         # https://www.reddit.com/r/NixOS/comments/qwu3d1/confused_about_git_gnomekeyring_and_libsecret/
         # https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage
         helper =
-          if utils.isDarwin
+          if isDarwin
           then "osxkeychain"
           else "";
       };
