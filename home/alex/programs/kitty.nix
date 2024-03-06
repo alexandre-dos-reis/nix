@@ -4,6 +4,7 @@
     enable = true;
     shellIntegration.enableFishIntegration = true;
     font = {
+      name = "JetBrainsMono";
       size = 20;
     };
     settings = {

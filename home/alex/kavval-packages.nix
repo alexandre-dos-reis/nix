@@ -5,7 +5,7 @@
     ruby
     docker
     docker-compose
-    google-chrome
+    # google-chrome
     ngrok
     ack
 

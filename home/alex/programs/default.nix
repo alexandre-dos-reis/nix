@@ -6,7 +6,7 @@
     # ./git.nix
     # ./keychain.nix
     # ./tmux.nix
-    # ./kitty.nix
+    ./kitty.nix
     # ./vscode.nix
   ];
 }

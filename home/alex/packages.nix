@@ -3,16 +3,12 @@
   utils,
   ...
 }: {
-  imports = [
-    ./kavval.nix
-  ];
-
   home.packages = with pkgs;
     [
       dust
       btop
       neofetch
-      libgcc
+      # libgcc Apparently, not a package, need to find an alternative.
       gnumake
       gnupg
       jq
@@ -28,7 +24,7 @@
       pandoc
       ripgrep
       sops
-      firefox
+      # firefox: Not available on silicon platform
       tree
       unrar
     ];

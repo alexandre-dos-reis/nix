@@ -1,7 +1,7 @@
 {
   # TODO: Add config folder...
-  home.file."scripts" = {
-    source = ./files;
+  home.file."bin" = {
+    source = ./scripts;
     recursive = true;
   };
 }

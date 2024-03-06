@@ -16,4 +16,16 @@
   system.stateVersion = 4;
 
   services.nix-daemon.enable = true;
+
+
+system.defaults = {
+  dock.autohide = true;
+  NSGlobalDomain.AppleShowAllExtensions = true;
+
+  finder = {
+    AppleShowAllExtensions = true;
+    FXEnableExtensionChangeWarning = false;
+  };
+};
+
 }

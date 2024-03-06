@@ -15,10 +15,10 @@
 in {
   imports = [
     ./programs
-    # ./config.nix
-    # ./packages.nix
-    # ./kavval-packages.nix
-    # ./files
+    ./config.nix
+    ./packages.nix
+    ./kavval-packages.nix
+    ./files
   ];
 
   # Recommended for linux distros other than NixOS
@@ -34,7 +34,6 @@ in {
 
   programs = {
     home-manager.enable = true;
-   neovim.enable = true;
   };
 
   # Nicely reload system units when changing configs

@@ -5,6 +5,8 @@
 }: let
   timeZone = "Europe/Paris";
 in {
+  nixpkgs.config.allowUnfree = true;
+
   nixpkgs.hostPlatform = host.system;
   networking.hostName = host.hostname;
 
