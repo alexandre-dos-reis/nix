@@ -22,7 +22,7 @@ setup-darwin host:
 
 [macos]
 update-darwin host:
-  darwin-rebuild switch --flake ".#{{host}}"
+  nix-darwin switch --flake .#{{host}}
 
 # https://nix-community.github.io/home-manager/index.xhtml#ch-nix-flakes
 setup-home-manager host:

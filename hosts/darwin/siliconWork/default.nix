@@ -1,5 +1,5 @@
 {
   imports = [
-    ../darwin-common
+    ../darwin-common.nix
   ];
 }

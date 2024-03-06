@@ -16,7 +16,7 @@
   };
   mbp2012 = {
     hostname = "mbp2012";
-    system = "x86_64-darwin";
+    system = "x86_64-linux";
     folder = "mbp2012";
   };
 }

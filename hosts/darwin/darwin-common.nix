@@ -1,6 +1,6 @@
 {utils, ...}: {
   imports = [
-    ../../cross-platforms-common
+    ../platform-common.nix
   ];
   # https://github.com/LnL7/nix-darwin/blob/master/modules/examples/flake/flake.nix
   programs.zsh.enable = true; # default shell on catalina

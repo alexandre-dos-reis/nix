@@ -20,54 +20,45 @@
 in {
   mkFormatter = forSystems (s: pkgs.${s}.alejandra);
 
-  mkNixos = hosts:
-    builtins.listToAttrs
-    (builtins.map
-      (host: {
-        name = host.hostname;
-        value = nixpkgs.lib.nixosSystem {
-          system = host.system;
-          specialArgs = {inherit inputs outputs vars utils host;};
-          modules = [./hosts/nixos/${host.folder}];
-        };
-      })
-      hosts);
+  mkNixos = host:
+    nixpkgs.lib.nixosSystem {
+      system = host.system;
+      specialArgs = {inherit inputs outputs vars utils host;};
+      modules = [
+        ./hosts/nixos/${host.folder}
+        inputs.home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.alex.imports = [./home/${vars.username}];
+          home-manager.extraSpecialArgs = {inherit inputs outputs vars utils host;};
+        }
+      ];
+    };
 
-  mkDarwin = hosts:
-    builtins.listToAttrs
-    (builtins.map
-      (host: {
-        name = host.hostname;
-        value = inputs.nix-darwin.lib.darwinSystem {
-          system = host.system;
-          specialArgs = {inherit inputs outputs vars utils host;};
-          modules = [
-            ./hosts/darwin/siliconWork
-            inputs.home-manager.darwinModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.alex.imports = [./home/alex];
-              home-manager.extraSpecialArgs = {inherit inputs outputs vars utils host;};
-            }
-          ];
-        };
-      })
-      hosts);
+  mkDarwin = host:
+    inputs.nix-darwin.lib.darwinSystem {
+      system = host.system;
+      specialArgs = {inherit inputs outputs vars utils host;};
+      modules = [
+        ./hosts/darwin/${host.folder}
+        inputs.home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.alex.imports = [./home/${vars.username}];
+          home-manager.extraSpecialArgs = {inherit inputs outputs vars utils host;};
+        }
+      ];
+    };
 
-  mkHome = hosts:
-    builtins.listToAttrs
-    (builtins.map
-      ({
-        username,
-        host,
-      }: {
-        name = "${username}@${host.hostname}";
-        value = inputs.home-manager.lib.homeManagerConfigurations {
-          pkgs = pkgs.${host.system};
-          extraSpecialArgs = {inherit inputs outputs vars utils host;};
-          modules = [./home/${username}];
-        };
-      })
-      hosts);
+  mkHome = {
+    username,
+    host,
+  }:
+    inputs.home-manager.lib.homeManagerConfigurations {
+      pkgs = pkgs.${host.system};
+      extraSpecialArgs = {inherit inputs outputs vars utils host;};
+      modules = [./home/${username}];
+    };
 }

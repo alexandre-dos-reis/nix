@@ -1,8 +1,8 @@
-{vars, ...}: {
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../nixos-common
+    ../nixos-common.nix
     ./sound.nix
     ./network.nix
     ./users.nix

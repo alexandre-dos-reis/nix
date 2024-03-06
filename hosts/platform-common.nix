@@ -16,9 +16,9 @@ in {
   programs.fish.enable = true;
 
   users.users.${vars.username} = {
-      home = /Users/alex;
-      shell = pkgs.fish;
-    };
+    home = /Users/alex;
+    shell = pkgs.fish;
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

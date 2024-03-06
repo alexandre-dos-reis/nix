@@ -3,7 +3,7 @@ let
   geoLocale = "fr_FR.UTF-8";
 in {
   imports = [
-    ../../cross-platforms-common
+    ../../platform-common.nix
   ];
 
   i18n = {

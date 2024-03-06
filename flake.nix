@@ -23,26 +23,26 @@
       inherit inputs vars;
       inherit (self) outputs;
     };
-    inherit (helpers) mkNixos mkDarwin mkHome mkFormatter;
+    inherit (helpers) mkNixos mkDarwin mkHome mkFormatter readJsonFile;
     inherit (vars) username;
-    inherit (import ./hosts.nix) white mbp2012 work siliconWork;
+    inherit (readJsonFile ./hosts.json) white mbp2012 work siliconWork;
   in {
     formatter = mkFormatter;
 
-    nixosConfigurations = mkNixos [
-      white
-    ];
+    nixosConfigurations = {
+      "white" = mkNixos white;
+    };
 
-    darwinConfigurations = mkDarwin [
-      mbp2012
-      siliconWork
-    ];
+    darwinConfigurations = {
+      "mbp2012" = mkDarwin mbp2012;
+      "siliconWork" = mkDarwin siliconWork;
+    };
 
-    homeConfigurations = mkHome [
-      {
+    homeConfigurations = {
+      "alex@siliconWork" = mkHome {
         inherit username;
         host = work;
-      }
-    ];
+      };
+    };
   };
 }
