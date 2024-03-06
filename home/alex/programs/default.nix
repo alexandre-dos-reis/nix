@@ -1,12 +1,12 @@
 {
   imports = [
     ./neovim
+    ./fish.nix
+    ./kitty.nix
+    ./tmux.nix
     # ./utils.nix
-    # ./fish.nix
     # ./git.nix
     # ./keychain.nix
-    # ./tmux.nix
-    ./kitty.nix
     # ./vscode.nix
   ];
 }

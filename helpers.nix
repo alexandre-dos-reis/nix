@@ -41,14 +41,16 @@ in {
         value = inputs.nix-darwin.lib.darwinSystem {
           system = host.system;
           specialArgs = {inherit inputs outputs vars utils host;};
-          modules = [./hosts/darwin/siliconWork
-		inputs.home-manager.darwinModules.home-manager {
-		    home-manager.useGlobalPkgs = true;
-		    home-manager.useUserPackages = true;
-		    home-manager.users.alex.imports = [./home/alex];
-		    home-manager.extraSpecialArgs = { inherit inputs outputs vars utils host;};
-		}
-		];
+          modules = [
+            ./hosts/darwin/siliconWork
+            inputs.home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.alex.imports = [./home/alex];
+              home-manager.extraSpecialArgs = {inherit inputs outputs vars utils host;};
+            }
+          ];
         };
       })
       hosts);

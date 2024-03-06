@@ -10,7 +10,7 @@
   ...
 }: let
   inherit (pkgs.stdenv) isLinux isDarwin;
-  inherit (utils)  isNixOs;
+  inherit (utils) isNixOs;
   inherit (vars) username;
 in {
   imports = [

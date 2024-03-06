@@ -1,7 +1,4 @@
-{
-  utils,
-  ...
-}: {
+{utils, ...}: {
   imports = [
     ../../cross-platforms-common
   ];
@@ -17,15 +14,13 @@
 
   services.nix-daemon.enable = true;
 
+  system.defaults = {
+    dock.autohide = true;
+    NSGlobalDomain.AppleShowAllExtensions = true;
 
-system.defaults = {
-  dock.autohide = true;
-  NSGlobalDomain.AppleShowAllExtensions = true;
-
-  finder = {
-    AppleShowAllExtensions = true;
-    FXEnableExtensionChangeWarning = false;
+    finder = {
+      AppleShowAllExtensions = true;
+      FXEnableExtensionChangeWarning = false;
+    };
   };
-};
-
 }

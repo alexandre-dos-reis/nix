@@ -1,6 +1,7 @@
 {
   pkgs,
   host,
+  vars,
   ...
 }: let
   timeZone = "Europe/Paris";
@@ -12,7 +13,12 @@ in {
 
   nix.settings.experimental-features = "nix-command flakes";
 
-  users.users.alex.home = /Users/alex;
+  programs.fish.enable = true;
+
+  users.users.${vars.username} = {
+      home = /Users/alex;
+      shell = pkgs.fish;
+    };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -20,10 +26,9 @@ in {
   environment.systemPackages = with pkgs; [
     # try to install neovim dependencies in the user scope.
     # Shell has to be installed globally...
-    fish
     vim
+    zsh
   ];
 
   time.timeZone = timeZone;
-
 }

@@ -3,7 +3,7 @@
     enable = true;
     prefix = "C-a";
     plugins = with pkgs.tmuxPlugins; [
-      continunn
+      continuum
       vim-tmux-navigator
       resurrect
     ];
