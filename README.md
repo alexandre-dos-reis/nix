@@ -57,3 +57,7 @@
 - [installing-home-manager-on-ubuntu](https://discourse.nixos.org/t/installing-home-manager-on-ubuntu/25957/8)
 - [How to use Nix on Ubuntu or any Linux Distro](https://www.youtube.com/watch?v=5Dd7rQPNDT8&t=1s)
   - [Related article use above](https://tech.aufomm.com/my-nix-journey-use-nix-with-ubuntu/)
+
+### Resources on programs
+
+- [Hyprland as Part of Your Development Workflow](https://haseebmajid.dev/posts/2023-11-15-part-3-hyprland-as-part-of-your-development-workflow/)
