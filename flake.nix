@@ -27,7 +27,7 @@
       inherit inputs vars;
       inherit (self) outputs;
     };
-    inherit (helpers) mkNixos mkDarwin mkHome mkFormatter readJsonFile;
+    inherit (helpers) mkNixos mkDarwin mkHome mkFormatter;
     inherit (vars) username;
     inherit (import ./hosts.nix) white mbp2012 work siliconWork;
   in {
