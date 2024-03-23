@@ -22,7 +22,7 @@ in {
   ];
 
   # Recommended for linux distros other than NixOS
-  #targets.genericLinux.enable = !isNixOs && isLinux;
+  targets.genericLinux.enable = true;
 
   # home = {
   #  inherit username;
@@ -31,6 +31,9 @@ in {
   #    then "/Users/${username}"
   #    else "/home/${username}";
   #};
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
+  nixpkgs.config.allowUnfree = true;
 
   programs = {
     home-manager.enable = true;
@@ -40,5 +43,9 @@ in {
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "24.05";
+
+  home.stateVersion = "23.11";
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 }

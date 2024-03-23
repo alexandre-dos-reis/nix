@@ -7,7 +7,6 @@
   nixpkgs = inputs.nixpkgs;
   pkgs = nixpkgs.legacyPackages;
   utils = {
-    isNixOs = builtins.pathExists /etc/nixos;
     ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
   };
   systems = [
@@ -52,9 +51,14 @@ in {
       ];
     };
 
-  mkHome = username: host:
-    inputs.home-manager.lib.homeManagerConfigurations {
-      pkgs = pkgs.${host.system};
+  mkHome = username: host: let
+    pkgs = import inputs.nixpkgs {
+      system = host.system;
+      overlays = [inputs.nixgl.overlay];
+    };
+  in
+    inputs.home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
       extraSpecialArgs = {inherit inputs outputs vars utils host;};
       modules = [./home/${username}];
     };

@@ -2,7 +2,7 @@
   vars,
   pkgs,
   ...
-}: let 
+}: let
   inherit (pkgs.stdenv) isDarwin;
   inherit (vars) email fullname;
 in {

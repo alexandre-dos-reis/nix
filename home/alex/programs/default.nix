@@ -1,6 +1,6 @@
 {
   imports = [
-    ./neovim
+    #./neovim This is buggy !
     ./fish.nix
     ./kitty.nix
     ./tmux.nix

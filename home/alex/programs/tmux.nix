@@ -1,8 +1,12 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  # term = "xterm-kitty";
+  # https://github.com/craftzdog/dotfiles-public/blob/master/.config/tmux/tmux.conf
+  term = "xterm-256color";
+in {
   programs.tmux = {
     enable = true;
     prefix = "C-a";
-    shell = "\${pkgs.fish}/bin/fish";
+    shell = "/home/alex/.nix-profile/bin/fish";
     plugins = with pkgs.tmuxPlugins; [
       continuum
       vim-tmux-navigator
@@ -11,6 +15,10 @@
     historyLimit = 10000;
     mouse = true;
     extraConfig = ''
+      set -g default-terminal "${term}"
+      set -ga terminal-overrides ",${term}:Tc"
+      # set -as terminal-features ",${term}:RGB"
+
       set -g set-clipboard on  # use system clipboard
 
       # Change split panes commands and open in the current directory
@@ -86,7 +94,7 @@
       # !!! #
       # Install plugins with "Prefix + Shift-i"
       # Initialize TMUX plugin manager (KEEP THIS LINE AT THE VERY BOTTOM OF tmux.conf)
-      run '~/.tmux/plugins/tpm/tpm'
+      # run '~/.tmux/plugins/tpm/tpm'
 
 
       ## StatusLine
