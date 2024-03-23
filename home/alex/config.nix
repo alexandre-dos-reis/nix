@@ -13,12 +13,17 @@ in {
 
   # keyboard layout
   # https://mipmip.github.io/home-manager-option-search/?query=keyboard
-  #  home.keyboard = {
+  # https://dev.to/tallesl/change-caps-lock-to-ctrl-3c4
+  # https://www.reddit.com/r/NixOS/comments/trkfyz/overriding_configurationnix_with_homemanager/
   # TODO:: try these layout on Darwin:
   # "Unicode Hex Input";
   # "U.S.";
   # "French - numerical";
   # "French";
-  #    layout = if isDarwin then "Unicode Hex Input" else "us";
-  #  };
+   home.keyboard = if isDarwin then {
+     layout = "Unicode Hex Input";
+   } else {
+     layout = "us";
+     options = [ "ctrl:nocaps" ];
+   };
 }

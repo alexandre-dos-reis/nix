@@ -95,6 +95,11 @@ in {
       # Install plugins with "Prefix + Shift-i"
       # Initialize TMUX plugin manager (KEEP THIS LINE AT THE VERY BOTTOM OF tmux.conf)
       # run '~/.tmux/plugins/tpm/tpm'
+    
+
+      # Undercurl
+      set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
+      set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
 
       ## StatusLine

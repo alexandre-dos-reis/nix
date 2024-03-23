@@ -5,6 +5,7 @@
 }: {
   # need to install cargo and gcc for neovim, move them to neovim folder
   home.packages = with pkgs; [
+    # system utils
     dust
     btop
     neofetch
@@ -29,12 +30,17 @@
     ripgrep
     sops
     # firefox: Not available on silicon platform
-    input-remapper
+    # input-remapper
     tree
     unrar
+
+   # app
+   discord
+    
+
+    # languages
     bun
     go
-
     # rust
     rustc
     cargo
