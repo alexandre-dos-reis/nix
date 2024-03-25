@@ -35,8 +35,7 @@
     unrar
 
    # app
-   discord
-    
+   # discord
 
     # languages
     bun

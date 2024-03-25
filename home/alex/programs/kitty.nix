@@ -1,10 +1,6 @@
 {pkgs, ...}: let
   kitty = "${pkgs.nixgl.nixGLMesa}/bin/nixGLMesa ${pkgs.kitty}/bin/kitty";
   inherit (pkgs.stdenv) isDarwin;
-  # theme = builtins.readFile(builtins.fetchurl {
-  #     url = "https://raw.githubusercontent.com/craftzdog/solarized-osaka.nvim/main/extras/kitty/solarized-osaka_night.conf";
-  #     sha256 = "sha256:0x6jv0ry2lynd9py6blsif3pplgbmmf45f7sysxdqqw3093mfa6r";
-  # });
 in {
   # https://mipmip.github.io/home-manager-option-search/?query=kitty
   programs.kitty = {
@@ -13,7 +9,7 @@ in {
     font = {
       # Show current fonts installed : kitty --debug-font-fallback
       name = "JetBrainsMono Nerd Font";
-      size = 12;
+      size = 9; #  9 - 12
     };
     settings = {
       hide_window_decorations =
@@ -22,9 +18,8 @@ in {
         else true;
       shell = "/home/alex/.nix-profile/bin/fish";
     };
-    # https://github.com/kovidgoyal/kitty-themes/tree/master/themes
+    # Use the name attribute from the json file to the theme key.
     # https://github.com/kovidgoyal/kitty-themes/blob/master/themes.json
-    # Use the name attribute from the json file
     theme = "Solarized Dark Higher Contrast";
     extraConfig = ''
       cursor #708183
