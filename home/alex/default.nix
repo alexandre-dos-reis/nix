@@ -10,7 +10,7 @@
   ...
 }: let
   inherit (utils) isDarwin isOtherLinuxOs;
-  inherit (vars) username editor;
+  inherit (vars) username editor homeDirectory;
 in {
   imports = [
     ./programs
@@ -24,7 +24,7 @@ in {
   targets.genericLinux.enable = isOtherLinuxOs;
 
   home.username = username;
-  home.homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
+  home.homeDirectory = homeDirectory;
 
   nixpkgs.config.allowUnfree = true;
 

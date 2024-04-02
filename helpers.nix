@@ -6,6 +6,7 @@
 }: let
   nixpkgs = inputs.nixpkgs;
   pkgs = nixpkgs.legacyPackages;
+  inherit (vars) username;
   systems = [
     "aarch64-linux"
     "x86_64-linux"
@@ -23,6 +24,9 @@
     isOtherLinuxOs = !isNixOs && isLinux;
   };
 
+  mkExtendedVars = {vars, utils}: vars // {
+    homeDirectory = if utils.isDarwin then "/Users/${vars.username}" else "/home/${vars.username}";
+  };
 
 in {
   mkFormatter = forSystems (s: pkgs.${s}.alejandra);
@@ -39,8 +43,11 @@ in {
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.alex.imports = [./home/${vars.username}];
-          home-manager.extraSpecialArgs = {inherit inputs outputs vars host utils;};
+          home-manager.users.${username}.imports = [./home/${username}];
+          home-manager.extraSpecialArgs = {
+            inherit inputs outputs host utils;
+            vars = mkExtendedVars {inherit vars utils;};
+          };
         }
       ];
     };
@@ -57,8 +64,11 @@ in {
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.alex.imports = [./home/${vars.username}];
-          home-manager.extraSpecialArgs = {inherit inputs outputs vars host utils;};
+          home-manager.users.${username}.imports = [./home/${username}];
+          home-manager.extraSpecialArgs = {
+            inherit inputs outputs host utils;
+            vars = mkExtendedVars {inherit vars utils;};
+          };
         }
       ];
     };
@@ -72,7 +82,10 @@ in {
   in
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = {inherit inputs outputs vars host utils;};
       modules = [./home/${username}];
+      extraSpecialArgs = {
+        inherit inputs outputs host utils;
+        vars = mkExtendedVars {inherit vars utils;};
+      };
     };
 }

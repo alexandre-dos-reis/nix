@@ -9,14 +9,14 @@ in {
     font = {
       # Show current fonts installed : kitty --debug-font-fallback
       name = vars.font;
-      size = 9; #  9 - 12
+      size = 12; #  9 - 12
     };
     settings = {
       hide_window_decorations =
         if isDarwin
         then "titlebar-only"
         else true;
-      shell = "/home/alex/.nix-profile/bin/fish";
+      shell = "${pkgs.fish}/bin/fish";
     };
     # Use the name attribute from the json file to the theme key.
     # https://github.com/kovidgoyal/kitty-themes/blob/master/themes.json

@@ -24,7 +24,7 @@ nix-diff gen1 gen2:
 
 # HOME
 # https://nix-community.github.io/home-manager/index.xhtml#ch-nix-flakes
-setup-home-manager host:
+setup-home-manager:
   nix run home-manager/master -- init
 
 # HOME
