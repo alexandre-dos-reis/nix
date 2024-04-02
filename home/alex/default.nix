@@ -9,7 +9,7 @@
   utils,
   ...
 }: let
-  inherit (utils) isDarwin;
+  inherit (utils) isDarwin isOtherLinuxOs;
   inherit (vars) username editor;
 in {
   imports = [
@@ -21,7 +21,7 @@ in {
   ];
 
   # Recommended for linux distros other than NixOS
-  targets.genericLinux.enable = true;
+  targets.genericLinux.enable = isOtherLinuxOs;
 
   home.username = username;
   home.homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";

@@ -24,6 +24,7 @@ in {
      layout = "Unicode Hex Input";
    } else {
      layout = "us";
-     options = [ "ctrl:nocaps" ];
+     # Not Working...
+     # options = [ "ctrl:nocaps" ];
    };
 }

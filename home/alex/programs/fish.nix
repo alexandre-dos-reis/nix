@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  inherit (pkgs.stdenv) isDarwin;
+  inherit (utils) isDarwin;
 in {
   # https://github.com/alexandre-dos-reis/dotfiles/blob/main/dot_config/private_fish/config.fish
   # https://discourse.nixos.org/t/managing-fish-plugins-with-home-manager/22368
@@ -18,7 +18,6 @@ in {
       set -gx PATH bin $PATH
       set -gx PATH ~/bin $PATH
       set -gx PATH ~/.local/bin $PATH
-      set -gx PATH ~/.local/bin/nvim-linux64/bin $PATH
 
       set -g theme_color_scheme terminal-dark
       set -g fish_prompt_pwd_dir_length 1

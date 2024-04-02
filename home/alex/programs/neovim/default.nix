@@ -1,8 +1,7 @@
 {
   # TODO: https://github.com/LazyVim/LazyVim/discussions/1972
   programs.neovim = {
-    enable = false;
-    defaultEditor = true;
+    enable = true;
   };
 
   # TODO: use xdg config
