@@ -6,10 +6,6 @@
 }: let
   nixpkgs = inputs.nixpkgs;
   pkgs = nixpkgs.legacyPackages;
-  utils = {
-    isNixOs = builtins.pathExists /etc/nixos;
-    ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
-  };
   systems = [
     "aarch64-linux"
     "x86_64-linux"
@@ -17,13 +13,26 @@
     "x86_64-darwin"
   ];
   forSystems = nixpkgs.lib.genAttrs systems;
+
+  mkUtils = pkgs: let
+    inherit (pkgs.stdenv) isLinux isDarwin;
+    isNixOs = builtins.pathExists /etc/nixos;
+  in {
+    ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
+    inherit isLinux isDarwin isNixOs;
+    isOtherLinuxOs = !isNixOs && isLinux;
+  };
+
+
 in {
   mkFormatter = forSystems (s: pkgs.${s}.alejandra);
 
-  mkNixos = host:
+  mkNixos = host: let 
+    utils = mkUtils pkgs;
+  in
     nixpkgs.lib.nixosSystem {
       system = host.system;
-      specialArgs = {inherit inputs outputs vars utils host;};
+      specialArgs = {inherit inputs outputs vars host utils;};
       modules = [
         ./hosts/nixos/${host.folder}
         inputs.home-manager.nixosModules.home-manager
@@ -31,15 +40,17 @@ in {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.alex.imports = [./home/${vars.username}];
-          home-manager.extraSpecialArgs = {inherit inputs outputs vars utils host;};
+          home-manager.extraSpecialArgs = {inherit inputs outputs vars host utils;};
         }
       ];
     };
 
-  mkDarwin = host:
+  mkDarwin = host: let 
+    utils = mkUtils pkgs;
+  in
     inputs.nix-darwin.lib.darwinSystem {
       system = host.system;
-      specialArgs = {inherit inputs outputs vars utils host;};
+      specialArgs = {inherit inputs outputs vars host utils;};
       modules = [
         ./hosts/darwin/${host.folder}
         inputs.home-manager.darwinModules.home-manager
@@ -47,7 +58,7 @@ in {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.alex.imports = [./home/${vars.username}];
-          home-manager.extraSpecialArgs = {inherit inputs outputs vars utils host;};
+          home-manager.extraSpecialArgs = {inherit inputs outputs vars host utils;};
         }
       ];
     };
@@ -57,10 +68,11 @@ in {
       system = host.system;
       overlays = [inputs.nixgl.overlay];
     };
+    utils = mkUtils pkgs;
   in
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = {inherit inputs outputs vars utils host;};
+      extraSpecialArgs = {inherit inputs outputs vars host utils;};
       modules = [./home/${username}];
     };
 }

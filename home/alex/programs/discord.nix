@@ -7,15 +7,14 @@
   icon = "${discord}/share/icons/hicolor/256x256/apps/discord.png";
   bin = "${discord}/bin/discord";
 
-  inherit (utils) isNixOs;
-  inherit (pkgs.stdenv) isLinux;
+  inherit (utils) isOtherLinuxOs;
 in {
   home.packages = [
     discord
   ];
 
   xdg.dataFile."applications/discord.desktop" = {
-    enable = !isNixOs && isLinux;
+    enable = isOtherLinuxOs;
     text = ''
       [Desktop Entry]
       Version=1.0

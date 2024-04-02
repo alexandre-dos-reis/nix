@@ -1,5 +1,5 @@
-{pkgs, ...}: let
-  inherit (pkgs.stdenv) isDarwin;
+{pkgs, utils, ...}: let
+  inherit (utils) isDarwin;
 in {
   fonts.fontconfig.enable = true;
   home.packages = [

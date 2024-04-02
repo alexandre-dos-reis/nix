@@ -1,6 +1,6 @@
-{pkgs, vars, ...}: let
+{pkgs, vars, utils, ...}: let
   kitty = "${pkgs.nixgl.nixGLMesa}/bin/nixGLMesa ${pkgs.kitty}/bin/kitty";
-  inherit (pkgs.stdenv) isDarwin;
+  inherit (utils) isDarwin;
 in {
   # https://mipmip.github.io/home-manager-option-search/?query=kitty
   programs.kitty = {
