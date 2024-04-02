@@ -61,3 +61,8 @@
 ### Resources on programs
 
 - [Hyprland as Part of Your Development Workflow](https://haseebmajid.dev/posts/2023-11-15-part-3-hyprland-as-part-of-your-development-workflow/)
+
+### Integrate Neovim with nix
+
+- [Setup LazyVim using Nix and home-manager](https://github.com/LazyVim/LazyVim/discussions/1972)
+- [Neovim - LazyVim - can’t load plugins](https://discourse.nixos.org/t/neovim-cant-load-plugins/31189/2)
