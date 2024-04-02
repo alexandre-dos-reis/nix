@@ -7,6 +7,7 @@
   nixpkgs = inputs.nixpkgs;
   pkgs = nixpkgs.legacyPackages;
   utils = {
+    isNixOs = builtins.pathExists /etc/nixos;
     ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
   };
   systems = [

@@ -8,5 +8,6 @@
     ./git.nix
     # ./keychain.nix
     ./vscode.nix
+    ./discord.nix
   ];
 }

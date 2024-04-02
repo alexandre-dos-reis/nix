@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+{pkgs, vars, ...}: let
   kitty = "${pkgs.nixgl.nixGLMesa}/bin/nixGLMesa ${pkgs.kitty}/bin/kitty";
   inherit (pkgs.stdenv) isDarwin;
 in {
@@ -8,7 +8,7 @@ in {
     shellIntegration.enableFishIntegration = true;
     font = {
       # Show current fonts installed : kitty --debug-font-fallback
-      name = "JetBrainsMono Nerd Font";
+      name = vars.font;
       size = 9; #  9 - 12
     };
     settings = {

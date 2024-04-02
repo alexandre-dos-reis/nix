@@ -11,7 +11,7 @@
 }: let
   inherit (pkgs.stdenv) isLinux isDarwin;
   inherit (utils) isNixOs;
-  inherit (vars) username;
+  inherit (vars) username editor;
 in {
   imports = [
     ./programs
@@ -24,16 +24,12 @@ in {
   # Recommended for linux distros other than NixOS
   targets.genericLinux.enable = true;
 
-  # home = {
-  #  inherit username;
-  #  homeDirectory =
-  #    if isDarwin
-  #    then "/Users/${username}"
-  #    else "/home/${username}";
-  #};
   home.username = username;
-  home.homeDirectory = "/home/${username}";
+  home.homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
+
   nixpkgs.config.allowUnfree = true;
+
+  xdg.enable = true;
 
   programs = {
     home-manager.enable = true;
@@ -46,6 +42,6 @@ in {
 
   home.stateVersion = "23.11";
   home.sessionVariables = {
-    EDITOR = "nvim";
+    EDITOR = editor;
   };
 }

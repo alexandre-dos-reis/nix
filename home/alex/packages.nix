@@ -34,14 +34,15 @@
     tree
     unrar
 
-   # app
-   # discord
-
     # languages
     bun
     go
     # rust
     rustc
     cargo
+
+
+    # Keyboard
+    qmk
   ];
 }
