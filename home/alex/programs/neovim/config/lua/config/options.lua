@@ -2,21 +2,10 @@
 -- Default oions that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional oions here
 
--- Enable undercurl for xterm-kitty -- NOT WORKING !
--- if vim.env.TERM == "xterm-kitty" then
---   vim.cmd([[autocmd UIEnter * if v:event.chan ==# 0 | call chansend(v:stderr, "\x1b[>1u") | endif]])
---   vim.cmd([[autocmd UILeave * if v:event.chan ==# 0 | call chansend(v:stderr, "\x1b[<1u") | endif]])
--- end
---
--- -- Undercurl
--- vim.cmd([[let &t_Cs = "\e[4:3m"]])
--- vim.cmd([[let &t_Ce = "\e[4:0m"]])
-
-vim.wo.number = true
-
 local o = vim.o
 
 o.encoding = "utf-8"
+o.number = true
 o.fileencoding = "utf-8"
 
 o.title = true
@@ -31,6 +20,7 @@ o.expandtab = true
 o.scrolloff = 10
 o.relativenumber = true
 o.shell = "fish"
+o.clipboard = "unnamedplus"
 -- o.backupskip = { "/tmp/*", "/private/tmp/*" }
 o.inccommand = "split"
 o.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
@@ -41,6 +31,7 @@ o.tabstop = 2
 o.wrap = false -- No Wrap lines
 -- o.backspace = { "start", "eol", "indent" }
 o.swapfile = false
+o.foldenable = false
 
 -- split windows
 o.splitright = true

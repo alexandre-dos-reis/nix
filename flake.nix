@@ -11,6 +11,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixgl = {
+      url = "github:guibou/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+    };
   };
 
   outputs = {
@@ -23,7 +30,7 @@
       inherit inputs vars;
       inherit (self) outputs;
     };
-    inherit (helpers) mkNixos mkDarwin mkHome mkFormatter readJsonFile;
+    inherit (helpers) mkNixos mkDarwin mkHome mkFormatter;
     inherit (vars) username;
     inherit (import ./hosts.nix) white mbp2012 work siliconWork;
   in {
@@ -39,7 +46,7 @@
     };
 
     homeConfigurations = {
-      "alex@siliconWork" = mkHome username work;
+      "alex@work" = mkHome username work;
     };
   };
 }

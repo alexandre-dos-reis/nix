@@ -13,6 +13,8 @@ return {
       function()
         require("telescope.builtin").find_files({
           cwd = vim.loop.cwd(),
+          hidden = true,
+          file_ignore_patterns = { "^%.git/", "^%node_modules/", "^%.yarn" },
         })
       end,
     },
@@ -30,17 +32,19 @@ return {
           hidden = true,
           grouped = true,
           initial_mode = "normal",
+          layout_strategy = "flex",
           layout_config = {
             height = 40,
+            width = 150,
           },
+          wrap_results = true,
         })
       end,
     },
     {
       "<leader>fs",
       function()
-        local builtin = require("telescope.builtin")
-        builtin.live_grep()
+        require("telescope.builtin").live_grep()
       end,
     },
   },
@@ -77,12 +81,12 @@ return {
             ["c"] = fb_actions.create,
             ["h"] = fb_actions.goto_parent_dir,
             ["<C-u>"] = function(prompt_bufnr)
-              for i = 1, 10 do
+              for _ = 1, 10 do
                 actions.move_selection_previous(prompt_bufnr)
               end
             end,
             ["<C-d>"] = function(prompt_bufnr)
-              for i = 1, 10 do
+              for _ = 1, 10 do
                 actions.move_selection_next(prompt_bufnr)
               end
             end,

@@ -1,16 +1,22 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  # term = "xterm-kitty";
+  # https://github.com/craftzdog/dotfiles-public/blob/master/.config/tmux/tmux.conf
+  term = "xterm-256color";
+in {
   programs.tmux = {
     enable = true;
     prefix = "C-a";
-    shell = "\${pkgs.fish}/bin/fish";
+    shell = "${pkgs.fish}/bin/fish";
     plugins = with pkgs.tmuxPlugins; [
-      continuum
       vim-tmux-navigator
-      resurrect
     ];
     historyLimit = 10000;
     mouse = true;
     extraConfig = ''
+      set -g default-terminal "${term}"
+      set -ga terminal-overrides ",${term}:Tc"
+      # set -as terminal-features ",${term}:RGB"
+
       set -g set-clipboard on  # use system clipboard
 
       # Change split panes commands and open in the current directory
@@ -62,32 +68,9 @@
       unbind r
       bind r source-file ~/.tmux.conf
 
-      # TPM plugin - https://github.com/tmux-plugins/tpm
-      set -g @plugin 'tmux-plugins/tpm'
-
-      ### START OF TMUX PLUGINS ###
-
-      set -g @plugin 'christoomey/vim-tmux-navigator'  # Allow switching panes with vim keys, ex: "ctrl + h,j,k,l"
-
-      set -g @plugin 'tmux-plugins/tmux-resurrect'  # Persist tmux session after computer restart: Key bindings
-      # Key bindings
-      # Save: prefix + Ctrl-s
-      # Restore: prefix + Ctrl-r
-
-      set -g @plugin 'tmux-plugins/tmux-continuum'  # auto saves session every 15 minutes
-
-      # set -g @plugin 'jimeh/tmux-themepack' # Install custom theme for tmux
-      # set -g @plugin 'catppuccin/tmux' # catppuccin theme
-
-      set -g @themepack 'powerline/default/cyan'
-
-      ### END OF TMUX PLUGINS ###
-
-      # !!! #
-      # Install plugins with "Prefix + Shift-i"
-      # Initialize TMUX plugin manager (KEEP THIS LINE AT THE VERY BOTTOM OF tmux.conf)
-      run '~/.tmux/plugins/tpm/tpm'
-
+      # Undercurl
+      set -as terminal-overrides ',*:Smulx=\E[4:%p1%dm'
+      set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
       ## StatusLine
       # vim: ft=tmux

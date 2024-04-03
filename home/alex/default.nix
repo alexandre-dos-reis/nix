@@ -9,9 +9,8 @@
   utils,
   ...
 }: let
-  inherit (pkgs.stdenv) isLinux isDarwin;
-  inherit (utils) isNixOs;
-  inherit (vars) username;
+  inherit (utils) isDarwin isOtherLinuxOs;
+  inherit (vars) username editor homeDirectory;
 in {
   imports = [
     ./programs
@@ -21,16 +20,19 @@ in {
     ./files
   ];
 
-  # Recommended for linux distros other than NixOS
-  #targets.genericLinux.enable = !isNixOs && isLinux;
 
-  # home = {
-  #  inherit username;
-  #  homeDirectory =
-  #    if isDarwin
-  #    then "/Users/${username}"
-  #    else "/home/${username}";
-  #};
+  # Recommended for linux distros other than NixOS
+  targets.genericLinux.enable = isOtherLinuxOs;
+
+  home.username = username;
+  home.homeDirectory = homeDirectory;
+
+  nixpkgs.config.allowUnfree = true;
+
+  xdg.enable = true;
+
+  # Create folders
+  home.file."dev/.keep".text = "keep";
 
   programs = {
     home-manager.enable = true;
@@ -40,5 +42,8 @@ in {
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "24.05";
+  home.stateVersion = "23.11";
+  home.sessionVariables = {
+    EDITOR = editor;
+  };
 }

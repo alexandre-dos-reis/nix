@@ -4,8 +4,10 @@
   vars,
   ...
 }: let
-  timeZone = "Europe/Paris";
+  inherit (vars) username homeDirectory;
 in {
+  time.timeZone = "Europe/Paris";
+
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.hostPlatform = host.system;
@@ -15,8 +17,8 @@ in {
 
   programs.fish.enable = true;
 
-  users.users.${vars.username} = {
-    home = /Users/alex;
+  users.users.${username} = {
+    home = homeDirectory;
     shell = pkgs.fish;
   };
 
@@ -29,6 +31,4 @@ in {
     vim
     zsh
   ];
-
-  time.timeZone = timeZone;
 }

@@ -24,7 +24,6 @@ return {
         bg = "#002b36",
       },
       fill = {
-
         bg = "#073642",
       },
       modified = {

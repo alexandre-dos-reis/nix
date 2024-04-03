@@ -1,9 +1,11 @@
 {
   utils,
   pkgs,
+  vars,
   ...
 }: let
-  inherit (pkgs.stdenv) isDarwin;
+  inherit (utils) isDarwin;
+  inherit (vars) editor;
 in {
   # https://github.com/alexandre-dos-reis/dotfiles/blob/main/dot_config/private_fish/config.fish
   # https://discourse.nixos.org/t/managing-fish-plugins-with-home-manager/22368
@@ -14,7 +16,7 @@ in {
     shellInit = ''
       set fish_greeting ""
       set -gx TERM xterm-256color
-      set -gx EDITOR nvim
+      set -gx EDITOR ${editor}
       set -gx PATH bin $PATH
       set -gx PATH ~/bin $PATH
       set -gx PATH ~/.local/bin $PATH

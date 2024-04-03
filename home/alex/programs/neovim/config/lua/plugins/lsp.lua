@@ -13,45 +13,51 @@ return {
         "css-lsp",
         "graphql-language-service-cli",
         "marksman",
+        "clangd",
 
         -- Checks that the followinf are working...
-        "astro-language-server",
-        "codelldb",
-        "css-lsp",
-        "cueimports",
-        "cuelsp",
-        "eslint-lsp",
-        "gofumpt",
-        "gopls",
-        "graphql-language-service-cli",
-        "json-lsp",
-        "lua-language-server",
-        "marksman",
-        "nil",
-        "prettier",
-        "prisma-language-server",
-        "rust-analyzer",
-        "selene",
-        "shellcheck",
-        "shfmt",
-        "stylua",
-        "tailwindcss-language-server",
-        "taplo",
-        "templ",
-        "typescript-language-server",
+        -- "astro-language-server",
+        -- "codelldb",
+        -- "css-lsp",
+        -- "cueimports",
+        -- "cuelsp",
+        -- "eslint-lsp",
+        -- "gofumpt",
+        -- "gopls",
+        -- "graphql-language-service-cli",
+        -- "json-lsp",
+        -- "lua-language-server",
+        -- "marksman",
+        -- "nil",
+        -- "prettier",
+        -- "prisma-language-server",
+        -- "rust-analyzer",
+        -- "selene",
+        -- "shellcheck",
+        -- "shfmt",
+        -- "stylua",
+        -- "tailwindcss-language-server",
+        -- "taplo",
+        -- "templ",
+        -- "typescript-language-server",
       })
     end,
   },
   {
     "neovim/nvim-lspconfig",
     -- opts = {
-    --   servers = {
-    --     -- Install with: `nix profile install github:nix-community/nixd`
-    --     nixd = {
-    --       mason = false,
-    --     },
+    --   capabilities = {
+    --     semanticTokensProvider = nil,
     --   },
     -- },
+    opts = {
+      servers = {
+        -- Install with: `nix profile install github:nix-community/nixd`
+        nixd = {
+          mason = false,
+        },
+      },
+    },
     init = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       -- https://www.lazyvim.org/plugins/lsp

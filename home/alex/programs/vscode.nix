@@ -1,52 +1,41 @@
-{pkgs, ...}: {
+{pkgs, vars, inputs,  ...}: let 
+  extensions = inputs.nix-vscode-extensions.extensions.${pkgs.system};
+  # https://marketplace.visualstudio.com/vscode
+  mkt = extensions.vscode-marketplace;
+  # https://open-vsx.org
+  vsx = extensions.open-vsx-release;
+in {
   # https://mipmip.github.io/home-manager-option-search/?query=vscode
   programs.vscode = {
     enable = true;
 
+    # https://code.visualstudio.com/docs/getstarted/keybindings
     keybindings = [
       {
         key = "alt+1";
         command = "multiCommand.makeRoom";
       }
-    ];
-
-    # TODO: build failed or packages unavailable for aarch64-darwin
-    extensions = with pkgs.vscode-extensions; [
-      #astro-build.astro-vscode
-      #matthewpi.caddyfile-support
-      #vadimcn.vscode-lldb
-      #ms-azuretools.vscode-docker
-      #p1c2u.docker-compose
-      #dsznajder.es7-react-js-snippets
-      #graphql.vscode-graphql
-      #graphql.vscode-graphql-syntax
-      #hashicorp.terraform
-      #ms-kubernetes-tools.vscode-kubernetes-tools
-      #ms-vscode.live-server
-      #ms-vsliveshare.vsliveshare
-      #ms-vsliveshare.vsliveshare-pack
-      #pkief.material-icon-theme
-      #unifiedjs.vscode-mdx
-      #ryuta46.multi-command
-      #nrwl.angular-console
-      #fabiospampinato.vscode-open-in-github
-      #pmndrs.pmndrs
-      #esbenp.prettier-vscode
-      #yoavbls.pretty-ts-errors
-      #prisma.prisma
-      #rust-lang.rust-analyzer
-      #joe-re.sql-language-server
-      #bradlc.vscode-tailwindcss
-      #bourhaouta.tailwindshades
-      #vscodevim.vim
-      #redhat.vscode-yaml
+      {
+          key = "tab";
+          command = "workbench.action.nextEditor";
+      }
+      {
+          key = "shift+tab";
+          command = "workbench.action.previousEditor";
+      }
+      {
+          key = "shift+k";
+          command = "editor.action.showHover";
+      }
     ];
 
     userSettings = {
       "workbench.colorTheme" = "poimandres";
-      "terminal.integrated.fontFamily" = "MesloLGS NF";
-      "editor.fontFamily" = "Jetbrains Mono; Menlo, Monaco, 'Courier New', monospace";
-      "editor.lineHeight" = 20;
+      "terminal.integrated.fontFamily" = vars.font.systemName;
+      "editor.fontFamily" = vars.font.systemName;
+      "editor.lineHeight" = 14;
+      "editor.fontSize" = 9;
+      "editor.fontLigatures" = true;
       "workbench.iconTheme" = "material-icon-theme";
       "material-icon-theme.hidesExplorerArrows" = true;
       "editor.minimap.enabled" = false;
@@ -67,16 +56,35 @@
       "workbench.tree.renderIndentGuides" = "always";
       "workbench.editor.enablePreview" = true;
       "emmet.triggerExpansionOnTab" = true;
-      "editor.fontLigatures" = true;
       "editor.bracketPairColorization.enabled" = true;
       "scm.defaultViewMode" = "tree";
+
       # Vim preference
       "editor.lineNumbers" = "relative";
       "editor.cursorStyle" = "block";
+      "vim.leader" = " ";
       "vim.insertModeKeyBindings" = [
         {
-          "before" = ["j" "j"];
+          "before" = ["j" "j;"];
           "after" = ["<Esc>"];
+        }
+      ];
+      "vim.normalModeKeyBindingsNonRecursive" = [
+        {
+          "before" = ["<C-d>"];
+          "after" = ["<C-d>" "z" "z"];
+        }
+        {
+          "before" = ["<C-u>"];
+          "after" = ["<C-u>" "z" "z"];
+        }
+        {
+          "before" = ["<leader>" "e"];
+          "commands" = [
+            "workbench.action.toggleActivityBarVisibility"
+            "workbench.action.toggleSidebarVisibility"
+            # "workbench.view.explorer"
+          ];
         }
       ];
       "vim.statusBarColorControl" = true;
@@ -123,5 +131,49 @@
       };
       "nxConsole.showNodeVersionOnStartup" = false;
     };
+
+    extensions = [
+      # Essentials
+      mkt.ms-vsliveshare.vsliveshare
+      mkt.vscodevim.vim # vim key bindings https://marketplace.visualstudio.com/items?itemName=vscodevim.vim
+      mkt.ms-vscode.live-server
+      mkt.redhat.vscode-yaml
+
+      # linter and formatter
+      mkt.dbaeumer.vscode-eslint
+
+      # themes
+      mkt.pmndrs.pmndrs
+
+      # Graphql
+      mkt.graphql.vscode-graphql
+      mkt.graphql.vscode-graphql-syntax
+
+      # Languages specific
+      mkt.bradlc.vscode-tailwindcss
+      mkt.vadimcn.vscode-lldb
+
+      # Docker
+      mkt.ms-azuretools.vscode-docker
+      mkt.p1c2u.docker-compose
+
+      #astro-build.astro-vscode
+      #matthewpi.caddyfile-support
+      #dsznajder.es7-react-js-snippets
+      #hashicorp.terraform
+      #ms-kubernetes-tools.vscode-kubernetes-tools
+      #pkief.material-icon-theme
+      #unifiedjs.vscode-mdx
+      #ryuta46.multi-command
+      #nrwl.angular-console
+      #fabiospampinato.vscode-open-in-github
+      #esbenp.prettier-vscode
+      #yoavbls.pretty-ts-errors
+      #prisma.prisma
+      #rust-lang.rust-analyzer
+      #joe-re.sql-language-server
+      #bourhaouta.tailwindshades
+    ];
+
   };
 }
