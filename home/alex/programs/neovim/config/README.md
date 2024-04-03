@@ -1,7 +1,5 @@
 # Nvim Config
 
-Temporary neovim config before finding a solution with nix.
-
 ## Undercurl
 
 - `echo $TERM` has to be `xterm-256color` inside TMUX.

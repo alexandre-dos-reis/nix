@@ -31,8 +31,8 @@ in {
 
     userSettings = {
       "workbench.colorTheme" = "poimandres";
-      "terminal.integrated.fontFamily" = vars.font;
-      "editor.fontFamily" = vars.font;
+      "terminal.integrated.fontFamily" = vars.font.systemName;
+      "editor.fontFamily" = vars.font.systemName;
       "editor.lineHeight" = 14;
       "editor.fontSize" = 9;
       "editor.fontLigatures" = true;

@@ -36,7 +36,10 @@ in {
   in
     nixpkgs.lib.nixosSystem {
       system = host.system;
-      specialArgs = {inherit inputs outputs vars host utils;};
+      specialArgs = {
+        inherit inputs outputs host utils;
+        vars = mkExtendedVars {inherit vars utils;};
+      };
       modules = [
         ./hosts/nixos/${host.folder}
         inputs.home-manager.nixosModules.home-manager
@@ -57,7 +60,10 @@ in {
   in
     inputs.nix-darwin.lib.darwinSystem {
       system = host.system;
-      specialArgs = {inherit inputs outputs vars host utils;};
+      specialArgs = {
+        inherit inputs outputs host utils;
+        vars = mkExtendedVars {inherit vars utils;};
+      };
       modules = [
         ./hosts/darwin/${host.folder}
         inputs.home-manager.darwinModules.home-manager

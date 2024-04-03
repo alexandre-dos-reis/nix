@@ -50,14 +50,14 @@ return {
     --     semanticTokensProvider = nil,
     --   },
     -- },
-    -- opts = {
-    --   servers = {
-    --     -- Install with: `nix profile install github:nix-community/nixd`
-    --     nixd = {
-    --       mason = false,
-    --     },
-    --   },
-    -- },
+    opts = {
+      servers = {
+        -- Install with: `nix profile install github:nix-community/nixd`
+        nixd = {
+          mason = false,
+        },
+      },
+    },
     init = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       -- https://www.lazyvim.org/plugins/lsp

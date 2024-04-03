@@ -1,4 +1,4 @@
-{pkgs, utils, ...}: let
+{pkgs, utils, vars, ...}: let
   inherit (utils) isDarwin;
 in {
   fonts.fontconfig.enable = true;
@@ -6,10 +6,12 @@ in {
     (pkgs.nerdfonts.override {
       fonts = [
         "Meslo"
-        "JetBrainsMono"
+        vars.font.nerdFontName
       ];
     })
   ];
+
+
 
   # keyboard layout
   # https://mipmip.github.io/home-manager-option-search/?query=keyboard
