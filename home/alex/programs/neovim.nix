@@ -1,4 +1,4 @@
-{
+{inputs, vars, ...}: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -6,12 +6,9 @@
     vimAlias = true;
   };
 
-
-  # xdg.configFile.test = {
-  #   enable = true;
-  #   text = ''
-  #     my test
-  #   '';
-  # };
+  xdg.configFile.nvim = {
+    source = "${vars.homeDirectory}/dev/nvim";
+    recursive = true;
+  };
 }
 

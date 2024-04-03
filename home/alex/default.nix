@@ -30,6 +30,9 @@ in {
 
   xdg.enable = true;
 
+  # Create folders
+  home.file."dev/.keep".text = "keep";
+
   programs = {
     home-manager.enable = true;
   };
