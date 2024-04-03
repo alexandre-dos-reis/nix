@@ -9,7 +9,7 @@ in {
     font = {
       # Show current fonts installed : kitty --debug-font-fallback
       name = vars.font;
-      size = 12; #  9 - 12
+      size = 9; #  9 - 12
     };
     settings = {
       hide_window_decorations =
@@ -29,7 +29,6 @@ in {
   home.shellAliases.kitty = kitty;
   home.sessionVariables.TERMINAL = "kitty";
 
-  xdg.enable = true;
   xdg.dataFile."applications/kitty.desktop" = {
     text = ''
       [Desktop Entry]

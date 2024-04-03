@@ -7,7 +7,7 @@ in {
     enable = true;
     prefix = "C-a";
     shell = "${pkgs.fish}/bin/fish";
-    plugins = with pkgs.tmuxPlugins;
+    plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
     ];
     historyLimit = 10000;
@@ -69,7 +69,7 @@ in {
       bind r source-file ~/.tmux.conf
 
       # Undercurl
-      set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
+      set -as terminal-overrides ',*:Smulx=\E[4:%p1%dm'
       set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
       ## StatusLine
