@@ -45,14 +45,8 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    -- opts = {
-    --   capabilities = {
-    --     semanticTokensProvider = nil,
-    --   },
-    -- },
     opts = {
       servers = {
-        -- Install with: `nix profile install github:nix-community/nixd`
         nixd = {
           mason = false,
         },
