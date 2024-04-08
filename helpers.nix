@@ -17,12 +17,13 @@
 
   mkUtils = pkgs: let
     inherit (pkgs.stdenv) isLinux isDarwin;
-    osName = builtins.elemAt (builtins.match ".*\nNAME\=\"([A-z]*)\"\n.*" (builtins.readFile /etc/os-release)) 0;
-    isNixOs = osName == "NixOS";
-  in {
+    osRelease = /etc/os-release;
+    osName = builtins.elemAt (builtins.match ".*\nNAME\=\"([A-z]*)\"\n.*" (builtins.readFile osRelease)) 0;
+    isNixOs = builtins.pathExists osRelease && osName == "NixOS";
+  in rec {
     ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
     inherit isLinux isDarwin isNixOs;
-    isOtherLinuxOs = !isNixOs && isLinux;
+    isOtherLinuxOs = builtins.pathExists /etc/os-release && !isNixOs && isLinux;
   };
 
   mkExtendedVars = {
@@ -88,11 +89,11 @@ in {
     };
 
   mkHome = username: host: let
+    utils = mkUtils pkgs;
     pkgs = import inputs.nixpkgs {
       system = host.system;
-      overlays = [inputs.nixgl.overlay];
+      overlays = if utils.isOtherLinuxOs then [inputs.nixgl.overlay] else [];
     };
-    utils = mkUtils pkgs;
   in
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
