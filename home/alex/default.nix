@@ -20,7 +20,6 @@ in {
     ./files
   ];
 
-
   # Recommended for linux distros other than NixOS
   targets.genericLinux.enable = isOtherLinuxOs;
 

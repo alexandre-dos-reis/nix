@@ -20,6 +20,7 @@ in {
       set -gx PATH bin $PATH
       set -gx PATH ~/bin $PATH
       set -gx PATH ~/.local/bin $PATH
+      set -gx PATH ~/.bun/bin $PATH
 
       set -g theme_color_scheme terminal-dark
       set -g fish_prompt_pwd_dir_length 1

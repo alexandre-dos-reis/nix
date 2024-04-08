@@ -1,4 +1,9 @@
-{pkgs, inputs, vars, ...}: {
+{
+  pkgs,
+  inputs,
+  vars,
+  ...
+}: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -16,4 +21,3 @@
     nixd ## nix lsp
   ];
 }
-

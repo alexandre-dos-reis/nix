@@ -1,4 +1,9 @@
-{pkgs, vars, inputs,  ...}: let 
+{
+  pkgs,
+  vars,
+  inputs,
+  ...
+}: let
   extensions = inputs.nix-vscode-extensions.extensions.${pkgs.system};
   # https://marketplace.visualstudio.com/vscode
   mkt = extensions.vscode-marketplace;
@@ -16,16 +21,16 @@ in {
         command = "multiCommand.makeRoom";
       }
       {
-          key = "tab";
-          command = "workbench.action.nextEditor";
+        key = "tab";
+        command = "workbench.action.nextEditor";
       }
       {
-          key = "shift+tab";
-          command = "workbench.action.previousEditor";
+        key = "shift+tab";
+        command = "workbench.action.previousEditor";
       }
       {
-          key = "shift+k";
-          command = "editor.action.showHover";
+        key = "shift+k";
+        command = "editor.action.showHover";
       }
     ];
 
@@ -174,6 +179,5 @@ in {
       #joe-re.sql-language-server
       #bourhaouta.tailwindshades
     ];
-
   };
 }

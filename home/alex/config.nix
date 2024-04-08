@@ -1,4 +1,9 @@
-{pkgs, utils, vars, ...}: let
+{
+  pkgs,
+  utils,
+  vars,
+  ...
+}: let
   inherit (utils) isDarwin;
 in {
   fonts.fontconfig.enable = true;
@@ -11,8 +16,6 @@ in {
     })
   ];
 
-
-
   # keyboard layout
   # https://mipmip.github.io/home-manager-option-search/?query=keyboard
   # https://dev.to/tallesl/change-caps-lock-to-ctrl-3c4
@@ -22,11 +25,14 @@ in {
   # "U.S.";
   # "French - numerical";
   # "French";
-   home.keyboard = if isDarwin then {
-     layout = "Unicode Hex Input";
-   } else {
-     layout = "us";
-     # Not Working...
-     # options = [ "ctrl:nocaps" ];
-   };
+  home.keyboard =
+    if isDarwin
+    then {
+      layout = "Unicode Hex Input";
+    }
+    else {
+      layout = "us";
+      # Not Working...
+      # options = [ "ctrl:nocaps" ];
+    };
 }

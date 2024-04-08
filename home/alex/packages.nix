@@ -35,12 +35,11 @@
     unrar
 
     # languages
-    bun
+    # bun
     go
     # rust
     rustc
     cargo
-
 
     # Keyboard
     qmk

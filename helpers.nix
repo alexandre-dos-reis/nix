@@ -17,21 +17,29 @@
 
   mkUtils = pkgs: let
     inherit (pkgs.stdenv) isLinux isDarwin;
-    isNixOs = builtins.pathExists /etc/nixos;
+    osName = builtins.elemAt (builtins.match ".*\nNAME\=\"([A-z]*)\"\n.*" (builtins.readFile /etc/os-release)) 0;
+    isNixOs = osName == "NixOS";
   in {
     ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
     inherit isLinux isDarwin isNixOs;
     isOtherLinuxOs = !isNixOs && isLinux;
   };
 
-  mkExtendedVars = {vars, utils}: vars // {
-    homeDirectory = if utils.isDarwin then "/Users/${vars.username}" else "/home/${vars.username}";
-  };
-
+  mkExtendedVars = {
+    vars,
+    utils,
+  }:
+    vars
+    // {
+      homeDirectory =
+        if utils.isDarwin
+        then "/Users/${vars.username}"
+        else "/home/${vars.username}";
+    };
 in {
   mkFormatter = forSystems (s: pkgs.${s}.alejandra);
 
-  mkNixos = host: let 
+  mkNixos = host: let
     utils = mkUtils pkgs;
   in
     nixpkgs.lib.nixosSystem {
@@ -55,7 +63,7 @@ in {
       ];
     };
 
-  mkDarwin = host: let 
+  mkDarwin = host: let
     utils = mkUtils pkgs;
   in
     inputs.nix-darwin.lib.darwinSystem {
