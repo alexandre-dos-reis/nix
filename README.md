@@ -6,6 +6,11 @@
 - From a flake: `/etc/nixos`: `sudo nixos-rebuild --flake .`
   - As a default, nix looks for the hostname in the `nixosConfigurations` key. You can specify another machine/key with `sudo nixos-rebuild --flake ".#other-config"`
 
+## Todos
+
+- [ ] Split configurations into multiple files to conditionnaly call config per platform/os.
+  - For kitty.
+
 ## Resources
 
 - [Nix Colors Input](https://github.com/Misterio77/nix-colors)
