@@ -23,8 +23,8 @@ in {
       unbind %
       unbind ')'
       unbind '"'
-      bind "|" split-window -h -c " #{pane_current_path}"
-      bind - split-window -v -c " #{pane_current_path}"
+      bind "|" split-window -c '#{pane_current_path}' -h
+      bind - split-window -c '#{pane_current_path}' -v
 
       # Resize panes
       bind -r j resize-pane -D 5
