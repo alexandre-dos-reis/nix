@@ -72,4 +72,5 @@
 ### Integrate Neovim with nix
 
 - [Setup LazyVim using Nix and home-manager](https://github.com/LazyVim/LazyVim/discussions/1972)
+- [](https://evantravers.com/articles/2023/11/28/moving-my-dotfiles-to-nix/)
 - [Neovim - LazyVim - can’t load plugins](https://discourse.nixos.org/t/neovim-cant-load-plugins/31189/2)
