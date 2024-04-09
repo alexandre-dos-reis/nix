@@ -20,10 +20,10 @@
     osRelease = /etc/os-release;
     osName = builtins.elemAt (builtins.match ".*\nNAME\=\"([A-z]*)\"\n.*" (builtins.readFile osRelease)) 0;
     isNixOs = builtins.pathExists osRelease && osName == "NixOS";
-  in rec {
+  in {
     ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
     inherit isLinux isDarwin isNixOs;
-    isOtherLinuxOs = builtins.pathExists /etc/os-release && !isNixOs && isLinux;
+    isOtherLinuxOs = true;
   };
 
   mkExtendedVars = {
@@ -92,7 +92,9 @@ in {
     utils = mkUtils pkgs;
     pkgs = import inputs.nixpkgs {
       system = host.system;
-      overlays = if utils.isOtherLinuxOs then [inputs.nixgl.overlay] else [];
+      overlays = [
+        inputs.neovim-nightly-overlay.overlay
+      ] ++ (if utils.isOtherLinuxOs then [inputs.nixgl.overlay] else []);
     };
   in
     inputs.home-manager.lib.homeManagerConfiguration {

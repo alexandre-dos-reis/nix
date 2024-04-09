@@ -9,6 +9,8 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+    package = pkgs.neovim-nightly;
+    
   };
 
   # xdg.configFile.nvim = {
