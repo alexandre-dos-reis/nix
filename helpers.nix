@@ -20,7 +20,7 @@
   };
 
   globalOverlays = [
-    inputs.neovim-nightly-overlay.overlay
+    # inputs.neovim-nightly-overlay.overlay
   ];
 
   mkExtendedVars = {
