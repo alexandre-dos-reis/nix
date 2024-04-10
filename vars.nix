@@ -7,4 +7,8 @@
     nerdFontName = "JetBrainsMono"; # https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/JetBrainsMono
   };
   editor = "nvim";
+  colors = {
+    background = "#001e26";
+    cursor = "#708183";
+  };
 }

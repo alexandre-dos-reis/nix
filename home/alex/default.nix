@@ -1,16 +1,15 @@
 {
-  # inputs,
-  # outputs,
-  # lib,
-  # config,
   # osConfig # Added by home-manager
   pkgs,
   vars,
   utils,
   ...
 }: let
-  inherit (utils) isDarwin isOtherLinuxOs;
-  inherit (vars) username editor homeDirectory;
+  inherit (pkgs.stdenv) isDarwin isLinux;
+  inherit (vars) username editor isManagedByHomeManager;
+  homeDirectory = if isDarwin
+    then "/Users/${vars.username}"
+    else "/home/${vars.username}";
 in {
   imports = [
     ./programs
@@ -21,7 +20,7 @@ in {
   ];
 
   # Recommended for linux distros other than NixOS
-  targets.genericLinux.enable = isOtherLinuxOs;
+  targets.genericLinux.enable = isLinux && isManagedByHomeManager;
 
   home.username = username;
   home.homeDirectory = homeDirectory;

@@ -4,7 +4,7 @@
   vars,
   ...
 }: let
-  inherit (utils) isDarwin;
+  inherit (pkgs.stdenv) isDarwin;
   inherit (vars) editor;
 in {
   # https://github.com/alexandre-dos-reis/dotfiles/blob/main/dot_config/private_fish/config.fish

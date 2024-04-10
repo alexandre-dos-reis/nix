@@ -4,10 +4,12 @@
   utils,
   ...
 }: let
-  inherit (utils) isDarwin isOtherLinuxOs;
+  inherit (pkgs.stdenv) isDarwin isLinux;
+  inherit (vars) colors isManagedByHomeManager;
   kittyBin = "${pkgs.kitty}/bin/kitty";
+  isHmStandalone = isLinux && isManagedByHomeManager;
   kittyBinWrapped =
-    if isOtherLinuxOs
+    if isHmStandalone
     then "${pkgs.nixgl.nixGLMesa}/bin/nixGLMesa ${kittyBin}"
     else kittyBin;
   kittyIcon = "${pkgs.kitty}/share/icons/hicolor/scalable/apps/kitty.svg";
@@ -34,7 +36,10 @@ in {
     # https://github.com/kovidgoyal/kitty-themes/blob/master/themes.json
     theme = "Solarized Dark Higher Contrast";
     extraConfig = ''
-      cursor #708183
+      background ${colors.background}
+      cursor ${colors.cursor}
+      background_opacity 0.95
+      dynamic_background_opacity yes
     '';
   };
 
@@ -42,7 +47,7 @@ in {
   home.sessionVariables.TERMINAL = "kitty";
 
   xdg.dataFile."applications/kitty.desktop" = {
-    enable = isOtherLinuxOs;
+    enable = isHmStandalone;
     text = ''
       [Desktop Entry]
       Version=1.0

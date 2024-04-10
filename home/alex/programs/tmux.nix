@@ -72,15 +72,14 @@ in {
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
       set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
-      ## StatusLine
-      # vim: ft=tmux
+      ## style and colors
         set -g mode-style "fg=#eee8d5,bg=#073642"
 
         set -g message-style "fg=#eee8d5,bg=#073642"
         set -g message-command-style "fg=#eee8d5,bg=#073642"
 
         set -g pane-border-style "fg=#073642"
-        set -g pane-active-border-style "fg=#eee8d5"
+        set -g pane-active-border-style "fg=#93a1a1"
 
         set -g status "on"
         set -g status-interval 1

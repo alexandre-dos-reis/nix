@@ -1,20 +1,21 @@
 {
   pkgs,
   utils,
+  vars,
   ...
 }: let
   discord = pkgs.discord;
   icon = "${discord}/share/icons/hicolor/256x256/apps/discord.png";
   bin = "${discord}/bin/discord";
-
-  inherit (utils) isOtherLinuxOs;
+  inherit (pkgs.stdenv) isLinux;
+  inherit (vars) isManagedByHomeManager;
 in {
   home.packages = [
     discord
   ];
 
   xdg.dataFile."applications/discord.desktop" = {
-    enable = isOtherLinuxOs;
+    enable = isLinux && isManagedByHomeManager;
     text = ''
       [Desktop Entry]
       Version=1.0

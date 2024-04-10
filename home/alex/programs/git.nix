@@ -4,7 +4,7 @@
   utils,
   ...
 }: let
-  inherit (utils) isDarwin;
+  inherit (pkgs.stdenv) isDarwin;
   inherit (vars) email fullname;
 in {
   programs.git = {

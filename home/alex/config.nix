@@ -4,7 +4,7 @@
   vars,
   ...
 }: let
-  inherit (utils) isDarwin;
+  inherit (pkgs.stdenv) isDarwin;
 in {
   fonts.fontconfig.enable = true;
   home.packages = [

@@ -4,7 +4,10 @@
   vars,
   ...
 }: let
-  inherit (vars) username homeDirectory;
+  inherit (vars) username;
+  homeDirectory = if pkgs.stdenv.isDarwin
+    then "/Users/${vars.username}"
+    else "/home/${vars.username}";
 in {
   time.timeZone = "Europe/Paris";
 
