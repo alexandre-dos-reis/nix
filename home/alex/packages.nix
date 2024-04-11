@@ -43,5 +43,8 @@
 
     # Keyboard
     qmk
+
+   # containers
+   lazydocker
   ];
 }
