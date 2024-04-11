@@ -44,6 +44,9 @@
     # Keyboard
     qmk
 
+   # Postgres
+   postgresql # needed for psql
+
    # containers
    lazydocker
   ];
