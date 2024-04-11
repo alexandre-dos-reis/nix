@@ -25,10 +25,6 @@
         then "/Users/${vars.username}"
         else "/home/${vars.username}";
     };
-
-  globalOverlays = [
-    inputs.neovim-nightly-overlay.overlay
-  ];
 in {
   mkFormatter = forSystems (s: nixpkgs.legacyPackages.${s}.alejandra);
 
@@ -44,12 +40,9 @@ in {
       pkgs = import nixpkgs {
         system = utils.system;
         overlays =
-          globalOverlays
-          ++ (
-            if utils.isLinux
-            then [inputs.nixgl.overlay]
-            else []
-          );
+          if utils.isLinux
+          then [inputs.nixgl.overlay]
+          else [];
       };
       modules = [./home/${username}];
       inherit extraSpecialArgs;
