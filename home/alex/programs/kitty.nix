@@ -2,17 +2,16 @@
   pkgs,
   vars,
   utils,
+  isManagedByHomeManager,
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin isLinux;
-  inherit (vars) colors isManagedByHomeManager;
   kittyBin = "${pkgs.kitty}/bin/kitty";
-  isHmStandalone = isLinux && isManagedByHomeManager;
+  addWrapper = isLinux && isManagedByHomeManager;
   kittyBinWrapped =
-    if isHmStandalone
+    if addWrapper
     then "${pkgs.nixgl.nixGLMesa}/bin/nixGLMesa ${kittyBin}"
     else kittyBin;
-  kittyIcon = "${pkgs.kitty}/share/icons/hicolor/scalable/apps/kitty.svg";
 in {
   # https://mipmip.github.io/home-manager-option-search/?query=kitty
   programs.kitty = {
@@ -35,7 +34,9 @@ in {
     # Use the name attribute from the json file to the theme key.
     # https://github.com/kovidgoyal/kitty-themes/blob/master/themes.json
     theme = "Solarized Dark Higher Contrast";
-    extraConfig = ''
+    extraConfig = let
+      inherit (vars) colors;
+    in ''
       background ${colors.background}
       cursor ${colors.cursor}
       background_opacity 0.95
@@ -47,7 +48,7 @@ in {
   home.sessionVariables.TERMINAL = "kitty";
 
   xdg.dataFile."applications/kitty.desktop" = {
-    enable = isHmStandalone;
+    enable = addWrapper;
     text = ''
       [Desktop Entry]
       Version=1.0
@@ -57,7 +58,7 @@ in {
       Comment=Fast, feature-rich, GPU based terminal
       TryExec=${kittyBin}
       Exec=${kittyBinWrapped}
-      Icon=${kittyIcon}
+      Icon="${pkgs.kitty}/share/icons/hicolor/scalable/apps/kitty.svg";
       Categories=System;TerminalEmulator;
     '';
   };

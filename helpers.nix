@@ -4,93 +4,100 @@
   outputs,
   ...
 }: let
-  inherit (vars) username;
   nixpkgs = inputs.nixpkgs;
-  pkgs = nixpkgs.legacyPackages;
-  systems = [
-    "aarch64-linux"
-    "x86_64-linux"
-    "aarch64-darwin"
-    "x86_64-darwin"
-  ];
-  forSystems = nixpkgs.lib.genAttrs systems;
+  forSystems = nixpkgs.lib.genAttrs (import ./constants.nix).systems;
 
-  utils = {
+  mkUtils = host: {
+    isDarwin = host.os == "darwin";
+    isLinux = host.os == "linux";
+    system = "${host.arch}-${host.os}";
     ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
   };
 
-  globalOverlays = [
-    # inputs.neovim-nightly-overlay.overlay
-  ];
-
   mkExtendedVars = {
     vars,
-    isManagedByHomeManager,
+    utils,
   }:
-    vars // {
-      inherit isManagedByHomeManager;
+    vars
+    // {
+      homeDirectory =
+        if utils.isDarwin
+        then "/Users/${vars.username}"
+        else "/home/${vars.username}";
     };
-in {
-  mkFormatter = forSystems (s: pkgs.${s}.alejandra);
 
-  mkHome = username: host:
+  globalOverlays = [
+    inputs.neovim-nightly-overlay.overlay
+  ];
+in {
+  mkFormatter = forSystems (s: nixpkgs.legacyPackages.${s}.alejandra);
+
+  mkHome = username: host: let
+    utils = mkUtils host;
+    extraSpecialArgs = {
+      inherit inputs outputs host utils;
+      vars = mkExtendedVars {inherit vars utils;};
+      isManagedByHomeManager = true;
+    };
+  in
     inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = import inputs.nixpkgs {
-        system = host.system;
-        overlays = globalOverlays ++ (if host.system == "x86_64-linux" then [inputs.nixgl.overlay] else []);
+      pkgs = import nixpkgs {
+        system = utils.system;
+        overlays =
+          globalOverlays
+          ++ (
+            if utils.isLinux
+            then [inputs.nixgl.overlay]
+            else []
+          );
       };
       modules = [./home/${username}];
-      extraSpecialArgs = {
-        inherit inputs outputs host utils;
-        vars = mkExtendedVars {inherit vars; isManagedByHomeManager = true;};
-      };
+      inherit extraSpecialArgs;
     };
 
+  mkNixos = host: let
+    utils = mkUtils host;
+    specialArgs = {
+      inherit inputs outputs host utils;
+      vars = mkExtendedVars {inherit vars utils;};
+      isManagedByHomeManager = false;
+    };
+  in
+    nixpkgs.lib.nixosSystem {
+      system = utils.system;
+      inherit specialArgs;
+      modules = [
+        ./hosts/nixos/${host.folder}
+        inputs.home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.${vars.username}.imports = [./home/${vars.username}];
+          home-manager.extraSpecialArgs = specialArgs;
+        }
+      ];
+    };
 
-  # mkNixos = host: let
-  #   utils = mkUtils pkgs;
-  #   vars = mkExtendedVars {inherit vars utils;};
-  # in
-  #   nixpkgs.lib.nixosSystem {
-  #     system = host.system;
-  #     specialArgs = {
-  #       inherit inputs outputs host utils vars;
-  #     };
-  #     modules = [
-  #       ./hosts/nixos/${host.folder}
-  #       inputs.home-manager.nixosModules.home-manager
-  #       {
-  #         home-manager.useGlobalPkgs = true;
-  #         home-manager.useUserPackages = true;
-  #         home-manager.users.${username}.imports = [./home/${username}];
-  #         home-manager.extraSpecialArgs = {
-  #           inherit inputs outputs host utils vars;
-  #         };
-  #       }
-  #     ];
-  #   };
-  #
-  # mkDarwin = host: let
-  #   utils = mkUtils pkgs;
-  #   vars = mkExtendedVars {inherit vars utils;};
-  # in
-  #   inputs.nix-darwin.lib.darwinSystem {
-  #     system = host.system;
-  #     specialArgs = {
-  #       inherit inputs outputs host utils vars;
-  #     };
-  #     modules = [
-  #       ./hosts/darwin/${host.folder}
-  #       inputs.home-manager.darwinModules.home-manager
-  #       {
-  #         home-manager.useGlobalPkgs = true;
-  #         home-manager.useUserPackages = true;
-  #         home-manager.users.${username}.imports = [./home/${username}];
-  #         home-manager.extraSpecialArgs = {
-  #           inherit inputs outputs host utils vars;
-  #         };
-  #       }
-  #     ];
-  #   };
-
+  mkDarwin = host: let
+    utils = mkUtils host;
+    specialArgs = {
+      inherit inputs outputs host utils;
+      vars = mkExtendedVars {inherit vars utils;};
+      isManagedByHomeManager = false;
+    };
+  in
+    inputs.nix-darwin.lib.darwinSystem {
+      system = utils.system;
+      inherit specialArgs;
+      modules = [
+        ./hosts/darwin/${host.folder}
+        inputs.home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.${vars.username}.imports = [./home/${vars.username}];
+          home-manager.extraSpecialArgs = specialArgs;
+        }
+      ];
+    };
 }

@@ -2,13 +2,13 @@
   pkgs,
   utils,
   vars,
+  isManagedByHomeManager,
   ...
 }: let
   discord = pkgs.discord;
   icon = "${discord}/share/icons/hicolor/256x256/apps/discord.png";
   bin = "${discord}/bin/discord";
   inherit (pkgs.stdenv) isLinux;
-  inherit (vars) isManagedByHomeManager;
 in {
   home.packages = [
     discord

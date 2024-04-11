@@ -3,13 +3,11 @@
   pkgs,
   vars,
   utils,
+  isManagedByHomeManager,
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin isLinux;
-  inherit (vars) username editor isManagedByHomeManager;
-  homeDirectory = if isDarwin
-    then "/Users/${vars.username}"
-    else "/home/${vars.username}";
+  inherit (vars) username editor homeDirectory;
 in {
   imports = [
     ./programs

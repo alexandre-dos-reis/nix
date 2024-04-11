@@ -1,22 +1,28 @@
-{
+let
+  inherit (import ./constants.nix) linux darwin x84_64 aarch64;
+in {
   white = {
     hostname = "white";
-    system = "x86_64-linux";
     folder = "white";
+    arch = x84_64;
+    os = linux;
   };
   work = {
     hostname = "kavval";
-    system = "x86_64-linux";
     folder = "work";
+    arch = x84_64;
+    os = linux;
   };
   siliconWork = {
     hostname = "kavval-silicon";
-    system = "aarch64-darwin";
     folder = "siliconWork";
+    arch = aarch64;
+    os = darwin;
   };
   mbp2012 = {
     hostname = "mbp2012";
-    system = "x86_64-linux";
     folder = "mbp2012";
+    arch = x84_64;
+    os = darwin;
   };
 }
