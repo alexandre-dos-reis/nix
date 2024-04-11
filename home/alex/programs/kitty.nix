@@ -12,6 +12,7 @@
     if addWrapper
     then "${pkgs.nixgl.nixGLMesa}/bin/nixGLMesa ${kittyBin}"
     else kittyBin;
+  icon = "${pkgs.kitty}/share/icons/hicolor/scalable/apps/kitty.svg";
 in {
   # https://mipmip.github.io/home-manager-option-search/?query=kitty
   programs.kitty = {
@@ -58,7 +59,7 @@ in {
       Comment=Fast, feature-rich, GPU based terminal
       TryExec=${kittyBin}
       Exec=${kittyBinWrapped}
-      Icon="${pkgs.kitty}/share/icons/hicolor/scalable/apps/kitty.svg";
+      Icon=${icon}
       Categories=System;TerminalEmulator;
     '';
   };
