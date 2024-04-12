@@ -49,16 +49,5 @@
 
     # containers
     lazydocker
-
-
-    (writeShellApplication {
-      name = "hello";
-      runtimeInputs = [ cowsay lolcat ];
-      text = ''
-        echo "hello world" | cowsay | lolcat
-      '';
-    })
-
-
   ];
 }

@@ -15,6 +15,7 @@ in {
     ./packages.nix
     ./kavval-packages.nix
     ./files
+    ./scripts
   ];
 
   # Recommended for linux distros other than NixOS

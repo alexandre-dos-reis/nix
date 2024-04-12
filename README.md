@@ -11,6 +11,8 @@
 - [ ] Split configurations into multiple files to conditionnaly call config per platform/os.
   - For kitty.
 - [ ] Use [nix-colors](https://github.com/Misterio77/nix-colors)
+- [ ] Try to import the nvim config
+  - [Introducing lazynixhelper use your existing](https://www.reddit.com/r/neovim/comments/18sk8r7/introducing_lazynixhelper_use_your_existing/)
 
 ## Resources
 
