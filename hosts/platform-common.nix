@@ -2,9 +2,11 @@
   pkgs,
   host,
   vars,
+  utils,
   ...
 }: let
-  inherit (vars) username homeDirectory;
+  inherit (vars) username;
+  inherit (pkgs.stdenv) isDarwin;
 in {
   time.timeZone = "Europe/Paris";
 
@@ -18,7 +20,7 @@ in {
   programs.fish.enable = true;
 
   users.users.${username} = {
-    home = homeDirectory;
+    home = utils.getHomeDir {inherit username isDarwin;};
     shell = pkgs.fish;
   };
 
@@ -26,9 +28,8 @@ in {
   # $ nix search wget
   #
   environment.systemPackages = with pkgs; [
-    # try to install neovim dependencies in the user scope.
-    # Shell has to be installed globally...
     vim
     zsh
+    fish
   ];
 }

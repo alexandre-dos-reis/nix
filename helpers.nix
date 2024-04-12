@@ -6,33 +6,14 @@
 }: let
   nixpkgs = inputs.nixpkgs;
   forSystems = nixpkgs.lib.genAttrs (import ./constants.nix).systems;
-
-  mkUtils = host: {
-    isDarwin = host.os == "darwin";
-    isLinux = host.os == "linux";
-    system = "${host.arch}-${host.os}";
-    ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
-  };
-
-  mkExtendedVars = {
-    vars,
-    utils,
-  }:
-    vars
-    // {
-      homeDirectory =
-        if utils.isDarwin
-        then "/Users/${vars.username}"
-        else "/home/${vars.username}";
-    };
+  mkUtils = import ./utils.nix;
 in {
   mkFormatter = forSystems (s: nixpkgs.legacyPackages.${s}.alejandra);
 
   mkHome = username: host: let
     utils = mkUtils host;
     extraSpecialArgs = {
-      inherit inputs outputs host utils;
-      vars = mkExtendedVars {inherit vars utils;};
+      inherit inputs outputs host utils vars;
       isManagedByHomeManager = true;
     };
   in
@@ -40,7 +21,7 @@ in {
       pkgs = import nixpkgs {
         system = utils.system;
         overlays =
-          if utils.isLinux
+          if host.os == "linux"
           then [inputs.nixgl.overlay]
           else [];
       };
@@ -51,8 +32,7 @@ in {
   mkNixos = host: let
     utils = mkUtils host;
     specialArgs = {
-      inherit inputs outputs host utils;
-      vars = mkExtendedVars {inherit vars utils;};
+      inherit inputs outputs host utils vars;
       isManagedByHomeManager = false;
     };
   in
@@ -60,7 +40,7 @@ in {
       system = utils.system;
       inherit specialArgs;
       modules = [
-        ./hosts/nixos/${host.folder}
+        ./hosts/nixos/${host.path}
         inputs.home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
@@ -74,8 +54,7 @@ in {
   mkDarwin = host: let
     utils = mkUtils host;
     specialArgs = {
-      inherit inputs outputs host utils;
-      vars = mkExtendedVars {inherit vars utils;};
+      inherit inputs outputs host utils vars;
       isManagedByHomeManager = false;
     };
   in
@@ -83,7 +62,7 @@ in {
       system = utils.system;
       inherit specialArgs;
       modules = [
-        ./hosts/darwin/${host.folder}
+        ./hosts/darwin/${host.path}
         inputs.home-manager.darwinModules.home-manager
         {
           home-manager.useGlobalPkgs = true;

@@ -7,7 +7,7 @@
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin isLinux;
-  inherit (vars) username editor homeDirectory;
+  inherit (vars) username editor;
 in {
   imports = [
     ./programs
@@ -21,7 +21,7 @@ in {
   targets.genericLinux.enable = isLinux && isManagedByHomeManager;
 
   home.username = username;
-  home.homeDirectory = homeDirectory;
+  home.homeDirectory = utils.getHomeDir {inherit isDarwin username;};
 
   nixpkgs.config.allowUnfree = true;
 

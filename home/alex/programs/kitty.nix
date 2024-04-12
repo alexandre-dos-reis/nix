@@ -7,9 +7,9 @@
 }: let
   inherit (pkgs.stdenv) isDarwin isLinux;
   kittyBin = "${pkgs.kitty}/bin/kitty";
-  addWrapper = isLinux && isManagedByHomeManager;
+  isWrapped = isLinux && isManagedByHomeManager;
   kittyBinWrapped =
-    if addWrapper
+    if isWrapped
     then "${pkgs.nixgl.nixGLMesa}/bin/nixGLMesa ${kittyBin}"
     else kittyBin;
   icon = "${pkgs.kitty}/share/icons/hicolor/scalable/apps/kitty.svg";
@@ -49,7 +49,7 @@ in {
   home.sessionVariables.TERMINAL = "kitty";
 
   xdg.dataFile."applications/kitty.desktop" = {
-    enable = addWrapper;
+    enable = isWrapped;
     text = ''
       [Desktop Entry]
       Version=1.0
