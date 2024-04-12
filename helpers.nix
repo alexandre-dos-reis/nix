@@ -6,7 +6,27 @@
 }: let
   nixpkgs = inputs.nixpkgs;
   forSystems = nixpkgs.lib.genAttrs (import ./constants.nix).systems;
-  mkUtils = import ./utils.nix;
+
+  mkPkgs = {
+    utils,
+    host,
+  }:
+    import nixpkgs {
+      system = utils.system;
+      overlays = host.overlays;
+    };
+
+  mkUtils = host: {
+    system = "${host.arch}-${host.os}";
+    ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
+    getHomeDir = {
+      isDarwin,
+      username,
+    }:
+      if isDarwin
+      then "/Users/${username}"
+      else "/home/${username}";
+  };
 in {
   mkFormatter = forSystems (s: nixpkgs.legacyPackages.${s}.alejandra);
 
@@ -18,13 +38,7 @@ in {
     };
   in
     inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs {
-        system = utils.system;
-        overlays =
-          if host.os == "linux"
-          then [inputs.nixgl.overlay]
-          else [];
-      };
+      pkgs = mkPkgs {inherit utils host;};
       modules = [./home/${username}];
       inherit extraSpecialArgs;
     };
@@ -37,7 +51,7 @@ in {
     };
   in
     nixpkgs.lib.nixosSystem {
-      system = utils.system;
+      pkgs = mkPkgs {inherit utils host;};
       inherit specialArgs;
       modules = [
         ./hosts/nixos/${host.path}
@@ -59,7 +73,7 @@ in {
     };
   in
     inputs.nix-darwin.lib.darwinSystem {
-      system = utils.system;
+      pkgs = mkPkgs {inherit utils host;};
       inherit specialArgs;
       modules = [
         ./hosts/darwin/${host.path}

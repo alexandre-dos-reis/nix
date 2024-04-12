@@ -1,18 +1,16 @@
 {
   pkgs,
   vars,
-  utils,
-  isManagedByHomeManager,
+  host,
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin isLinux;
+  inherit (host) isNixGlWrapped dataFileEnabled;
   kittyBin = "${pkgs.kitty}/bin/kitty";
-  isWrapped = isLinux && isManagedByHomeManager;
   kittyBinWrapped =
-    if isWrapped
+    if isNixGlWrapped
     then "${pkgs.nixgl.nixGLMesa}/bin/nixGLMesa ${kittyBin}"
     else kittyBin;
-  icon = "${pkgs.kitty}/share/icons/hicolor/scalable/apps/kitty.svg";
 in {
   # https://mipmip.github.io/home-manager-option-search/?query=kitty
   programs.kitty = {
@@ -49,7 +47,7 @@ in {
   home.sessionVariables.TERMINAL = "kitty";
 
   xdg.dataFile."applications/kitty.desktop" = {
-    enable = isWrapped;
+    enable = dataFileEnabled;
     text = ''
       [Desktop Entry]
       Version=1.0
@@ -59,7 +57,7 @@ in {
       Comment=Fast, feature-rich, GPU based terminal
       TryExec=${kittyBin}
       Exec=${kittyBinWrapped}
-      Icon=${icon}
+      Icon=${pkgs.kitty}/share/icons/hicolor/scalable/apps/kitty.svg
       Categories=System;TerminalEmulator;
     '';
   };

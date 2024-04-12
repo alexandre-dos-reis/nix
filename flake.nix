@@ -31,7 +31,8 @@
     };
     inherit (helpers) mkNixos mkDarwin mkHome mkFormatter;
     inherit (vars) username;
-    inherit (import ./hosts.nix) white mbp2012 work siliconWork;
+    hosts = (import ./hosts.nix) {inherit inputs;};
+    inherit (hosts) white mbp2012 work siliconWork;
   in {
     formatter = mkFormatter;
 

@@ -51,13 +51,15 @@
 - [jakehamilton](https://github.com/jakehamilton/config)
   - [Is Darwin ?](https://github.com/jakehamilton/config/blob/main/modules/home/user/default.nix#L10)
   - [Gnome extension](https://github.com/jakehamilton/config/blob/main/modules/nixos/desktop/gnome/default.nix)
-- [nix-darwin-kickstarter](https://github.com/ryan4yin/nix-darwin-kickstarter)
+- [ryan4yin](https://github.com/ryan4yin/nix-config)
+  - [nix-darwin-kickstarter](https://github.com/ryan4yin/nix-darwin-kickstarter)
 - [SomeGuyNamedMay](https://github.com/SomeGuyNamedMay/users/blob/master/flake.nix)
 - [Home-Manager Flake Template](https://github.com/juspay/nix-dev-home)
 - [dustinlyons macos oriented](https://github.com/dustinlyons/nixos-config)
 - [Zaney - NixOs wayland, hyprland, nix-colors, ...](https://gitlab.com/Zaney/zaneyos/-/blob/main/flake.nix)
 - [Yusef Cross Platform](https://github.com/yusefnapora/nix-config/tree/main)
 - [JRMurr xdg example with home-manager](https://github.com/JRMurr/NixOsConfig/blob/main/flake.nix)
+- [EmergentMind](https://github.com/EmergentMind/nix-config)
 
 ### Install home-manager on Ubuntu
 
