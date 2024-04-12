@@ -12,7 +12,7 @@ in {
   ];
 
   xdg.dataFile."applications/discord.desktop" = {
-    enable = host.dataFileEnabled;
+    enable = host.xdgDataFileEnabled;
     text = ''
       [Desktop Entry]
       Version=1.0

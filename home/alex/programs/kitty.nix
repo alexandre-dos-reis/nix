@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin isLinux;
-  inherit (host) isNixGlWrapped dataFileEnabled;
+  inherit (host) isNixGlWrapped xdgDataFileEnabled;
   kittyBin = "${pkgs.kitty}/bin/kitty";
   kittyBinWrapped =
     if isNixGlWrapped
@@ -47,7 +47,7 @@ in {
   home.sessionVariables.TERMINAL = "kitty";
 
   xdg.dataFile."applications/kitty.desktop" = {
-    enable = dataFileEnabled;
+    enable = xdgDataFileEnabled;
     text = ''
       [Desktop Entry]
       Version=1.0

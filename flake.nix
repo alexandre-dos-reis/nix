@@ -21,7 +21,6 @@
 
   outputs = {
     self,
-    nixpkgs,
     ...
   } @ inputs: let
     vars = import ./vars.nix;

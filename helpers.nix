@@ -57,10 +57,12 @@ in {
         ./hosts/nixos/${host.path}
         inputs.home-manager.nixosModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.${vars.username}.imports = [./home/${vars.username}];
-          home-manager.extraSpecialArgs = specialArgs;
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.${vars.username}.imports = [./home/${vars.username}];
+            extraSpecialArgs = specialArgs;
+          };
         }
       ];
     };
@@ -79,10 +81,12 @@ in {
         ./hosts/darwin/${host.path}
         inputs.home-manager.darwinModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.${vars.username}.imports = [./home/${vars.username}];
-          home-manager.extraSpecialArgs = specialArgs;
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.${vars.username}.imports = [./home/${vars.username}];
+            extraSpecialArgs = specialArgs;
+          };
         }
       ];
     };

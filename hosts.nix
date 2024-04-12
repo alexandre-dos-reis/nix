@@ -4,7 +4,7 @@
   base = {
     overlays = [];
     isNixGlWrapped = false;
-    dataFileEnabled = false;
+    xdgDataFileEnabled = false;
   };
 in {
   white =
@@ -24,7 +24,7 @@ in {
       os = linux;
       overlays = [nixgl.overlay];
       isNixGlWrapped = true;
-      dataFileEnabled = true;
+      xdgDataFileEnabled = true;
     };
   siliconWork =
     base

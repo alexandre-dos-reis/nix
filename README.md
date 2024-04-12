@@ -15,6 +15,7 @@
 ## Resources
 
 - [Nix Colors Input](https://github.com/Misterio77/nix-colors)
+- [Official Nix Cookbook](https://nixos.wiki/wiki/Nix_Cookbook)
 
 ### Search packages
 
