@@ -75,3 +75,11 @@
 
 - [Setup LazyVim using Nix and home-manager](https://github.com/LazyVim/LazyVim/discussions/1972)
 - [Neovim - LazyVim - can’t load plugins](https://discourse.nixos.org/t/neovim-cant-load-plugins/31189/2)
+
+### Making nixGL works with Home Manager
+
+See this [issue](https://github.com/nix-community/nixGL/issues/114).
+
+#### Example:
+
+- [rengare example](https://github.com/rengare/dotfiles/blob/main/nix/helpers.nix)
