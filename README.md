@@ -86,3 +86,13 @@ See this [issue](https://github.com/nix-community/nixGL/issues/114).
 #### Example:
 
 - [rengare example](https://github.com/rengare/dotfiles/blob/main/nix/helpers.nix)
+
+## Partitioning on Nixos system
+
+From [NixOS Episode 1 - Installation](https://www.youtube.com/watch?v=63sSGuclBn0)
+
+- Create a gpt style partition table
+
+- Create a 500 mb EFI boot partition with FAT swap system
+- (Optional) Create a Swap partition based on the ram
+- Create the system partition with the remaining space.
