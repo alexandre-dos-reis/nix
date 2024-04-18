@@ -35,7 +35,7 @@
     unrar
 
     # languages
-    # bun
+    bun
     go
     # rust
     rustc

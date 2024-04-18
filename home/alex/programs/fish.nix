@@ -7,6 +7,11 @@
   inherit (pkgs.stdenv) isDarwin;
   inherit (vars) editor;
 in {
+
+  home.packages = with pkgs; [
+    git-extras
+  ];
+
   # https://github.com/alexandre-dos-reis/dotfiles/blob/main/dot_config/private_fish/config.fish
   # https://discourse.nixos.org/t/managing-fish-plugins-with-home-manager/22368
   # https://github.com/LnL7/nix-darwin/issues/122#issuecomment-1782971499
@@ -20,7 +25,6 @@ in {
       set -gx PATH bin $PATH
       set -gx PATH ~/bin $PATH
       set -gx PATH ~/.local/bin $PATH
-      set -gx PATH ~/.bun/bin $PATH
 
       set -g theme_color_scheme terminal-dark
       set -g fish_prompt_pwd_dir_length 1
