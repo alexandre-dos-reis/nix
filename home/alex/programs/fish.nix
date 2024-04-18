@@ -8,9 +8,6 @@
   inherit (vars) editor;
 in {
 
-  home.packages = with pkgs; [
-    git-extras
-  ];
 
   # https://github.com/alexandre-dos-reis/dotfiles/blob/main/dot_config/private_fish/config.fish
   # https://discourse.nixos.org/t/managing-fish-plugins-with-home-manager/22368

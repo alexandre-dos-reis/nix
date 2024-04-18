@@ -7,6 +7,10 @@
   inherit (pkgs.stdenv) isDarwin;
   inherit (vars) email fullname;
 in {
+  home.packages = with pkgs; [
+    git-extras
+  ];
+
   programs.git = {
     enable = true;
 
