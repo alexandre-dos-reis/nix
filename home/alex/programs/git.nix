@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin;
-  inherit (vars) email fullname;
+  inherit (vars) email fullname editor;
 in {
   home.packages = with pkgs; [
-    git-extras
+    delta # https://github.com/dandavison/delta
   ];
 
   programs.git = {
@@ -28,7 +28,26 @@ in {
     };
     extraConfig = {
       core = {
+        inherit editor;
         ignorecase = false;
+        pager = "delta";
+      };
+
+      interactive = {
+        diffFilter = "delta --color-only";
+      };
+
+      delta = {
+          navigate = true;
+      };
+
+      merge = {
+        conflictstyle = "diff3";
+      };
+
+      diff = {
+        colorMoved = "default";
+
       };
 
       pager = {
