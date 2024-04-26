@@ -19,7 +19,7 @@ in {
     font = {
       # Show current fonts installed : kitty --debug-font-fallback
       name = vars.font.systemName;
-      size = 9; #  9 - 12
+      size = 12; #  9 - 12
     };
     settings = {
       hide_window_decorations =
@@ -38,8 +38,6 @@ in {
     in ''
       background ${colors.background}
       cursor ${colors.cursor}
-      background_opacity 0.95
-      dynamic_background_opacity yes
     '';
   };
 
