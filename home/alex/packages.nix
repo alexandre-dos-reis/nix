@@ -49,5 +49,8 @@
 
     # containers
     lazydocker
+
+    # Nix Dev
+    devenv
   ];
 }

@@ -9,10 +9,14 @@
 
     # Utilities
     google-cloud-sdk
-    # ruby_3_3
     ngrok
     ack
     terraform
+
+    # Poeditor
+    # (ruby_3_3.withPackages (ps: with ps; [
+      # pry
+    # ]))
 
     # Certificate
     mkcert
