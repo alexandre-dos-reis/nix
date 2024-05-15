@@ -40,12 +40,14 @@
     # rust
     rustc
     cargo
+    tokei
 
     # Keyboard
     qmk
 
     # Postgres
     postgresql # needed for psql
+    tbls
 
     # containers
     lazydocker
