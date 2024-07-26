@@ -4,15 +4,13 @@
   vars,
   ...
 }: {
-  nixpkgs.overlays = [
-    inputs.neovim-nightly-overlay.overlay
-  ];
 
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+    package = inputs.nvim-nightly.packages.${pkgs.system}.default;
   };
 
   # xdg.configFile.nvim = {
