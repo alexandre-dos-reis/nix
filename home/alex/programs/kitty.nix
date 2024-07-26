@@ -19,7 +19,8 @@ in {
     font = {
       # Show current fonts installed : kitty --debug-font-fallback
       name = vars.font.systemName;
-      size = 12; #  9 - 12
+      size = 9;
+      # size = 13;
     };
     settings = {
       hide_window_decorations =
@@ -54,7 +55,8 @@ in {
       GenericName=Terminal emulator
       Comment=Fast, feature-rich, GPU based terminal
       TryExec=${kittyBin}
-      Exec=${kittyBinWrapped}
+      # Disable kitty builtin unicode editor
+      Exec=env GLFW_IM_MODULE=ibus ${kittyBinWrapped}
       Icon=${pkgs.kitty}/share/icons/hicolor/scalable/apps/kitty.svg
       Categories=System;TerminalEmulator;
     '';
