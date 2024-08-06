@@ -8,6 +8,7 @@
 }: let
   inherit (pkgs.stdenv) isDarwin isLinux;
   inherit (vars) username editor;
+  homeDir = utils.getHomeDir {inherit isDarwin username;};
 in {
   imports = [
     ./programs
@@ -23,7 +24,7 @@ in {
   targets.genericLinux.enable = isLinux && isManagedByHomeManager;
 
   home.username = username;
-  home.homeDirectory = utils.getHomeDir {inherit isDarwin username;};
+  home.homeDirectory = homeDir;
 
   nixpkgs.config.allowUnfree = true;
 
@@ -43,5 +44,6 @@ in {
   home.stateVersion = "23.11";
   home.sessionVariables = {
     EDITOR = editor;
+    FLAKE = "${homeDir}/dev/nix-conf";
   };
 }

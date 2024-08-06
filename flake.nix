@@ -45,7 +45,7 @@
     };
 
     homeConfigurations = {
-      "alex@work" = mkHome username work;
+      "alex@kavval" = mkHome username work;
       "alex@siliconWork" = mkHome username siliconWork;
     };
   };
