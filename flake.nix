@@ -19,19 +19,10 @@
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 
-  outputs = {
-    self,
-    ...
-  } @ inputs: let
-    vars = import ./vars.nix;
-    helpers = import ./helpers.nix {
-      inherit inputs vars;
-      inherit (self) outputs;
-    };
-    inherit (helpers) mkNixos mkDarwin mkHome mkFormatter;
-    inherit (vars) username;
-    hosts = (import ./hosts.nix) {inherit inputs;};
-    inherit (hosts) white mbp2012 work siliconWork;
+  outputs = inputs: let
+    inherit (import ./helpers.nix inputs) mkNixos mkDarwin mkHome mkFormatter;
+    inherit (import ./hosts.nix inputs) white mbp2012 work siliconWork;
+    inherit (import ./vars.nix) username;
   in {
     formatter = mkFormatter;
 

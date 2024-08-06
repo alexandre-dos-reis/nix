@@ -1,9 +1,6 @@
-{
-  inputs,
-  vars,
-  outputs,
-  ...
-}: let
+inputs: let
+  inherit (inputs) outputs;
+  vars = import ./vars.nix;
   nixpkgs = inputs.nixpkgs;
   forSystems = nixpkgs.lib.genAttrs (import ./constants.nix).systems;
 
