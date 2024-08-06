@@ -72,6 +72,10 @@ in {
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
       set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
+      # Shortcut
+      # DON'T WORK...
+      # bind-key -n C-f run-shell "~/bin/tmux-sessionizer"
+
       ## style and colors
         set -g mode-style "fg=#eee8d5,bg=#073642"
 

@@ -1,6 +1,6 @@
 {
   imports = [
-    ./neovim
+    ./neovim.nix
     ./fish.nix
     ./atuin.nix
     ./kitty.nix
