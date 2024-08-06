@@ -25,14 +25,5 @@ in {
   # "U.S.";
   # "French - numerical";
   # "French";
-  home.keyboard =
-    if isDarwin
-    then {
-      layout = "Unicode Hex Input";
-    }
-    else {
-      layout = "us";
-      # Not Working...
-      # options = [ "ctrl:nocaps" ];
-    };
+  home.keyboard.layout = if isDarwin then "Unicode Hex Input" else "us";
 }

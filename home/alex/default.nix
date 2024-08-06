@@ -11,6 +11,7 @@
 in {
   imports = [
     ./programs
+    ./services
     ./config.nix
     ./packages.nix
     ./kavval-packages.nix
