@@ -3,7 +3,7 @@
   pkgs,
   vars,
   utils,
-  isManagedByHomeManager,
+  host,
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin isLinux;
@@ -21,7 +21,7 @@ in {
   nixpkgs.config.allowUnfree = true;
 
   # Recommended for linux distros other than NixOS
-  targets.genericLinux.enable = isLinux && isManagedByHomeManager;
+  targets.genericLinux.enable = isLinux && host.isManagedByHomeManager;
   xdg.enable = true;
 
   programs = {

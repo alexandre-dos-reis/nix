@@ -28,63 +28,26 @@ in {
   mkFormatter = forSystems (s: nixpkgs.legacyPackages.${s}.alejandra);
 
   mkHome = username: host: let
-    utils = mkUtils host;
-    extraSpecialArgs = {
-      inherit inputs outputs host utils vars;
-      isManagedByHomeManager = true;
-    };
-  in
-    inputs.home-manager.lib.homeManagerConfiguration {
+      utils = mkUtils host;
+    in inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = mkPkgs {inherit utils host;};
       modules = [./home/${username}];
-      inherit extraSpecialArgs;
+      extraSpecialArgs = {inherit inputs outputs host utils vars;};
     };
 
   mkNixos = host: let
-    utils = mkUtils host;
-    specialArgs = {
-      inherit inputs outputs host utils vars;
-      isManagedByHomeManager = false;
-    };
-  in
-    nixpkgs.lib.nixosSystem {
+      utils = mkUtils host;
+    in nixpkgs.lib.nixosSystem {
       pkgs = mkPkgs {inherit utils host;};
-      inherit specialArgs;
-      modules = [
-        ./hosts/nixos/${host.path}
-        inputs.home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.${vars.username}.imports = [./home/${vars.username}];
-            extraSpecialArgs = specialArgs;
-          };
-        }
-      ];
+      specialArgs = {inherit inputs outputs host utils vars;};
+      modules = [./hosts/nixos/${host.path}];
     };
 
   mkDarwin = host: let
-    utils = mkUtils host;
-    specialArgs = {
-      inherit inputs outputs host utils vars;
-      isManagedByHomeManager = false;
-    };
-  in
-    inputs.nix-darwin.lib.darwinSystem {
+      utils = mkUtils host;
+    in inputs.nix-darwin.lib.darwinSystem {
       pkgs = mkPkgs {inherit utils host;};
-      inherit specialArgs;
-      modules = [
-        ./hosts/darwin/${host.path}
-        inputs.home-manager.darwinModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.${vars.username}.imports = [./home/${vars.username}];
-            extraSpecialArgs = specialArgs;
-          };
-        }
-      ];
+      specialArgs = {inherit inputs outputs host utils vars;};
+      modules = [./hosts/darwin/${host.path}];
     };
 }
