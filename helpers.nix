@@ -1,6 +1,7 @@
 inputs: let
   inherit (inputs) outputs;
   users = import ./users.nix;
+  hosts = (import ./hosts.nix inputs);
   nixpkgs = inputs.nixpkgs;
   forSystems = nixpkgs.lib.genAttrs (import ./constants.nix).systems;
 
@@ -51,8 +52,8 @@ inputs: let
       specialArgs = {inherit inputs outputs host utils users;};
       modules = [./hosts/darwin/${host.path}];
     };
-in
-  {
+
+  mkFlake = {
     nixos,
     darwin,
     home,
@@ -80,4 +81,8 @@ in
       })
       users))
     home));
+  };
+
+in {
+    inherit mkFlake users hosts;
   }

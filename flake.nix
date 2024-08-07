@@ -20,9 +20,9 @@
   };
 
   outputs = inputs: let
-    mkFlake = import ./helpers.nix inputs;
-    inherit (import ./users.nix) alex;
-    inherit (import ./hosts.nix inputs) white mbp2012 work siliconWork;
+    inherit (import ./helpers.nix inputs) mkFlake hosts users;
+    inherit (hosts) white work mbp2012 siliconWork;
+    inherit (users) alex;
   in
     mkFlake {
       nixos = [white];
