@@ -1,5 +1,5 @@
 {
-  description = "My config";
+  description = "My Nix config";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
@@ -16,7 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvim-nightly.url = "github:nix-community/neovim-nightly-overlay";
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 
   outputs = inputs: let
@@ -31,12 +31,12 @@
 
       home = [
         {
-          user = alex;
           host = work;
+          users = [alex];
         }
         {
-          user = alex;
           host = siliconWork;
+          users = [alex];
         }
       ];
     };

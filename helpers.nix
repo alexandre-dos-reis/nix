@@ -71,12 +71,13 @@ in
       })
       darwin);
 
-    homeConfigurations = builtins.listToAttrs (map ({
-        user,
-        host,
-      }: {
+    homeConfigurations = builtins.listToAttrs (nixpkgs.lib.lists.flatten (map ({
+      users,
+      host,
+    }: (map (user: {
         name = "${user.username}@${host.hostname}";
         value = mkHome user host;
       })
-      home);
+      users))
+    home));
   }

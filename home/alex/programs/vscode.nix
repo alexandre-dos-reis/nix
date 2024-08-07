@@ -3,13 +3,7 @@
   user,
   inputs,
   ...
-}: let
-  extensions = inputs.nix-vscode-extensions.extensions.${pkgs.system};
-  # https://marketplace.visualstudio.com/vscode
-  mkt = extensions.vscode-marketplace;
-  # https://open-vsx.org
-  vsx = extensions.open-vsx-release;
-in {
+}: {
   # https://mipmip.github.io/home-manager-option-search/?query=vscode
   programs.vscode = {
     enable = true;
@@ -137,7 +131,13 @@ in {
       "nxConsole.showNodeVersionOnStartup" = false;
     };
 
-    extensions = [
+    extensions = let
+      extensions = inputs.vscode-extensions.extensions.${pkgs.system};
+      # https://marketplace.visualstudio.com/vscode
+      mkt = extensions.vscode-marketplace;
+      # https://open-vsx.org
+      vsx = extensions.open-vsx-release;
+    in [
       # Essentials
       mkt.ms-vsliveshare.vsliveshare
       mkt.vscodevim.vim # vim key bindings https://marketplace.visualstudio.com/items?itemName=vscodevim.vim
