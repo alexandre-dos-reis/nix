@@ -1,6 +1,6 @@
 {
   pkgs,
-  vars,
+  user,
   inputs,
   ...
 }: let
@@ -36,8 +36,8 @@ in {
 
     userSettings = {
       "workbench.colorTheme" = "poimandres";
-      "terminal.integrated.fontFamily" = vars.font.systemName;
-      "editor.fontFamily" = vars.font.systemName;
+      "terminal.integrated.fontFamily" = user.font.systemName;
+      "editor.fontFamily" = user.font.systemName;
       "editor.lineHeight" = 14;
       "editor.fontSize" = 9;
       "editor.fontLigatures" = true;

@@ -1,14 +1,13 @@
 {
   # osConfig # Added by home-manager
   pkgs,
-  vars,
+  user,
   utils,
   host,
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin isLinux;
-  inherit (vars) username editor;
-  homeDir = utils.getHomeDir {inherit isDarwin username;};
+  homeDir = utils.getHomeDir {inherit isDarwin user;};
 in {
   imports = [
     ./programs
@@ -36,26 +35,29 @@ in {
   home = {
     stateVersion = "23.11"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
 
-    username = username;
+    username = user.username;
     homeDirectory = homeDir;
 
     file."dev/.keep".text = "keep"; # Create folders
 
     sessionVariables = {
-      EDITOR = editor;
+      EDITOR = user.editor;
       FLAKE = "${homeDir}/dev/nix-conf";
     };
 
     # https://mipmip.github.io/home-manager-option-search/?query=keyboard
     # https://dev.to/tallesl/change-caps-lock-to-ctrl-3c4
     # https://www.reddit.com/r/NixOS/comments/trkfyz/overriding_configurationnix_with_homemanager/
-    keyboard.layout = if isDarwin then "Unicode Hex Input" else "us";
+    keyboard.layout =
+      if isDarwin
+      then "Unicode Hex Input"
+      else "us";
 
     packages = [
       (pkgs.nerdfonts.override {
         fonts = [
           "Meslo"
-          vars.font.nerdFontName
+          user.font.nerdFontName
         ];
       })
     ];

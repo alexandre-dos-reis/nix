@@ -1,6 +1,6 @@
 inputs: let
   inherit (inputs) outputs;
-  vars = import ./vars.nix;
+  users = import ./users.nix;
   nixpkgs = inputs.nixpkgs;
   forSystems = nixpkgs.lib.genAttrs (import ./constants.nix).systems;
 
@@ -18,36 +18,65 @@ inputs: let
     ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
     getHomeDir = {
       isDarwin,
-      username,
+      user,
     }:
       if isDarwin
-      then "/Users/${username}"
-      else "/home/${username}";
+      then "/Users/${user.username}"
+      else "/home/${user.username}";
   };
-in {
-  mkFormatter = forSystems (s: nixpkgs.legacyPackages.${s}.alejandra);
 
-  mkHome = username: host: let
-      utils = mkUtils host;
-    in inputs.home-manager.lib.homeManagerConfiguration {
+  mkHome = user: host: let
+    utils = mkUtils host;
+  in
+    inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = mkPkgs {inherit utils host;};
-      modules = [./home/${username}];
-      extraSpecialArgs = {inherit inputs outputs host utils vars;};
+      extraSpecialArgs = {inherit inputs outputs host utils user;};
+      modules = [./home/${user.username}];
     };
 
   mkNixos = host: let
-      utils = mkUtils host;
-    in nixpkgs.lib.nixosSystem {
+    utils = mkUtils host;
+  in
+    nixpkgs.lib.nixosSystem {
       pkgs = mkPkgs {inherit utils host;};
-      specialArgs = {inherit inputs outputs host utils vars;};
+      specialArgs = {inherit inputs outputs host utils users;};
       modules = [./hosts/nixos/${host.path}];
     };
 
   mkDarwin = host: let
-      utils = mkUtils host;
-    in inputs.nix-darwin.lib.darwinSystem {
+    utils = mkUtils host;
+  in
+    inputs.nix-darwin.lib.darwinSystem {
       pkgs = mkPkgs {inherit utils host;};
-      specialArgs = {inherit inputs outputs host utils vars;};
+      specialArgs = {inherit inputs outputs host utils users;};
       modules = [./hosts/darwin/${host.path}];
     };
-}
+in
+  {
+    nixos,
+    darwin,
+    home,
+  }: {
+    formatter = forSystems (s: nixpkgs.legacyPackages.${s}.alejandra);
+
+    nixosConfigurations = builtins.listToAttrs (map (host: {
+        name = host.hostname;
+        value = mkNixos host;
+      })
+      nixos);
+
+    darwinConfigurations = builtins.listToAttrs (map (host: {
+        name = host.hostname;
+        value = mkDarwin host;
+      })
+      darwin);
+
+    homeConfigurations = builtins.listToAttrs (map ({
+        user,
+        host,
+      }: {
+        name = "${user.username}@${host.hostname}";
+        value = mkHome user host;
+      })
+      home);
+  }

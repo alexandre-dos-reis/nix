@@ -1,12 +1,12 @@
 {
   pkgs,
   host,
-  vars,
+  users,
   utils,
   ...
 }: let
-  inherit (vars) username;
   inherit (pkgs.stdenv) isDarwin;
+  inherit (users) alex
 in {
   time.timeZone = "Europe/Paris";
 
@@ -19,8 +19,8 @@ in {
 
   programs.fish.enable = true;
 
-  users.users.${username} = {
-    home = utils.getHomeDir {inherit username isDarwin;};
+  users.users.${alex.username} = {
+    home = utils.getHomeDir {inherit isDarwin; user = alex };
     shell = pkgs.fish;
   };
 

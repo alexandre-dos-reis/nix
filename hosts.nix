@@ -1,12 +1,14 @@
 inputs: let
   inherit (import ./constants.nix) linux darwin x84_64 aarch64;
   inherit (inputs) nixgl;
-  mkHost = args: {
-    overlays = [];
-    isNixGlWrapped = false;
-    xdgDataFileEnabled = false;
-    isManagedByHomeManager = false;
-  } // args;
+  mkHost = args:
+    {
+      overlays = [];
+      isNixGlWrapped = false;
+      xdgDataFileEnabled = false;
+      isManagedByHomeManager = false;
+    }
+    // args;
 in {
   white = mkHost {
     hostname = "white";

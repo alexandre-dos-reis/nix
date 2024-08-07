@@ -1,11 +1,11 @@
 {
-  vars,
+  user,
   pkgs,
   utils,
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin;
-  inherit (vars) email fullname editor;
+  inherit (user) email fullname editor;
 in {
   home.packages = with pkgs; [
     delta # https://github.com/dandavison/delta
@@ -38,7 +38,7 @@ in {
       };
 
       delta = {
-          navigate = true;
+        navigate = true;
       };
 
       merge = {
@@ -47,7 +47,6 @@ in {
 
       diff = {
         colorMoved = "default";
-
       };
 
       pager = {

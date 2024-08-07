@@ -55,6 +55,5 @@
 
     # containers
     lazydocker
-
   ];
 }

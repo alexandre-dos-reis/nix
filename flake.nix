@@ -20,24 +20,24 @@
   };
 
   outputs = inputs: let
-    inherit (import ./helpers.nix inputs) mkNixos mkDarwin mkHome mkFormatter;
+    mkFlake = import ./helpers.nix inputs;
+    inherit (import ./users.nix) alex;
     inherit (import ./hosts.nix inputs) white mbp2012 work siliconWork;
-    inherit (import ./vars.nix) username;
-  in {
-    formatter = mkFormatter;
+  in
+    mkFlake {
+      nixos = [white];
 
-    nixosConfigurations = {
-      "white" = mkNixos white;
-    };
+      darwin = [mbp2012 siliconWork];
 
-    darwinConfigurations = {
-      "mbp2012" = mkDarwin mbp2012;
-      "siliconWork" = mkDarwin siliconWork;
+      home = [
+        {
+          user = alex;
+          host = work;
+        }
+        {
+          user = alex;
+          host = siliconWork;
+        }
+      ];
     };
-
-    homeConfigurations = {
-      "alex@kavval" = mkHome username work;
-      "alex@siliconWork" = mkHome username siliconWork;
-    };
-  };
 }

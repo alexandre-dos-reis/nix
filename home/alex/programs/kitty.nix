@@ -1,6 +1,6 @@
 {
   pkgs,
-  vars,
+  user,
   host,
   ...
 }: let
@@ -18,7 +18,7 @@ in {
     shellIntegration.enableFishIntegration = true;
     font = {
       # Show current fonts installed : kitty --debug-font-fallback
-      name = vars.font.systemName;
+      name = user.font.systemName;
       size = 9;
       # size = 13;
     };
@@ -35,7 +35,7 @@ in {
     # https://github.com/kovidgoyal/kitty-themes/blob/master/themes.json
     theme = "Solarized Dark Higher Contrast";
     extraConfig = let
-      inherit (vars) colors;
+      inherit (user) colors;
     in ''
       background ${colors.background}
       cursor ${colors.cursor}

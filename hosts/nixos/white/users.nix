@@ -1,15 +1,16 @@
 {
-  vars,
+  users,
   pkgs,
   config,
   utils,
   ...
 }: let
   inherit (utils) ifTheyExist;
+  inherit (users.alex) username
 in {
-  users.users.${vars.username} = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = vars.username;
+    description = username;
     defaultUserShell = pkgs.fish;
     extraGroups =
       [

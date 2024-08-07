@@ -15,7 +15,7 @@
 
     # Poeditor
     # (ruby_3_3.withPackages (ps: with ps; [
-      # pry
+    # pry
     # ]))
 
     # Certificate
