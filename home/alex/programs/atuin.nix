@@ -7,14 +7,10 @@
     ];
     settings = {
       keymap_mode = "vim-insert";
-      filter_mode_shell_up_key_binding = "session";
+      # filter_mode_shell_up_key_binding = "session";
       keys = {
         scroll_exits = false;
       };
-      history_filter = [
-        "c"
-        "clear"
-      ];
     };
   };
 }
