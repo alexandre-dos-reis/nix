@@ -42,7 +42,7 @@ inputs: let
       users))
     list));
 
-  mkOsSystems = os: list:
+  mkOsSystems = folder: os: func: list:
     builtins.listToAttrs (map ({
         host,
         users,
@@ -50,30 +50,23 @@ inputs: let
         name = host.hostname;
         value = let
           utils = mkUtils host;
-          folder =
-            if host.os == linux
-            then "nixos"
-            else "darwin";
-          config = {
+        in
+          func {
             pkgs = mkPkgs {inherit utils host;};
             specialArgs = {inherit inputs outputs host utils users;};
             modules = [
               ./hosts/${folder}/${host.path}
             ];
           };
-        in
-          if host.os == linux
-          then nixpkgs.lib.nixosSystem config
-          else nix-darwin.lib.darwin config;
       })
-      (builtins.filter ({host, ...}: host.os == os)));
+      (builtins.filter ({host, ...}: host.os == os) list));
 in {
   users = import ./users.nix;
   hosts = import ./hosts.nix inputs;
   mkFlake = list: {
     formatter = forSystems (s: nixpkgs.legacyPackages.${s}.alejandra);
-    nixosConfigurations = mkOsSystems linux list;
-    darwinConfigurations = mkOsSystems darwin list;
+    nixosConfigurations = mkOsSystems "nixos" linux nixpkgs.lib.nixosSystem list;
+    darwinConfigurations = mkOsSystems "darwin" darwin nix-darwin.lib.darwin list;
     homeConfigurations = mkHomes list;
   };
 }
