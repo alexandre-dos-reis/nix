@@ -24,20 +24,22 @@
     inherit (hosts) white work mbp2012 siliconWork;
     inherit (users) alex;
   in
-    mkFlake {
-      nixos = [white];
-
-      darwin = [mbp2012 siliconWork];
-
-      home = [
-        {
-          host = work;
-          users = [alex];
-        }
-        {
-          host = siliconWork;
-          users = [alex];
-        }
-      ];
-    };
+    mkFlake [
+      {
+        host = white;
+        users = [alex];
+      }
+      {
+        host = mbp2012;
+        users = [alex];
+      }
+      {
+        host = work;
+        users = [alex];
+      }
+      {
+        host = siliconWork;
+        users = [alex];
+      }
+    ];
 }
