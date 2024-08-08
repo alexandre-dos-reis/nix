@@ -38,4 +38,10 @@ in {
     arch = x84_64;
     os = darwin;
   };
+  raspie = mkHost {
+    hostname = "raspie";
+    path = "raspie";
+    arch = aarch64;
+    os = linux;
+  };
 }

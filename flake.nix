@@ -21,7 +21,7 @@
 
   outputs = inputs: let
     inherit (import ./helpers.nix inputs) mkFlake hosts users;
-    inherit (hosts) white work mbp2012 siliconWork;
+    inherit (hosts) white work mbp2012 siliconWork raspie;
     inherit (users) alex;
   in
     mkFlake [
@@ -39,6 +39,10 @@
       }
       {
         host = siliconWork;
+        users = [alex];
+      }
+      {
+        host = raspie;
         users = [alex];
       }
     ];

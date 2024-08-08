@@ -31,3 +31,5 @@ setup-home-manager:
 update-home-manager host:
   home-manager switch --flake .#{{host}}
 
+gc:
+  nix-collect-garbage --delete-older-than 7d
