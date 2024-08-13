@@ -33,6 +33,7 @@
     pandoc
     ripgrep
     sops
+    ssh-to-age
     # firefox: Not available on silicon platform
     tree
     unrar

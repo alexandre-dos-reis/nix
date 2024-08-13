@@ -3,6 +3,7 @@
   user,
   utils,
   host,
+  inputs,
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin isLinux;
