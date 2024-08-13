@@ -34,9 +34,11 @@
     ripgrep
     sops
     # firefox: Not available on silicon platform
-    # input-remapper
     tree
     unrar
+    go-task
+    # coreutils
+    # openssl
 
     # languages
     bun

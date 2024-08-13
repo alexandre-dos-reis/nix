@@ -43,6 +43,7 @@
 - [Walkthrough of Nix Install and Setup on MacOS](https://www.youtube.com/watch?v=LE5JR4JcvMg&t=1662s)
 - [Tidying up your $HOME with Nix](https://juliu.is/tidying-your-home-with-nix/)
 - [DevInsideYou - Nix Home Manager Tutorial](https://www.youtube.com/watch?v=utoj6annRK0)
+- [Handling Secrets in NixOS: An Overview](https://lgug2z.com/articles/handling-secrets-in-nixos-an-overview/)
 
 ### Some flakes users
 

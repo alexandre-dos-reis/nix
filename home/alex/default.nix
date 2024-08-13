@@ -1,5 +1,4 @@
 {
-  # osConfig # Added by home-manager
   pkgs,
   user,
   utils,
