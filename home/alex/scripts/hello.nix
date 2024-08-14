@@ -1,4 +1,4 @@
-pkgs:
+{pkgs, ...}:
 pkgs.writeShellApplication {
   name = "hello";
   runtimeInputs = with pkgs; [cowsay lolcat];
