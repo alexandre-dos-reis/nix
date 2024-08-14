@@ -5,7 +5,7 @@
     ./atuin.nix
     ./kitty.nix
     ./tmux.nix
-    # ./utils.nix
+    ./direnv.nix
     ./git.nix
     ./vscode.nix
     ./discord.nix
