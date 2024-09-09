@@ -19,7 +19,7 @@ in {
     font = {
       # Show current fonts installed : kitty --debug-font-fallback
       name = user.font.systemName;
-      size = 9;
+      size = 10;
       # size = 13;
     };
     settings = {

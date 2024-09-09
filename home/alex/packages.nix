@@ -12,6 +12,7 @@
     # system utils
     dust
     btop
+    yazi
     neofetch
     clang
     gnumake
@@ -58,5 +59,8 @@
 
     # containers
     lazydocker
+
+    # Various
+    whatsapp-for-linux
   ];
 }
