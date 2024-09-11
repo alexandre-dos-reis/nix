@@ -49,6 +49,7 @@
     rustc
     cargo
     tokei
+    dotnetCorePackages.sdk_9_0
 
     # Keyboard
     qmk
