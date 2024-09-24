@@ -39,6 +39,8 @@ in {
 
       delta = {
         navigate = true;
+        line-numbers = true;
+        side-by-side = true;
       };
 
       merge = {
