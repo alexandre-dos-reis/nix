@@ -19,8 +19,8 @@ in {
     font = {
       # Show current fonts installed : kitty --debug-font-fallback
       name = user.font.systemName;
-      size = 10;
-      # size = 13;
+      # size = 10;
+      size = 12;
     };
     settings = {
       hide_window_decorations =
@@ -31,9 +31,7 @@ in {
       window_padding_width = "1 0 0";
       shell = "${pkgs.fish}/bin/fish";
     };
-    # Use the name attribute from the json file to the theme key.
-    # https://github.com/kovidgoyal/kitty-themes/blob/master/themes.json
-    theme = "Solarized Dark Higher Contrast";
+    themeFile = "Solarized_Dark_Higher_Contrast";
     extraConfig = let
       inherit (user) colors;
     in ''

@@ -97,3 +97,11 @@ From [NixOS Episode 1 - Installation](https://www.youtube.com/watch?v=63sSGuclBn
 - Create a 500 mb EFI boot partition with FAT swap system
 - (Optional) Create a Swap partition based on the ram
 - Create the system partition with the remaining space.
+
+## Troubleshooting
+
+On ubuntu, this error might happen: `The SUID sandbox helper binary was found...`
+
+Workaround for a session: `echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns`
+
+See [SUID sandbox helper breaks packages in Single User Installation](https://github.com/NixOS/nixpkgs/issues/121694#issuecomment-2159420924)

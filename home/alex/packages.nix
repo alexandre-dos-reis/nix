@@ -63,5 +63,8 @@
 
     # Various
     whatsapp-for-linux
+
+    websocat
+
   ];
 }

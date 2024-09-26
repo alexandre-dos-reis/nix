@@ -12,6 +12,8 @@
     ngrok
     ack
     terraform
+    # pulumi
+    # pulumiPackages.pulumi-language-nodejs
 
     # Poeditor
     # (ruby_3_3.withPackages (ps: with ps; [
