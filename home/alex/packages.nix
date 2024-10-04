@@ -1,10 +1,14 @@
 {
   pkgs,
   utils,
+  inputs,
   ...
 }: {
   # need to install cargo and gcc for neovim, move them to neovim folder
-  home.packages = with pkgs; [
+  home.packages = [
+    # overlays from inputs
+    inputs.zig.packages.${pkgs.system}.master
+  ] ++ (with pkgs; [
     # nix helpers
     nh # cli wrapper
     devenv # Dev
@@ -41,15 +45,19 @@
     go-task
     # coreutils
     # openssl
+    websocat
 
-    # languages
+    # langs
     bun
+    ## golang
     go
+    air 
     # rust
     rustc
     cargo
-    tokei
     dotnetCorePackages.sdk_9_0
+    ## utils
+    tokei # Stats about code
 
     # Keyboard
     qmk
@@ -61,10 +69,9 @@
     # containers
     lazydocker
 
-    # Various
+    # Gui Apps
     whatsapp-for-linux
-
-    websocat
-
-  ];
+    simplescreenrecorder
+    vlc
+  ]);
 }

@@ -17,7 +17,7 @@
   # };
 
   # https://github.com/nix-community/nixd/blob/main/nixd/docs/user-guide.md#configuration
-  home.packages = with pkgs; [
-    nixd ## nix lsp
+  home.packages = [
+    pkgs.nixd ## nix lsp
   ];
 }

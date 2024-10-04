@@ -16,6 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    zig.url = "github:mitchellh/zig-overlay";
     vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 

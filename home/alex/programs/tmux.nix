@@ -75,6 +75,9 @@ in {
       # Shortcut
       # DON'T WORK...
       # bind-key -n C-f run-shell "~/bin/tmux-sessionizer"
+      
+      # Enable kitty image protocol to work, see: https://www.youtube.com/watch?v=nYDMXI-yFTA
+      set -gq allow-passthrough on
 
       ## style and colors
         set -g mode-style "fg=#eee8d5,bg=#073642"
