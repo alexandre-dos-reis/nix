@@ -10,6 +10,7 @@
     inputs.zig.packages.${pkgs.system}.master
   ] ++ (with pkgs; [
     # nix helpers
+    nixos-rebuild
     nh # cli wrapper
     devenv # Dev
 
@@ -25,7 +26,6 @@
     gnupg
     bat
     jq
-    just
     wget
     sqlite
     zip
@@ -37,17 +37,13 @@
     lazygit
     pandoc
     ripgrep
-    sops
-    ssh-to-age
-    # firefox: Not available on silicon platform
     tree
     unrar
     go-task
-    # coreutils
-    # openssl
     websocat
 
-    # langs
+    # code
+    jujutsu
     bun
     ## golang
     go
