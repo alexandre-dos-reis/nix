@@ -7,12 +7,14 @@
   # need to install cargo and gcc for neovim, move them to neovim folder
   home.packages = [
     # overlays from inputs
-    inputs.zig.packages.${pkgs.system}.master
+    inputs.zig.packages.${pkgs.system}."0.13.0"
   ] ++ (with pkgs; [
     # nix helpers
     nixos-rebuild
     nh # cli wrapper
     devenv # Dev
+    alejandra
+    nixd
 
     # system utils
     dust
@@ -22,7 +24,6 @@
     clang
     gnumake
     cmake
-    gnumake
     gnupg
     bat
     jq
@@ -47,7 +48,7 @@
     bun
     ## golang
     go
-    air 
+    air
     # rust
     rustc
     cargo

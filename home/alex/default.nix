@@ -17,6 +17,7 @@ in {
     ./scripts
   ];
   nixpkgs.config.allowUnfree = true;
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   # Recommended for linux distros other than NixOS
   targets.genericLinux.enable = isLinux && host.isManagedByHomeManager;

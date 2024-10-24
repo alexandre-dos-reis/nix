@@ -43,13 +43,11 @@ in {
       f = "~/bin/tmux-sessionizer";
       fw = "~/bin/tmux-windownizer";
       cs = "~/bin/cht.sh";
-      cm = "chezmoi";
-      cme = "chezmoi edit --apply";
       d = "docker";
       dcp = "docker compose";
       ff = "fzf --preview 'bat --style=numbers --color=always {}'";
       ffn = "ff | xargs nvim";
-      k = "kubectl";
+      s = "sudo env PATH=\"$PATH\"";
     };
 
     # https://search.nixos.org/packages?channel=unstable&show=fishPlugins.z&from=0&size=50&sort=relevance&type=packages&query=fishPlugins
