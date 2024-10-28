@@ -19,7 +19,7 @@
             "style": "letter"
           },
           "style": "plain",
-          "template": "<#eaeaea>\u23a7</> \u27e8{{ .Path }}\u27e9 ",
+          "template": "\u27e8 {{ .Path }} \u27e9 ",
           "type": "path"
         },
         {
@@ -30,7 +30,7 @@
             "fetch_status": true
           },
           "style": "plain",
-          "template": "\u27e8{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \u2206{{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}\u27e9",
+          "template": "\u27e8 {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \u2206{{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }} \u27e9",
           "type": "git"
         },
         {
@@ -61,7 +61,7 @@
             "threshold": 0
           },
           "style": "plain",
-          "template": "\u27e8{{ .FormattedMs }}\u27e9 <#eaeaea>\u23ab</>",
+          "template": "\u27e8 {{ .FormattedMs }} \u27e9",
           "type": "executiontime"
         }
       ],
@@ -74,7 +74,7 @@
         {
           "foreground": "#3ce6bf",
           "style": "plain",
-          "template": "<#eaeaea>\u23a9</>\u27e9 ",
+          "template": "\u27e9 ",
           "type": "text"
         }
       ],
@@ -89,7 +89,7 @@
             "time_format": "15:04:05"
           },
           "style": "plain",
-          "template": "\u27e8{{ .CurrentDate | date .Format }}\u27e9 <#eaeaea>\u23ad</>",
+          "template": "\u27e8 {{ .CurrentDate | date .Format }} \u27e9",
           "type": "time"
         }
       ],
