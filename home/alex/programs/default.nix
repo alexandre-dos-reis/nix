@@ -9,5 +9,6 @@
     ./git.nix
     ./vscode.nix
     ./discord.nix
+    ./oh-my-posh
   ];
 }
