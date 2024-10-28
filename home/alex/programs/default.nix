@@ -1,9 +1,9 @@
 {
   imports = [
+    ./shells
     ./neovim.nix
-    ./fish.nix
-    ./atuin.nix
     ./kitty.nix
+    ./atuin.nix
     ./tmux.nix
     ./direnv.nix
     ./git.nix

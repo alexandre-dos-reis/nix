@@ -48,6 +48,7 @@ in {
       ff = "fzf --preview 'bat --style=numbers --color=always {}'";
       ffn = "ff | xargs nvim";
       s = "sudo env PATH=\"$PATH\"";
+      k = "kubectl";
     };
 
     # https://search.nixos.org/packages?channel=unstable&show=fishPlugins.z&from=0&size=50&sort=relevance&type=packages&query=fishPlugins

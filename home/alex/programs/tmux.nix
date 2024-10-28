@@ -6,7 +6,8 @@ in {
   programs.tmux = {
     enable = true;
     prefix = "C-a";
-    shell = "${pkgs.fish}/bin/fish";
+    # shell = "${pkgs.fish}/bin/fish";
+    shell = "${pkgs.nushell}/bin/nu";
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
     ];
@@ -74,8 +75,8 @@ in {
 
       # Shortcut
       # DON'T WORK...
-      # bind-key -n C-f run-shell "~/bin/tmux-sessionizer"
-      
+      bind-key -n C-f run-shell "~/bin/tmux-sessionizer"
+
       # Enable kitty image protocol to work, see: https://www.youtube.com/watch?v=nYDMXI-yFTA
       set -gq allow-passthrough on
 

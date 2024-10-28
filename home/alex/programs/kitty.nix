@@ -15,7 +15,7 @@ in {
   # https://mipmip.github.io/home-manager-option-search/?query=kitty
   programs.kitty = {
     enable = true;
-    shellIntegration.enableFishIntegration = true;
+    # shellIntegration.enableFishIntegration = true;
     font = {
       # Show current fonts installed : kitty --debug-font-fallback
       name = user.font.systemName;
@@ -29,7 +29,8 @@ in {
         else true;
       placement_strategy = "top-left";
       window_padding_width = "1 0 0";
-      shell = "${pkgs.fish}/bin/fish";
+      # shell = "${pkgs.fish}/bin/fish";
+      shell = "${pkgs.nushell}/bin/nu";
     };
     themeFile = "Solarized_Dark_Higher_Contrast";
     extraConfig = let

@@ -21,6 +21,7 @@
 
 ### Search packages
 
+- [MyNixOs - The best search tool !](https://mynixos.com/)
 - [packages](https://search.nixos.org/packages)
 - [home-manager](https://mipmip.github.io/home-manager-option-search/)
 - [Search through nix versions](https://lazamar.co.uk/nix-versions)
