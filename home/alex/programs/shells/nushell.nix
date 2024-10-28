@@ -9,6 +9,10 @@ in {
   programs.nushell = {
     enable = true;
 
+    extraConfig = ''
+    $env.config.show_banner = false
+    '';
+
     shellAliases = {
       v = "nvim";
       t = "tmux";
@@ -35,6 +39,7 @@ in {
       gcm = "git commit -m";
       gca = "git commit --amend";
       gcne = "git commit --amend --no-edit";
+      gco = "git checkout";
       gcb = "git checkout -b";
       gp = "git push";
       gpf = "git push --force";
