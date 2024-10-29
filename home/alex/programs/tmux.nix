@@ -74,8 +74,8 @@ in {
       set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
       # Shortcut
-      # DON'T WORK...
-      bind-key -n C-f run-shell "~/bin/tmux-sessionizer"
+      # `-n` bypass the prefix-key
+      bind-key -n C-f run-shell "tmux neww ~/bin/tmux-sessionizer"
 
       # Enable kitty image protocol to work, see: https://www.youtube.com/watch?v=nYDMXI-yFTA
       set -gq allow-passthrough on

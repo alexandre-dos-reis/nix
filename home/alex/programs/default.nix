@@ -10,5 +10,6 @@
     ./vscode.nix
     ./ssh.nix
     ./oh-my-posh
+    ./zellij.nix
   ];
 }

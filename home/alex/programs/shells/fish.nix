@@ -29,6 +29,8 @@ in {
 
       fish_vi_key_bindings
       function fish_mode_prompt; end
+
+      bind \cf "tmux-sessionizer"
     '';
 
     shellAliases = {
@@ -41,8 +43,6 @@ in {
       llt = "ll --tree";
       c = "clear";
       b = "bat -p";
-      f = "~/bin/tmux-sessionizer";
-      fw = "~/bin/tmux-windownizer";
       cs = "~/bin/cht.sh";
       d = "docker";
       dcp = "docker compose";

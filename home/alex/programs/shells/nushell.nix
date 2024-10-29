@@ -10,7 +10,7 @@ in {
     enable = true;
 
     extraConfig = ''
-    $env.config.show_banner = false
+      $env.config.show_banner = false
     '';
 
     shellAliases = {
@@ -23,8 +23,6 @@ in {
       llt = "ll --tree";
       c = "clear";
       b = "bat -p";
-      f = "~/bin/tmux-sessionizer";
-      fw = "~/bin/tmux-windownizer";
       cs = "~/bin/cht.sh";
       d = "docker";
       dcp = "docker compose";

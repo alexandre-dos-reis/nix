@@ -6,7 +6,7 @@
 }: let
   inherit (pkgs.stdenv) isDarwin isLinux;
   inherit (host) isNixGlWrapped xdgDataFileEnabled;
-  kittyBin = "GLFW_IM_MODULE=ibus ${pkgs.kitty}/bin/kitty";
+  kittyBin = "${pkgs.kitty}/bin/kitty";
   kittyBinWrapped =
     if isNixGlWrapped
     then "${pkgs.nixgl.nixGLMesa}/bin/nixGLMesa '${kittyBin}'"
