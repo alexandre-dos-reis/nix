@@ -31,6 +31,5 @@
     nodePackages.nodemon
     nodePackages.prettier
     nodePackages.vercel
-    nodePackages.pnpm
   ];
 }

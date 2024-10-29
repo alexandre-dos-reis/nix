@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# See https://github.com/edr3x/tmux-sessionizer
+
 session=$(find ~ ~/.config ~/dev ~/obsidian -mindepth 1 -maxdepth 1 -type d | fzf)
 session_name=$(basename "$session" | tr . _)
 

@@ -8,7 +8,6 @@
     ./direnv.nix
     ./git.nix
     ./vscode.nix
-    ./discord.nix
     ./ssh.nix
     ./oh-my-posh
   ];

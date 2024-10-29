@@ -6,10 +6,10 @@
 }: let
   inherit (pkgs.stdenv) isDarwin isLinux;
   inherit (host) isNixGlWrapped xdgDataFileEnabled;
-  kittyBin = "${pkgs.kitty}/bin/kitty";
+  kittyBin = "GLFW_IM_MODULE=ibus ${pkgs.kitty}/bin/kitty";
   kittyBinWrapped =
     if isNixGlWrapped
-    then "${pkgs.nixgl.nixGLMesa}/bin/nixGLMesa ${kittyBin}"
+    then "${pkgs.nixgl.nixGLMesa}/bin/nixGLMesa '${kittyBin}'"
     else kittyBin;
 in {
   # https://mipmip.github.io/home-manager-option-search/?query=kitty
@@ -19,8 +19,8 @@ in {
     font = {
       # Show current fonts installed : kitty --debug-font-fallback
       name = user.font.systemName;
-      # size = 10;
-      size = 12;
+      size = 12; #  9 - 12
+      # size = 13;
     };
     settings = {
       hide_window_decorations =
