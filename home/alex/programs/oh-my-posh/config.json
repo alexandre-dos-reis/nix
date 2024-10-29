@@ -3,66 +3,33 @@
   "blocks": [
     {
       "alignment": "left",
-      "newline": true,
       "segments": [
         {
-          "foreground": "#b1ff4f",
-          "style": "powerline",
-          "template": "[🐍 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}] ",
-          "type": "python"
+          "foreground": "#45F1C2",
+          "style": "plain",
+          "template": "\ueb99 {{ .UserName }} on",
+          "type": "session"
         },
         {
-          "foreground": "#ffaed8",
+          "foreground": "#0CA0D8",
           "properties": {
-            "folder_separator_icon": " | ",
-            "home_icon": "\uf46d",
-            "style": "letter"
+            "folder_separator_icon": "/",
+            "style": "full"
           },
           "style": "plain",
-          "template": "\u27e8 {{ .Path }} \u27e9 ",
+          "template": " \uf07b {{ .Path }} ",
           "type": "path"
         },
         {
-          "foreground": "#62beff",
+          "foreground": "#14A5AE",
+          "powerline_symbol": "\ue0b0",
           "properties": {
-            "branch_icon": "\uf418",
-            "branch_identical_icon": "\u2261",
-            "fetch_status": true
+            "fetch_stash_count": true,
+            "fetch_upstream_icon": true
           },
           "style": "plain",
-          "template": "\u27e8 {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \u2206{{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }} \u27e9",
+          "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
           "type": "git"
-        },
-        {
-          "foreground": "#98C379",
-          "properties": {
-            "fetch_version": true
-          },
-          "style": "plain",
-          "template": "<#ffffff>\u25e6</> \u2622{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
-          "type": "node"
-        }
-      ],
-      "type": "prompt"
-    },
-    {
-      "alignment": "right",
-      "segments": [
-        {
-          "foreground": "#fb0207",
-          "style": "plain",
-          "template": " ××× ",
-          "type": "status"
-        },
-        {
-          "foreground": "#9966ff",
-          "properties": {
-            "style": "austin",
-            "threshold": 0
-          },
-          "style": "plain",
-          "template": "\u27e8 {{ .FormattedMs }} \u27e9",
-          "type": "executiontime"
         }
       ],
       "type": "prompt"
@@ -72,38 +39,20 @@
       "newline": true,
       "segments": [
         {
-          "foreground": "#3ce6bf",
+          "foreground": "#cd5e42",
           "style": "plain",
-          "template": "\u27e9 ",
+          "template": "\ue3bf ",
+          "type": "root"
+        },
+        {
+          "foreground": "#CD4277",
+          "style": "plain",
+          "template": "# ",
           "type": "text"
         }
       ],
       "type": "prompt"
-    },
-    {
-      "alignment": "right",
-      "segments": [
-        {
-          "foreground": "#f5f5a6",
-          "properties": {
-            "time_format": "15:04:05"
-          },
-          "style": "plain",
-          "template": "\u27e8 {{ .CurrentDate | date .Format }} \u27e9",
-          "type": "time"
-        }
-      ],
-      "type": "rprompt"
     }
   ],
-  "transient_prompt": {
-    "foreground_templates": [
-      "{{if gt .Code 0}}red{{end}}",
-      "{{if eq .Code 0}}magenta{{end}}"
-    ],
-    "background": "transparent",
-    "foreground": "#3ce6bf",
-    "template": "\u27e9 "
-  },
   "version": 2
 }

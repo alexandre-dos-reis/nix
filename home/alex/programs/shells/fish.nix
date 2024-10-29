@@ -28,6 +28,7 @@ in {
       set -g theme_hostname always
 
       fish_vi_key_bindings
+      function fish_mode_prompt; end
     '';
 
     shellAliases = {
@@ -54,10 +55,10 @@ in {
     # https://search.nixos.org/packages?channel=unstable&show=fishPlugins.z&from=0&size=50&sort=relevance&type=packages&query=fishPlugins
     plugins = with pkgs.fishPlugins;
       [
-        {
-          name = "tide";
-          src = tide.src;
-        }
+        # {
+        #   name = "tide";
+        #   src = tide.src;
+        # }
         {
           name = "autopair";
           src = autopair.src;
