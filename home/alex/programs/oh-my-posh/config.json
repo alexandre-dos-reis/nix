@@ -3,6 +3,7 @@
   "blocks": [
     {
       "alignment": "left",
+      "newline": true,
       "segments": [
         {
           "foreground": "#45F1C2",
@@ -47,7 +48,7 @@
         {
           "foreground": "#CD4277",
           "style": "plain",
-          "template": "# ",
+          "template": "> ",
           "type": "text"
         }
       ],

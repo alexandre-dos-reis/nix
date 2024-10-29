@@ -64,6 +64,8 @@ in {
           src = autopair.src;
         }
         {
+          # TODO: Replace this plugin with personal aliases for use with other shells.
+          # https://gist.github.com/spitfire05/103324f015d12c661f5da9e329852ad0
           name = "git";
           src = plugin-git.src;
         }
