@@ -74,6 +74,7 @@ in {
       set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
       # Shortcut
+      # https://github.com/edr3x/tmux-sessionizer?tab=readme-ov-file
       # `-n` bypass the prefix-key
       bind-key -n C-f run-shell "tmux neww ~/bin/tmux-sessionizer"
 
