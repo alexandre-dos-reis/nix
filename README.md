@@ -81,6 +81,7 @@
 - [Setup LazyVim using Nix and home-manager](https://github.com/LazyVim/LazyVim/discussions/1972)
 - [Neovim - LazyVim - can’t load plugins](https://discourse.nixos.org/t/neovim-cant-load-plugins/31189/2)
 - [](https://github.com/shivajreddy/dotfiles/tree/main/nixos/home/apps/neovim)
+- [LongerHV/nixos-configuration](https://github.com/LongerHV/nixos-configuration/tree/02434a93d6719253f087ce67e31ffdeedc45da1e/modules/home-manager/myHome/neovim)
 
 ### Making nixGL works with Home Manager
 
@@ -98,7 +99,6 @@ From [NixOS Episode 1 - Installation](https://www.youtube.com/watch?v=63sSGuclBn
 - Create a 500 mb EFI boot partition with FAT swap system
 - (Optional) Create a Swap partition based on the ram
 - Create the system partition with the remaining space.
-<<<<<<< Updated upstream
 
 ## Troubleshooting
 
@@ -107,8 +107,6 @@ On ubuntu, this error might happen: `The SUID sandbox helper binary was found...
 Workaround for a session: `echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns`
 
 See [SUID sandbox helper breaks packages in Single User Installation](https://github.com/NixOS/nixpkgs/issues/121694#issuecomment-2159420924)
-||||||| Stash base
-=======
 
 ## Troubleshooting
 
@@ -132,4 +130,3 @@ to your configuration.
 ```
 
 You need to update the installation of home-manager, [see here](https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-standalone).
->>>>>>> Stashed changes

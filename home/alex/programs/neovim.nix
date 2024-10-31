@@ -9,17 +9,37 @@
     viAlias = true;
     vimAlias = true;
     package = inputs.nvim-nightly.packages.${pkgs.system}.default;
+    plugins = [
+      (pkgs.vimPlugins.nvim-treesitter.withPlugins (p:
+        with p; [
+          html
+          lua
+          tsx
+          typescript
+          javascript
+          go
+          astro
+          cmake
+          css
+          scss
+          fish
+          gitignore
+          markdown
+          graphql
+          http
+          php
+          rust
+          sql
+          nix
+          just
+          terraform
+          zig
+        ]))
+    ];
   };
 
-  # xdg.configFile.nvim = {
-  #   source = ./config;
-  #   recursive = true;
-  # };
-
-  # https://github.com/nix-community/nixd/blob/main/nixd/docs/user-guide.md#configuration
-  home.packages = with pkgs;
-  with pkgs.tree-sitter-grammars; [
-    # LSPs
+  # LSPs
+  home.packages = with pkgs; [
     # Javascript / Typescript
     typescript-language-server # Find a way to install vtsls
     typescript
@@ -38,30 +58,6 @@
     nixd
     alejandra # formatter
 
-    # TREESITTER PARSERS
-    tree-sitter-typescript
-
-    # TODO: Implement theses parsers
-    # "html",
-    # "lua",
-    # "tsx",
-    # "javascript",
-    # "go",
-    # "astro",
-    # "cmake",
-    # "css",
-    # "scss",
-    # "fish",
-    # "gitignore",
-    # "markdown",
-    # "graphql",
-    # "http",
-    # "php",
-    # "rust",
-    # "sql",
-    # "nix",
-    # "just",
-    # "terraform",
-    # "zig",
+    # Golang
   ];
 }
