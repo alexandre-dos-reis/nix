@@ -15,8 +15,6 @@
       nixos-rebuild
       nh # cli wrapper
       devenv # Dev
-      alejandra
-      nixd
 
       # system utils
       dust
@@ -29,6 +27,7 @@
       gnupg
       bat
       jq
+      yq
       wget
       sqlite
       zip
@@ -48,13 +47,7 @@
 
       # code
       jujutsu
-      bun
       ## golang
-      go
-      air
-      # rust
-      rustc
-      cargo
       dotnetCorePackages.sdk_9_0
       ## utils
       tokei # Stats about code

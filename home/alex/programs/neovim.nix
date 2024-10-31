@@ -38,9 +38,16 @@
     ];
   };
 
-  # LSPs
+  # LSPs and executable
   home.packages = with pkgs; [
     # Javascript / Typescript
+    nodejs_18
+    corepack_18
+    # These will be installed globally
+    nodePackages.nodemon
+    nodePackages.prettier
+    nodePackages.vercel
+    bun
     typescript-language-server # Find a way to install vtsls
     typescript
     prettierd
@@ -59,9 +66,19 @@
     alejandra # formatter
 
     # Golang
+    air
+    go
     gopls
     gofumpt
     goimports-reviser
     golines
+
+    # Rust
+    rustc
+    cargo
+    rustfmt
+    rust-analyzer
+
+    # Zig
   ];
 }
