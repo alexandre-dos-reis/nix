@@ -38,6 +38,7 @@
       fd
       fzf
       lazygit
+      gh # github cli
       pandoc
       ripgrep
       tree
