@@ -59,5 +59,9 @@
     alejandra # formatter
 
     # Golang
+    gopls
+    gofumpt
+    goimports-reviser
+    golines
   ];
 }
