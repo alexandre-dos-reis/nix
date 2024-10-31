@@ -17,7 +17,23 @@
   # };
 
   # https://github.com/nix-community/nixd/blob/main/nixd/docs/user-guide.md#configuration
-  home.packages = [
-    pkgs.nixd ## nix lsp
+  home.packages = with pkgs; [
+    # Javascript / Typescript
+    typescript-language-server # Find a way to install vtsls
+    typescript
+    prettierd
+    eslint_d
+
+    # Tailwind
+    tailwindcss-language-server
+    nodePackages.neovim # Needed for tailwind-tools
+
+    # Lua
+    lua-language-server
+    stylua
+
+    # Nix
+    nixd
+    alejandra # formatter
   ];
 }

@@ -12,7 +12,6 @@ in {
   imports = [
     ./programs
     ./packages.nix
-    ./lsp.nix
     ./kavval-packages.nix
     ./files
     ./scripts
