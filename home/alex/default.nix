@@ -27,9 +27,6 @@ in {
     home-manager.enable = true;
   };
 
-  # Nicely reload system units when changing configs, is this usefull ?
-  systemd.user.startServices = "sd-switch";
-
   fonts.fontconfig.enable = true;
 
   home = {
@@ -54,6 +51,7 @@ in {
       else "us";
 
     packages = [
+      pkgs.maple-mono-NF
       (pkgs.nerdfonts.override {
         fonts = [
           "Meslo"
