@@ -18,7 +18,7 @@ in {
     shellIntegration.enableFishIntegration = true;
     font = {
       # Show current fonts installed : kitty --debug-font-fallback
-      name = user.font.systemName;
+      name = user.font;
       # size = 12; #  9 - 12
       size = 16;
     };

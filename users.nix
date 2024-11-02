@@ -3,10 +3,7 @@
     username = "alex";
     email = "ajm.dosreis.daponte@gmail.com";
     fullname = "Alexandre Dos Reis";
-    font = {
-      systemName = "Maple Mono NF";
-      nerdFontName = "JetBrainsMono"; # https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/JetBrainsMono
-    };
+    font = "Maple Mono NF"; # This is not the nix package name but rather the name installed on the system
     editor = "nvim";
     colors = {
       background = "#001e26";

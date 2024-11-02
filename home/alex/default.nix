@@ -55,7 +55,7 @@ in {
       (pkgs.nerdfonts.override {
         fonts = [
           "Meslo"
-          user.font.nerdFontName
+          "JetBrainsMono"
         ];
       })
     ];
