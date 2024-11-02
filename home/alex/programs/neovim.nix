@@ -39,7 +39,9 @@
   };
 
   # LSPs and executable
-  home.packages = with pkgs; [
+  home.packages = with pkgs; let
+    zig = inputs.zig.packages.${pkgs.system}."0.13.0";
+  in [
     # Deps for Lazy
     luajitPackages.luarocks
 
@@ -83,5 +85,7 @@
     rust-analyzer
 
     # Zig
+    zig
+    zls
   ];
 }
