@@ -6,7 +6,7 @@
     font = "Maple Mono NF"; # This is not the nix package name but rather the name installed on the system
     editor = "nvim";
     colors = {
-      background = "#001e26";
+      background = "#072329";
       cursor = "#708183";
     };
   };
