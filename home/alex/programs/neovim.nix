@@ -40,6 +40,9 @@
 
   # LSPs and executable
   home.packages = with pkgs; [
+    # Deps for Lazy
+    luajitPackages.luarocks
+
     # Javascript / Typescript
     nodejs_18
     corepack_18
