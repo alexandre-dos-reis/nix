@@ -9,33 +9,33 @@
     viAlias = true;
     vimAlias = true;
     package = inputs.nvim-nightly.packages.${pkgs.system}.default;
-    plugins = [
-      (pkgs.vimPlugins.nvim-treesitter.withPlugins (p:
-        with p; [
-          html
-          lua
-          tsx
-          typescript
-          javascript
-          go
-          astro
-          cmake
-          css
-          scss
-          fish
-          gitignore
-          markdown
-          graphql
-          http
-          php
-          rust
-          sql
-          nix
-          just
-          terraform
-          zig
-        ]))
-    ];
+    # plugins = [
+    #   (pkgs.vimPlugins.nvim-treesitter.withPlugins (p:
+    #     with p; [
+    #       html
+    #       lua
+    #       tsx
+    #       typescript
+    #       javascript
+    #       go
+    #       astro
+    #       cmake
+    #       css
+    #       scss
+    #       fish
+    #       gitignore
+    #       markdown
+    #       graphql
+    #       http
+    #       php
+    #       rust
+    #       sql
+    #       nix
+    #       just
+    #       terraform
+    #       zig
+    #     ]))
+    # ];
   };
 
   # LSPs and executable
@@ -48,7 +48,6 @@
     # Javascript / Typescript
     nodejs_18
     corepack_18
-    # These will be installed globally
     nodePackages.nodemon
     nodePackages.prettier
     nodePackages.vercel
