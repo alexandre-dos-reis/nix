@@ -45,6 +45,9 @@
     # Deps for Lazy
     luajitPackages.luarocks
 
+    # bash
+    nodePackages.bash-language-server
+
     # Javascript / Typescript
     nodejs_18
     corepack_18
