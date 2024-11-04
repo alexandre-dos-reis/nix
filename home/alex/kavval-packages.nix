@@ -7,6 +7,9 @@
     ack
     terraform
 
+    # Geojson
+    tippecanoe
+
     # Certificate
     mkcert
     nssTools
