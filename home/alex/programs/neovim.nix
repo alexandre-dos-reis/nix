@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  user,
   ...
 }: {
   programs.neovim = {

@@ -40,6 +40,7 @@ in {
     sessionVariables = {
       EDITOR = user.editor;
       FLAKE = "${homeDir}/dev/nix-conf";
+      TERMINAL_BG = user.colors.background;
     };
 
     # https://mipmip.github.io/home-manager-option-search/?query=keyboard
