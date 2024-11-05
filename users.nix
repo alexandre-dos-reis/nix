@@ -9,5 +9,7 @@
       background = "#072329";
       cursor = "#708183";
     };
+    # This allows to install npm packages globally with: `npm i -g <some-package>`
+    npm.packages.path = "~/.npm-packages";
   };
 }
