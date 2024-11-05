@@ -4,12 +4,14 @@
   utils,
   host,
   inputs,
+  config,
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin isLinux;
   homeDir = utils.getHomeDir {inherit isDarwin user;};
 in {
   imports = [
+    ./overlays.nix
     ./programs
     ./packages.nix
     ./kavval-packages.nix
