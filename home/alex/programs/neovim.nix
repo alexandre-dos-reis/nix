@@ -44,6 +44,7 @@
   in [
     # Deps for Lazy
     luajitPackages.luarocks
+    beautysh
 
     # bash
     nodePackages.bash-language-server
