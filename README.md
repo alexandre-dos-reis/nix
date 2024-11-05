@@ -10,13 +10,12 @@
 
 - [ ] Split configurations into multiple files to conditionnaly call config per platform/os.
   - For kitty.
-- [ ] Use [nix-colors](https://github.com/Misterio77/nix-colors)
 - [ ] Try to import the nvim config
+  - Using options in lazy.nvim to allow nix managing dependencies introduce some performance downside.
   - [Introducing lazynixhelper use your existing](https://www.reddit.com/r/neovim/comments/18sk8r7/introducing_lazynixhelper_use_your_existing/)
 
 ## Resources
 
-- [Nix Colors Input](https://github.com/Misterio77/nix-colors)
 - [Official Nix Cookbook](https://nixos.wiki/wiki/Nix_Cookbook)
 
 ### Search packages
@@ -31,6 +30,11 @@
 - [lib.attrsets](https://ryantm.github.io/nixpkgs/functions/library/attrsets/#sec-functions-library-attrsets)
 - [builtins Functions](https://nixos.org/manual/nix/stable/language/builtins.html)
 - [Nix Cheat Sheet](https://jdheyburn.co.uk/blog/nix-cheat-sheet/)
+
+#### Darwin / MacOSX
+
+- [nix darwin kickstarter](https://github.com/ryan4yin/nix-darwin-kickstarter)
+- [Video by Dreams of Autonomy - Nix is my favorite package manager to use on macOS](https://www.youtube.com/watch?v=Z8BL8mdzWHI)
 
 ### Tutorials & Articles
 
