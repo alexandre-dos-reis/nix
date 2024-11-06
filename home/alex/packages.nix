@@ -42,9 +42,6 @@
 
     # code
     jujutsu
-    ## golang
-    dotnetCorePackages.sdk_9_0
-    ## utils
     tokei # Stats about code
 
     # Keyboard

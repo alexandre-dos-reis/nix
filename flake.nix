@@ -7,6 +7,7 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,8 +17,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+
     zig.url = "github:mitchellh/zig-overlay";
+
     vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
+    # fish
+    fish-ssh-agent = {
+      url = "github:danhper/fish-ssh-agent";
+      flake = false;
+    };
+    ssh-agent-macos = {
+      url = "github:nifoc/ssh-agent-macos.fish";
+      flake = false;
+    };
   };
 
   outputs = {nixgl, ...} @ inputs: let

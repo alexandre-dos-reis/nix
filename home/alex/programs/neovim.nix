@@ -91,5 +91,8 @@
     # Zig
     zig
     zls
+
+    # Dotnet
+    dotnetCorePackages.sdk_9_0
   ];
 }
