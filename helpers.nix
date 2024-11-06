@@ -1,7 +1,11 @@
-inputs: let
-  inherit (inputs) outputs nixpkgs nix-darwin;
-  inherit (import ./constants.nix) linux darwin;
-  forSystems = nixpkgs.lib.genAttrs (import ./constants.nix).systems;
+{
+  self,
+  nixpkgs,
+  nix-darwin,
+  home-manager,
+  ...
+} @ inputs: let
+  outputs = self.outputs;
 
   mkPkgs = {
     utils,
@@ -14,7 +18,7 @@ inputs: let
 
   mkUtils = host: {
     system = "${host.arch}-${host.os}";
-    ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
+    # ifTheyExist = groupsIn: groups: builtins.filter (group: builtins.hasAttr group groupsIn) groups;
     getHomeDir = {
       isDarwin,
       user,
@@ -33,7 +37,7 @@ inputs: let
         value = let
           utils = mkUtils host;
         in
-          inputs.home-manager.lib.homeManagerConfiguration {
+          home-manager.lib.homeManagerConfiguration {
             pkgs = mkPkgs {inherit utils host;};
             extraSpecialArgs = {inherit inputs outputs host utils user;};
             modules = [./home/${user.username}];
@@ -42,7 +46,7 @@ inputs: let
       users))
     list));
 
-  mkOsSystems = folder: os: func: list:
+  mkSystems = dir: os: func: list:
     builtins.listToAttrs (map ({
         host,
         users,
@@ -55,18 +59,24 @@ inputs: let
             pkgs = mkPkgs {inherit utils host;};
             specialArgs = {inherit inputs outputs host utils users;};
             modules = [
-              ./hosts/${folder}/${host.path}
+              ./hosts/${dir}/${host.path}
             ];
           };
       })
       (builtins.filter ({host, ...}: host.os == os) list));
 in {
-  users = import ./users.nix;
-  hosts = import ./hosts.nix inputs;
+  mkHost = args:
+    {
+      overlays = [];
+      isNixGlWrapped = false;
+      xdgDataFileEnabled = false;
+      isManagedByHomeManager = false;
+    }
+    // args;
+
   mkFlake = list: {
-    formatter = forSystems (s: nixpkgs.legacyPackages.${s}.alejandra);
-    nixosConfigurations = mkOsSystems "nixos" linux nixpkgs.lib.nixosSystem list;
-    darwinConfigurations = mkOsSystems "darwin" darwin nix-darwin.lib.darwin list;
+    nixosConfigurations = mkSystems "nixos" "linux" nixpkgs.lib.nixosSystem list;
+    darwinConfigurations = mkSystems "darwin" "darwin" nix-darwin.lib.darwin list;
     homeConfigurations = mkHomes list;
   };
 }
