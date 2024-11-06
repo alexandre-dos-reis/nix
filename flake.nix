@@ -1,13 +1,14 @@
 {
   description = "My Nix config";
 
+  # https://nixos-and-flakes.thiscute.world/other-usage-of-flakes/inputs
   inputs = {
+    # Nix
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,13 +17,15 @@
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Editor
     nvim-nightly.url = "github:nix-community/neovim-nightly-overlay";
-
-    zig.url = "github:mitchellh/zig-overlay";
-
     vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
-    # fish
+    # Lang
+    zig.url = "github:mitchellh/zig-overlay";
+
+    # Fish
     fish-ssh-agent = {
       url = "github:danhper/fish-ssh-agent";
       flake = false;

@@ -72,14 +72,12 @@
       })
       list);
 in {
-  mkFlake = rawHostList: let
-    hostList =
-      map (element: mkHost element)
-      rawHostList;
-    filterOsList = os: builtins.filter (host: host.os == os && host.isManagedByHomeManager == false) hostList;
+  mkFlake = rawHosts: let
+    hosts = map (x: mkHost x) rawHosts;
+    filterHostsByOs = os: builtins.filter (host: host.os == os && !host.isManagedByHomeManager) hosts;
   in {
-    nixosConfigurations = mkSystems nixpkgs.lib.nixosSystem (filterOsList "linux");
-    darwinConfigurations = mkSystems nix-darwin.lib.darwin (filterOsList "darwin");
-    homeConfigurations = mkHomes hostList;
+    nixosConfigurations = mkSystems nixpkgs.lib.nixosSystem (filterHostsByOs "linux");
+    darwinConfigurations = mkSystems nix-darwin.lib.darwin (filterHostsByOs "darwin");
+    homeConfigurations = mkHomes hosts;
   };
 }

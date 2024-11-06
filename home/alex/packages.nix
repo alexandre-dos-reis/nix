@@ -39,6 +39,7 @@
     unrar
     go-task
     websocat
+    just
 
     # code
     jujutsu
