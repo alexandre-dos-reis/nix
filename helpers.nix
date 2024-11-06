@@ -78,7 +78,7 @@ in {
       rawHostList;
     filterOsList = os: builtins.filter (host: host.os == os && host.isManagedByHomeManager == false) hostList;
   in {
-    nixosConfigurations = mkSystems nixpkgs.lib.nixosSystem filterOsList "nixos";
+    nixosConfigurations = mkSystems nixpkgs.lib.nixosSystem filterOsList "linux";
     darwinConfigurations = mkSystems nix-darwin.lib.darwin filterOsList "darwin";
     homeConfigurations = mkHomes hostList;
   };
