@@ -53,7 +53,7 @@
       host.users))
     list));
 
-  mkOsSystems = func: list:
+  mkSystems = func: list:
     builtins.listToAttrs (map (host: {
         name = host.hostname;
         value = let
@@ -78,8 +78,8 @@ in {
       rawHostList;
     filterOsList = os: builtins.filter (host: host.os == os && host.isManagedByHomeManager == false) hostList;
   in {
-    nixosConfigurations = mkOsSystems nixpkgs.lib.nixosSystem filterOsList "nixos";
-    darwinConfigurations = mkOsSystems nix-darwin.lib.darwin filterOsList "darwin";
+    nixosConfigurations = mkSystems nixpkgs.lib.nixosSystem filterOsList "nixos";
+    darwinConfigurations = mkSystems nix-darwin.lib.darwin filterOsList "darwin";
     homeConfigurations = mkHomes hostList;
   };
 }

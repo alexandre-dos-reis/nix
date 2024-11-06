@@ -4,6 +4,7 @@
   host,
   ...
 }: let
+  # TODO: Refact with [GPU on non-NixOS systems](https://nix-community.github.io/home-manager/index.xhtml#sec-usage-gpu-non-nixos)
   inherit (pkgs.stdenv) isDarwin isLinux;
   inherit (host) isNixGlWrapped xdgDataFileEnabled;
   kittyBin = "${pkgs.kitty}/bin/kitty";
