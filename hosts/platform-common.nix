@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin;
-  inherit (users) alex
+  inherit (users) alex;
 in {
   time.timeZone = "Europe/Paris";
 
@@ -20,7 +20,10 @@ in {
   programs.fish.enable = true;
 
   users.users.${alex.username} = {
-    home = utils.getHomeDir {inherit isDarwin; user = alex };
+    home = utils.getHomeDir {
+      inherit isDarwin;
+      user = alex;
+    };
     shell = pkgs.fish;
   };
 

@@ -1,7 +1,21 @@
-inputs: let
-  inherit (inputs) outputs nixpkgs nix-darwin;
-  inherit (import ./constants.nix) linux darwin;
-  forSystems = nixpkgs.lib.genAttrs (import ./constants.nix).systems;
+{
+  self,
+  nixpkgs,
+  nix-darwin,
+  home-manager,
+  ...
+} @ inputs: let
+  outputs = self.outputs;
+
+  mkHost = args:
+    {
+      overlays = [];
+      isNixGlWrapped = false;
+      xdgDataFileEnabled = false;
+      isManagedByHomeManager = false;
+      users = [];
+    }
+    // args;
 
   mkPkgs = {
     utils,
@@ -25,48 +39,47 @@ inputs: let
   };
 
   mkHomes = list:
-    builtins.listToAttrs (nixpkgs.lib.lists.flatten (map ({
-      users,
-      host,
-    }: (map (user: {
+    builtins.listToAttrs (nixpkgs.lib.lists.flatten (map (host: (map (user: {
         name = "${user.username}@${host.hostname}";
         value = let
           utils = mkUtils host;
         in
-          inputs.home-manager.lib.homeManagerConfiguration {
+          home-manager.lib.homeManagerConfiguration {
             pkgs = mkPkgs {inherit utils host;};
             extraSpecialArgs = {inherit inputs outputs host utils user;};
             modules = [./home/${user.username}];
           };
       })
-      users))
+      host.users))
     list));
 
-  mkOsSystems = folder: os: func: list:
-    builtins.listToAttrs (map ({
-        host,
-        users,
-      }: {
+  mkOsSystems = func: list:
+    builtins.listToAttrs (map (host: {
         name = host.hostname;
         value = let
           utils = mkUtils host;
         in
           func {
             pkgs = mkPkgs {inherit utils host;};
-            specialArgs = {inherit inputs outputs host utils users;};
+            specialArgs = {
+              users = host.users;
+              inherit inputs outputs host utils;
+            };
             modules = [
-              ./hosts/${folder}/${host.path}
+              ./hosts/${host.os}/${host.hostname}
             ];
           };
       })
-      (builtins.filter ({host, ...}: host.os == os) list));
+      list);
 in {
-  users = import ./users.nix;
-  hosts = import ./hosts.nix inputs;
-  mkFlake = list: {
-    formatter = forSystems (s: nixpkgs.legacyPackages.${s}.alejandra);
-    nixosConfigurations = mkOsSystems "nixos" linux nixpkgs.lib.nixosSystem list;
-    darwinConfigurations = mkOsSystems "darwin" darwin nix-darwin.lib.darwin list;
-    homeConfigurations = mkHomes list;
+  mkFlake = rawHostList: let
+    hostList =
+      map (element: mkHost element)
+      rawHostList;
+    filterOsList = os: builtins.filter (host: host.os == os && host.isManagedByHomeManager == false) hostList;
+  in {
+    nixosConfigurations = mkOsSystems nixpkgs.lib.nixosSystem filterOsList "nixos";
+    darwinConfigurations = mkOsSystems nix-darwin.lib.darwin filterOsList "darwin";
+    homeConfigurations = mkHomes hostList;
   };
 }

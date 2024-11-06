@@ -20,30 +20,56 @@
     vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 
-  outputs = inputs: let
-    inherit (import ./helpers.nix inputs) mkFlake hosts users;
-    inherit (hosts) white work mbp2012 siliconWork raspie;
-    inherit (users) alex;
+  outputs = {nixgl, ...} @ inputs: let
+    inherit (import ./helpers.nix inputs) mkFlake;
+
+    alex = {
+      username = "alex";
+      email = "ajm.dosreis.daponte@gmail.com";
+      fullname = "Alexandre Dos Reis";
+      font = "Maple Mono NF"; # This is not the nix package name but rather the name installed on the system
+      editor = "nvim";
+      colors = {
+        background = "#072329";
+        cursor = "#708183";
+      };
+      # This allows to install npm packages globally with: `npm i -g <some-package>`
+      npm.packages.path = "~/.npm-packages";
+    };
   in
     mkFlake [
       {
-        host = white;
+        hostname = "white";
+        arch = "x84_64";
+        os = "linux";
         users = [alex];
       }
       {
-        host = mbp2012;
+        hostname = "mbp2012";
+        arch = "x84_64";
+        os = "darwin";
         users = [alex];
       }
       {
-        host = work;
+        hostname = "kavval";
+        arch = "x86_64";
+        os = "linux";
+        overlays = [nixgl.overlay];
+        isNixGlWrapped = true;
+        xdgDataFileEnabled = true;
+        isManagedByHomeManager = true;
         users = [alex];
       }
       {
-        host = siliconWork;
+        hostname = "kavval-silicon";
+        arch = "aarch64";
+        os = "darwin";
         users = [alex];
       }
       {
-        host = raspie;
+        hostname = "raspie";
+        arch = "aarch64";
+        os = "linux";
         users = [alex];
       }
     ];

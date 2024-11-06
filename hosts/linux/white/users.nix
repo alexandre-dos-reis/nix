@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (utils) ifTheyExist;
-  inherit (users.alex) username
+  inherit (users.alex) username;
 in {
   users.users.${username} = {
     isNormalUser = true;
