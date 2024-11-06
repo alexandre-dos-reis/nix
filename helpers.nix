@@ -53,13 +53,13 @@
       host.users))
     list));
 
-  mkSystems = func: list:
+  mkSystems = system: list:
     builtins.listToAttrs (map (host: {
         name = host.hostname;
         value = let
           utils = mkUtils host;
         in
-          func {
+          system {
             pkgs = mkPkgs {inherit utils host;};
             specialArgs = {
               users = host.users;
