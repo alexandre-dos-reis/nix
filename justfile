@@ -6,6 +6,10 @@ default:
 nix-prefetech-github user repo:
   nix shell nixpkgs#nix-prefetch-github --command nix-prefetch-github --nix {{user}} {{repo}}
 
+
+nix-prefetech-url url:
+  nix shell nixpkgs#nix-prefetch-git --command nix-prefetch-url {{url}}
+
 # Setup nix darwin
 [macos]
 setup-darwin host:
