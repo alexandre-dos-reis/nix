@@ -36,7 +36,7 @@
     };
   };
 
-  outputs = {nixgl, ...} @ inputs: let
+  outputs = inputs: let
     inherit (import ./helpers.nix inputs) mkFlake;
 
     alex = {
@@ -56,21 +56,17 @@
     mkFlake [
       {
         hostname = "white";
-        arch = "x84_64";
-        os = "linux";
+        system = "x86_64-linux";
         users = [alex];
       }
       {
         hostname = "mbp2012";
-        arch = "x84_64";
-        os = "darwin";
+        system = "x86_64-darwin";
         users = [alex];
       }
       {
         hostname = "kavval";
-        arch = "x86_64";
-        os = "linux";
-        overlays = [nixgl.overlay];
+        system = "x86_64-linux";
         isNixGlWrapped = true;
         xdgDataFileEnabled = true;
         isManagedByHomeManager = true;
@@ -78,14 +74,12 @@
       }
       {
         hostname = "kavval-silicon";
-        arch = "aarch64";
-        os = "darwin";
+        system = "aarch64-darwin";
         users = [alex];
       }
       {
         hostname = "raspie";
-        arch = "aarch64";
-        os = "linux";
+        system = "aarch64-linux";
         users = [alex];
       }
     ];

@@ -8,7 +8,7 @@
   ...
 }: {
   imports = [
-    ./overlays.nix
+    # ./overlays.nix
     ./programs
     ./packages.nix
     ./kavval-packages.nix

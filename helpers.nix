@@ -6,6 +6,9 @@
   ...
 } @ inputs: let
   outputs = self.outputs;
+  hasSuffix = nixpkgs.lib.strings.hasSuffix;
+  flattenList = nixpkgs.lib.lists.flatten;
+  listToAttrs = builtins.listToAttrs;
 
   decorateHost = args:
     {
@@ -16,12 +19,6 @@
       users = [];
     }
     // args;
-
-  mkPkgs = host:
-    import nixpkgs {
-      system = "${host.arch}-${host.os}";
-      overlays = host.overlays;
-    };
 
   mkUtils = pkgs: {inherit (pkgs.stdenv) isDarwin isLinux;};
 
@@ -35,10 +32,10 @@
     };
 
   mkHomes = list:
-    builtins.listToAttrs (nixpkgs.lib.lists.flatten (map (host: (map (user: {
+    listToAttrs (flattenList (map (host: (map (user: {
         name = "${user.username}@${host.hostname}";
         value = let
-          pkgs = mkPkgs host;
+          pkgs = nixpkgs.legacyPackages.${host.system};
           utils = mkUtils pkgs;
         in
           home-manager.lib.homeManagerConfiguration {
@@ -47,17 +44,29 @@
               inherit inputs outputs host utils;
               user = decorateUser user utils;
             };
-            modules = [./home/${user.username}];
+            modules = [
+              {
+                nixpkgs.overlays = (
+                  if host.isNixGlWrapped
+                  then [inputs.nixgl.overlay]
+                  else []
+                );
+              }
+              ./home/${user.username}
+            ];
           };
       })
       host.users))
     list));
 
-  mkSystems = mkSystem: list:
-    builtins.listToAttrs (map (host: {
+  mkSystems = mkSystem: list: dir:
+    listToAttrs (map (host: {
         name = host.hostname;
         value = let
-          pkgs = mkPkgs host;
+          pkgs = import nixpkgs {
+            system = host.system;
+            overlays = host.overlays;
+          };
           utils = mkUtils pkgs;
         in
           mkSystem {
@@ -67,18 +76,18 @@
               users = host.users;
             };
             modules = [
-              ./hosts/${host.os}/${host.hostname}
+              ./hosts/${dir}/${host.hostname}
             ];
           };
       })
       list);
 in {
-  mkFlake = rawHosts: let
-    hosts = map (x: decorateHost x) rawHosts;
-    filterHostsByOs = os: builtins.filter (host: host.os == os && !host.isManagedByHomeManager) hosts;
+  mkFlake = hosts: let
+    decoratedHosts = map (x: decorateHost x) hosts;
+    filterHostsByOs = os: builtins.filter (host: (hasSuffix os host.system) && !host.isManagedByHomeManager) decoratedHosts;
   in {
-    nixosConfigurations = mkSystems nixpkgs.lib.nixosSystem (filterHostsByOs "linux");
-    darwinConfigurations = mkSystems nix-darwin.lib.darwin (filterHostsByOs "darwin");
-    homeConfigurations = mkHomes hosts;
+    nixosConfigurations = mkSystems nixpkgs.lib.nixosSystem (filterHostsByOs "linux") "nixos";
+    darwinConfigurations = mkSystems nix-darwin.lib.darwin (filterHostsByOs "darwin") "darwin";
+    homeConfigurations = mkHomes decoratedHosts;
   };
 }
