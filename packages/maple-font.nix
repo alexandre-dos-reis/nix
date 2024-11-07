@@ -7,7 +7,7 @@
 }:
 stdenv.mkDerivation rec {
   pname = "MapleMono-NF";
-  version = "7.0-beta29";
+  version = "beta";
   src = inputs.maple-mono-NF;
 
   # Work around the "unpacker appears to have produced no directories"
