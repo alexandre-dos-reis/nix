@@ -19,13 +19,11 @@ in {
 
   programs.fish.enable = true;
 
-  users.users.${alex.username} = {
-    home = utils.getHomeDir {
-      inherit isDarwin;
-      user = alex;
-    };
-    shell = pkgs.fish;
-  };
+  # TODO: iterate users
+  # users.users.${alex.username} = {
+  #   home = user.
+  #   shell = pkgs.fish;
+  # };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

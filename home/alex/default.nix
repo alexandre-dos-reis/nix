@@ -6,10 +6,7 @@
   inputs,
   config,
   ...
-}: let
-  inherit (pkgs.stdenv) isDarwin isLinux;
-  homeDir = utils.getHomeDir {inherit isDarwin user;};
-in {
+}: {
   imports = [
     ./overlays.nix
     ./programs
@@ -22,7 +19,7 @@ in {
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   # Recommended for linux distros other than NixOS
-  targets.genericLinux.enable = isLinux && host.isManagedByHomeManager;
+  targets.genericLinux.enable = utils.isLinux && host.isManagedByHomeManager;
   xdg.enable = true;
 
   programs = {
@@ -35,13 +32,13 @@ in {
     stateVersion = "23.11"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
 
     username = user.username;
-    homeDirectory = homeDir;
+    homeDirectory = user.homeDir;
 
     file."dev/.keep".text = "keep"; # Create folders
 
     sessionVariables = {
       EDITOR = user.editor;
-      FLAKE = "${homeDir}/dev/nix-conf";
+      FLAKE = "${user.homeDir}/dev/nix-conf";
       TERMINAL_BG = user.colors.background;
     };
 
@@ -49,7 +46,7 @@ in {
     # https://dev.to/tallesl/change-caps-lock-to-ctrl-3c4
     # https://www.reddit.com/r/NixOS/comments/trkfyz/overriding_configurationnix_with_homemanager/
     keyboard.layout =
-      if isDarwin
+      if utils.isDarwin
       then "Unicode Hex Input"
       else "us";
 
