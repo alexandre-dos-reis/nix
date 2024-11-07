@@ -34,6 +34,12 @@
       url = "github:nifoc/ssh-agent-macos.fish";
       flake = false;
     };
+
+    # Fonts
+    maple-mono-NF = {
+      url = "https://github.com/subframe7536/Maple-font/releases/download/v7.0-beta29/MapleMono-NF.zip";
+      flake = false;
+    };
   };
 
   outputs = {nixgl, ...} @ inputs: let

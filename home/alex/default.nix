@@ -51,7 +51,7 @@
       else "us";
 
     packages = let
-      maple-mono-NF = pkgs.callPackage ../../packages/maple-font.nix pkgs;
+      maple-mono-NF = pkgs.callPackage ../../packages/maple-font.nix {inherit pkgs inputs;};
     in [
       maple-mono-NF
       # pkgs.maple-mono-NF

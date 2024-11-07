@@ -2,16 +2,13 @@
   lib,
   stdenv,
   unzip,
-  fetchurl,
+  inputs,
   ...
 }:
 stdenv.mkDerivation rec {
   pname = "MapleMono-NF";
   version = "7.0-beta29";
-  src = fetchurl {
-    url = "https://github.com/subframe7536/Maple-font/releases/download/v${version}/${pname}.zip";
-    sha256 = "sha256-PSVENrrN14kFKrtfd5RORsOeZKoqNGe0FfZvn0I+e2Y=";
-  };
+  src = inputs.maple-mono-NF;
 
   # Work around the "unpacker appears to have produced no directories"
   # case that happens when the archive doesn't have a subdirectory.

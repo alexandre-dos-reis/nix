@@ -264,6 +264,19 @@
         "type": "github"
       }
     },
+    "maple-mono-NF": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1730054210,
+        "narHash": "sha256-RyTikqIZ/wcYY6UMbfq2en3zJ8hCfNLu9/in5ZQkXgE=",
+        "type": "tarball",
+        "url": "https://github.com/subframe7536/Maple-font/releases/download/v7.0-beta29/MapleMono-NF.zip"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/subframe7536/Maple-font/releases/download/v7.0-beta29/MapleMono-NF.zip"
+      }
+    },
     "neovim-src": {
       "flake": false,
       "locked": {
@@ -411,6 +424,7 @@
       "inputs": {
         "fish-ssh-agent": "fish-ssh-agent",
         "home-manager": "home-manager",
+        "maple-mono-NF": "maple-mono-NF",
         "nix-darwin": "nix-darwin",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs",
