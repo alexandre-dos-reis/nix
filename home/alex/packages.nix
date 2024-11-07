@@ -7,8 +7,8 @@
   # need to install cargo and gcc for neovim, move them to neovim folder
   home.packages = with pkgs; [
     # nix helpers
+    nix-inspect # inspect flake in a nice interface
     nixos-rebuild
-    nh # cli wrapper
     devenv # Dev
 
     # system utils

@@ -50,12 +50,11 @@
       then "Unicode Hex Input"
       else "us";
 
-    packages = let
-      maple-mono-NF = pkgs.callPackage ../../packages/maple-font.nix {inherit pkgs inputs;};
-    in [
-      maple-mono-NF
-      # pkgs.maple-mono-NF
-      (pkgs.nerdfonts.override {
+    packages = with pkgs; [
+      (maple-mono-NF.overrideAttrs {
+        version = "7.0-beta29";
+      })
+      (nerdfonts.override {
         fonts = [
           "Meslo"
           "JetBrainsMono"
