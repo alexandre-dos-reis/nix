@@ -51,8 +51,8 @@
     nodePackages.bash-language-server
 
     # Javascript / Typescript
-    nodejs_18
-    corepack_18
+    nodejs_20
+    corepack_20
     nodePackages.nodemon
     nodePackages.prettier
     nodePackages.vercel
