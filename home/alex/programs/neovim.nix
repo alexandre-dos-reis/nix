@@ -45,14 +45,14 @@
   in [
     # Deps for Lazy
     luajitPackages.luarocks
-    beautysh
 
     # bash
     nodePackages.bash-language-server
+    beautysh
 
     # Javascript / Typescript
-    nodejs_18
-    corepack_18
+    nodejs_22
+    corepack_22
     nodePackages.nodemon
     nodePackages.prettier
     nodePackages.vercel
@@ -93,6 +93,12 @@
     zls
 
     # Dotnet
-    dotnetCorePackages.sdk_9_0
+    dotnetCorePackages.sdk_8_0_3xx
+    # csharp-ls
+    omnisharp-roslyn
+
+    # Terraform
+    terraform
+    terraform-lsp
   ];
 }
