@@ -37,8 +37,6 @@
   };
 
   outputs = inputs: let
-    inherit (import ./helpers.nix inputs) mkFlake;
-
     alex = {
       username = "alex";
       email = "ajm.dosreis.daponte@gmail.com";
@@ -53,7 +51,7 @@
       npm.packages.path = "~/.npm-packages";
     };
   in
-    mkFlake [
+    (import ./helpers.nix inputs) [
       {
         hostname = "white";
         system = "x86_64-linux";

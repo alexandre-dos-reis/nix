@@ -81,13 +81,12 @@
           };
       })
       list);
-in {
-  mkFlake = hosts: let
+in
+  hosts: let
     decoratedHosts = map (x: decorateHost x) hosts;
     filterHostsByOs = os: builtins.filter (host: (hasSuffix os host.system) && !host.isManagedByHomeManager) decoratedHosts;
   in {
     nixosConfigurations = mkSystems nixpkgs.lib.nixosSystem (filterHostsByOs "linux") "nixos";
     darwinConfigurations = mkSystems nix-darwin.lib.darwin (filterHostsByOs "darwin") "darwin";
     homeConfigurations = mkHomes decoratedHosts;
-  };
-}
+  }
