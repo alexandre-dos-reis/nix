@@ -50,17 +50,27 @@
     nodePackages.bash-language-server
     beautysh
 
+    # Json
+    vscode-langservers-extracted
+
+    # Yaml
+    yaml-language-server
+
     # Javascript / Typescript
-    nodejs_22
-    corepack_22
+    nodejs_18
+    corepack_18
     nodePackages.nodemon
     nodePackages.prettier
     nodePackages.vercel
     bun
+    deno
     typescript-language-server # Find a way to install vtsls
     typescript
     prettierd
     eslint_d
+
+    # Graphql
+    nodePackages.graphql-language-service-cli
 
     # Tailwind
     tailwindcss-language-server
@@ -100,5 +110,9 @@
     # Terraform
     terraform
     terraform-lsp
+
+    # Postgres
+    postgres-lsp
+    pgformatter
   ];
 }
