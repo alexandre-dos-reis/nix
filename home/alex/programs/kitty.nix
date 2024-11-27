@@ -21,7 +21,7 @@ in {
       # Show current fonts installed : kitty --debug-font-fallback
       name = user.font;
       # size = 12; #  9 - 12
-      size = 13;
+      size = 20;
     };
     settings = {
       hide_window_decorations =

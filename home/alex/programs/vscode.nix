@@ -2,6 +2,8 @@
   pkgs,
   user,
   inputs,
+  config,
+  lib,
   ...
 }: {
   # https://mipmip.github.io/home-manager-option-search/?query=vscode
@@ -161,6 +163,7 @@
       # Docker
       mkt.ms-azuretools.vscode-docker
       mkt.p1c2u.docker-compose
+      mkt.broadcommfd.cobol-language-support
 
       #astro-build.astro-vscode
       #matthewpi.caddyfile-support
@@ -180,4 +183,23 @@
       #bourhaouta.tailwindshades
     ];
   };
+
+  # make `settings.json` writeable as it is required by vscode
+  # https://github.com/nix-community/home-manager/issues/1800#issuecomment-2262881846
+  # home.activation.makeVSCodeConfigWritable = let
+  #   configDirName =
+  #     {
+  #       "vscode" = "Code";
+  #       "vscode-insiders" = "Code - Insiders";
+  #       "vscodium" = "VSCodium";
+  #     }
+  #     .${config.programs.vscode.package.pname};
+  #   configPath = "${config.xdg.configHome}/${configDirName}/User/settings.json";
+  # in {
+  #   after = ["writeBoundary"];
+  #   before = [];
+  #   data = ''
+  #     install -m 0640 "$(readlink ${configPath})" ${configPath}
+  #   '';
+  # };
 }

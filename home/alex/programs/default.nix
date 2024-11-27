@@ -9,9 +9,9 @@
     ./tmux.nix
     ./direnv.nix
     ./git.nix
-    ./vscode.nix
+    # ./vscode.nix
     ./ssh.nix
     ./oh-my-posh
-    ./zellij.nix
+    # ./zellij.nix
   ];
 }

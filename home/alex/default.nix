@@ -52,7 +52,7 @@
 
     packages = with pkgs; [
       (maple-mono-NF.overrideAttrs {
-        version = "7.0-beta29";
+        version = "7.0-beta30";
       })
       (nerdfonts.override {
         fonts = [

@@ -14,6 +14,11 @@
   - Using options in lazy.nvim to allow nix managing dependencies introduce some performance downside.
   - [Introducing lazynixhelper use your existing](https://www.reddit.com/r/neovim/comments/18sk8r7/introducing_lazynixhelper_use_your_existing/)
 
+### See if this is usefull
+
+- https://clan.lol/
+- https://medium.com/@stylishavocado/managing-docker-containers-in-nixos-fbda0f666dd1
+
 ## Resources
 
 - [Official Nix Cookbook](https://nixos.wiki/wiki/Nix_Cookbook)

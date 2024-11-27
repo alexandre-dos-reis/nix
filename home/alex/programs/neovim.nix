@@ -10,33 +10,6 @@
     viAlias = true;
     vimAlias = true;
     package = inputs.nvim-nightly.packages.${pkgs.system}.default;
-    # plugins = [
-    #   (pkgs.vimPlugins.nvim-treesitter.withPlugins (p:
-    #     with p; [
-    #       html
-    #       lua
-    #       tsx
-    #       typescript
-    #       javascript
-    #       go
-    #       astro
-    #       cmake
-    #       css
-    #       scss
-    #       fish
-    #       gitignore
-    #       markdown
-    #       graphql
-    #       http
-    #       php
-    #       rust
-    #       sql
-    #       nix
-    #       just
-    #       terraform
-    #       zig
-    #     ]))
-    # ];
   };
 
   # LSPs and executable
@@ -57,14 +30,14 @@
     yaml-language-server
 
     # Javascript / Typescript
-    nodejs_18
-    corepack_18
+    nodejs_20
+    corepack_20
     nodePackages.nodemon
     nodePackages.prettier
     nodePackages.vercel
     bun
     deno
-    typescript-language-server # Find a way to install vtsls
+    typescript-language-server
     typescript
     prettierd
     eslint_d
