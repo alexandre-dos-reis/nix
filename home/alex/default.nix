@@ -54,12 +54,12 @@
       (maple-mono-NF.overrideAttrs {
         version = "7.0-beta31";
       })
-      (nerdfonts.override {
-        fonts = [
-          "Meslo"
-          "JetBrainsMono"
-        ];
-      })
+      # (nerdfonts.override {
+      #   fonts = [
+      #     "Meslo"
+      #     "JetBrainsMono"
+      #   ];
+      # })
     ];
   };
 }

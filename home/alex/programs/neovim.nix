@@ -47,7 +47,8 @@
 
     # Tailwind
     tailwindcss-language-server
-    nodePackages.neovim # Needed for tailwind-tools
+    #
+    # nodePackages.neovim # Needed for tailwind-tools
 
     # Lua
     lua-language-server

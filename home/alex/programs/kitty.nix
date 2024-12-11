@@ -20,8 +20,7 @@ in {
     font = {
       # Show current fonts installed : kitty --debug-font-fallback
       name = user.font;
-      # size = 12; #  9 - 12
-      size = 20;
+      size = 20; # 14 - 20
     };
     settings = {
       hide_window_decorations =
