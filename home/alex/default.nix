@@ -34,7 +34,13 @@
     username = user.username;
     homeDirectory = user.homeDir;
 
-    file."dev/.keep".text = "keep"; # Create folders
+    file = {
+      "dev/.keep".text = "keep"; # Create folders
+      # "qmk_firmware" = {
+      #   source = inputs.qmk;
+      #   recursive = true;
+      # };
+    };
 
     sessionVariables = {
       EDITOR = user.editor;

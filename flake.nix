@@ -34,6 +34,12 @@
       url = "github:nifoc/ssh-agent-macos.fish";
       flake = false;
     };
+    # qmk = {
+    #   url = "https://github.com/qmk/qmk_firmware.git";
+    #   type = "git";
+    #   flake = false;
+    #   submodules = true;
+    # };
   };
 
   outputs = inputs: let

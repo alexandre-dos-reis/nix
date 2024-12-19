@@ -47,6 +47,7 @@
 
     # Keyboard
     qmk
+    qmk_hid
 
     # Postgres
     postgresql # needed for psql
@@ -58,8 +59,6 @@
     k9s
 
     # Gui Apps
-    whatsapp-for-linux
-    simplescreenrecorder
     vlc
   ];
 }
