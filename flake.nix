@@ -18,6 +18,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Ghostty Terminal
+    ghostty.url = "github:ghostty-org/ghostty";
+
     # Editor
     nvim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     vscode-extensions.url = "github:nix-community/nix-vscode-extensions";

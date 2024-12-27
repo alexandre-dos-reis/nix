@@ -4,6 +4,7 @@
     ./neovim.nix
     ./nh.nix
     ./kitty.nix
+    ./ghostty.nix
     ./atuin.nix
     ./npm.nix
     ./tmux.nix
