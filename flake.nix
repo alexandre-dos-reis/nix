@@ -19,6 +19,7 @@
     };
 
     # Ghostty Terminal
+    ghostty-hm-module.url = "github:clo4/ghostty-hm-module";
     ghostty.url = "github:ghostty-org/ghostty";
 
     # Editor
