@@ -9,14 +9,16 @@
   hasSuffix = nixpkgs.lib.strings.hasSuffix;
   flattenList = nixpkgs.lib.lists.flatten;
   listToAttrs = builtins.listToAttrs;
+  mkIf = condition: module:
+    if condition
+    then module
+    else {};
 
   decorateHost = args:
     {
       overlays = [];
-      isNixGlWrapped = false;
-      xdgDataFileEnabled = false;
-      isManagedByHomeManager = false;
       users = [];
+      useNixGL = false;
     }
     // args;
 
@@ -45,13 +47,17 @@
               user = decorateUser user utils;
             };
             modules = [
-              {
-                nixpkgs.overlays = (
-                  if host.isNixGlWrapped
-                  then [inputs.nixgl.overlay]
-                  else []
-                );
-              }
+              (
+                mkIf
+                (utils.isLinux && host.isManagedByHomeManager)
+                ./home/xdg-application-fix.nix
+              )
+              (
+                mkIf host.useNixGL
+                {
+                  nixGL.packages = inputs.nixgl.packages;
+                }
+              )
               ./home/${user.username}
             ];
           };

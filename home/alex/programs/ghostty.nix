@@ -3,15 +3,21 @@
   host,
   inputs,
   user,
+  config,
   ...
-}: {
+}: let
+  ghostty = inputs.ghostty.packages.${pkgs.system}.default;
+in {
   imports = [
     inputs.ghostty-hm-module.homeModules.default
   ];
 
   programs.ghostty = {
     enable = true;
-    package = inputs.ghostty.packages.${pkgs.system}.default;
+    package =
+      if host.useNixGL
+      then config.lib.nixGL.wrap ghostty
+      else ghostty;
     shellIntegration = {
       enable = true;
       enableFishIntegration = true;

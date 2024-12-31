@@ -14,11 +14,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl = {
-      url = "github:guibou/nixGL";
+      url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Ghostty Terminal
     # TODO: When this [PR](https://github.com/nix-community/home-manager/pull/6235) is merged, rm the next line
     ghostty-hm-module.url = "github:clo4/ghostty-hm-module";
     ghostty.url = "github:ghostty-org/ghostty";
@@ -76,8 +75,7 @@
       {
         hostname = "kavval";
         system = "x86_64-linux";
-        isNixGlWrapped = true;
-        xdgDataFileEnabled = true;
+        useNixGL = true;
         isManagedByHomeManager = true;
         users = [alex];
       }

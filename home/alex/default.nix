@@ -8,7 +8,6 @@
   ...
 }: {
   imports = [
-    # ./overlays.nix
     ./programs
     ./packages.nix
     ./kavval-packages.nix
@@ -18,8 +17,6 @@
   nixpkgs.config.allowUnfree = true;
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
-  # Recommended for linux distros other than NixOS
-  targets.genericLinux.enable = utils.isLinux && host.isManagedByHomeManager;
   xdg.enable = true;
 
   programs = {
@@ -58,7 +55,7 @@
 
     packages = with pkgs; [
       (maple-mono-NF.overrideAttrs {
-        version = "7.0-beta32";
+        version = "7.0-beta33";
       })
     ];
   };
