@@ -8,23 +8,16 @@
 }: let
   ghostty = inputs.ghostty.packages.${pkgs.system}.default;
 in {
-  imports = [
-    inputs.ghostty-hm-module.homeModules.default
-  ];
-
   programs.ghostty = {
     enable = true;
     package =
       if host.useNixGL
       then config.lib.nixGL.wrap ghostty
       else ghostty;
-    shellIntegration = {
-      enable = true;
-      enableFishIntegration = true;
-    };
+    enableFishIntegration = true;
     settings = {
       theme = "Solarized Dark Higher Contrast";
-      font-size = 22;
+      font-size = 20; # 22
       font-family = user.font;
       background = user.colors.background;
       cursor-color = user.colors.cursor;

@@ -18,8 +18,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # TODO: When this [PR](https://github.com/nix-community/home-manager/pull/6235) is merged, rm the next line
-    ghostty-hm-module.url = "github:clo4/ghostty-hm-module";
     ghostty.url = "github:ghostty-org/ghostty";
 
     # Editor
