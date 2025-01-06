@@ -50,7 +50,7 @@
               (
                 mkIf
                 (utils.isLinux && host.isManagedByHomeManager)
-                ./home/xdg-application-fix.nix
+                ./home/xdg-fix.nix
               )
               (
                 mkIf host.useNixGL
