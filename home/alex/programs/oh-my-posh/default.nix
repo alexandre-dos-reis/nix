@@ -5,7 +5,7 @@
 }: {
   programs.oh-my-posh = {
     enable = true;
-    # enableNushellIntegration = true;
+    enableFishIntegration = true;
     # https://ohmyposh.dev/docs/themes#quick-term
     # useTheme = "smoothie";
     # useTheme = "amro";

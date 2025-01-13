@@ -2,24 +2,25 @@
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "blocks": [
     {
+      "type": "prompt",
       "alignment": "left",
       "newline": true,
       "segments": [
         {
+          "type": "session",
           "foreground": "#45F1C2",
           "style": "plain",
-          "template": "{{ .UserName }}@{{ .HostName }}",
-          "type": "session"
+          "template": "{{ .UserName }}@{{ .HostName }}"
         },
         {
+          "type": "path",
           "foreground": "#0CA0D8",
           "properties": {
             "folder_separator_icon": "/",
             "style": "full"
           },
           "style": "plain",
-          "template": " {{ .Path }} ",
-          "type": "path"
+          "template": " {{ .Path }} "
         },
         {
           "foreground": "#14A5AE",
@@ -28,14 +29,14 @@
             "fetch_stash_count": true,
             "fetch_upstream_icon": true
           },
+          "type": "git",
           "style": "plain",
-          "template": "{{ .HEAD }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
-          "type": "git"
+          "template": "{{ .HEAD }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} "
         }
-      ],
-      "type": "prompt"
+      ]
     },
     {
+      "type": "prompt",
       "alignment": "left",
       "newline": true,
       "segments": [
@@ -51,8 +52,7 @@
           "template": "> ",
           "type": "text"
         }
-      ],
-      "type": "prompt"
+      ]
     }
   ],
   "version": 2
