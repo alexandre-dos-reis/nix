@@ -35,6 +35,26 @@ in {
       function fish_mode_prompt; end
 
       bind \cf "tmux-sessionizer"
+
+      function __fish_kubectx_arg_number -a number
+          set -l cmd (commandline -opc)
+          test (count $cmd) -eq $number
+      end
+
+      complete -f -c kubectx
+      complete -f -x -c kubectx -n '__fish_kubectx_arg_number 1' -a "(kubectl config get-contexts --output='name')"
+      complete -f -x -c kubectx -n '__fish_kubectx_arg_number 1' -a "-" -d "switch to the previous namespace in this context"
+
+      function __fish_kubens_arg_number -a number
+          set -l cmd (commandline -opc)
+          test (count $cmd) -eq $number
+      end
+
+      complete -f -c kubens
+      complete -f -x -c kubens -n '__fish_kubens_arg_number 1' -a "(kubectl get ns -o=custom-columns=NAME:.metadata.name --no-headers)"
+      complete -f -x -c kubens -n '__fish_kubens_arg_number 1' -a "-" -d "switch to the previous namespace in this context"
+      complete -f -x -c kubens -n '__fish_kubens_arg_number 1' -s c -l current -d "show the current namespace"
+      complete -f -x -c kubens -n '__fish_kubens_arg_number 1' -s h -l help -d "show the help message"
     '';
 
     shellAliases = {
@@ -54,6 +74,8 @@ in {
       ffn = "ff | xargs nvim";
       s = "sudo env PATH=\"$PATH\"";
       k = "kubectl";
+      kns = "kubens";
+      kx = "kubectx";
     };
 
     # https://search.nixos.org/packages?channel=unstable&show=fishPlugins.z&from=0&size=50&sort=relevance&type=packages&query=fishPlugins

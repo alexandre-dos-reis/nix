@@ -55,7 +55,7 @@
 
     # containers
     lazydocker
-    kubectl
+    # kubectl
     k9s
 
     # Gui Apps

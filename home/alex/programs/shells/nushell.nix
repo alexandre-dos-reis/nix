@@ -11,6 +11,12 @@ in {
 
     extraConfig = ''
       $env.config.show_banner = false
+      $env.config.buffer_editor = "nvim"
+      $env.config.edit_mode = "vi"
+      $env.PROMPT_INDICATOR_VI_NORMAL = "n "
+      $env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = "n "
+      $env.PROMPT_INDICATOR_VI_INSERT = "> "
+      $env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = "> "
     '';
 
     shellAliases = {
@@ -18,9 +24,8 @@ in {
       t = "tmux";
       ta = "tmux attach";
       tk = "tmux kill-session";
-      ll = "exa -l -g --icons";
-      lla = "ll --all";
-      llt = "ll --tree";
+      ll = "ls -l";
+      lla = "ls -la";
       c = "clear";
       b = "bat -p";
       cs = "~/bin/cht.sh";
@@ -30,6 +35,8 @@ in {
       ffn = "ff | xargs nvim";
       s = "sudo env PATH=\"$PATH\"";
       k = "kubectl";
+      kns = "kubens";
+      kx = "kubectx";
 
       # git
       gst = "git status";

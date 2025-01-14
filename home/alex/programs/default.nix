@@ -2,6 +2,7 @@
   imports = [
     ./shells
     ./neovim.nix
+    ./helix.nix
     ./nh.nix
     ./kitty.nix
     ./ghostty.nix

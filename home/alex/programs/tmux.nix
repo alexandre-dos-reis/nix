@@ -6,8 +6,8 @@ in {
   programs.tmux = {
     enable = true;
     prefix = "C-a";
-    shell = "${pkgs.fish}/bin/fish";
-    # shell = "${pkgs.nushell}/bin/nu";
+    # shell = "${pkgs.fish}/bin/fish";
+    shell = "${pkgs.nushell}/bin/nu";
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
     ];
