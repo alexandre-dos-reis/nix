@@ -18,12 +18,6 @@ in {
     userName = fullname;
 
     aliases = {
-      cm = "commit -m";
-      st = "status";
-      br = "branch ";
-      co = "checkout";
-      p = "push";
-      l = "pull";
       hist = "log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate";
     };
     extraConfig = {

@@ -18,7 +18,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Terminals
     ghostty.url = "github:ghostty-org/ghostty";
+
+    # Shells
+    nu-scripts = {
+      url = "github:nushell/nu_scripts";
+      flake = false;
+    };
 
     # Editor
     nvim-nightly.url = "github:nix-community/neovim-nightly-overlay";
