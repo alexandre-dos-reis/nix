@@ -315,6 +315,22 @@
         "type": "github"
       }
     },
+    "kubectx": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1736281501,
+        "narHash": "sha256-AuYo2EIyyQ0oDMRZlubrNvs/93K3BMMvSBmYhmwm19o=",
+        "owner": "ahmetb",
+        "repo": "kubectx",
+        "rev": "0bcd0d5dd51b29f5139a45e50ddd50de4d0e36c9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ahmetb",
+        "repo": "kubectx",
+        "type": "github"
+      }
+    },
     "neovim-src": {
       "flake": false,
       "locked": {
@@ -496,6 +512,7 @@
         "fish-ssh-agent": "fish-ssh-agent",
         "ghostty": "ghostty",
         "home-manager": "home-manager",
+        "kubectx": "kubectx",
         "nix-darwin": "nix-darwin",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs",

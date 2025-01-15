@@ -17,6 +17,7 @@ in {
     # enableFishIntegration = true;
     settings = {
       command = "${pkgs.nushell}/bin/nu";
+      # command = "${pkgs.fish}/bin/fish";
       theme = "Solarized Dark Higher Contrast";
       font-size = 20; # 22
       font-family = user.font;

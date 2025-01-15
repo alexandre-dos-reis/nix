@@ -21,16 +21,11 @@
     # Terminals
     ghostty.url = "github:ghostty-org/ghostty";
 
-    # Shells
-
-    # Nushell
-    # Using fish completions inside Nushell for the moment
-    # nu-scripts = {
-    #   url = "github:nushell/nu_scripts";
-    #   flake = false;
-    # };
-
     # Fish
+    kubectx = {
+      url = "github:ahmetb/kubectx";
+      flake = false;
+    };
     fish-ssh-agent = {
       url = "github:danhper/fish-ssh-agent";
       flake = false;

@@ -26,8 +26,8 @@
         else true;
       placement_strategy = "top-left";
       window_padding_width = "1 0 0";
-      shell = "${pkgs.fish}/bin/fish";
-      # shell = "${pkgs.nushell}/bin/nu";
+      # shell = "${pkgs.fish}/bin/fish";
+      shell = "${pkgs.nushell}/bin/nu";
     };
     themeFile = "Solarized_Dark_Higher_Contrast";
     extraConfig = ''

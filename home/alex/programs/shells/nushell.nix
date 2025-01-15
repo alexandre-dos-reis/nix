@@ -12,12 +12,6 @@ in {
 
     extraConfig = ''
 
-       let fish_completer = {|spans|
-           fish --command $'complete "--do-complete=($spans | str join " ")"'
-           | from tsv --flexible --noheaders --no-infer
-           | rename value description
-       }
-
       # This completer will use carapace by default
        let external_completer = {|spans|
            let expanded_alias = scope aliases
@@ -32,8 +26,10 @@ in {
                $spans
            }
 
-           match $spans.0 {
-               _ => $fish_completer
+           {|spans|
+               fish --command $'complete "--do-complete=($spans | str join " ")"'
+               | from tsv --flexible --noheaders --no-infer
+               | rename value description
            } | do $in $spans
        }
 
