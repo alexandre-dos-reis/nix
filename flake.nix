@@ -22,17 +22,13 @@
     ghostty.url = "github:ghostty-org/ghostty";
 
     # Shells
-    nu-scripts = {
-      url = "github:nushell/nu_scripts";
-      flake = false;
-    };
 
-    # Editor
-    nvim-nightly.url = "github:nix-community/neovim-nightly-overlay";
-    vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-
-    # Lang
-    zig.url = "github:mitchellh/zig-overlay";
+    # Nushell
+    # Using fish completions inside Nushell for the moment
+    # nu-scripts = {
+    #   url = "github:nushell/nu_scripts";
+    #   flake = false;
+    # };
 
     # Fish
     fish-ssh-agent = {
@@ -43,6 +39,14 @@
       url = "github:nifoc/ssh-agent-macos.fish";
       flake = false;
     };
+
+    # Editors
+    nvim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
+    # Langs
+    zig.url = "github:mitchellh/zig-overlay";
+
     # qmk = {
     #   url = "https://github.com/qmk/qmk_firmware.git";
     #   type = "git";
