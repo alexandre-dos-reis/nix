@@ -21,6 +21,13 @@
     # Terminals
     ghostty.url = "github:ghostty-org/ghostty";
 
+    # Nushell
+
+    nu-scripts = {
+      url = "github:nushell/nu_scripts";
+      flake = false;
+    };
+
     # Fish
     kubectx = {
       url = "github:ahmetb/kubectx";

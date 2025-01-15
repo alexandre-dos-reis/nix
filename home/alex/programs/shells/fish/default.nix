@@ -41,7 +41,7 @@ in {
       end
 
       if type -q flux
-        ${builtins.readFile ./completions/fluxcd.fish}
+        ${builtins.readFile ./fluxcd-completions.fish}
       end
     '';
 

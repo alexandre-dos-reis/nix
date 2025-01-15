@@ -1,6 +1,7 @@
 {
   imports = [
-    ./shells
+    ./shells/fish
+    ./shells/nushell
     ./neovim.nix
     ./helix.nix
     ./nh.nix
