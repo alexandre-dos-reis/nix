@@ -86,7 +86,6 @@
       {
         hostname = "kavval";
         system = "x86_64-linux";
-        useNixGL = true;
         isManagedByHomeManager = true;
         users = [alex];
       }

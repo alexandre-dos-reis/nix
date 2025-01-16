@@ -15,7 +15,7 @@
     dust
     btop
     yazi
-    neofetch
+    fastfetch # better neofetch
     clang
     gnumake
     cmake

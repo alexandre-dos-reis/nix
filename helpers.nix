@@ -14,13 +14,16 @@
     then module
     else {};
 
-  decorateHost = args:
+  decorateHost = host:
     {
       overlays = [];
       users = [];
-      useNixGL = false;
+      isManagedByHomeManager = false;
+      useNixGL =
+        (host.isManagedByHomeManager ? false)
+        && host.system == "x86_64-linux";
     }
-    // args;
+    // host;
 
   mkUtils = pkgs: {inherit (pkgs.stdenv) isDarwin isLinux;};
 
