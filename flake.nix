@@ -21,13 +21,6 @@
     # Terminals
     ghostty.url = "github:ghostty-org/ghostty";
 
-    # Nushell
-
-    nu-scripts = {
-      url = "github:nushell/nu_scripts";
-      flake = false;
-    };
-
     # Fish
     kubectx = {
       url = "github:ahmetb/kubectx";
@@ -48,13 +41,6 @@
 
     # Langs
     zig.url = "github:mitchellh/zig-overlay";
-
-    # qmk = {
-    #   url = "https://github.com/qmk/qmk_firmware.git";
-    #   type = "git";
-    #   flake = false;
-    #   submodules = true;
-    # };
   };
 
   outputs = inputs: let

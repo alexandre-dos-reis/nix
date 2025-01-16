@@ -483,22 +483,6 @@
         "type": "github"
       }
     },
-    "nu-scripts": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1736191500,
-        "narHash": "sha256-fIayTOyJCqOkFUkmghBQJfCp8s8oNrdUi+/BuOjcbTU=",
-        "owner": "nushell",
-        "repo": "nu_scripts",
-        "rev": "a9b829115ff3c77981616ae777379fc0bd4dc998",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nushell",
-        "repo": "nu_scripts",
-        "type": "github"
-      }
-    },
     "nvim-nightly": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -532,7 +516,6 @@
         "nix-darwin": "nix-darwin",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs",
-        "nu-scripts": "nu-scripts",
         "nvim-nightly": "nvim-nightly",
         "ssh-agent-macos": "ssh-agent-macos",
         "vscode-extensions": "vscode-extensions",
