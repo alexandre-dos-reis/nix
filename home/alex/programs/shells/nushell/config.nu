@@ -23,9 +23,7 @@ let external_completer = {|spans|
     }
 
     match $spans.0 {
-        kubens => $fish_completer
-        kubectx => $fish_completer
-        flux => $fish_completer
+        kubens | kubectx | flux => $fish_completer
         _ => $carapace_completer
     } | do $in $spans
 }

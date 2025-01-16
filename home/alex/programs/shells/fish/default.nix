@@ -36,10 +36,14 @@ in {
 
       bind \cf "tmux-sessionizer"
 
-      if type -q kubens
+      if type -q kubens; or type -q kubectx; end
         source ${inputs.kubectx}/completion/kubens.fish
       end
 
+      # TODO: Try to run `flux completions fish` during activation, see:
+      # https://rycee.gitlab.io/home-manager/options.xhtml#opt-home.activation
+      # https://www.reddit.com/r/NixOS/comments/rgaj3c/homemanager_how_to_run_a_command_remove_a/
+      # https://discourse.nixos.org/t/home-manager-home-activation-access-to-packages-in-home-packages/26732
       if type -q flux
         ${builtins.readFile ./fluxcd-completions.fish}
       end
