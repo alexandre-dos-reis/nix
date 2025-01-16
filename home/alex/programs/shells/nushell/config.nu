@@ -37,10 +37,13 @@ $current.completions.external = ($current.completions.external
 $env.config = $current
 
 
-$env.PROMPT_INDICATOR_VI_NORMAL = "n "
-$env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = "n "
-$env.PROMPT_INDICATOR_VI_INSERT = "> "
-$env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = "> "
+let vi_normal_icon = "ℕ "
+let vi_insert_icon = "> "
+
+$env.PROMPT_INDICATOR_VI_NORMAL = $vi_normal_icon
+$env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = $vi_normal_icon 
+$env.PROMPT_INDICATOR_VI_INSERT = $vi_insert_icon
+$env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = $vi_insert_icon
 $env.config.show_banner = false
 $env.config.buffer_editor = "nvim"
 $env.config.edit_mode = "vi"
