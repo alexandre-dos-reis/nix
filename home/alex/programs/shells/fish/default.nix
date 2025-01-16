@@ -36,8 +36,9 @@ in {
 
       bind \cf "tmux-sessionizer"
 
-      if type -q kubens; or type -q kubectx; end
+      if type -q kubectx
         source ${inputs.kubectx}/completion/kubens.fish
+        source ${inputs.kubectx}/completion/kubectx.fish
       end
 
       # TODO: Try to run `flux completions fish` during activation, see:
