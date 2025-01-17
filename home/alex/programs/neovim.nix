@@ -14,7 +14,8 @@
 
   # LSPs and executable
   home.packages = with pkgs; let
-    zig = inputs.zig.packages.${pkgs.system}."0.13.0";
+    # zig = inputs.zig.packages.${pkgs.system}."0.13.0";
+    zig = inputs.zig.packages.${pkgs.system}.master;
   in [
     # Deps for Lazy
     luajitPackages.luarocks

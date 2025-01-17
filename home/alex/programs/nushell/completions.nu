@@ -23,7 +23,7 @@ let external_completer = {|spans|
     }
 
     match $spans.0 {
-        kubens | kubectx | flux => $fish_completer
+        kubens | kubectx | flux | nh | zig => $fish_completer
         _ => $carapace_completer
     } | do $in $spans
 }
@@ -35,15 +35,3 @@ $current.completions.external = ($current.completions.external
 | default $external_completer completer)
 
 $env.config = $current
-
-
-let vi_normal_icon = "ℕ "
-let vi_insert_icon = "> "
-
-$env.PROMPT_INDICATOR_VI_NORMAL = $vi_normal_icon
-$env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = $vi_normal_icon 
-$env.PROMPT_INDICATOR_VI_INSERT = $vi_insert_icon
-$env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = $vi_insert_icon
-$env.config.show_banner = false
-$env.config.buffer_editor = "nvim"
-$env.config.edit_mode = "vi"
