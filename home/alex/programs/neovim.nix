@@ -89,5 +89,8 @@
     # Postgres
     postgres-lsp
     pgformatter
+
+    # Php
+    phpactor
   ];
 }
