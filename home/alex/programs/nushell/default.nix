@@ -13,7 +13,21 @@ in {
 
   programs.nushell = {
     enable = true;
-    extraConfig = ''
+    extraConfig = let
+      mkAutopair = name: triggerChar: insertChar: ''
+         {
+          name: ${name}
+          modifier: none
+          keycode: "char_${triggerChar}"
+          mode: [emacs vi_normal vi_insert]
+          event: [
+              { edit: InsertChar value: "${triggerChar}" }
+              { edit: InsertChar value: "${insertChar}" }
+              { edit: MoveLeft }
+          ]
+        }
+      '';
+    in ''
       ${builtins.readFile ./completions.nu}
 
       $env.config.show_banner = false
@@ -29,6 +43,13 @@ in {
       $env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = $vi_insert_icon
 
       $env.config.buffer_editor = "${user.editor}"
+      $env.config.keybindings = [
+        ${mkAutopair "AutoParen" "(" ")"}
+        ${mkAutopair "AutoSquared" "[" "]"}
+        ${mkAutopair "AutoCurly" "{" "}"}
+        ${mkAutopair "AutoDoublequote" "\\\"" "\\\""}
+        ${mkAutopair "AutoSinglequote" "'" "'"}
+      ]
     '';
     shellAliases = {
       v = "nvim";
