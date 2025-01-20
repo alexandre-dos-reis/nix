@@ -9,21 +9,27 @@
   hasSuffix = nixpkgs.lib.strings.hasSuffix;
   flattenList = nixpkgs.lib.lists.flatten;
   listToAttrs = builtins.listToAttrs;
+  hasAttr = builtins.hasAttr;
   mkIf = condition: module:
     if condition
     then module
     else {};
 
-  decorateHost = host:
-    {
-      overlays = [];
-      users = [];
-      isManagedByHomeManager = false;
-      useNixGL =
-        (host.isManagedByHomeManager ? false)
-        && host.system == "x86_64-linux";
-    }
-    // host;
+  decorateHost = host: let
+    isManagedByHomeManager =
+      if (hasAttr "isManagedByHomeManager" host)
+      then host.isManagedByHomeManager
+      else false;
+    overlays =
+      if (hasAttr "overlays" host)
+      then host.overlays
+      else [];
+    useNixGL = isManagedByHomeManager && host.system == "x86_64-linux";
+  in
+    host
+    // {
+      inherit isManagedByHomeManager overlays useNixGL;
+    };
 
   mkUtils = pkgs: {inherit (pkgs.stdenv) isDarwin isLinux;};
 
