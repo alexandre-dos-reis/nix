@@ -40,6 +40,7 @@
     go-task
     websocat
     just
+    codecrafters-cli
 
     # code
     jujutsu

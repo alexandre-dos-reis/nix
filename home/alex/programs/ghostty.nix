@@ -19,7 +19,7 @@ in {
       command = "${pkgs.nushell}/bin/nu";
       # command = "${pkgs.fish}/bin/fish";
       theme = "Solarized Dark Higher Contrast";
-      font-size = 20; # 22
+      font-size = 18; # 22
       font-family = user.font;
       background = user.colors.background;
       cursor-color = user.colors.cursor;

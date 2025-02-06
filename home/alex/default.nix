@@ -55,7 +55,7 @@
 
     packages = with pkgs; [
       (maple-mono-NF.overrideAttrs {
-        version = "7.0-beta34";
+        version = "7.0-beta36";
       })
     ];
   };
