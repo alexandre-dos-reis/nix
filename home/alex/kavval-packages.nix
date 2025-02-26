@@ -13,5 +13,7 @@
     # Certificate
     mkcert
     nssTools
+    ruby
+    python3
   ];
 }

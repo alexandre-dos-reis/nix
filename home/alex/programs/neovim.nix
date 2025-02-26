@@ -38,6 +38,7 @@
     bun
     deno
     typescript-language-server
+    vtsls
     typescript
     prettierd
     eslint_d

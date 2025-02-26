@@ -1,15 +1,11 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./kavval-core.nix
   ];
 
   # Bootloader.
@@ -84,17 +80,11 @@
     isNormalUser = true;
     description = "Alexandre Dos Reis";
     extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
+    # packages = [] Managed by home-manager
   };
 
   # Install firefox.
   programs.firefox.enable = true;
-
-  # Allow unfree packages
-  # Can use this because we're setting this in the helper file
-  # nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

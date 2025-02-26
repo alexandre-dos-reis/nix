@@ -14,10 +14,10 @@ in {
       if host.useNixGL
       then config.lib.nixGL.wrap ghostty
       else ghostty;
-    # enableFishIntegration = true;
+    enableFishIntegration = true;
     settings = {
-      command = "${pkgs.nushell}/bin/nu";
-      # command = "${pkgs.fish}/bin/fish";
+      # command = "${pkgs.nushell}/bin/nu";
+      command = "${pkgs.fish}/bin/fish";
       theme = "Solarized Dark Higher Contrast";
       font-size = 18; # 22
       font-family = user.font;

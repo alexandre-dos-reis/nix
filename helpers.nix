@@ -65,13 +65,14 @@
                 };
               })
               (
-                # NonNixos host managed by Home-Manager
+                # NonNixos but linux hosts and managed by Home-Manager
                 mkIf
                 (helpers.isLinux && host.isManagedByHomeManager)
                 {
                   targets.genericLinux.enable = true;
                 }
               )
+              # Enable NixGL
               (
                 mkIf host.useNixGL
                 {

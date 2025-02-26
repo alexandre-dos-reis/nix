@@ -39,7 +39,7 @@
 
     sessionVariables = {
       EDITOR = user.editor;
-      FLAKE = "${user.homeDir}/dev/nix-conf";
+      FLAKE = "${user.homeDir}/dev/nix-config";
       TERMINAL_BG = user.colors.background;
     };
 
