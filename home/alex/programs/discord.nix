@@ -1,6 +1,5 @@
 {
   pkgs,
-  utils,
   host,
   ...
 }: let

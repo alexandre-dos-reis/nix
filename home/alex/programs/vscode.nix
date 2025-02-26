@@ -2,8 +2,6 @@
   pkgs,
   user,
   inputs,
-  config,
-  lib,
   ...
 }: {
   # https://mipmip.github.io/home-manager-option-search/?query=vscode

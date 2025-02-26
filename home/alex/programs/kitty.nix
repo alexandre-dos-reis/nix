@@ -2,7 +2,7 @@
   pkgs,
   user,
   host,
-  utils,
+  helpers,
   config,
   ...
 }: {
@@ -21,7 +21,7 @@
     };
     settings = {
       hide_window_decorations =
-        if utils.isDarwin
+        if helpers.isDarwin
         then "titlebar-only"
         else true;
       placement_strategy = "top-left";

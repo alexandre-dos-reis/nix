@@ -70,6 +70,11 @@
         users = [alex];
       }
       {
+        hostname = "finishers";
+        system = "x86_64-linux";
+        users = [alex];
+      }
+      {
         hostname = "kavval";
         system = "x86_64-linux";
         isManagedByHomeManager = true;

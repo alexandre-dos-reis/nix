@@ -1,9 +1,7 @@
 {
-  utils,
   pkgs,
   user,
   inputs,
-  lib,
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin;

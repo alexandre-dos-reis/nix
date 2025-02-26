@@ -31,13 +31,13 @@
       inherit isManagedByHomeManager overlays useNixGL;
     };
 
-  mkUtils = pkgs: {inherit (pkgs.stdenv) isDarwin isLinux;};
+  mkHelpers = pkgs: {inherit (pkgs.stdenv) isDarwin isLinux;};
 
-  decorateUser = user: utils:
+  decorateUser = user: helpers:
     user
     // {
       homeDir =
-        if utils.isDarwin
+        if helpers.isDarwin
         then "/Users/${user.username}"
         else "/home/${user.username}";
     };
@@ -47,19 +47,30 @@
         name = "${user.username}@${host.hostname}";
         value = let
           pkgs = nixpkgs.legacyPackages.${host.system};
-          utils = mkUtils pkgs;
+          helpers = mkHelpers pkgs;
         in
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             extraSpecialArgs = {
-              inherit inputs outputs host utils;
-              user = decorateUser user utils;
+              inherit inputs outputs host helpers;
+              user = decorateUser user helpers;
             };
             modules = [
+              # Link applications defined by Home-Manager to host
+              ({config, ...}: {
+                xdg = {
+                  enable = true;
+                  mime.enable = true;
+                  systemDirs.data = ["${config.home.homeDirectory}/.nix-profile/share/applications"];
+                };
+              })
               (
+                # NonNixos host managed by Home-Manager
                 mkIf
-                (utils.isLinux && host.isManagedByHomeManager)
-                ./home/xdg-fix.nix
+                (helpers.isLinux && host.isManagedByHomeManager)
+                {
+                  targets.genericLinux.enable = true;
+                }
               )
               (
                 mkIf host.useNixGL
@@ -81,13 +92,14 @@
           pkgs = import nixpkgs {
             system = host.system;
             overlays = host.overlays;
+            config.allowUnfree = true;
           };
-          utils = mkUtils pkgs;
+          helpers = mkHelpers pkgs;
         in
           mkSystem {
             inherit pkgs;
             specialArgs = {
-              inherit inputs outputs host utils;
+              inherit inputs outputs host helpers;
               users = host.users;
             };
             modules = [

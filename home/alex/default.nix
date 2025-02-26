@@ -1,10 +1,8 @@
 {
   pkgs,
   user,
-  utils,
-  host,
+  helpers,
   inputs,
-  config,
   ...
 }: {
   imports = [
@@ -49,7 +47,7 @@
     # https://dev.to/tallesl/change-caps-lock-to-ctrl-3c4
     # https://www.reddit.com/r/NixOS/comments/trkfyz/overriding_configurationnix_with_homemanager/
     keyboard.layout =
-      if utils.isDarwin
+      if helpers.isDarwin
       then "Unicode Hex Input"
       else "us";
 
