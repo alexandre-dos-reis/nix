@@ -18,11 +18,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Hardware
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     # Terminals
     ghostty.url = "github:ghostty-org/ghostty";
 
     # Fish
     kubectx = {
+      # For completions
       url = "github:ahmetb/kubectx";
       flake = false;
     };
@@ -41,9 +45,6 @@
 
     # Langs
     zig.url = "github:mitchellh/zig-overlay";
-
-    # Hardware
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = inputs: let
@@ -58,6 +59,7 @@
         cursor = "#708183";
       };
       # This allows to install npm packages globally with: `npm i -g <some-package>`
+      # Not available in nixpkgs
       npm.packages.path = "~/.npm-packages";
     };
   in
