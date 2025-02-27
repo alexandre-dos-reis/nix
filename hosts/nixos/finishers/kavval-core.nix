@@ -21,16 +21,16 @@
     "fs.inotify.max_user_watches" = 524288;
   };
 
-  networking.extraHosts = ''
-    127.0.0.1 dev.finishers.com
-    127.0.0.1 api.dev.finishers.com
-    127.0.0.1 admin.dev.finishers.com
-    127.0.0.1 www.dev.finishers.com
-    127.0.0.1 metabase.dev.finishers.com
-    127.0.0.1 organisateur.dev.finishers.com
-    127.0.0.1 club.dev.finishers.com
-    127.0.0.1 inngest.dev.finishers.com
-  '';
+  networking.extraHosts = let
+    domain = "dev.finishers.com";
+    subDomains = ["" "api" "admin" "www" "metabase" "organisateur" "club" "inngest"];
+  in
+    toString (map (subDomain: "127.0.0.1 ${
+        if subDomain == ""
+        then domain
+        else "${subDomain}.${domain}"
+      }\n")
+      subDomains);
 
   security.pki.certificateFiles = [./certificates/rootCA.pem];
 }

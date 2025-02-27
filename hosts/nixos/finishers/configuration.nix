@@ -83,6 +83,7 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  # TODO: map over user...
   users.users.alex = {
     isNormalUser = true;
     description = "Alexandre Dos Reis";
