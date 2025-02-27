@@ -15,7 +15,6 @@ in {
 
     shellInit = ''
       set fish_greeting ""
-      set -gx TERM xterm-256color
       set -gx EDITOR ${user.editor}
       set -gx PATH bin $PATH
       set -gx PATH ~/bin $PATH

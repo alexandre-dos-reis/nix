@@ -1,7 +1,8 @@
 {pkgs, ...}: let
   # term = "xterm-kitty";
   # https://github.com/craftzdog/dotfiles-public/blob/master/.config/tmux/tmux.conf
-  term = "xterm-256color";
+  # term = "xterm-256color";
+  term = "xterm-ghostty";
 in {
   programs.tmux = {
     enable = true;
@@ -14,8 +15,8 @@ in {
     historyLimit = 10000;
     mouse = true;
     extraConfig = ''
-      set -g default-terminal "${term}"
-      set -ga terminal-overrides ",${term}:Tc"
+      # set -g default-terminal "${term}"
+      # set -ga terminal-overrides ",${term}:Tc"
       # set -as terminal-features ",${term}:RGB"
 
       set -g set-clipboard on  # use system clipboard

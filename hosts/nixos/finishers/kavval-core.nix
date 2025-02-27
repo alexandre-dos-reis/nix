@@ -12,7 +12,7 @@
   # Some scripts need `/bin/bash` which doesn't exists in nixos
   system.activationScripts.binbash = {
     text = ''
-      ln -s /run/current-system/sw/bin/bash /bin/bash
+      ln -sf /run/current-system/sw/bin/bash /bin/bash
     '';
   };
 
