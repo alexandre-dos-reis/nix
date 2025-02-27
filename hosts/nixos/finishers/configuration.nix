@@ -4,6 +4,7 @@
 {
   pkgs,
   host,
+  inputs,
   ...
 }: {
   imports = [
@@ -11,6 +12,7 @@
     ./hardware-configuration.nix
     ../common
     ./kavval-core.nix
+    inputs.nixos-hardware.nixosModules.dell-xps-15-9530
   ];
 
   # Bootloader.

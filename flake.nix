@@ -41,6 +41,9 @@
 
     # Langs
     zig.url = "github:mitchellh/zig-overlay";
+
+    # Hardware
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = inputs: let
