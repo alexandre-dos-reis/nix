@@ -10,9 +10,9 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    inputs.nixos-hardware.nixosModules.dell-xps-15-9530
     ../common
     ./kavval-core.nix
-    inputs.nixos-hardware.nixosModules.dell-xps-15-9530
   ];
 
   # Bootloader.

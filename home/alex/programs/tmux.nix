@@ -15,8 +15,8 @@ in {
     historyLimit = 10000;
     mouse = true;
     extraConfig = ''
-      # set -g default-terminal "${term}"
-      # set -ga terminal-overrides ",${term}:Tc"
+      set -g default-terminal "${term}"
+      set -ga terminal-overrides ",${term}:Tc"
       # set -as terminal-features ",${term}:RGB"
 
       set -g set-clipboard on  # use system clipboard

@@ -112,13 +112,17 @@ From [NixOS Episode 1 - Installation](https://www.youtube.com/watch?v=63sSGuclBn
 
 ## Troubleshooting
 
+### `The SUID sandbox helper binary was found...`
+
 On ubuntu, this error might happen: `The SUID sandbox helper binary was found...`
 
 Workaround for a session: `echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns`
 
 See [SUID sandbox helper breaks packages in Single User Installation](https://github.com/NixOS/nixpkgs/issues/121694#issuecomment-2159420924)
 
-## Troubleshooting
+### `command-not-found` unable to open database
+
+See https://discourse.nixos.org/t/command-not-found-unable-to-open-database/3807/8
 
 ### Mismatch versions between home-manager and nixpkgs
 
