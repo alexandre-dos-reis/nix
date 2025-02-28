@@ -16,8 +16,22 @@
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # See https://nixos.wiki/wiki/Bootloader
+
+  boot.loader = {
+    systemd-boot = {
+      enable = false;
+      configurationLimit = 5; # Prevent generations from filling `/boot`
+    };
+    grub = {
+      enable = true;
+      device = "nodev";
+      useOSProber = true;
+      efiSupport = true;
+      configurationLimit = 5; # Prevent generations from filling `/boot`
+    };
+    efi.canTouchEfiVariables = true;
+  };
 
   networking.hostName = host.hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -53,6 +67,8 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+
+  # services.xserver.videoDrivers = ["nvidia"];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -104,6 +120,8 @@
     git
     google-chrome
     slack
+    gparted
+    nvitop # NVIDIA-GPU process viewer
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
