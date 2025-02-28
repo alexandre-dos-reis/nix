@@ -17,7 +17,6 @@
 
   # Bootloader.
   # See https://nixos.wiki/wiki/Bootloader
-
   boot.loader = {
     systemd-boot = {
       enable = false;
@@ -28,9 +27,13 @@
       device = "nodev";
       useOSProber = true;
       efiSupport = true;
+      # efiInstallAsRemovable = true;
       configurationLimit = 5; # Prevent generations from filling `/boot`
     };
-    efi.canTouchEfiVariables = true;
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/efi";
+    };
   };
 
   networking.hostName = host.hostname; # Define your hostname.
