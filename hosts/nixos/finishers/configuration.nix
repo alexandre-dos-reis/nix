@@ -12,29 +12,10 @@
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.dell-xps-15-9530
     ../common
+    ./boot.nix
+    ./gpu.nix
     ./kavval-core.nix
   ];
-
-  # Bootloader.
-  # See https://nixos.wiki/wiki/Bootloader
-  boot.loader = {
-    systemd-boot = {
-      enable = false;
-      configurationLimit = 5; # Prevent generations from filling `/boot`
-    };
-    grub = {
-      enable = true;
-      device = "nodev";
-      useOSProber = true;
-      efiSupport = true;
-      # efiInstallAsRemovable = true;
-      configurationLimit = 5; # Prevent generations from filling `/boot`
-    };
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
-    };
-  };
 
   networking.hostName = host.hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -70,8 +51,6 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-
-  # services.xserver.videoDrivers = ["nvidia"];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -123,8 +102,9 @@
     git
     google-chrome
     slack
-    gparted
+    gparted # Managed disks
     nvitop # NVIDIA-GPU process viewer
+    mesa-demos # glxgears
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

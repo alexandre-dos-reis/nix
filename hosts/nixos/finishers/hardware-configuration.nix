@@ -21,13 +21,19 @@
     fsType = "ext4";
   };
 
+  # https://nixos.wiki/wiki/Bootloader
   fileSystems."/boot/efi" = {
     device = "/dev/disk/by-uuid/B2B9-D3C0";
     fsType = "vfat";
     options = ["fmask=0077" "dmask=0077"];
   };
 
-  swapDevices = [];
+  swapDevices = [
+    {
+      device = "/dev/nvme0n1p7";
+      size = 32 * 1024; # 32GB
+    }
+  ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
