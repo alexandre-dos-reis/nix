@@ -18,6 +18,7 @@ in {
     settings = {
       # command = "${pkgs.nushell}/bin/nu";
       command = "${pkgs.fish}/bin/fish";
+      gtk-single-instance = false; # On linux enable multi instances
       theme = "Solarized Dark Higher Contrast";
       font-size = 18; # 22
       font-family = user.font;
@@ -26,7 +27,7 @@ in {
       cursor-style = "block";
       cursor-style-blink = false;
       window-decoration = false;
-      window-padding-x = 10;
+      window-padding-x = 0; # 10
       window-padding-y = 0;
       window-padding-color = "extend";
     };

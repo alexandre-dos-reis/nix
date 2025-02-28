@@ -15,6 +15,7 @@
     # ./vscode.nix
     ./ssh.nix
     ./oh-my-posh
+    ./wayland
     # ./zellij.nix
   ];
 }
