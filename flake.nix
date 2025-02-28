@@ -45,6 +45,9 @@
 
     # Langs
     zig.url = "github:mitchellh/zig-overlay";
+
+    # Hyprland
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = inputs: let

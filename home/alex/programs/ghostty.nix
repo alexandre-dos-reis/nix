@@ -27,7 +27,7 @@ in {
       cursor-style = "block";
       cursor-style-blink = false;
       window-decoration = false;
-      window-padding-x = 0; # 10
+      window-padding-x = 5; # 10
       window-padding-y = 0;
       window-padding-color = "extend";
     };
