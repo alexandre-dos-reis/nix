@@ -10,6 +10,7 @@
   programs.wofi.enable = true;
   # Status bar
   programs.waybar = {
+    # https://github.com/Alexays/Waybar/wiki/Module:-Hyprland
     enable = true;
     style = ./waybar.css;
     settings = {
@@ -27,13 +28,13 @@
           # I'm using icons just to rename workspaces
           format = "{icon}";
           format-icons = {
-            "1" = "work";
-            "2" = "com";
+            "1" = "Work";
+            "2" = "Com";
             "3" = "3";
             "4" = "4";
             # "5" = "5";
-            "6" = "work";
-            "7" = "com";
+            "6" = "Work";
+            "7" = "Com";
             "8" = "8";
             "9" = "9";
             # "10" = "5";

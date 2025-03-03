@@ -1,37 +1,40 @@
 * {
   border: none;
   border-radius: 0px;
-  font-family: "JetBrains Mono";
+  font-family: "Maple Mono NF";
   font-weight: bold;
   font-size: 16px;
   min-height: 0;
-  color: #ebdbb2;
+  /* color: #ebdbb2; */
 }
 
 window#waybar {
-  /* background: #1d2021; */
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 #workspaces button {
-  background: #d65d0e;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.5);
 }
 
 /* The order is important to keep select color coherent ! */
 
 #workspaces button.visible label {
-  color: #1d2021;
+  color: #b16286;
+  border-bottom: 5px solid #b16286;
 }
 
 /* Workspace Buttons */
-#workspaces button label {
-  /* orange */
-  color: #ebdbb2;
-  padding: 0 10px;
-}
+/* #workspaces button label { */
+/* orange */
+/* color: #ebdbb2; */
+/* padding: 0 10px; */
+/* } */
 
-#workspaces button.active label {
-  color: #1d2021;
-}
+/* #workspaces button.active label { */
+/*   color: #b16286; */
+/*   border-bottom: 5px solid #b16286; */
+/* } */
 
 #clock,
 #battery,
