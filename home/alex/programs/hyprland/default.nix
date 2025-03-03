@@ -11,8 +11,11 @@
   # Status bar
   programs.waybar.enable = true;
 
+  services.clipman.enable = true;
+
   # TUI-based clipboard manager
   home.packages = [
     pkgs.clipse
+    pkgs.wl-clipboard
   ];
 }

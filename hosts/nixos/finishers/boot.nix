@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   # Bootloader.
   # See https://nixos.wiki/wiki/Bootloader
   boot.loader = {
@@ -14,6 +14,8 @@
       efiSupport = true;
       # efiInstallAsRemovable = true;
       configurationLimit = 5; # Prevent generations from filling `/boot`
+      fontSize = 40;
+      font = "${pkgs.maple-mono-NF}/share/fonts/truetype/MapleMono-NF-Regular.ttf";
     };
     efi = {
       canTouchEfiVariables = true;
