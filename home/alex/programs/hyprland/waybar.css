@@ -9,19 +9,28 @@
 }
 
 window#waybar {
-  background: #1d2021;
+  /* background: #1d2021; */
+}
+
+#workspaces button {
+  background: #d65d0e;
+}
+
+/* The order is important to keep select color coherent ! */
+
+#workspaces button.visible label {
+  color: #1d2021;
 }
 
 /* Workspace Buttons */
 #workspaces button label {
+  /* orange */
   color: #ebdbb2;
   padding: 0 10px;
 }
+
 #workspaces button.active label {
   color: #1d2021;
-}
-#workspaces button.active {
-  background: #d65d0e;
 }
 
 #clock,

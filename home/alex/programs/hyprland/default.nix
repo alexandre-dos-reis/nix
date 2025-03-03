@@ -22,6 +22,8 @@
         modules-right = ["hyprland/language" "custom/weather" "pulseaudio" "battery" "clock" "tray"];
 
         "hyprland/workspaces" = {
+          active-only = false;
+          all-outputs = false;
           # I'm using icons just to rename workspaces
           format = "{icon}";
           format-icons = {
@@ -32,15 +34,13 @@
             # "5" = "5";
             "6" = "work";
             "7" = "com";
-            "8" = "3";
-            "9" = "4";
+            "8" = "8";
+            "9" = "9";
             # "10" = "5";
           };
-          active-only = false;
           disable-scroll = true;
           show-special = true;
           # special-visible-only = true;
-          all-outputs = false;
           persistent-workspaces = {
             "eDP-1" = [
               1
