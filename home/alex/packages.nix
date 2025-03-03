@@ -10,6 +10,7 @@
     dust
     btop
     yazi
+    superfile
     fastfetch # better neofetch
     clang
     gnumake
