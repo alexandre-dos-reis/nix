@@ -108,6 +108,8 @@
     # packages = [] Managed by home-manager
   };
 
+  nix.settings.trusted-users = ["root" "alex"];
+
   # Install firefox.
   programs.firefox.enable = true;
 
