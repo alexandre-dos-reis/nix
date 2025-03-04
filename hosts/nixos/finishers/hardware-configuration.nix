@@ -31,7 +31,8 @@
   swapDevices = [
     {
       device = "/dev/nvme0n1p7";
-      size = 32 * 1024; # 32GB
+      # swap was created before
+      # size = 32 * 1024; # 32GB
     }
   ];
 

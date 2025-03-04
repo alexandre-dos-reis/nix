@@ -14,6 +14,7 @@
     ../common
     ./boot.nix
     ./gpu.nix
+    ./hyprland.nix
     ./kavval-core.nix
   ];
 
@@ -23,26 +24,30 @@
 
   time.timeZone = "Europe/Paris";
 
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "fr_FR.UTF-8";
-    LC_IDENTIFICATION = "fr_FR.UTF-8";
-    LC_MEASUREMENT = "fr_FR.UTF-8";
-    LC_MONETARY = "fr_FR.UTF-8";
-    LC_NAME = "fr_FR.UTF-8";
-    LC_NUMERIC = "fr_FR.UTF-8";
-    LC_PAPER = "fr_FR.UTF-8";
-    LC_TELEPHONE = "fr_FR.UTF-8";
-    LC_TIME = "fr_FR.UTF-8";
+  i18n = let
+    lang = "en_US";
+    locale = "fr_FR";
+  in {
+    defaultLocale = "${lang}.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "${locale}.UTF-8";
+      LC_IDENTIFICATION = "${locale}.UTF-8";
+      LC_MEASUREMENT = "${locale}.UTF-8";
+      LC_MONETARY = "${locale}.UTF-8";
+      LC_NAME = "${locale}.UTF-8";
+      LC_NUMERIC = "${locale}.UTF-8";
+      LC_PAPER = "${locale}.UTF-8";
+      LC_TELEPHONE = "${locale}.UTF-8";
+      LC_TIME = "${locale}.UTF-8";
+    };
   };
 
   services.xserver = {
     enable = true;
     displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
     xkb = {
       # Configure keymap in X11
-      desktopManager.gnome.enable = true;
       layout = "us";
       variant = "";
     };
@@ -62,7 +67,6 @@
     # jack.enable = true;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   # TODO: map over user...
   users.users.alex = {
     isNormalUser = true;

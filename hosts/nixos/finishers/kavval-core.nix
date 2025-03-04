@@ -4,11 +4,6 @@
   virtualisation.docker.enable = true;
   users.extraGroups.docker.members = ["alex"];
 
-  # https://github.com/Mic92/envfs
-  # Allows executing FHS based programs on a non-FHS system
-  # CAUTION: this seems usefull but freeze the host!
-  # services.envfs.enable = true;
-
   # Some scripts need `/bin/bash` which doesn't exists in nixos
   system.activationScripts.binbash = {
     text = ''
