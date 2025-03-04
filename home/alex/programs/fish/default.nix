@@ -28,10 +28,19 @@ in {
       set -g theme_hide_hostname no
       set -g theme_hostname always
 
-      fish_vi_key_bindings
-      function fish_mode_prompt; end
+      # Handle vim mode correctly with oh-my-posh
+      # https://ohmyposh.dev/docs/faq#fish-display-current-bind-vim-mode
+      function rerender_on_bind_mode_change --on-variable fish_bind_mode
+          if test "$fish_bind_mode" != paste -a "$fish_bind_mode" != "$FISH__BIND_MODE"
+              set -gx FISH__BIND_MODE $fish_bind_mode
+              omp_repaint_prompt
+          end
+      end
 
-      bind \cf "tmux-sessionizer"
+      function fish_default_mode_prompt; end
+      # Handle vim mode correctly with oh-my-posh
+
+      fish_vi_key_bindings
 
       if type -q kubectx
         source ${inputs.kubectx}/completion/kubens.fish

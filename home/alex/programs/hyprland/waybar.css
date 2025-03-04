@@ -12,16 +12,26 @@ window#waybar {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-#workspaces button {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-bottom: 5px solid rgba(0, 0, 0, 0.5);
+#workspaces {
+  margin: 0;
+  padding: 0;
 }
 
-/* The order is important to keep select color coherent ! */
+#workspaces button {
+  background-color: rgba(0, 0, 0, 0.5);
+  /* border-bottom: 5px solid rgba(0, 0, 0, 0.5); */
+  margin: 0;
+  padding: 0 5px;
+}
+
+#workspaces button label {
+  color: #808080;
+  border-bottom: 5px solid #808080;
+}
 
 #workspaces button.visible label {
-  color: #b16286;
-  border-bottom: 5px solid #b16286;
+  color: #dc312e;
+  border-bottom: 5px solid #dc312e;
 }
 
 /* Workspace Buttons */

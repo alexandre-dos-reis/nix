@@ -27,14 +27,17 @@
           all-outputs = false;
           # I'm using icons just to rename workspaces
           format = "{icon}";
-          format-icons = {
-            "1" = "Work";
-            "2" = "Com";
+          format-icons = let
+            work = "Work";
+            com = "Com";
+          in {
+            "1" = work;
+            "2" = com;
             "3" = "3";
             "4" = "4";
             # "5" = "5";
-            "6" = "Work";
-            "7" = "Com";
+            "6" = work;
+            "7" = com;
             "8" = "8";
             "9" = "9";
             # "10" = "5";

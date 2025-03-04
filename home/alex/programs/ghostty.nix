@@ -20,7 +20,7 @@ in {
       command = "${pkgs.fish}/bin/fish";
       gtk-single-instance = false; # On linux enable multi instances
       theme = "Solarized Dark Higher Contrast";
-      font-size = 18; # 22
+      font-size = 16; # 22
       font-family = user.font;
       background = user.colors.background;
       cursor-color = user.colors.cursor;
@@ -30,6 +30,7 @@ in {
       window-padding-x = 0; # 10
       window-padding-y = 0;
       window-padding-color = "extend";
+      mouse-hide-while-typing = true;
     };
   };
 }

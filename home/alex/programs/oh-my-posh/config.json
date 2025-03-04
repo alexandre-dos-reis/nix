@@ -43,6 +43,12 @@
           "type": "text",
           "style": "plain",
           "template": "\n"
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "#14A5AE",
+          "template": "{{ if eq .Env.FISH__BIND_MODE \"default\" }}ℕ {{ else if eq .Env.FISH__BIND_MODE \"insert\" }}> {{ else if eq .Env.FISH__BIND_MODE \"replace_one\" }}<green>[R]</>{{ else if eq .Env.FISH__BIND_MODE \"visual\"}}v {{ else }}<red>[?]</>{{ end }}"
         }
       ]
     }
