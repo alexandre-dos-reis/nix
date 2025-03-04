@@ -25,7 +25,6 @@
     };
   };
 
-  # TUI-based clipboard manager
   home.packages = with pkgs; [
     clipse
     wl-clipboard
