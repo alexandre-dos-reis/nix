@@ -5,6 +5,7 @@
   pkgs,
   host,
   inputs,
+  users,
   ...
 }: {
   imports = [
@@ -67,15 +68,19 @@
     # jack.enable = true;
   };
 
-  # TODO: map over user...
-  users.users.alex = {
-    isNormalUser = true;
-    description = "Alexandre Dos Reis";
-    extraGroups = ["networkmanager" "wheel" "audio" "video"];
-    # packages = [] Managed by home-manager
-  };
+  users.users = builtins.listToAttrs (map (u: {
+      name = u.username;
+      value = {
+        isNormalUser = true;
+        description = u.fullname;
+        extraGroups = ["networkmanager" "wheel" "audio" "video"];
+        # packages = [] Managed by home-manager
+      };
+    })
+    users);
 
   # `root` is already included
+  # Add sudo users to nix trusted-users
   nix.settings.trusted-users = ["@wheel"];
 
   # Install firefox.
