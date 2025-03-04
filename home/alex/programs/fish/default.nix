@@ -5,6 +5,30 @@
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin;
+
+  # Handle vim mode correctly with oh-my-posh
+  vimMode = ''
+    fish_vi_key_bindings
+
+    set fish_cursor_default block
+    set fish_cursor_insert block
+    set fish_cursor_visual underscore
+
+    function omp_repaint_prompt
+        set _omp_new_prompt 1
+        commandline --function repaint
+    end
+
+    # https://ohmyposh.dev/docs/faq#fish-display-current-bind-vim-mode
+    function rerender_on_bind_mode_change --on-variable fish_bind_mode
+        if test "$fish_bind_mode" != paste -a "$fish_bind_mode" != "$FISH__BIND_MODE"
+            set -gx FISH__BIND_MODE $fish_bind_mode
+            omp_repaint_prompt
+        end
+    end
+
+    function fish_default_mode_prompt; end
+  '';
 in {
   # https://github.com/alexandre-dos-reis/dotfiles/blob/main/dot_config/private_fish/config.fish
   # https://discourse.nixos.org/t/managing-fish-plugins-with-home-manager/22368
@@ -12,7 +36,7 @@ in {
 
   programs.fish = {
     enable = true;
-
+    generateCompletions = true;
     shellInit = ''
       set fish_greeting ""
       set -gx EDITOR ${user.editor}
@@ -28,23 +52,7 @@ in {
       set -g theme_hide_hostname no
       set -g theme_hostname always
 
-      set fish_cursor_default block
-      set fish_cursor_insert block
-      set fish_cursor_visual underscore
-
-      # >> Handle vim mode correctly with oh-my-posh
-      # https://ohmyposh.dev/docs/faq#fish-display-current-bind-vim-mode
-      function rerender_on_bind_mode_change --on-variable fish_bind_mode
-          if test "$fish_bind_mode" != paste -a "$fish_bind_mode" != "$FISH__BIND_MODE"
-              set -gx FISH__BIND_MODE $fish_bind_mode
-              omp_repaint_prompt
-          end
-      end
-
-      function fish_default_mode_prompt; end
-      # << Handle vim mode correctly with oh-my-posh
-
-      fish_vi_key_bindings
+      ${vimMode}
 
       if type -q kubectx
         source ${inputs.kubectx}/completion/kubens.fish
