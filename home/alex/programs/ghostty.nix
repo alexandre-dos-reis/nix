@@ -23,6 +23,7 @@ in {
       font-size = 16; # 22
       font-family = user.font;
       background = user.colors.background;
+      shell-integration-features = "no-cursor, sudo, title";
       cursor-color = user.colors.cursor;
       cursor-style = "block";
       cursor-style-blink = false;

@@ -28,7 +28,11 @@ in {
       set -g theme_hide_hostname no
       set -g theme_hostname always
 
-      # Handle vim mode correctly with oh-my-posh
+      set fish_cursor_default block
+      set fish_cursor_insert block
+      set fish_cursor_visual underscore
+
+      # >> Handle vim mode correctly with oh-my-posh
       # https://ohmyposh.dev/docs/faq#fish-display-current-bind-vim-mode
       function rerender_on_bind_mode_change --on-variable fish_bind_mode
           if test "$fish_bind_mode" != paste -a "$fish_bind_mode" != "$FISH__BIND_MODE"
@@ -38,7 +42,7 @@ in {
       end
 
       function fish_default_mode_prompt; end
-      # Handle vim mode correctly with oh-my-posh
+      # << Handle vim mode correctly with oh-my-posh
 
       fish_vi_key_bindings
 
