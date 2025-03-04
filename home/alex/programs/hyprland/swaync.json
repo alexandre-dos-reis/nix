@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/ErikReider/SwayNotificationCenter/refs/heads/main/src/configSchema.json",
-  "positionX": "right",
+  "positionX": "center",
   "positionY": "top",
   "layer": "overlay",
   "control-center-layer": "top",

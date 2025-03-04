@@ -6,8 +6,65 @@
   #   enable = true;
   # };
 
+  # Notifications daemon
+  services.swaync = {
+    enable = true;
+    settings = builtins.fromJSON (builtins.readFile ./swaync.json);
+  };
+
+  services.hyprpaper = {
+    enable = true;
+    settings = let
+      path = "/home/alex/dev/nix-config/home/alex/programs/hyprland/wallpapers";
+      dots_img = "${path}/solarized_dots.jpg";
+      triangle_img = "${path}/solarized_triangle.jpg";
+    in {
+      ipc = "on";
+      preload = [dots_img triangle_img];
+      wallpaper = ["DP-4,${triangle_img}" "eDP-1,${dots_img}"];
+    };
+  };
+
+  # TUI-based clipboard manager
+  home.packages = with pkgs; [
+    clipse
+    wl-clipboard
+    hyprshot
+    nautilus
+    hyprpaper # services.hyprpaper doesn't seems to run launch hyprpaper
+  ];
+
   # App launcher
-  programs.wofi.enable = true;
+  programs.wofi = {
+    enable = true;
+    style = builtins.readFile ./wofi.css;
+    settings = {
+      width = 700;
+      height = 400;
+      location = "center";
+      columns = 2;
+      show = "drun";
+      prompt = "";
+      filter_rate = 100;
+      allow_markup = true;
+      dmenu-parse_actions = true;
+      no_actions = false;
+      halign = "fill";
+      orientation = "vertical";
+      content_halign = "fill";
+      insensitive = true;
+      allow_images = true;
+      image_size = 24;
+      gtk_dark = true;
+      layer = "top";
+      term = "ghostty";
+      hide_scroll = true;
+      normal_window = true;
+      line_wrap = "word_char";
+      dymanic_lines = true;
+    };
+  };
+
   # Status bar
   programs.waybar = {
     # https://github.com/Alexays/Waybar/wiki/Module:-Hyprland
@@ -65,17 +122,4 @@
       };
     };
   };
-
-  services.swaync = {
-    enable = true;
-    settings = builtins.fromJSON (builtins.readFile ./swaync.json);
-  };
-
-  # TUI-based clipboard manager
-  home.packages = with pkgs; [
-    clipse
-    wl-clipboard
-    hyprshot
-    nautilus
-  ];
 }
