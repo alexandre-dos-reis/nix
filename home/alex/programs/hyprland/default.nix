@@ -66,11 +66,16 @@
     };
   };
 
-  services.clipman.enable = true;
+  services.swaync = {
+    enable = true;
+    settings = builtins.fromJSON (builtins.readFile ./swaync.json);
+  };
 
   # TUI-based clipboard manager
-  home.packages = [
-    pkgs.clipse
-    pkgs.wl-clipboard
+  home.packages = with pkgs; [
+    clipse
+    wl-clipboard
+    hyprshot
+    nautilus
   ];
 }
