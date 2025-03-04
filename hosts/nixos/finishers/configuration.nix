@@ -104,11 +104,12 @@
   users.users.alex = {
     isNormalUser = true;
     description = "Alexandre Dos Reis";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "audio" "video"];
     # packages = [] Managed by home-manager
   };
 
-  nix.settings.trusted-users = ["root" "alex"];
+  # `root` is already included
+  nix.settings.trusted-users = ["@wheel"];
 
   # Install firefox.
   programs.firefox.enable = true;
