@@ -31,33 +31,37 @@ tooltip {
   margin-bottom: -4px;
 }
 
-#workspaces button.active {
-  color: #cb4b16;
-}
-
-#workspaces button.persistent {
-  color: #d33682;
-}
-
-#workspaces button.empty {
+#workspaces button {
   color: #586e75;
 }
+
+/* #workspaces button.active { */
+/*   color: #cb4b16; */
+/* } */
+
+/* #workspaces button.persistent { */
+/*   color: #d33682; */
+/* } */
+
+/* #workspaces button.empty { */
+/*   color: #586e75; */
+/* } */
 
 #workspaces button:hover {
   color: #268bd2;
 }
 
-#workspaces button.special {
-  color: #b58900;
-}
+/* #workspaces button.special { */
+/*   color: #b58900; */
+/* } */
 
 #workspaces button.visible {
   color: #859900;
 }
 
-#workspaces button.urgent {
-  color: #dc322f;
-}
+/* #workspaces button.urgent { */
+/*   color: #dc322f; */
+/* } */
 
 #language,
 #custom-updates,

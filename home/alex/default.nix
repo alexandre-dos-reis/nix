@@ -56,5 +56,17 @@
         version = "7.0-beta36";
       })
     ];
+
+    pointerCursor = {
+      hyprcursor.enable = true;
+      gtk.enable = true;
+      # x11.enable = true;
+      package = pkgs.banana-cursor;
+      name = "Banana";
+      # package = pkgs.bibata-cursors;
+      # name = "Bibata-Modern-Classic";
+      size = 28;
+    };
   };
+  gtk = {enable = true;};
 }

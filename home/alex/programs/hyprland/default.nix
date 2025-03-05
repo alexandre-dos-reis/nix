@@ -1,8 +1,9 @@
 {pkgs, ...}: {
   # TODO: https://www.youtube.com/watch?v=zt3hgSBs11g
-  # For now just tweak the config file in `~/.config/hypr/hyprland.conf`
 
   # wayland.windowManager.hyprland = {
+  # TODO: Rewrite hyprland.conf the nix way
+  # For now just tweak the config file in `~/.config/hypr/hyprland.conf`
   #   enable = true;
   # };
 
@@ -86,17 +87,14 @@
           format-icons = let
             work = "Work";
             com = "Com";
+            share = "Share";
           in {
             "1" = work;
             "2" = com;
-            "3" = "3";
-            "4" = "4";
-            # "5" = "5";
-            "6" = work;
-            "7" = com;
-            "8" = "8";
-            "9" = "9";
-            # "10" = "5";
+            "3" = share;
+            "11" = work;
+            "12" = com;
+            "13" = share;
           };
           disable-scroll = true;
           show-special = true;
@@ -105,17 +103,36 @@
             "eDP-1" = [
               1
               2
-              # 3
-              # 4
-              # 5
+              3
             ];
             "DP-4" = [
-              6
-              7
-              # 8
-              # 9
-              # 10
+              11
+              12
+              13
             ];
+          };
+        };
+        "hyprland/language" = {
+          "format" = "{}";
+          "format-en" = "Eng";
+          "format-fr" = "Fra";
+        };
+        "pulseaudio" = {
+          "format" = "{volume}{icon}";
+          "tooltip" = false;
+          "format-muted" = "Muted";
+          "on-click" = "pamixer -t";
+          "on-scroll-up" = "pamixer -i 2";
+          "on-scroll-down" = "pamixer -d 2";
+          "scroll-step" = 5;
+          "format-icons" = {
+            "headphone" = "";
+            "hands-free" = "";
+            "headset" = "";
+            "phone" = "";
+            "portable" = "";
+            "car" = "";
+            "default" = ["" "" ""];
           };
         };
       };
