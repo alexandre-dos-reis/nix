@@ -1,5 +1,7 @@
 {pkgs, ...}: {
   # TODO: https://www.youtube.com/watch?v=zt3hgSBs11g
+  # Example of script using pid
+  # https://www.emadelsaid.com/Open%20application%20in%20workspace%20Hyprland/
 
   # wayland.windowManager.hyprland = {
   # TODO: Rewrite hyprland.conf the nix way
@@ -11,6 +13,7 @@
   services.swaync = {
     enable = true;
     settings = builtins.fromJSON (builtins.readFile ./swaync.json);
+    style = builtins.readFile ./swaync.css;
   };
 
   services.hyprpaper = {

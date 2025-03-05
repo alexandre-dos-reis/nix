@@ -4,7 +4,9 @@
   helpers,
   inputs,
   ...
-}: {
+}: let
+  cursorSize = 30;
+in {
   imports = [
     ./programs
     ./packages.nix
@@ -41,6 +43,8 @@
       EDITOR = user.editor;
       FLAKE = "${user.homeDir}/dev/nix-config";
       TERMINAL_BG = user.colors.background;
+      XCURSOR_SIZE = cursorSize;
+      HYPRCURSOR_SIZE = cursorSize;
     };
 
     # https://mipmip.github.io/home-manager-option-search/?query=keyboard
@@ -65,7 +69,7 @@
       name = "Banana";
       # package = pkgs.bibata-cursors;
       # name = "Bibata-Modern-Classic";
-      size = 28;
+      size = cursorSize;
     };
   };
   gtk = {enable = true;};
