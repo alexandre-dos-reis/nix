@@ -92,13 +92,16 @@
             work = "Work";
             com = "Com";
             share = "Share";
+            review = "Review";
           in {
             "1" = work;
             "2" = com;
             "3" = share;
+            "4" = review;
             "11" = work;
             "12" = com;
             "13" = share;
+            "14" = review;
           };
           disable-scroll = true;
           show-special = true;
@@ -108,11 +111,13 @@
               1
               2
               3
+              4
             ];
             "DP-4" = [
               11
               12
               13
+              14
             ];
           };
         };
