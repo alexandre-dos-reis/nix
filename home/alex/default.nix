@@ -4,9 +4,7 @@
   helpers,
   inputs,
   ...
-}: let
-  cursorSize = 28;
-in {
+}: {
   imports = [
     ./programs
     ./packages.nix
@@ -43,8 +41,8 @@ in {
       EDITOR = user.editor;
       FLAKE = "${user.homeDir}/dev/nix-config";
       TERMINAL_BG = user.colors.background;
-      XCURSOR_SIZE = cursorSize;
-      HYPRCURSOR_SIZE = cursorSize;
+      XCURSOR_SIZE = user.cursorSize;
+      HYPRCURSOR_SIZE = user.cursorSize;
     };
 
     # https://mipmip.github.io/home-manager-option-search/?query=keyboard
@@ -60,17 +58,5 @@ in {
         version = "7.0-beta36";
       })
     ];
-
-    pointerCursor = {
-      hyprcursor.enable = true;
-      gtk.enable = true;
-      # x11.enable = true;
-      package = pkgs.banana-cursor;
-      name = "Banana";
-      # package = pkgs.bibata-cursors;
-      # name = "Bibata-Modern-Classic";
-      size = cursorSize;
-    };
   };
-  gtk = {enable = true;};
 }

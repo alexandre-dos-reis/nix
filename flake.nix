@@ -57,6 +57,7 @@
       fullname = "Alexandre Dos Reis";
       font = "Maple Mono NF"; # This is not the nix package name but rather the name installed on the system
       editor = "nvim";
+      cursorSize = 28;
       colors = {
         background = "#072329";
         cursor = "#708183";
@@ -80,7 +81,7 @@
       {
         hostname = "finishers";
         system = "x86_64-linux";
-        users = [alex];
+        users = [(alex // {modules = ["linux_hyprland"];})];
       }
       {
         hostname = "kavval";

@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  user,
+  ...
+}: {
   # TODO: https://www.youtube.com/watch?v=zt3hgSBs11g
   # Example of script using pid
   # https://www.emadelsaid.com/Open%20application%20in%20workspace%20Hyprland/
@@ -9,6 +13,18 @@
   # For now just tweak the config file in `~/.config/hypr/hyprland.conf`
   #   enable = true;
   # };
+
+  home.pointerCursor = {
+    hyprcursor.enable = true;
+    gtk.enable = true;
+    # x11.enable = true;
+    package = pkgs.banana-cursor;
+    name = "Banana";
+    # package = pkgs.bibata-cursors;
+    # name = "Bibata-Modern-Classic";
+    size = user.cursorSize;
+  };
+  gtk = {enable = true;};
 
   # Notifications daemon
   services.swaync = {

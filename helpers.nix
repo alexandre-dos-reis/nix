@@ -33,13 +33,19 @@
 
   mkHelpers = pkgs: {inherit (pkgs.stdenv) isDarwin isLinux;};
 
-  decorateUser = user: helpers:
+  decorateUser = user: helpers: let
+    modules =
+      if (hasAttr "modules" user)
+      then user.modules
+      else [];
+    homeDir =
+      if helpers.isDarwin
+      then "/Users/${user.username}"
+      else "/home/${user.username}";
+  in
     user
     // {
-      homeDir =
-        if helpers.isDarwin
-        then "/Users/${user.username}"
-        else "/home/${user.username}";
+      inherit modules homeDir;
     };
 
   mkHomes = list:
@@ -80,6 +86,9 @@
                 }
               )
               ./home/${user.username}
+              {
+                imports = map (module: ./home/_modules/${module}) user.modules;
+              }
             ];
           };
       })

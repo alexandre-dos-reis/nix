@@ -15,7 +15,6 @@
     # ./vscode.nix
     ./ssh.nix
     ./oh-my-posh
-    ./hyprland
     # ./zellij.nix
   ];
 }
