@@ -36,6 +36,7 @@
   services.hyprpaper = {
     enable = true;
     settings = let
+      # TODO: Put this in the global config.
       path = "/home/alex/dev/nix-config/home/alex/programs/hyprland/wallpapers";
       dots_img = "${path}/solarized_dots.jpg";
       triangle_img = "${path}/solarized_triangle.jpg";
