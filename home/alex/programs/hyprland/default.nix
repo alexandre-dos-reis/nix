@@ -2,6 +2,7 @@
   # TODO: https://www.youtube.com/watch?v=zt3hgSBs11g
   # Example of script using pid
   # https://www.emadelsaid.com/Open%20application%20in%20workspace%20Hyprland/
+  # https://blogs.kde.org/2024/10/09/cursor-size-problems-in-wayland-explained/
 
   # wayland.windowManager.hyprland = {
   # TODO: Rewrite hyprland.conf the nix way
@@ -121,13 +122,14 @@
           "format-fr" = "Fra";
         };
         "pulseaudio" = {
+          "max-volume" = 100;
           "format" = "{volume}{icon}";
           "tooltip" = false;
           "format-muted" = "Muted";
           "on-click" = "pamixer -t";
           "on-scroll-up" = "pamixer -i 2";
           "on-scroll-down" = "pamixer -d 2";
-          "scroll-step" = 5;
+          "scroll-step" = 2;
           "format-icons" = {
             "headphone" = "";
             "hands-free" = "";

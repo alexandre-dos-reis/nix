@@ -5,7 +5,7 @@
   inputs,
   ...
 }: let
-  cursorSize = 30;
+  cursorSize = 28;
 in {
   imports = [
     ./programs
