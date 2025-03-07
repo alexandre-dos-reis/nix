@@ -86,9 +86,15 @@
                 }
               )
               ./home/${user.username}
-              {
-                imports = map (module: ./home/_modules/${module}) user.modules;
-              }
+              ({helpers, ...}: {
+                imports = map (module:
+                  ./modules/home-manager/${
+                    if helpers.isLinux
+                    then "linux"
+                    else "darwin"
+                  }/${module})
+                user.modules;
+              })
             ];
           };
       })

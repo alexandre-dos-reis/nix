@@ -37,13 +37,13 @@
     enable = true;
     settings = let
       # TODO: Put this in the global config.
-      path = "/home/alex/dev/nix-config/home/alex/programs/hyprland/wallpapers";
+      path = "/home/alex/dev/nix-config/home/alex/files/wallpapers";
       dots_img = "${path}/solarized_dots.jpg";
       triangle_img = "${path}/solarized_triangle.jpg";
     in {
       ipc = "on";
       preload = [dots_img triangle_img];
-      wallpaper = ["DP-4,${triangle_img}" "eDP-1,${dots_img}"];
+      wallpaper = ["eDP-1,${dots_img}" "DP-4,${triangle_img}"];
     };
   };
 
