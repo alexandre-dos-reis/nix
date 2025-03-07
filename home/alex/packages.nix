@@ -22,7 +22,7 @@
     sqlite
     zip
     age
-    ansible
+    # ansible
     eza
     fd
     fzf
