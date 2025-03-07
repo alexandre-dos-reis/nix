@@ -1,8 +1,16 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  user,
+  ...
+}: let
   # term = "xterm-kitty";
   # https://github.com/craftzdog/dotfiles-public/blob/master/.config/tmux/tmux.conf
   # term = "xterm-256color";
   term = "xterm-ghostty";
+  bg = user.colors.background;
+  fg = user.colors.palette.base2-hex;
+  yellow = user.colors.palette.yellow500-hex;
+  grey = user.colors.palette.base1-hex;
 in {
   programs.tmux = {
     enable = true;
@@ -68,7 +76,7 @@ in {
 
       # Shortcut for reloading tmux config
       unbind r
-      bind r source-file ~/.tmux.conf
+      bind r source-file ~/.config/tmux/tmux.conf
 
       # Undercurl
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
@@ -83,21 +91,21 @@ in {
       set -gq allow-passthrough on
 
       ## style and colors
-        set -g mode-style "fg=#eee8d5,bg=#073642"
+        set -g mode-style "fg=${fg},bg=${bg}"
 
-        set -g message-style "fg=#eee8d5,bg=#073642"
-        set -g message-command-style "fg=#eee8d5,bg=#073642"
+        set -g message-style "fg=${fg},bg=${bg}"
+        set -g message-command-style "fg=${fg},bg=${bg}"
 
-        set -g pane-border-style "fg=#073642"
-        set -g pane-active-border-style "fg=#93a1a1"
+        set -g pane-border-style "fg=${bg}"
+        set -g pane-active-border-style "fg=${grey}"
 
         set -g status "on"
         set -g status-interval 1
         set -g status-justify "left"
 
-        set -g status-style "fg=#586e75,bg=#073642"
+        set -g status-style "fg=${grey},bg=${bg}"
 
-        set -g status-bg "#002b36"
+        set -g status-bg "${bg}"
 
         set -g status-left-length "100"
         set -g status-right-length "100"
@@ -105,14 +113,14 @@ in {
         set -g status-left-style NONE
         set -g status-right-style NONE
 
-        set -g status-left "#[fg=#073642,bg=#eee8d5,bold] #S #[fg=#eee8d5,bg=#93a1a1,nobold,nounderscore,noitalics]#[fg=#15161E,bg=#93a1a1,bold] #(whoami) #[fg=#93a1a1,bg=#002b36]"
-        set -g status-right "#[fg=#586e75,bg=#002b36,nobold,nounderscore,noitalics]#[fg=#93a1a1,bg=#586e75]#[fg=#657b83,bg=#586e75,nobold,nounderscore,noitalics]#[fg=#93a1a1,bg=#657b83]#[fg=#93a1a1,bg=#657b83,nobold,nounderscore,noitalics]#[fg=#15161E,bg=#93a1a1,bold] #h "
+        set -g status-left "#[fg=${bg},bg=${fg},bold] #S #[fg=${fg},bg=${grey},nobold,nounderscore,noitalics]#[fg=${bg},bg=${grey},bold] #(whoami) #[fg=${grey},bg=${bg}]"
+        set -g status-right "#[fg=${grey},bg=${bg},nobold,nounderscore,noitalics]#[fg=${grey},bg=${grey}]#[fg=${grey},bg=${grey},nobold,nounderscore,noitalics]#[fg=${grey},bg=#657b83]#[fg=${grey},bg=#657b83,nobold,nounderscore,noitalics]#[fg=#15161E,bg=${grey},bold] #h "
 
-        setw -g window-status-activity-style "underscore,fg=#839496,bg=#002b36"
+        setw -g window-status-activity-style "underscore,fg=${grey},bg=${bg}"
         setw -g window-status-separator ""
-        setw -g window-status-style "NONE,fg=#839496,bg=#002b36"
-        setw -g window-status-format '#[fg=#002b36,bg=#002b36]#[default] #I  #{b:pane_current_path} #[fg=#002b36,bg=#002b36,nobold,nounderscore,noitalics]'
-        setw -g window-status-current-format '#[fg=#002b36,bg=#eee8d5]#[fg=#b58900,bg=#eee8d5] #I #[fg=#eee8d5,bg=#b58900] #{b:pane_current_path} #[fg=#b58900,bg=#002b36,nobold]'
+        setw -g window-status-style "NONE,fg=${grey},bg=${bg}"
+        setw -g window-status-format '#[fg=${bg},bg=${bg}]#[default] #I  #{b:pane_current_path} #[fg=${bg},bg=${bg},nobold,nounderscore,noitalics]'
+        setw -g window-status-current-format '#[fg=${bg},bg=${fg}]#[fg=${yellow},bg=${fg}] #I #[fg=${fg},bg=${yellow}] #{b:pane_current_path} #[fg=${yellow},bg=${bg},nobold]'
     '';
   };
 }

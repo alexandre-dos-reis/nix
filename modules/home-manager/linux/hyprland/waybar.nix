@@ -123,7 +123,6 @@ in {
       * {
         border: none;
         font-family: ${user.font};
-        font-weight: 800;
         font-size: 20px;
         min-height: 0;
       }
