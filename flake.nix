@@ -62,6 +62,7 @@
       colors = {
         background = "#072329";
         cursor = "#708183";
+        palette = builtins.fromJSON (builtins.readFile ./colors/palette.json);
       };
       # This allows to install npm packages globally with: `npm i -g <some-package>`
       # Not available in nixpkgs

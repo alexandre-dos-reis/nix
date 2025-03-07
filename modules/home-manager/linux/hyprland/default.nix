@@ -5,11 +5,17 @@
 }: let
   attrsToList = pkgs.lib.attrsets.attrsToList;
   join = pkgs.lib.strings.concatStringsSep;
+
+  colors = user.colors.palette;
+  borderActiveColor = colors.base02-rgbhex;
+  borderInativeColor = "rgba(07354100)";
 in {
   # TODO: https://www.youtube.com/watch?v=zt3hgSBs11g
   # Example of script using pid
   # https://www.emadelsaid.com/Open%20application%20in%20workspace%20Hyprland/
   # https://blogs.kde.org/2024/10/09/cursor-size-problems-in-wayland-explained/
+
+  imports = [./waybar.nix];
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -55,12 +61,12 @@ in {
       monitor = map ({value, ...}: "${value.name},preferred,auto,${value.scale}") (attrsToList monitors);
 
       exec-once = [
-        # Hyprland ecosystem
-        (join " & " ["waybar" "swaync" "hyprpaper" "clipse -listen"])
-        # Apps
-        (join
-          " & "
-          (map ({value, ...}: value.name) (attrsToList apps)))
+        (join " & "
+          # Hyprland ecosystem
+          (["waybar" "swaync" "hyprpaper" "clipse -listen"]
+            ++
+            # Apps
+            (map ({value, ...}: value.name) (attrsToList apps))))
       ];
 
       # Set wallpapers
@@ -108,7 +114,7 @@ in {
           "$mainMod, W, killactive,"
           "$mainMod, M, exit,"
           "$mainMod, T, togglefloating,"
-          "$mainMod, SPACE, exec, \"wofi --show drun\""
+          "$mainMod, SPACE, execr, wofi --show drun"
           "$mainMod, C, exec, kitty --class clipse -e clipse"
 
           # Movements
@@ -176,11 +182,11 @@ in {
         gaps_in = 5;
         gaps_out = 5;
 
-        border_size = 1;
+        border_size = 8;
 
         # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-        "col.active_border" = "rgba(ffffff9e)";
-        "col.inactive_border" = "rgba(ffffff1e)";
+        "col.active_border" = borderActiveColor;
+        "col.inactive_border" = borderInativeColor;
 
         # Set to true enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = true;
@@ -193,8 +199,8 @@ in {
 
       # https://wiki.hyprland.org/Configuring/Variables/#decoration
       decoration = {
-        rounding = 5;
-        rounding_power = "2";
+        rounding = 0;
+        rounding_power = 2;
 
         # Change transparency of focused and unfocused windows
         active_opacity = 1.0;
@@ -371,82 +377,4 @@ in {
   };
 
   # Status bar
-  programs.waybar = {
-    # https://github.com/Alexays/Waybar/wiki/Module:-Hyprland
-    enable = true;
-    style = ./waybar.css;
-    settings = {
-      mainBar = {
-        layer = "top";
-        position = "top";
-        height = 30;
-        modules-left = ["hyprland/workspaces"];
-        # modules-center = ["hyprland/window"];
-        modules-right = ["hyprland/language" "custom/weather" "pulseaudio" "battery" "clock" "tray"];
-
-        "hyprland/workspaces" = {
-          active-only = false;
-          all-outputs = false;
-          # I'm using icons just to rename workspaces
-          format = "{icon}";
-          format-icons = let
-            work = "Work";
-            com = "Com";
-            share = "Share";
-            review = "Review";
-          in {
-            "1" = work;
-            "2" = com;
-            "3" = share;
-            "4" = review;
-            "11" = work;
-            "12" = com;
-            "13" = share;
-            "14" = review;
-          };
-          disable-scroll = true;
-          show-special = true;
-          # special-visible-only = true;
-          persistent-workspaces = {
-            "eDP-1" = [
-              1
-              2
-              3
-              4
-            ];
-            "DP-4" = [
-              11
-              12
-              13
-              14
-            ];
-          };
-        };
-        "hyprland/language" = {
-          "format" = "{}";
-          "format-en" = "Eng";
-          "format-fr" = "Fra";
-        };
-        "pulseaudio" = {
-          "max-volume" = 100;
-          "format" = "{volume}{icon}";
-          "tooltip" = false;
-          "format-muted" = "Muted";
-          "on-click" = "pamixer -t";
-          "on-scroll-up" = "pamixer -i 2";
-          "on-scroll-down" = "pamixer -d 2";
-          "scroll-step" = 2;
-          "format-icons" = {
-            "headphone" = "";
-            "hands-free" = "";
-            "headset" = "";
-            "phone" = "";
-            "portable" = "";
-            "car" = "";
-            "default" = ["" "" ""];
-          };
-        };
-      };
-    };
-  };
 }
