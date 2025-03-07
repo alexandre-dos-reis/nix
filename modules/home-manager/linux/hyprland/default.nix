@@ -142,6 +142,10 @@ in {
         "$mainMod, mouse:273, resizewindow"
       ];
 
+      # TODO: try that for screen brightness, need to install `brightnessctl`
+      # binde = , XF86MonBrightnessUp, exec, brightnessctl set +15%
+      # binde = , XF86MonBrightnessDown, exec, brightnessctl set 15%-
+
       bindel = [
         ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
