@@ -6,6 +6,7 @@
 in {
   programs.waybar = {
     # https://github.com/Alexays/Waybar/wiki/Module:-Hyprland
+    # Enable css in nix with treesitter: https://www.youtube.com/watch?v=v3o9YaHBM4Q
     enable = true;
 
     settings = {
