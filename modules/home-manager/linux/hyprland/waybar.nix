@@ -16,10 +16,28 @@ in {
         modules-left = ["clock"];
         modules-center = ["hyprland/workspaces"];
         # modules-center = ["hyprland/window"];
-        modules-right = ["hyprland/language" "custom/weather" "pulseaudio" "battery"];
+        modules-right = ["hyprland/language" "custom/weather" "pulseaudio" "network" "memory" "cpu" "battery"];
 
         clock = {
           format = "<span color='${cyan}'>{:%A %H:%M %d %b}</span>";
+        };
+        "memory" = {
+          "format" = "<span color='${white}'>r{}%</span> ";
+        };
+        "cpu" = {
+          "format" = "<span color='${white}'>c{}%</span> ";
+        };
+
+        network = {
+          "format" = "{ifname}";
+          "format-wifi" = "";
+          "format-ethernet" = "{ifname}/{cidr}";
+          "format-disconnected" = "";
+          "tooltip-format" = "{ifname} via {gwaddr}";
+          "tooltip-format-wifi" = "{essid} ({signalStrength}%) ";
+          "tooltip-format-ethernet" = "{ifname} ";
+          "tooltip-format-disconnected" = "Disconnected";
+          "max-length" = 50;
         };
 
         "hyprland/workspaces" = {
@@ -153,6 +171,8 @@ in {
       #network,
       #workspaces,
       #tray,
+      #memory,
+      #cpu,
       #cava,
       #keyboard-state,
       #idle_inhibitor,
