@@ -9,8 +9,9 @@
   term = "xterm-ghostty";
   bg = user.colors.background;
   fg = user.colors.palette.base2-hex;
-  yellow = user.colors.palette.yellow500-hex;
+  yellow = user.colors.palette.yellow-hex;
   grey = user.colors.palette.base1-hex;
+  colors = user.colors.palette;
 in {
   programs.tmux = {
     enable = true;
@@ -113,14 +114,14 @@ in {
         set -g status-left-style NONE
         set -g status-right-style NONE
 
-        set -g status-left "#[fg=${bg},bg=${fg},bold] #S #[fg=${fg},bg=${grey},nobold,nounderscore,noitalics]#[fg=${bg},bg=${grey},bold] #(whoami) #[fg=${grey},bg=${bg}]"
-        set -g status-right "#[fg=${grey},bg=${bg},nobold,nounderscore,noitalics]#[fg=${grey},bg=${grey}]#[fg=${grey},bg=${grey},nobold,nounderscore,noitalics]#[fg=${grey},bg=#657b83]#[fg=${grey},bg=#657b83,nobold,nounderscore,noitalics]#[fg=#15161E,bg=${grey},bold] #h "
+        set -g status-left "#[fg=${colors.base1-hex},bg=${colors.base02-hex},bold] #S #[fg=${colors.base02-hex},bg=${colors.base03-hex},nobold,nounderscore,noitalics]#[fg=${colors.base1-hex},bg=${colors.base03-hex},bold] #(whoami) #[fg=${colors.base03-hex},bg=${bg}]"
+        set -g status-right "#[fg=${colors.base03-hex},bg=${bg},nobold,nounderscore,noitalics]#[fg=${colors.base02-hex},bg=${colors.base03-hex},nobold,nounderscore,noitalics]#[fg=${colors.base1-hex},bg=${colors.base02-hex},bold] #h "
 
         setw -g window-status-activity-style "underscore,fg=${grey},bg=${bg}"
         setw -g window-status-separator ""
         setw -g window-status-style "NONE,fg=${grey},bg=${bg}"
-        setw -g window-status-format '#[fg=${bg},bg=${bg}]#[default] #I  #{b:pane_current_path} #[fg=${bg},bg=${bg},nobold,nounderscore,noitalics]'
-        setw -g window-status-current-format '#[fg=${bg},bg=${fg}]#[fg=${yellow},bg=${fg}] #I #[fg=${fg},bg=${yellow}] #{b:pane_current_path} #[fg=${yellow},bg=${bg},nobold]'
+        setw -g window-status-format '#[fg=${bg},bg=${bg}]#[fg=${colors.base00-hex},bg=${bg}] #I  #{b:pane_current_command} #[fg=${bg},bg=${bg},nobold,nounderscore,noitalics]'
+        setw -g window-status-current-format '#[fg=${bg},bg=${yellow}]#[fg=${colors.base02-hex},bg=${yellow}] #I #[fg=${yellow},bg=${colors.base02-hex}] #{b:pane_current_command} #[fg=${colors.base02-hex},bg=${bg},nobold]'
     '';
   };
 }

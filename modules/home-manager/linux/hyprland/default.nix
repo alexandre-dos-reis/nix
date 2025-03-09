@@ -347,6 +347,7 @@ in {
     hyprshot
     nautilus
     hyprpaper # services.hyprpaper doesn't seems to run launch hyprpaper
+    brightnessctl
   ];
 
   # App launcher
