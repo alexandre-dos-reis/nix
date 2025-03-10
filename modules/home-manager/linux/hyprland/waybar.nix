@@ -12,7 +12,10 @@
   green = colors.green500-hex;
   violet = colors.violet500-hex;
 in {
-  home.packages = with pkgs; [wttrbar];
+  home.packages = with pkgs; [
+    wttrbar
+    nerd-fonts.caskaydia-mono
+  ];
 
   programs.waybar = {
     # https://github.com/Alexays/Waybar/wiki/Module:-Hyprland

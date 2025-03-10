@@ -7,7 +7,6 @@
     devenv # Dev
 
     # fonts
-    nerd-fonts.caskaydia-mono
     (maple-mono-NF.overrideAttrs {
       version = "7.0-beta36";
     })
