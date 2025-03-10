@@ -1,9 +1,19 @@
-{user, ...}: let
+{
+  user,
+  pkgs,
+  ...
+}: let
   colors = user.colors.palette;
   cyan = colors.cyan500-hex;
   yellow = colors.yellow500-hex;
   white = colors.base2-hex;
+  blue = colors.blue500-hex;
+  grey = colors.base00-hex;
+  green = colors.green500-hex;
+  violet = colors.violet500-hex;
 in {
+  home.packages = with pkgs; [wttrbar];
+
   programs.waybar = {
     # https://github.com/Alexays/Waybar/wiki/Module:-Hyprland
     # Enable css in nix with treesitter: https://www.youtube.com/watch?v=v3o9YaHBM4Q
@@ -13,25 +23,34 @@ in {
       mainBar = {
         layer = "top";
         position = "top";
-        height = 30;
-        modules-left = ["clock"];
+        height = 40;
+        modules-left = ["memory" "cpu" "disk" "custom/weather"];
         modules-center = ["hyprland/workspaces"];
-        # modules-center = ["hyprland/window"];
-        modules-right = ["hyprland/language" "custom/weather" "pulseaudio" "network" "memory" "cpu" "battery"];
+        modules-right = ["hyprland/language" "pulseaudio" "network" "battery" "clock"];
 
+        "custom/weather" = {
+          "format" = "<span color='${cyan}'>{}°</span>";
+          "tooltip" = true;
+          "interval" = 3600;
+          "exec" = "wttrbar --location blèves --nerd";
+          "return-type" = "json";
+        };
         clock = {
-          format = "<span color='${cyan}'>{:%A %H:%M %d %b}</span>";
+          format = "<span color='${white}'>{:%H:%M}</span>";
         };
         "memory" = {
-          "format" = "<span color='${white}'>r{}%</span> ";
+          "format" = "<span color='${cyan}'>  {}%</span> ";
         };
         "cpu" = {
-          "format" = "<span color='${white}'>c{}%</span> ";
+          "format" = "<span color='${cyan}'> {}%</span> ";
+        };
+        "disk" = {
+          "format" = "<span color='${cyan}'> {}%</span> ";
         };
 
         network = {
-          "format" = "{ifname}";
-          "format-wifi" = "";
+          "format" = "<span color='${violet}'>{ifname}</span>";
+          "format-wifi" = "<span color='${violet}'>{essid} </span>";
           "format-ethernet" = "{ifname}/{cidr}";
           "format-disconnected" = "";
           "tooltip-format" = "{ifname} via {gwaddr}";
@@ -44,13 +63,8 @@ in {
         "hyprland/workspaces" = {
           active-only = false;
           all-outputs = false;
-          # I'm using icons just to rename workspaces
           format = "{icon}";
           format-icons = let
-            # work = "Work";
-            # com = "Com";
-            # share = "Share";
-            # review = "Review";
             icon = "";
           in {
             "1" = icon;
@@ -64,7 +78,6 @@ in {
           };
           disable-scroll = true;
           show-special = true;
-          # special-visible-only = true;
           persistent-workspaces = {
             "eDP-1" = [
               1
@@ -81,7 +94,7 @@ in {
           };
         };
         "hyprland/language" = {
-          "format" = "{}";
+          "format" = "<span color='${green}'>{}</span>";
           "format-en" = "Eng";
           "format-fr" = "Fra";
         };
@@ -91,15 +104,15 @@ in {
             "warning" = 30;
             "critical" = 15;
           };
-          "format" = "{capacity}% {icon}";
-          "format-charging" = "{capacity}% ";
-          "format-plugged" = "{capacity}% ";
+          "format" = "<span color='${cyan}'>{capacity}% {icon}</span";
+          "format-charging" = "<span color='${cyan}'>{capacity}% </span>";
+          "format-plugged" = "<span color='${cyan}'>{capacity}% </span>";
           "format-alt" = "{time} {icon}";
           "format-icons" = ["" "" "" "" ""];
         };
         "pulseaudio" = {
           "max-volume" = 100;
-          "format" = "{volume}{icon}";
+          "format" = "<span color='${yellow}'>{volume}% {icon}</span>";
           "tooltip" = false;
           "format-muted" = "Muted";
           "on-click" = "pamixer -t";
@@ -122,30 +135,32 @@ in {
     style = ''
       * {
         border: none;
-        font-family: ${user.font};
-        font-size: 20px;
-        min-height: 0;
       }
 
       window#waybar {
         background: none;
-        margin: 0px;
+        margin: 0;
         padding: 0 5px;
+        font-size: 20px;
+        font-weight: 400;
+        font-family: CaskaydiaMono Nerd Font;
       }
 
       tooltip {
         background: rgba(0, 43, 54, 0.9);
-        color: #839496;
+        color: ${cyan};
       }
 
       #workspaces button {
-        border: none;
         transition-duration: 0.3s;
         background: none;
         box-shadow: inherit;
         text-shadow: inherit;
-        margin-top: -4px;
-        margin-bottom: -4px;
+        font-weight: 800;
+        font-family: ${user.font};
+        font-size: 30px;
+        margin-top: -8px;
+        margin-bottom: -8px;
       }
 
       #workspaces button {
@@ -153,7 +168,7 @@ in {
       }
 
       #workspaces button:hover {
-        color: #268bd2;
+        color: ${blue};
       }
 
       #workspaces button.visible {
@@ -172,86 +187,18 @@ in {
       #workspaces,
       #tray,
       #memory,
+      #disk,
       #cpu,
       #cava,
       #keyboard-state,
       #idle_inhibitor,
-      #custom-power {
+      #workspaces {
         background: none;
-        padding: 0px 10px;
+        padding: 0px 16px;
         margin: 0px;
         margin-top: 5px;
       }
 
-      #workspaces {
-        margin-left: 4px;
-        padding-right: 4px;
-        padding-left: 0px;
-      }
-
-      #language {
-        color: ${cyan};
-        min-width: 24px;
-      }
-
-      #keyboard-state {
-        background: none;
-        color: #b58900;
-        border: none;
-      }
-
-      #custom-updates {
-        background: rgba(0, 43, 54, 0.9);
-        color: #268bd2;
-      }
-
-      #window {
-        background: rgba(0, 43, 54, 0.9);
-        margin-left: 30px;
-        margin-right: 30px;
-      }
-
-      #custom-playerctl {
-        background: rgba(0, 43, 54, 0.9);
-        color: #b58900;
-      }
-
-      #cava {
-        background: rgba(0, 43, 54, 0.9);
-        color: #cb4b16;
-        margin-left: 4px;
-      }
-
-
-      #network {
-        color: #839496;
-      }
-
-      #battery,
-      #pulseaudio.microphone,
-      #pulseaudio {
-        color: ${cyan};
-      }
-
-      #custom-weather {
-        background: rgba(0, 43, 54, 0.9);
-        color: #b58900;
-        border-radius: 7px 0px 0px 7px;
-      }
-
-      #idle_inhibitor {
-        background: rgba(0, 43, 54, 0.9);
-        color: #839496;
-        min-width: 18px;
-      }
-
-      #custom-power {
-        background: rgba(0, 43, 54, 0.9);
-        color: #dc322f;
-        margin-left: 0px;
-        margin-right: 4px;
-        padding-right: 12px;
-      }
     '';
   };
 }

@@ -6,6 +6,12 @@
     nixos-rebuild
     devenv # Dev
 
+    # fonts
+    nerd-fonts.caskaydia-mono
+    (maple-mono-NF.overrideAttrs {
+      version = "7.0-beta36";
+    })
+
     # system utils
     dust
     btop
@@ -22,7 +28,6 @@
     sqlite
     zip
     age
-    # ansible
     eza
     fd
     fzf

@@ -1,5 +1,4 @@
 {
-  pkgs,
   user,
   helpers,
   inputs,
@@ -52,11 +51,5 @@
       if helpers.isDarwin
       then "Unicode Hex Input"
       else "us";
-
-    packages = with pkgs; [
-      (maple-mono-NF.overrideAttrs {
-        version = "7.0-beta36";
-      })
-    ];
   };
 }
