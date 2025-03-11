@@ -30,8 +30,6 @@
     eza
     fd
     fzf
-    lazygit
-    gh # github cli
     pandoc
     ripgrep
     tree
@@ -44,6 +42,11 @@
     # code
     jujutsu
     tokei # Stats about code
+
+    # git
+    tig
+    lazygit
+    gh # github cli
 
     # Keyboard
     qmk
