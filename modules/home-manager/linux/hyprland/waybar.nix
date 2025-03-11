@@ -53,7 +53,7 @@ in {
 
         network = {
           "format" = "<span color='${violet}'>{ifname}</span>";
-          "format-wifi" = "<span color='${violet}'>{essid} </span>";
+          "format-wifi" = "<span color='${violet}'>{essid} {icon}</span>";
           "format-ethernet" = "{ifname}/{cidr}";
           "format-disconnected" = "";
           "tooltip-format" = "{ifname} via {gwaddr}";
@@ -61,6 +61,7 @@ in {
           "tooltip-format-ethernet" = "{ifname} ";
           "tooltip-format-disconnected" = "Disconnected";
           "max-length" = 50;
+          "format-icons" = ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
         };
 
         "hyprland/workspaces" = {
