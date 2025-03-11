@@ -26,20 +26,21 @@
   time.timeZone = "Europe/Paris";
 
   i18n = let
-    lang = "en_US";
-    locale = "fr_FR";
+    lang = "en_US.UTF-8";
+    locale = "fr_FR.UTF-8";
   in {
-    defaultLocale = "${lang}.UTF-8";
+    defaultLocale = lang;
+    supportedLocales = ["${locale}/UTF-8"];
     extraLocaleSettings = {
-      LC_ADDRESS = "${locale}.UTF-8";
-      LC_IDENTIFICATION = "${locale}.UTF-8";
-      LC_MEASUREMENT = "${locale}.UTF-8";
-      LC_MONETARY = "${locale}.UTF-8";
-      LC_NAME = "${locale}.UTF-8";
-      LC_NUMERIC = "${locale}.UTF-8";
-      LC_PAPER = "${locale}.UTF-8";
-      LC_TELEPHONE = "${locale}.UTF-8";
-      LC_TIME = "${locale}.UTF-8";
+      LC_ADDRESS = locale;
+      LC_IDENTIFICATION = locale;
+      LC_MEASUREMENT = locale;
+      LC_MONETARY = locale;
+      LC_NAME = locale;
+      LC_NUMERIC = locale;
+      LC_PAPER = locale;
+      LC_TELEPHONE = locale;
+      LC_TIME = locale;
     };
   };
 
