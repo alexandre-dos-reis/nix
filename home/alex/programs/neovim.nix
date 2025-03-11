@@ -44,7 +44,8 @@
     eslint_d
 
     # Graphql
-    nodePackages.graphql-language-service-cli
+    # Not available on master branch atm
+    # nodePackages.graphql-language-service-cli
 
     # Tailwind
     tailwindcss-language-server
