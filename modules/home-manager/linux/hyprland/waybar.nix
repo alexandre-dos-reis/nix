@@ -8,7 +8,6 @@
   yellow = colors.yellow500-hex;
   white = colors.base2-hex;
   blue = colors.blue500-hex;
-  grey = colors.base00-hex;
   green = colors.green500-hex;
   violet = colors.violet500-hex;
 in {
@@ -111,7 +110,7 @@ in {
           "format" = "<span color='${cyan}'>{capacity}% {icon}</span";
           "format-charging" = "<span color='${cyan}'>{capacity}% </span>";
           "format-plugged" = "<span color='${cyan}'>{capacity}% </span>";
-          "format-alt" = "{time} {icon}";
+          "format-alt" = "<span color='${cyan}'>{capacity}% {icon}</span>";
           "format-icons" = ["" "" "" "" ""];
         };
         "pulseaudio" = {
