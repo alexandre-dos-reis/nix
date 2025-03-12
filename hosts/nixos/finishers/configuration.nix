@@ -58,16 +58,19 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
-
+  # Internet said that pipewire is better than pulseaudio.
   services.pulseaudio.enable = false;
+
+  # Enable sound with pipewire.
+  # HINT: open pavucontrol and change sink/profile in configuration.
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # jack.enable = true;
+    # TODO: find a way to set default sink/profile
+    # extraConfig = ...
   };
 
   users.users = builtins.listToAttrs (map (u: {
@@ -99,7 +102,7 @@
     gparted # Managed disks
     nvitop # NVIDIA-GPU process viewer
     mesa-demos # glxgears
-    pavucontrol # Controls Audio
+    pavucontrol # Graphical Controls Audio
   ];
 
   # This value determines the NixOS release from which the default
