@@ -58,6 +58,18 @@ in {
 
       "$mainMod" = "SUPER";
 
+      # Taken from here : https://wiki.hyprland.org/Nvidia/
+      # CLI debug to check if nvidia drivers are running:
+      #
+      # `nvidia-settings`
+      # `glxinfo | egrep "OpenGL"`
+      # `nvidia-smi`
+
+      env = [
+        "LIBVA_DRIVER_NAME,nvidia"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+      ];
+
       monitor = map ({value, ...}: "${value.name},preferred,auto,${value.scale}") (attrsToList monitors);
 
       exec-once = [
@@ -347,7 +359,8 @@ in {
     hyprshot
     nautilus
     hyprpaper # services.hyprpaper doesn't seems to run launch hyprpaper
-    brightnessctl
+    brightnessctl # Control brightness display
+    playerctl # Control audio
   ];
 
   # App launcher
