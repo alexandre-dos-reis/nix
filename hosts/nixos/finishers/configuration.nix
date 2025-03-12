@@ -99,6 +99,7 @@
     gparted # Managed disks
     nvitop # NVIDIA-GPU process viewer
     mesa-demos # glxgears
+    pavucontrol # Controls Audio
   ];
 
   # This value determines the NixOS release from which the default
