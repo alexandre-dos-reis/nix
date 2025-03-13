@@ -75,7 +75,13 @@ in {
       exec-once = [
         (join " & "
           # Hyprland ecosystem
-          (["waybar" "swaync" "hyprpaper" "clipse -listen"]
+          ([
+              "waybar"
+              "swaync"
+              "hyprpaper"
+              "clipse -listen"
+              "hyprctl setcursor ${user.cursor.theme} ${toString user.cursor.size}"
+            ]
             ++
             # Apps
             (map ({value, ...}: value.name) (attrsToList apps))))
@@ -321,20 +327,19 @@ in {
   };
 
   home.pointerCursor = {
-    hyprcursor.enable = true;
-    name = "Banana";
-    size = user.cursorSize;
+    name = user.cursor.theme;
+    size = user.cursor.size;
     gtk.enable = true;
     x11.enable = true;
-    package = pkgs.banana-cursor;
+    package = pkgs.${user.cursor.pkgs};
   };
 
   gtk = {
     enable = true;
     cursorTheme = {
-      name = "Banana";
-      size = user.cursorSize;
-      package = pkgs.banana-cursor;
+      name = user.cursor.theme;
+      size = user.cursor.size;
+      package = pkgs.${user.cursor.pkgs};
     };
   };
 

@@ -57,7 +57,11 @@
       fullname = "Alexandre Dos Reis";
       font = "Maple Mono NF"; # This is not the nix package name but rather the name installed on the system
       editor = "nvim";
-      cursorSize = 32;
+      cursor = {
+        pkgs = "banana-cursor";
+        theme = "Banana";
+        size = 36;
+      };
       wallpapers = [];
       colors = {
         background = "#072329";

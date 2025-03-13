@@ -40,8 +40,8 @@
       EDITOR = user.editor;
       FLAKE = "${user.homeDir}/dev/nix-config";
       TERMINAL_BG = user.colors.background;
-      XCURSOR_SIZE = user.cursorSize;
-      HYPRCURSOR_SIZE = user.cursorSize;
+      # TODO: See if this is causing an error.
+      # XCURSOR_SIZE = user.cursor.size;
     };
 
     # https://mipmip.github.io/home-manager-option-search/?query=keyboard
