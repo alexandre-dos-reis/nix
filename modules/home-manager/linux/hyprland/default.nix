@@ -322,15 +322,21 @@ in {
 
   home.pointerCursor = {
     hyprcursor.enable = true;
-    gtk.enable = true;
-    # x11.enable = true;
-    package = pkgs.banana-cursor;
     name = "Banana";
-    # package = pkgs.bibata-cursors;
-    # name = "Bibata-Modern-Classic";
     size = user.cursorSize;
+    gtk.enable = true;
+    x11.enable = true;
+    package = pkgs.banana-cursor;
   };
-  gtk = {enable = true;};
+
+  gtk = {
+    enable = true;
+    cursorTheme = {
+      name = "Banana";
+      size = user.cursorSize;
+      package = pkgs.banana-cursor;
+    };
+  };
 
   # Notifications daemon
   services.swaync = {
