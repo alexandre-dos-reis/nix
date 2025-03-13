@@ -15,7 +15,7 @@ in {
   # https://www.emadelsaid.com/Open%20application%20in%20workspace%20Hyprland/
   # https://blogs.kde.org/2024/10/09/cursor-size-problems-in-wayland-explained/
 
-  imports = [./waybar.nix];
+  imports = [./waybar.nix ./audio.nix];
 
   wayland.windowManager.hyprland = {
     enable = true;

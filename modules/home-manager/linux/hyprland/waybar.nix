@@ -107,7 +107,7 @@ in {
             "warning" = 30;
             "critical" = 15;
           };
-          "format" = "<span color='${cyan}'>{capacity}% {icon}</span";
+          "format" = "<span color='${cyan}'>{capacity}% {icon}</span>";
           "format-charging" = "<span color='${cyan}'>{capacity}% </span>";
           "format-plugged" = "<span color='${cyan}'>{capacity}% </span>";
           "format-alt" = "<span color='${cyan}'>{capacity}% {icon}</span>";
