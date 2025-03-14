@@ -17,6 +17,7 @@
     ./gpu.nix
     ./hyprland.nix
     ./kavval-core.nix
+    ./audio.nix
   ];
 
   networking.hostName = host.hostname; # Define your hostname.
@@ -58,21 +59,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Internet said that pipewire is better than pulseaudio.
-  services.pulseaudio.enable = false;
-
-  # Enable sound with pipewire.
-  # HINT: open pavucontrol and change sink/profile in configuration.
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # TODO: find a way to set default sink/profile
-    # extraConfig = ...
-  };
-
   users.users = builtins.listToAttrs (map (u: {
       name = u.username;
       value = {
@@ -102,7 +88,6 @@
     gparted # Managed disks
     nvitop # NVIDIA-GPU process viewer
     mesa-demos # glxgears
-    pavucontrol # Graphical Controls Audio
   ];
 
   # This value determines the NixOS release from which the default
