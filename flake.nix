@@ -34,6 +34,7 @@
       url = "github:danhper/fish-ssh-agent";
       flake = false;
     };
+    # efiInstallAsRemovable = true;
     ssh-agent-macos = {
       url = "github:nifoc/ssh-agent-macos.fish";
       flake = false;

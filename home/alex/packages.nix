@@ -7,7 +7,7 @@
     devenv # Dev
 
     # fonts
-    (maple-mono-NF.overrideAttrs {
+    (maple-mono.NF.overrideAttrs {
       version = "7.0-beta36";
     })
 
@@ -63,5 +63,8 @@
 
     # Gui Apps
     vlc
+
+    # 3d apps
+    blender
   ];
 }

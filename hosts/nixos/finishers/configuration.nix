@@ -88,6 +88,7 @@
     gparted # Managed disks
     nvitop # NVIDIA-GPU process viewer
     mesa-demos # glxgears
+    freecad
   ];
 
   # This value determines the NixOS release from which the default

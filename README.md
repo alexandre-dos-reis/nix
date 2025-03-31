@@ -74,6 +74,7 @@
 - [Yusef Cross Platform](https://github.com/yusefnapora/nix-config/tree/main)
 - [JRMurr xdg example with home-manager](https://github.com/JRMurr/NixOsConfig/blob/main/flake.nix)
 - [EmergentMind](https://github.com/EmergentMind/nix-config)
+- [pinpox](https://github.com/pinpox/nixos/blob/main/flake.nix)
 
 ### Install home-manager on Ubuntu
 
