@@ -75,6 +75,7 @@
 - [JRMurr xdg example with home-manager](https://github.com/JRMurr/NixOsConfig/blob/main/flake.nix)
 - [EmergentMind](https://github.com/EmergentMind/nix-config)
 - [pinpox](https://github.com/pinpox/nixos/blob/main/flake.nix)
+- [cdata | framework config example](https://github.com/cdata/nixos-config)
 
 ### Install home-manager on Ubuntu
 

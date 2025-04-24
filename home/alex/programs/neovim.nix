@@ -35,6 +35,7 @@
     nodePackages.nodemon
     nodePackages.prettier
     nodePackages.vercel
+    nodePackages."@astrojs/language-server"
     bun
     deno
     typescript-language-server
@@ -42,14 +43,13 @@
     typescript
     prettierd
     eslint_d
+    dart # for sass
 
     # Graphql
-    # Not available on master branch atm
-    # nodePackages.graphql-language-service-cli
+    graphql-language-service-cli
 
     # Tailwind
     tailwindcss-language-server
-    #
     # nodePackages.neovim # Needed for tailwind-tools
 
     # Lua

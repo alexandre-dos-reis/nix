@@ -26,6 +26,7 @@
     wget
     sqlite
     zip
+    unzip
     age
     eza
     fd
