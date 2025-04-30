@@ -36,9 +36,12 @@
       # };
     };
 
-    sessionVariables = {
+    sessionVariables = let
+      flake = "${user.homeDir}/dev/nix-config";
+    in {
       EDITOR = user.editor;
-      FLAKE = "${user.homeDir}/dev/nix-config";
+      FLAKE = flake;
+      NH_FLAKE = flake;
       TERMINAL_BG = user.colors.background;
       # TODO: See if this is causing an error.
       # XCURSOR_SIZE = user.cursor.size;

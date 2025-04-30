@@ -8,7 +8,7 @@
 
     # fonts
     (maple-mono.NF.overrideAttrs {
-      version = "7.0-beta36";
+      version = "7.2";
     })
 
     # system utils
