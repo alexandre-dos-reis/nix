@@ -100,7 +100,7 @@
         hostname = "pop-os";
         system = "x86_64-linux";
         isManagedByHomeManager = true;
-        users = [(alex // {modules = [];})];
+        users = [alex];
       }
       {
         hostname = "kavval-silicon";

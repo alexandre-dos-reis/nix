@@ -49,17 +49,17 @@
     };
 
   mkHomes = list:
-    listToAttrs (flattenList (map (host: (map (user: {
-        name = "${user.username}@${host.hostname}";
+    listToAttrs (flattenList (map (host: (map (rawUser: {
+        name = "${rawUser.username}@${host.hostname}";
         value = let
           pkgs = nixpkgs.legacyPackages.${host.system};
           helpers = mkHelpers pkgs;
+          user = decorateUser rawUser helpers;
         in
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             extraSpecialArgs = {
-              inherit inputs outputs host helpers;
-              user = decorateUser user helpers;
+              inherit inputs outputs host helpers user;
             };
             modules = [
               # Link applications defined by Home-Manager to host
