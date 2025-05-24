@@ -24,6 +24,10 @@ Usefull is you want to run nix on a (generic linux / darwin) os.
 
 `nix run github:nix-community/home-manager switch --flake ".#{username}@{hostname}"`
 
+- Add the current user to `/etc/nix/nix.conf` or `/etc/nix/nix.custom.conf` if nix installed with determinate system:
+
+`trusted-users = root {username}`
+
 ## Todos
 
 - [ ] Split configurations into multiple files to conditionnaly call config per platform/os.
