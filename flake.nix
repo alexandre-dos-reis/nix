@@ -97,6 +97,12 @@
         users = [alex];
       }
       {
+        hostname = "pop-os";
+        system = "x86_64-linux";
+        isManagedByHomeManager = true;
+        users = [(alex // {modules = [];})];
+      }
+      {
         hostname = "kavval-silicon";
         system = "aarch64-darwin";
         users = [alex];

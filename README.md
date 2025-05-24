@@ -6,6 +6,24 @@
 - From a flake: `/etc/nixos`: `sudo nixos-rebuild --flake .`
   - As a default, nix looks for the hostname in the `nixosConfigurations` key. You can specify another machine/key with `sudo nixos-rebuild --flake ".#other-config"`
 
+## How-to
+
+### Install Nixos
+
+Todo...
+
+### Install Home-Manager in standalone mode
+
+Usefull is you want to run nix on a (generic linux / darwin) os.
+
+- Copy this repo
+
+`mkdir ~/dev && cd ./dev && git clone git@github.com:alexandre-dos-reis/nix.git nix-config`
+
+- Run home-manager without installing
+
+`nix run github:nix-community/home-manager switch --flake ".#{username}@{hostname}"`
+
 ## Todos
 
 - [ ] Split configurations into multiple files to conditionnaly call config per platform/os.

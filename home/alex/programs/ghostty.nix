@@ -20,6 +20,7 @@ in {
       command = "${pkgs.fish}/bin/fish";
       gtk-single-instance = false; # On linux enable multi instances
       theme = "Solarized Dark Higher Contrast";
+      maximize = true;
       font-size = 16; # 22
       font-family = user.font;
       background = user.colors.background;
