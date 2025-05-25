@@ -13,8 +13,7 @@
 
   # LSPs and executable
   home.packages = with pkgs; let
-    # zig = inputs.zig.packages.${pkgs.system}."0.13.0";
-    zig = inputs.zig.packages.${pkgs.system}.master; # version 0.14.0 will be available on 17/02/25
+    zig = inputs.zig.packages.${pkgs.system}.master;
   in [
     # Deps for Lazy
     luajitPackages.luarocks
@@ -88,7 +87,9 @@
     terraform-lsp
 
     # Postgres
-    postgres-lsp
+    (postgres-lsp.overrideAttrs {
+      version = "0.7.0";
+    })
     pgformatter
 
     # Php

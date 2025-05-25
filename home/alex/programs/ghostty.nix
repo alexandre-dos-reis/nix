@@ -33,6 +33,7 @@ in {
       window-padding-y = 0;
       window-padding-color = "extend";
       mouse-hide-while-typing = true;
+      app-notifications = ["no-clipboard-copy"];
     };
   };
 }
