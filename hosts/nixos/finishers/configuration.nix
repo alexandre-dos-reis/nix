@@ -12,10 +12,10 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.dell-xps-15-9530
-    ../common
+    ../common/remap-keys.nix
+    ../common/hyprland.nix
     ./boot.nix
     ./gpu.nix
-    ./hyprland.nix
     ./kavval-core.nix
     ./audio.nix
   ];

@@ -1,3 +1,0 @@
-{
-  imports = [./remap-keys.nix];
-}

@@ -65,10 +65,10 @@ in {
       # `glxinfo | egrep "OpenGL"`
       # `nvidia-smi`
 
-      env = [
-        "LIBVA_DRIVER_NAME,nvidia"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-      ];
+      # env = [
+      #   "LIBVA_DRIVER_NAME,nvidia"
+      #   "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+      # ];
 
       monitor = map ({value, ...}: "${value.name},preferred,auto,${value.scale}") (attrsToList monitors);
 
