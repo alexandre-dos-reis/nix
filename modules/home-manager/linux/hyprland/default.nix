@@ -70,6 +70,11 @@ in {
       #   "__GLX_VENDOR_LIBRARY_NAME,nvidia"
       # ];
 
+      env = [
+        "GTK_CURSOR_BLINK,1"
+        "GTK_CURSOR_BLINK_TIME,1200"
+      ];
+
       monitor = map ({value, ...}: "${value.name},preferred,auto,${value.scale}") (attrsToList monitors);
 
       exec-once = [

@@ -25,13 +25,24 @@ in {
       mainBar = {
         layer = "top";
         position = "top";
-        height = 40;
-        modules-left = ["memory" "cpu" "disk" "custom/weather"];
-        modules-center = ["hyprland/workspaces"];
-        modules-right = ["hyprland/language" "pulseaudio" "network" "battery" "clock"];
+        height = 30;
+        modules-left = [
+          "memory"
+          "cpu"
+          "disk"
+          "battery"
+        ];
+        # modules-center = ["hyprland/workspaces"];
+        modules-right = [
+          # "hyprland/language"
+          "pulseaudio"
+          "network"
+          "custom/weather"
+          "clock"
+        ];
 
         "custom/weather" = {
-          "format" = "<span color='${cyan}'>{}°</span>";
+          "format" = "<span color='${green}'>{}°</span>";
           "tooltip" = true;
           "interval" = 3600;
           "exec" = "wttrbar --location blèves --nerd";
@@ -63,44 +74,44 @@ in {
           "format-icons" = ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
         };
 
-        "hyprland/workspaces" = {
-          active-only = false;
-          all-outputs = false;
-          format = "{icon}";
-          format-icons = let
-            icon = "";
-          in {
-            "1" = icon;
-            "2" = icon;
-            "3" = icon;
-            "4" = icon;
-            "11" = icon;
-            "12" = icon;
-            "13" = icon;
-            "14" = icon;
-          };
-          disable-scroll = true;
-          show-special = true;
-          persistent-workspaces = {
-            "eDP-1" = [
-              1
-              2
-              3
-              4
-            ];
-            "DP-4" = [
-              11
-              12
-              13
-              14
-            ];
-          };
-        };
-        "hyprland/language" = {
-          "format" = "<span color='${green}'>{}</span>";
-          "format-en" = "Eng";
-          "format-fr" = "Fra";
-        };
+        # "hyprland/workspaces" = {
+        #   active-only = false;
+        #   all-outputs = false;
+        #   format = "{icon}";
+        #   format-icons = let
+        #     icon = "";
+        #   in {
+        #     "1" = icon;
+        #     "2" = icon;
+        #     "3" = icon;
+        #     "4" = icon;
+        #     "11" = icon;
+        #     "12" = icon;
+        #     "13" = icon;
+        #     "14" = icon;
+        #   };
+        #   disable-scroll = true;
+        #   show-special = true;
+        #   persistent-workspaces = {
+        #     "eDP-1" = [
+        #       1
+        #       2
+        #       3
+        #       4
+        #     ];
+        #     "DP-4" = [
+        #       11
+        #       12
+        #       13
+        #       14
+        #     ];
+        #   };
+        # };
+        # "hyprland/language" = {
+        #   "format" = "<span color='${green}'>{}</span>";
+        #   "format-en" = "Eng";
+        #   "format-fr" = "Fra";
+        # };
 
         battery = {
           "states" = {
@@ -144,7 +155,7 @@ in {
         background: none;
         margin: 0;
         padding: 0 5px;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 400;
         font-family: CaskaydiaMono Nerd Font;
       }
@@ -197,9 +208,8 @@ in {
       #idle_inhibitor,
       #workspaces {
         background: none;
-        padding: 0px 16px;
-        margin: 0px;
-        margin-top: 5px;
+        padding: 0;
+        margin: 10px 12px 5px;
       }
 
     '';
