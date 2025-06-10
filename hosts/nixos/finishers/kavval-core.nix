@@ -1,9 +1,5 @@
 # Deps for kavval-core
 {
-  # FINISHERS
-  virtualisation.docker.enable = true;
-  users.extraGroups.docker.members = ["alex"];
-
   # Some scripts need `/bin/bash` which doesn't exists in nixos
   system.activationScripts.binbash = {
     text = ''

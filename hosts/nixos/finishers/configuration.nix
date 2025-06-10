@@ -14,6 +14,7 @@
     inputs.nixos-hardware.nixosModules.dell-xps-15-9530
     ../common/remap-keys.nix
     ../common/hyprland.nix
+    ../common/docker.nix
     ./boot.nix
     ./gpu.nix
     ./kavval-core.nix

@@ -80,7 +80,7 @@ in {
       b = "bat -p";
       cs = "~/bin/cht.sh";
       d = "docker";
-      dcp = "docker compose";
+      dc = "docker compose";
       ff = "fzf --preview 'bat --style=numbers --color=always {}'";
       ffn = "ff | xargs nvim";
       s = "sudo env PATH=\"$PATH\"";

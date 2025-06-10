@@ -6,6 +6,7 @@
     ./hardware-configuration.nix
     ../common/remap-keys.nix
     ../common/hyprland.nix
+    ../common/docker.nix
   ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
@@ -122,6 +123,7 @@
     dig
     usbutils
     pciutils
+    ansible
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
