@@ -52,27 +52,7 @@
   };
 
   outputs = inputs: let
-    alex = {
-      username = "alex";
-      email = "ajm.dosreis.daponte@gmail.com";
-      fullname = "Alexandre Dos Reis";
-      font = "Maple Mono NF"; # This is not the nix package name but rather the name installed on the system
-      editor = "nvim";
-      cursor = {
-        pkgs = "banana-cursor";
-        theme = "Banana";
-        size = 36;
-      };
-      wallpapers = [];
-      colors = {
-        background = "#072329";
-        cursor = "#708183";
-        palette = builtins.fromJSON (builtins.readFile ./colors/palette.json);
-      };
-      # This allows to install npm packages globally with: `npm i -g <some-package>`
-      # Not available in nixpkgs
-      npm.packages.path = "~/.npm-packages";
-    };
+    inherit (import ./users.nix) alex;
   in
     (import ./helpers.nix inputs) [
       {
