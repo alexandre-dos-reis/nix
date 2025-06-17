@@ -42,10 +42,12 @@ in {
         laptop = {
           name = "eDP-1";
           scale = "2";
+          position = "auto";
         };
         lg = {
-          name = "DP-4";
-          scale = "1.33";
+          name = "DP-2";
+          scale = "1.666667";
+          position = "auto-left";
         };
       };
       # wallPath = "~/dev/nix-config/home/alex/files/wallpapers";
@@ -75,7 +77,7 @@ in {
         "GTK_CURSOR_BLINK_TIME,1200"
       ];
 
-      monitor = map ({value, ...}: "${value.name},preferred,auto,${value.scale}") (attrsToList monitors);
+      monitor = map ({value, ...}: "${value.name}, preferred, ${value.position}, ${value.scale}") (attrsToList monitors);
 
       exec-once = [
         (join " & "

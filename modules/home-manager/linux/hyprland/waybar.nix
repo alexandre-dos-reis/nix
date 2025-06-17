@@ -6,6 +6,7 @@
   colors = user.colors.palette;
   cyan = colors.cyan500-hex;
   yellow = colors.yellow500-hex;
+  orange = colors.orange-hex;
   white = colors.base2-hex;
   blue = colors.blue500-hex;
   green = colors.green500-hex;
@@ -128,7 +129,7 @@ in {
           "max-volume" = 100;
           "format" = "<span color='${yellow}'>{volume}% {icon}</span>";
           "tooltip" = false;
-          "format-muted" = "Muted";
+          "format-muted" = "<span color='${orange}'>Muted </span>";
           "on-click" = "pamixer -t";
           "on-scroll-up" = "pamixer -i 2";
           "on-scroll-down" = "pamixer -d 2";
