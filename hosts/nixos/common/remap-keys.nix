@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   # Optional, but makes sure that when you type the make palm rejection work with keyd
   # https://github.com/rvaiya/keyd/issues/723
   environment.etc."libinput/local-overrides.quirks".text = ''
@@ -7,6 +7,10 @@
     MatchName=keyd virtual keyboard
     AttrKeyboardIntegration=internal
   '';
+
+  environment.systemPackages = with pkgs; [
+    keyd
+  ];
 
   # https://wiki.nixos.org/wiki/Keyd
   # Replace the `caplock` key with `control`
@@ -22,10 +26,16 @@
           main = {
             capslock = "layer(control)"; # you might need to also enclose the key in quotes if it contains non-alphabetical symbols
           };
+
           otherlayer = {};
         };
         extraConfig = ''
           # put here any extra-config, e.g. you can copy/paste here directly a configuration, just remove the ids part
+
+          # Combo: Control + ' => esc
+          [control:C]
+          ' = esc
+
         '';
       };
     };
