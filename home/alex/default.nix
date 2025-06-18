@@ -30,18 +30,10 @@
 
     file = {
       "dev/.keep".text = "keep"; # Create folders
-      # "qmk_firmware" = {
-      #   source = inputs.qmk;
-      #   recursive = true;
-      # };
     };
 
-    sessionVariables = let
-      flake = "${user.homeDir}/dev/nix-config";
-    in {
+    sessionVariables = {
       EDITOR = user.editor;
-      FLAKE = flake;
-      NH_FLAKE = flake;
       TERMINAL_BG = user.colors.background;
       # TODO: See if this is causing an error.
       # XCURSOR_SIZE = user.cursor.size;
