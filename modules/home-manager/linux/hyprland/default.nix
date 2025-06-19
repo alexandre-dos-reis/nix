@@ -9,6 +9,19 @@
   colors = user.colors.palette;
   borderActiveColor = colors.base02-rgbhex;
   borderInativeColor = "rgba(07354100)";
+
+  monitors = {
+    laptop = {
+      name = "eDP-1";
+      scale = "2";
+      position = "auto";
+    };
+    lg = {
+      name = "DP-2";
+      scale = "1.666667";
+      position = "auto-left";
+    };
+  };
 in {
   # TODO: https://www.youtube.com/watch?v=zt3hgSBs11g
   # Example of script using pid
@@ -36,18 +49,6 @@ in {
         chrome = {
           name = "google-chrome-stable";
           class = "google-chrome";
-        };
-      };
-      monitors = {
-        laptop = {
-          name = "eDP-1";
-          scale = "2";
-          position = "auto";
-        };
-        lg = {
-          name = "DP-2";
-          scale = "1.666667";
-          position = "auto-left";
         };
       };
       # wallPath = "~/dev/nix-config/home/alex/files/wallpapers";
@@ -367,7 +368,10 @@ in {
     in {
       ipc = "on";
       preload = [dots_img triangle_img];
-      wallpaper = ["eDP-1,${dots_img}" "DP-4,${triangle_img}"];
+      wallpaper = [
+        "${monitors.laptop.name},${dots_img}"
+        "${monitors.lg.name},${triangle_img}"
+      ];
     };
   };
 
@@ -411,6 +415,4 @@ in {
       dymanic_lines = true;
     };
   };
-
-  # Status bar
 }
