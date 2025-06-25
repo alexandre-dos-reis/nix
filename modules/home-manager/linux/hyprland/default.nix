@@ -42,10 +42,10 @@ in {
           name = "ghostty";
           class = "com.mitchellh.ghostty";
         };
-        slack = {
-          name = "slack";
-          class = "Slack";
-        };
+        # slack = {
+        #   name = "slack";
+        #   class = "Slack";
+        # };
         chrome = {
           name = "google-chrome-stable";
           class = "google-chrome";
@@ -117,12 +117,12 @@ in {
           "$mainMod, u, workspace, 11"
 
           "$mainMod, i, movetoworkspace, 2, class:^(com.mitchellh.ghostty)$"
-          "$mainMod, i, movetoworkspace, 12, class:^(Slack)$"
+          # "$mainMod, i, movetoworkspace, 12, class:^(Slack)$"
           "$mainMod, i, movetoworkspace, 12, class:^(google-chrome)$"
           "$mainMod, i, workspace, 2"
           "$mainMod, i, workspace, 12"
 
-          "$mainMod, o, movetoworkspace, 3, class:^(Slack)$"
+          # "$mainMod, o, movetoworkspace, 3, class:^(Slack)$"
           "$mainMod, o, movetoworkspace, 13, class:^(com.mitchellh.ghostty)$"
           "$mainMod, o, movetoworkspace, 13, class:^(google-chrome)$"
           "$mainMod, o, workspace, 3"

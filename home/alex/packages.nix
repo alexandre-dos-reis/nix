@@ -64,8 +64,7 @@
 
     # Gui Apps
     vlc
-
-    # 3d apps
+    libreoffice
     blender
   ];
 }
