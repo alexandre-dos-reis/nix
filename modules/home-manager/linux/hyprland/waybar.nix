@@ -68,7 +68,7 @@ in {
           };
         };
         "memory" = {
-          "format" = "<span color='${cyan}'>  {}%</span> ";
+          "format" = "<span color='${cyan}'> {}%</span> ";
         };
         "cpu" = {
           "format" = "<span color='${cyan}'> {}%</span> ";
@@ -81,7 +81,7 @@ in {
           "format" = "<span color='${violet}'>{ifname}</span>";
           "format-wifi" = "<span color='${violet}'>{essid} {icon}</span>";
           "format-ethernet" = "{ifname}/{cidr}";
-          "format-disconnected" = "";
+          "format-disconnected" = "<span color='${violet}'>NO NETWORK</span>";
           "tooltip-format" = "{ifname} via {gwaddr}";
           "tooltip-format-wifi" = "{essid} ({signalStrength}%) ";
           "tooltip-format-ethernet" = "{ifname} ";
@@ -134,10 +134,10 @@ in {
             "warning" = 30;
             "critical" = 15;
           };
-          "format" = "<span color='${cyan}'>{capacity}% {icon}</span>";
-          "format-charging" = "<span color='${cyan}'>{capacity}% </span>";
-          "format-plugged" = "<span color='${cyan}'>{capacity}% </span>";
-          "format-alt" = "<span color='${cyan}'>{capacity}% {icon}</span>";
+          "format" = "<span color='${cyan}'>{icon} {capacity}%</span>";
+          "format-charging" = "<span color='${cyan}'> {capacity}%</span>";
+          "format-plugged" = "<span color='${cyan}'> {capacity}%</span>";
+          "format-alt" = "<span color='${cyan}'>{icon} {capacity}%</span>";
           "format-icons" = ["" "" "" "" ""];
         };
         "pulseaudio" = {
