@@ -7,9 +7,7 @@
     devenv # Dev
 
     # fonts
-    (maple-mono.NF.overrideAttrs {
-      version = "7.2";
-    })
+    maple-mono.NF
 
     # system utils
     dust

@@ -42,7 +42,7 @@
     typescript
     prettierd
     eslint_d
-    dart # for sass
+    # dart # for sass
 
     # Graphql
     graphql-language-service-cli
@@ -87,9 +87,7 @@
     terraform-lsp
 
     # Postgres
-    (postgres-lsp.overrideAttrs {
-      version = "0.7.0";
-    })
+    postgres-lsp
     pgformatter
 
     # Php

@@ -81,7 +81,8 @@ in {
       monitor = map ({value, ...}: "${value.name}, preferred, ${value.position}, ${value.scale}") (attrsToList monitors);
 
       exec-once = [
-        (join " & "
+        (
+          join " & "
           # Hyprland ecosystem
           ([
               "waybar"
@@ -92,7 +93,10 @@ in {
             ]
             ++
             # Apps
-            (map ({value, ...}: value.name) (attrsToList apps))))
+            (map ({value, ...}: value.name) (attrsToList apps)))
+        )
+
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=$XDG_CURRENT_DESKTOP PATH"
       ];
 
       # Set wallpapers
