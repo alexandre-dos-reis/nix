@@ -7,9 +7,9 @@
     font = "Maple Mono NF";
     editor = "nvim";
     cursor = {
-      pkgs = "banana-cursor";
-      theme = "Banana";
-      size = 36;
+      pkgs = "bibata-cursors";
+      theme = "Bibata-Modern-Ice";
+      size = 32;
     };
     wallpapers = [];
     colors = {
