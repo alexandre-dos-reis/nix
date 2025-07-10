@@ -29,8 +29,8 @@
     yaml-language-server
 
     # Javascript / Typescript
-    nodejs_20
-    corepack_20
+    nodejs_24
+    corepack_24
     nodePackages.nodemon
     nodePackages.prettier
     nodePackages.vercel
