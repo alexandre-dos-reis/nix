@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   # need to install cargo and gcc for neovim, move them to neovim folder
   home.packages = with pkgs; [
     # nix helpers
@@ -41,6 +45,7 @@
     # code
     jujutsu
     tokei # Stats about code
+    inputs.encore.packages.${pkgs.system}.encore
 
     # git
     tig

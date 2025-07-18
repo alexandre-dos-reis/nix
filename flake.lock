@@ -33,6 +33,26 @@
         "type": "github"
       }
     },
+    "encore": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1752063484,
+        "narHash": "sha256-uQkJsb/pr21e7lURLCuLGDwEfaG06YH9lauj0qU1bCE=",
+        "owner": "encoredev",
+        "repo": "encore-flake",
+        "rev": "8ec09902750fc458c77ac19ceb081e736a7057a8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "encoredev",
+        "repo": "encore-flake",
+        "type": "github"
+      }
+    },
     "fish-ssh-agent": {
       "flake": false,
       "locked": {
@@ -863,6 +883,7 @@
     },
     "root": {
       "inputs": {
+        "encore": "encore",
         "fish-ssh-agent": "fish-ssh-agent",
         "ghostty": "ghostty",
         "home-manager": "home-manager",

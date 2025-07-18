@@ -47,6 +47,12 @@
     # Langs
     zig.url = "github:mitchellh/zig-overlay";
 
+    # Cli
+    encore = {
+      url = "github:encoredev/encore-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
   };

@@ -16,5 +16,6 @@
     ./ssh.nix
     ./oh-my-posh
     # ./zellij.nix
+    ./zed.nix
   ];
 }
