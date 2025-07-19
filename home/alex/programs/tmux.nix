@@ -83,10 +83,11 @@ in {
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
       set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
-      # Shortcut
+      # Globals Shortcuts that works without the tmux prefix
       # https://github.com/edr3x/tmux-sessionizer?tab=readme-ov-file
       # `-n` bypass the prefix-key
       bind-key -n C-f run-shell "tmux neww ~/bin/tmux-sessionizer"
+      bind-key -n C-m run-shell "tmux copy-mode"
 
       # Enable kitty image protocol to work, see: https://www.youtube.com/watch?v=nYDMXI-yFTA
       set -gq allow-passthrough on
