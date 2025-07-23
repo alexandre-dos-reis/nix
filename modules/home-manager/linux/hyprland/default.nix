@@ -17,7 +17,7 @@
       position = "auto";
     };
     lg = {
-      name = "DP-2";
+      name = "DP-3";
       scale = "1.666667";
       position = "auto-left";
     };
