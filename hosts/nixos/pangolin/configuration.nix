@@ -7,6 +7,7 @@
     ../common/remap-keys.nix
     ../common/hyprland.nix
     ../common/docker.nix
+    ./hosts.nix
   ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
@@ -20,7 +21,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_14;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
 
   networking.hostName = "pangolin"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

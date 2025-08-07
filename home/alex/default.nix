@@ -35,6 +35,7 @@
     sessionVariables = {
       EDITOR = user.editor;
       TERMINAL_BG = user.colors.background;
+      CAROOT = "${user.homeDir}/.local/share/mkcert";
       # TODO: See if this is causing an error.
       # XCURSOR_SIZE = user.cursor.size;
     };

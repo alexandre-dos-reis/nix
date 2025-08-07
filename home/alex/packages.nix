@@ -43,7 +43,7 @@
     codecrafters-cli
 
     # code
-    jujutsu
+    jujutsu # Alternative to git, use with `jj`
     tokei # Stats about code
     inputs.encore.packages.${pkgs.system}.encore
 
@@ -51,6 +51,8 @@
     tig
     lazygit
     gh # github cli
+    # sops
+    # ssh-to-age
 
     # Keyboard
     qmk
