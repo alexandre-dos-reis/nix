@@ -8,7 +8,7 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    package = inputs.nvim-nightly.packages.${pkgs.system}.default;
+    # package = inputs.nvim-nightly.packages.${pkgs.system}.default;
   };
 
   # LSPs and executable

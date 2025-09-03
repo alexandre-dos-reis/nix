@@ -38,7 +38,7 @@
     };
 
     # Editors
-    nvim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    # nvim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
     # Langs
