@@ -21,9 +21,6 @@
     # Hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    # Terminals
-    ghostty.url = "github:ghostty-org/ghostty";
-
     # Fish
     kubectx = {
       # For completions

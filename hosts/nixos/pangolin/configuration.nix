@@ -21,8 +21,8 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
-
+  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_9;
+  #
   networking.hostName = "pangolin"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 

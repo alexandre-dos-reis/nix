@@ -1,22 +1,18 @@
 {
+  user,
   pkgs,
   host,
-  inputs,
-  user,
   config,
   ...
-}: let
-  ghostty = inputs.ghostty.packages.${pkgs.system}.default;
-in {
+}: {
   programs.ghostty = {
     enable = true;
     package =
       if host.useNixGL
-      then config.lib.nixGL.wrap ghostty
-      else ghostty;
+      then config.lib.nixGL.wrap pkgs.ghostty
+      else pkgs.ghostty;
     enableFishIntegration = true;
     settings = {
-      # command = "${pkgs.nushell}/bin/nu";
       command = "${pkgs.fish}/bin/fish";
       gtk-single-instance = false; # On linux enable multi instances
       theme = "Solarized Dark Higher Contrast";
