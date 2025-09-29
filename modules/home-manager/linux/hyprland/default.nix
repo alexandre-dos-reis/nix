@@ -17,7 +17,7 @@
       position = "auto";
     };
     lg = {
-      name = "DP-3";
+      name = "DP-2"; # Plugged on the top left usbc input.
       scale = "1.666667";
       position = "auto-left";
     };
