@@ -45,7 +45,6 @@
     # code
     jujutsu # Alternative to git, use with `jj`
     tokei # Stats about code
-    inputs.encore.packages.${pkgs.system}.encore
 
     # git
     tig

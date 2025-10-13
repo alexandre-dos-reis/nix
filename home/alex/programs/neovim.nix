@@ -78,9 +78,10 @@
     zls
 
     # Dotnet
-    dotnetCorePackages.sdk_8_0_3xx
-    # csharp-ls
-    omnisharp-roslyn
+    dotnetCorePackages.sdk_9_0
+    csharp-ls # community lsp
+    # roslyn-ls # official new lsp # not working atm
+    omnisharp-roslyn # official old lsp
 
     # Terraform
     terraform
