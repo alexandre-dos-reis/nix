@@ -23,7 +23,8 @@
   };
 
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
+  # services.displayManager.gdm.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -95,7 +96,6 @@
     dig
     usbutils
     pciutils
-    ansible
   ];
 
   # This value determines the NixOS release from which the default

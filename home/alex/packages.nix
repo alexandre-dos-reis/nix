@@ -10,6 +10,8 @@
     nixos-rebuild
     devenv # Dev
 
+    pavucontrol
+
     # fonts
     maple-mono.NF
 
@@ -41,6 +43,8 @@
     websocat
     just
     codecrafters-cli
+    brotli
+    gzip
 
     # code
     jujutsu # Alternative to git, use with `jj`

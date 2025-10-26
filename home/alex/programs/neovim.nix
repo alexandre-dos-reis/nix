@@ -22,7 +22,7 @@
     nodePackages.bash-language-server
     beautysh
 
-    # Json
+    # HTML/CSS/JSON/ESLint
     vscode-langservers-extracted
 
     # Yaml
@@ -38,6 +38,7 @@
     bun
     deno
     typescript-language-server
+    typescript-go
     vtsls
     typescript
     prettierd

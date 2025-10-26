@@ -6,7 +6,7 @@
 
   # Be carefull with the linux kernel version
   # as it can make bluetooth not working anymore.
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_16;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_17;
 
   hardware.enableAllFirmware = true;
 
