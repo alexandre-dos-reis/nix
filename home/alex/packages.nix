@@ -1,9 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
-  # need to install cargo and gcc for neovim, move them to neovim folder
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # nix helpers
     nix-inspect # inspect flake in a nice interface
@@ -13,7 +8,7 @@
     pavucontrol
 
     # fonts
-    maple-mono.NF
+    maple-mono.NF-unhinted
 
     # system utils
     dust
@@ -47,6 +42,7 @@
     gzip
 
     # code
+    vim
     jujutsu # Alternative to git, use with `jj`
     tokei # Stats about code
 
