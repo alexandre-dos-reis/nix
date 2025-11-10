@@ -39,6 +39,7 @@
     codecrafters-cli
     brotli
     gzip
+    nmap
 
     # code
     vim
