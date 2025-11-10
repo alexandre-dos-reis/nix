@@ -89,7 +89,7 @@
     terraform-lsp
 
     # Postgres
-    postgres-lsp
+    postgres-language-server
     pgformatter
 
     # Php
