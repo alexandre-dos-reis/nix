@@ -13,17 +13,20 @@ in {
   programs.git = {
     enable = true;
 
-    userEmail = email;
-    userName = fullname;
-
-    aliases = {
-      hist = "log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate";
-    };
-    extraConfig = {
+    settings = {
       core = {
         inherit editor;
         ignorecase = false;
         pager = "delta";
+      };
+
+      user = {
+        email = email;
+        name = fullname;
+      };
+
+      alias = {
+        hist = "log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate";
       };
 
       interactive = {
