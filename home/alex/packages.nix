@@ -15,7 +15,6 @@
     btop
     yazi
     fastfetch # better neofetch
-    clang
     gnumake
     cmake
     gnupg
@@ -45,6 +44,9 @@
     vim
     jujutsu # Alternative to git, use with `jj`
     tokei # Stats about code
+    woff2
+    (python3.withPackages
+      (ps: [ps.fonttools]))
 
     # git
     tig

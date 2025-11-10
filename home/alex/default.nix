@@ -10,7 +10,6 @@
     ./files
     ./scripts
     # ./kavval-packages.nix
-    # ./office.nix
   ];
   nixpkgs.config.allowUnfree = true;
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];

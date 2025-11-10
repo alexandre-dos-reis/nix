@@ -94,5 +94,8 @@
 
     # Php
     phpactor
+
+    # C
+    gcc # or clang
   ];
 }
