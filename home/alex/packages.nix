@@ -42,7 +42,6 @@
     nmap
 
     # code
-    vim
     jujutsu # Alternative to git, use with `jj`
     tokei # Stats about code
     woff2
