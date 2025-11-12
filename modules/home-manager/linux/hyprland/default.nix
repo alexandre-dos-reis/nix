@@ -392,7 +392,11 @@ in {
   # App launcher
   programs.wofi = {
     enable = true;
-    style = builtins.readFile ./wofi.css;
+    style = pkgs.replaceVars ./wofi.css {
+      bgColor = colors.base03-hex; # Background color
+      fgColor = colors.base0-hex; # Foreground color
+      mgColor = colors.base00-hex; # Middleground color
+    };
     settings = {
       width = 700;
       height = 400;
