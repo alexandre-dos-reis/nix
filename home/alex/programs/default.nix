@@ -3,7 +3,7 @@
     ./fish
     ./nushell
     ./neovim.nix
-    ./vim.nix
+    ./vim
     ./helix.nix
     ./nh.nix
     ./kitty.nix
