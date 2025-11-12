@@ -13,14 +13,11 @@ set wildmenu
 set autochdir
 set noswapfile
 set background=dark 
+set number relativenumber
+
+hi StatusLine ctermfg=8 ctermbg=NONE cterm=NONE
 
 let mapleader = " "
-
-" StatusLine
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ }
-
 
 " recenter screen on page up and down
 nnoremap <C-u> <C-u>zz
