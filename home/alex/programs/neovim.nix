@@ -8,12 +8,11 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = false;
-    # package = inputs.nvim-nightly.packages.${pkgs.system}.default;
   };
 
   # LSPs and executable
   home.packages = with pkgs; let
-    zig = inputs.zig.packages.${pkgs.system}.master;
+    zig = inputs.zig.packages.${pkgs.system}."0.15.2";
   in [
     # Deps for Lazy
     luajitPackages.luarocks
@@ -43,6 +42,8 @@
     typescript
     prettierd
     eslint_d
+    biome
+    oxlint
     # dart # for sass
 
     # Graphql
