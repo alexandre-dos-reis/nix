@@ -68,6 +68,7 @@
     gofumpt
     goimports-reviser
     golines
+    golangci-lint
 
     # Rust
     rustc
