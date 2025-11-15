@@ -69,6 +69,7 @@
     goimports-reviser
     golines
     golangci-lint
+    gotestsum
 
     # Rust
     rustc

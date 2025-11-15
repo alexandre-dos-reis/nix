@@ -49,6 +49,7 @@ in {
       set -gx PATH ~/bin $PATH
       set -gx PATH ~/.local/bin $PATH
       set -gx PATH ~/.pulumi/bin $PATH
+      set -gx PATH ~/go/bin $PATH
       set -gx PATH ${user.npm.packages.path}/bin $PATH
 
       set -g theme_color_scheme terminal-dark
