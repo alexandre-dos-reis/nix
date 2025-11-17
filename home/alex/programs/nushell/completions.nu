@@ -12,7 +12,7 @@ let fish_completer = {|spans|
 let external_completer = {|spans|
     let expanded_alias = scope aliases
     | where name == $spans.0
-    | get -i 0.expansion
+    | get --optional 0.expansion
 
     let spans = if $expanded_alias != null {
         $spans
@@ -32,6 +32,6 @@ mut current = (($env | default {} config).config | default {} completions)
 $current.completions = ($current.completions | default {} external)
 $current.completions.external = ($current.completions.external
 | default true enable
-| default $external_completer completer)
+| default { $external_completer } completer)
 
 $env.config = $current
