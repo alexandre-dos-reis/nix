@@ -40,6 +40,7 @@
     brotli
     gzip
     nmap
+    openssl
 
     # code
     jujutsu # Alternative to git, use with `jj`
