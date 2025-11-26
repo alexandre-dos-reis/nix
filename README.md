@@ -79,6 +79,7 @@ Usefull is you want to run nix on a (generic linux / darwin) os.
 
 ### Some flakes users
 
+- [mitchellh](https://github.com/mitchellh/nixos-config)
 - [fufexan](https://github.com/fufexan/dotfiles/blob/main/home/editors/neovim/default.nix)
 - [librephoenix](https://github.com/librephoenix/nixos-config)
 - [shaunsingh](https://github.com/shaunsingh/nix-darwin-dotfiles/tree/main)
