@@ -18,6 +18,6 @@
     ./oh-my-posh
     # ./zellij.nix
     ./zed.nix
-    ./yazi.nix
+    ./yazi
   ];
 }
