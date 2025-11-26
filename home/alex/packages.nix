@@ -5,15 +5,12 @@
     nixos-rebuild
     devenv # Dev
 
-    pavucontrol
-
     # fonts
     maple-mono.NF-unhinted
 
     # system utils
     dust
     btop
-    yazi
     fastfetch # better neofetch
     gnumake
     cmake

@@ -9,9 +9,10 @@
       }\n")
       ["" "api" "admin" "assets" "minio" "email"]);
 
-  # For mkcert generate run:
+  # NOTE: For mkcert generate run:
   # - mkcert -install in ~/.local/share/mkcert
   # It will generate a public and private root certificate authority keys.
-  # - import the rootCa here, don't `git add` the rootCA-key.pem file, it's the private key
+  # - import the rootCa here, don't `git add` the rootCA-key.pem file,
+  # it's the private key !
   security.pki.certificateFiles = [./certificates/rootCA.pem];
 }

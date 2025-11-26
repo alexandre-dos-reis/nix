@@ -55,6 +55,10 @@ in {
       set-window-option -g pane-base-index 1
       set-option -g renumber-windows on
 
+      # from yazi: https://yazi-rs.github.io/docs/image-preview/#tmux
+      set -g allow-passthrough on
+      set -ga update-environment TERM
+      set -ga update-environment TERM_PROGRAM
 
       # nvim config advised by ":healthcheck"
       # https://github.com/neovim/neovim/wiki/FAQ#esc-in-tmux-or-gnu-screen-is-delayed

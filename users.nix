@@ -39,6 +39,7 @@
       k = "kubectl";
       kns = "kubens";
       kx = "kubectx";
+      y = "yazi";
     };
   };
 }
