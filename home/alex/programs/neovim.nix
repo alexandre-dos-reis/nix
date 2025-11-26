@@ -12,7 +12,7 @@
 
   # LSPs and executable
   home.packages = with pkgs; let
-    zig = inputs.zig.packages.${pkgs.system}."0.15.2";
+    zig = inputs.zig.packages.${pkgs.stdenv.hostPlatform.system}."0.15.2";
   in [
     # Deps for Lazy
     luajitPackages.luarocks

@@ -8,7 +8,7 @@
         evil = true;
       };
       keys.normal = {
-        "S-i" = "hover";
+        "S-k" = "hover";
       };
       # ui = {
       #   background = user.colors.background;
