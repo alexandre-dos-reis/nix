@@ -2,10 +2,28 @@
   pkgs,
   user,
   inputs,
+  config,
+  lib,
   ...
 }: {
+  imports = [
+    # make vscode settings writable : https://github.com/nix-community/home-manager/issues/1800#issuecomment-1924321850
+    (import (builtins.fetchurl {
+      url = "https://gist.githubusercontent.com/piousdeer/b29c272eaeba398b864da6abf6cb5daa/raw/41e569ba110eb6ebbb463a6b1f5d9fe4f9e82375/mutability.nix";
+      sha256 = "4b5ca670c1ac865927e98ac5bf5c131eca46cc20abf0bd0612db955bfc979de8";
+    }) {inherit config lib;})
+
+    (import (builtins.fetchurl {
+      url = "https://gist.githubusercontent.com/piousdeer/b29c272eaeba398b864da6abf6cb5daa/raw/41e569ba110eb6ebbb463a6b1f5d9fe4f9e82375/vscode.nix";
+      sha256 = "fed877fa1eefd94bc4806641cea87138df78a47af89c7818ac5e76ebacbd025f";
+    }) {inherit config lib pkgs;})
+  ];
+
+  # Source: https://gist.github.com/piousdeer/b29c272eaeba398b864da6abf6cb5daa
+  # Make vscode settings writable
   # https://mipmip.github.io/home-manager-option-search/?query=vscode
   programs.vscode = {
+    mutableExtensionsDir = true;
     enable = true;
 
     # https://code.visualstudio.com/docs/getstarted/keybindings
@@ -33,7 +51,7 @@
       "terminal.integrated.fontFamily" = user.font;
       "editor.fontFamily" = user.font;
       "editor.lineHeight" = 14;
-      "editor.fontSize" = 9;
+      "editor.fontSize" = 11;
       "editor.fontLigatures" = true;
       "workbench.iconTheme" = "material-icon-theme";
       "material-icon-theme.hidesExplorerArrows" = true;
@@ -70,19 +88,39 @@
       ];
       "vim.normalModeKeyBindingsNonRecursive" = [
         {
-          "before" = ["<C-d>"];
-          "after" = ["<C-d>" "z" "z"];
+          before = ["<C-d>"];
+          after = ["<C-d>" "z" "z"];
         }
         {
-          "before" = ["<C-u>"];
-          "after" = ["<C-u>" "z" "z"];
+          before = ["<C-u>"];
+          after = ["<C-u>" "z" "z"];
         }
         {
-          "before" = ["<leader>" "e"];
-          "commands" = [
+          before = ["<Tab>"];
+          commands = ["workbench.action.nextEditor"];
+        }
+        {
+          before = ["<S-Tab>"];
+          commands = ["workbench.action.nextEditor"];
+        }
+        {
+          before = ["<Esc>"];
+          commands = [
+            "workbench.action.closeSidebar"
+          ];
+        }
+        {
+          before = ["<leader>" "e"];
+          commands = [
             "workbench.action.toggleActivityBarVisibility"
             "workbench.action.toggleSidebarVisibility"
-            # "workbench.view.explorer"
+            "workbench.view.explorer"
+          ];
+        }
+        {
+          before = ["<leader>" "z"];
+          commands = [
+            "workbench.action.toggleZenMode"
           ];
         }
       ];
@@ -156,7 +194,7 @@
 
       # Languages specific
       mkt.bradlc.vscode-tailwindcss
-      mkt.vadimcn.vscode-lldb
+      # mkt.vadimcn.vscode-lldb
 
       # Docker
       mkt.ms-azuretools.vscode-docker

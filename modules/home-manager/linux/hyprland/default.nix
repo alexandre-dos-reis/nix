@@ -42,6 +42,10 @@ in {
           name = "ghostty";
           class = "com.mitchellh.ghostty";
         };
+        vscode = {
+          name = "code";
+          class = "code";
+        };
         # slack = {
         #   name = "slack";
         #   class = "Slack";
@@ -115,25 +119,24 @@ in {
       bind =
         [
           # >>> Presets
-          "$mainMod, u, movetoworkspace, 1, class:^(google-chrome)$"
-          "$mainMod, u, movetoworkspace, 11, class:^(com.mitchellh.ghostty)$"
+          "$mainMod, u, movetoworkspace, 1, class:^(${apps.chrome.class})$"
+          "$mainMod, u, movetoworkspace, 11, class:^(${apps.ghostty.class})$"
           "$mainMod, u, workspace, 1"
           "$mainMod, u, workspace, 11"
 
-          "$mainMod, i, movetoworkspace, 2, class:^(com.mitchellh.ghostty)$"
+          "$mainMod, i, movetoworkspace, 2, class:^(${apps.chrome.class})$"
           # "$mainMod, i, movetoworkspace, 12, class:^(Slack)$"
-          "$mainMod, i, movetoworkspace, 12, class:^(google-chrome)$"
+          "$mainMod, i, movetoworkspace, 12, class:^(${apps.chrome.class})$"
           "$mainMod, i, workspace, 2"
           "$mainMod, i, workspace, 12"
 
-          # "$mainMod, o, movetoworkspace, 3, class:^(Slack)$"
-          "$mainMod, o, movetoworkspace, 13, class:^(com.mitchellh.ghostty)$"
-          "$mainMod, o, movetoworkspace, 13, class:^(google-chrome)$"
+          "$mainMod, o, movetoworkspace, 3, class:^(${apps.ghostty.class})$"
+          "$mainMod, o, movetoworkspace, 13, class:^(${apps.vscode.class})$"
           "$mainMod, o, workspace, 3"
           "$mainMod, o, workspace, 13"
 
-          "$mainMod, p, movetoworkspace, 4, class:^(com.mitchellh.ghostty)$"
-          "$mainMod, p, movetoworkspace, 14, class:^(google-chrome)$"
+          "$mainMod, p, movetoworkspace, 4, class:^(${apps.ghostty.class})$"
+          "$mainMod, p, movetoworkspace, 14, class:^(${apps.chrome.class})$"
           "$mainMod, p, workspace, 4"
           "$mainMod, p, workspace, 14"
           # <<< Presets

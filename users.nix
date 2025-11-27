@@ -25,6 +25,7 @@
       t = "tmux";
       ta = "tmux attach";
       tk = "tmux kill-session";
+      ts = "tmux kill-server";
       ll = "exa -l -g --icons";
       lla = "ll --all";
       llt = "ll --tree";
