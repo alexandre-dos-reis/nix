@@ -1,6 +1,11 @@
-{
-  imports = [
-    ./home.nix
-    ./hyprland
-  ];
+{useNixGl, ...}: {
+  imports =
+    [
+      ./home.nix
+    ]
+    ++ (
+      if !useNixGl
+      then [./hyprland]
+      else []
+    );
 }
