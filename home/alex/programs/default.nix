@@ -16,7 +16,7 @@
     ./vscode.nix
     ./ssh.nix
     ./oh-my-posh
-    # ./zellij.nix
+    ./zellij.nix
     ./zed.nix
     ./yazi
   ];
