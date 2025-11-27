@@ -1,8 +1,10 @@
 {
   pkgs,
-  user,
+  users,
   ...
 }: let
+  user = users.alex;
+
   attrsToList = pkgs.lib.attrsets.attrsToList;
   join = pkgs.lib.strings.concatStringsSep;
 

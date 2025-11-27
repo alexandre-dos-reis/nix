@@ -1,16 +1,18 @@
 {
-  user,
-  helpers,
   inputs,
+  pkgs,
+  users,
   ...
-}: {
+}: let
+  user = users.alex;
+in {
   imports = [
     ./programs
     ./packages.nix
     ./files
     ./scripts
-    # ./kavval-packages.nix
   ];
+
   nixpkgs.config.allowUnfree = true;
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
@@ -22,7 +24,6 @@
 
   home = {
     stateVersion = "23.11"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-
     username = user.username;
     homeDirectory = user.homeDir;
 
@@ -34,15 +35,13 @@
       EDITOR = user.editor;
       TERMINAL_BG = user.colors.background;
       CAROOT = "${user.homeDir}/.local/share/mkcert";
-      # TODO: See if this is causing an error.
-      # XCURSOR_SIZE = user.cursor.size;
     };
 
     # https://mipmip.github.io/home-manager-option-search/?query=keyboard
     # https://dev.to/tallesl/change-caps-lock-to-ctrl-3c4
     # https://www.reddit.com/r/NixOS/comments/trkfyz/overriding_configurationnix_with_homemanager/
     keyboard.layout =
-      if helpers.isDarwin
+      if pkgs.stdenv.isDarwin
       then "Unicode Hex Input"
       else "us";
   };

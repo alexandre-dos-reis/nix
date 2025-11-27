@@ -1,8 +1,10 @@
 {
-  user,
   pkgs,
+  users,
   ...
 }: let
+  user = users.alex;
+
   colors = user.colors.palette;
   cyan = colors.cyan500-hex;
   yellow = colors.yellow500-hex;

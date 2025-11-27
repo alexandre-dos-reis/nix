@@ -1,11 +1,12 @@
 {
   pkgs,
-  user,
+  users,
   host,
-  helpers,
   config,
   ...
-}: {
+}: let
+  user = users.alex;
+in {
   # https://mipmip.github.io/home-manager-option-search/?query=kitty
   programs.kitty = {
     enable = true;
@@ -21,7 +22,7 @@
     };
     settings = {
       hide_window_decorations =
-        if helpers.isDarwin
+        if pkgs.stdenv.isDarwin
         then "titlebar-only"
         else true;
       placement_strategy = "top-left";

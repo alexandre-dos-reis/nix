@@ -1,10 +1,13 @@
 {
-  user,
+  users,
   pkgs,
   host,
   config,
   ...
-}: {
+}: let 
+
+user = users.alex;
+in {
   programs.ghostty = {
     enable = true;
     package =

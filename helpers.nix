@@ -1,127 +1,82 @@
-{
-  self,
-  nixpkgs,
-  nix-darwin,
-  home-manager,
-  ...
-} @ inputs: let
-  outputs = self.outputs;
-  hasSuffix = nixpkgs.lib.strings.hasSuffix;
+inputs: let
+  outputs = inputs.self.outputs;
+  users = import ./users.nix;
+  nixpkgs = inputs.nixpkgs;
   flattenList = nixpkgs.lib.lists.flatten;
-  listToAttrs = builtins.listToAttrs;
-  mkIf = condition: module:
-    if condition
-    then module
-    else {};
-
-  decorateHost = {
-    isManagedByHomeManager ? false,
-    overlays ? [],
-    system,
-    ...
-  } @ host: let
-  in
-    host
-    // {
-      inherit isManagedByHomeManager overlays;
-      useNixGL = isManagedByHomeManager && system == "x86_64-linux";
-    };
-
-  mkHelpers = pkgs: {inherit (pkgs.stdenv) isDarwin isLinux;};
-
-  decorateUser = {modules ? [], ...} @ user: helpers: let
-    homeDir =
-      if helpers.isDarwin
-      then "/Users/${user.username}"
-      else "/home/${user.username}";
-  in
-    user
-    // {
-      inherit modules homeDir;
-    };
-
+in {
   mkHomes = list:
-    listToAttrs (flattenList (map (host: (map (rawUser: {
-        name = "${rawUser.username}@${host.hostname}";
-        value = let
+    builtins.listToAttrs (flattenList (map (host: (map (user: {
+        name = "${user.username}@${host.hostname}";
+        value = inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${host.system};
-          helpers = mkHelpers pkgs;
-          user = decorateUser rawUser helpers;
-        in
-          home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            extraSpecialArgs = {
-              inherit inputs outputs host helpers user;
-            };
-            modules = [
-              # Link applications defined by Home-Manager to host
-              ({config, ...}: {
-                xdg = {
-                  enable = true;
-                  mime.enable = true;
-                  systemDirs.data = ["${config.home.homeDirectory}/.nix-profile/share/applications"];
-                };
-              })
-              (
-                # NonNixos but linux hosts and managed by Home-Manager
-                mkIf
-                (helpers.isLinux && host.isManagedByHomeManager)
-                {
+          extraSpecialArgs = {
+            inherit inputs outputs host user;
+          };
+          modules = [
+            # Link applications defined by Home-Manager to host
+            ({config, ...}: {
+              xdg = {
+                enable = true;
+                mime.enable = true;
+                systemDirs.data = ["${config.home.homeDirectory}/.nix-profile/share/applications"];
+              };
+            })
+            (
+              {pkgs, ...}:
+                if pkgs.stdenv.isLinux
+                then {
                   targets.genericLinux.enable = true;
                 }
-              )
-              # Enable NixGL
-              (
-                mkIf host.useNixGL
-                {
-                  nixGL.packages = inputs.nixgl.packages;
-                }
-              )
-              ./home/${user.username}
-              ({helpers, ...}: {
-                imports = map (module:
-                  ./modules/home-manager/${
-                    if helpers.isLinux
-                    then "linux"
-                    else "darwin"
-                  }/${module})
-                user.modules;
-              })
-            ];
-          };
+                else {}
+            )
+            # Enable NixGL
+            {
+              nixGL.packages = inputs.nixgl.packages;
+            }
+            ./home/${user.username}
+          ];
+        };
       })
-      host.users))
+      users))
     list));
 
-  mkSystems = mkSystem: list: dir:
-    listToAttrs (map (host: {
+  mkSystems = list:
+    builtins.listToAttrs (map (host: {
         name = host.hostname;
         value = let
-          pkgs = import nixpkgs {
-            system = host.system;
-            overlays = host.overlays;
-            config.allowUnfree = true;
-          };
-          helpers = mkHelpers pkgs;
+          isDarwin = inputs.nixpkgs.lib.strings.hasSuffix "darwin" host.system;
+          systemFunc =
+            if isDarwin
+            then inputs.nix-darwin.lib.darwin
+            else inputs.nixpkgs.lib.nixosSystem;
         in
-          mkSystem {
-            inherit pkgs;
+          systemFunc {
             specialArgs = {
-              inherit inputs outputs host helpers;
-              users = host.users;
+              inherit inputs host users outputs;
             };
             modules = [
-              ./hosts/${dir}/${host.hostname}
+              # Allow unfree packages.
+              {nixpkgs.config.allowUnfree = true;}
+              # Call Home-manager module
+              (inputs.home-manager.nixosModules.home-manager {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users = builtins.listToAttrs (map (user: {
+                    name = user.username;
+                    value = "./home/${user.username}";
+                  })
+                  users);
+                home-manager.extraSpecialArgs = {
+                  inherit inputs outputs host;
+                  users = builtins.listToAttrs (map (user: {
+                      name = user.username;
+                      value = user;
+                    })
+                    users);
+                };
+              })
             ];
           };
       })
       list);
-in
-  hosts: let
-    decoratedHosts = map (x: decorateHost x) hosts;
-    filterHostsByOs = os: builtins.filter (host: (hasSuffix os host.system) && !host.isManagedByHomeManager) decoratedHosts;
-  in {
-    nixosConfigurations = mkSystems nixpkgs.lib.nixosSystem (filterHostsByOs "linux") "nixos";
-    darwinConfigurations = mkSystems nix-darwin.lib.darwin (filterHostsByOs "darwin") "darwin";
-    homeConfigurations = mkHomes decoratedHosts;
-  }
+}

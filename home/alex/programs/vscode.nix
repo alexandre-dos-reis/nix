@@ -1,11 +1,13 @@
 {
   pkgs,
-  user,
+  users,
   inputs,
   config,
   lib,
   ...
-}: {
+}: let
+  user = users.alex;
+in {
   imports = [
     # make vscode settings writable : https://github.com/nix-community/home-manager/issues/1800#issuecomment-1924321850
     (import (builtins.fetchurl {

@@ -49,50 +49,41 @@
   };
 
   outputs = inputs: let
-    inherit (import ./users.nix) alex;
-  in
-    (import ./helpers.nix inputs) [
-      {
-        hostname = "white";
-        system = "x86_64-linux";
-        users = [alex];
-      }
+    inherit (import ./helpers.nix inputs) mkSystems mkHomes;
+  in {
+    darwinConfigurations = mkSystems [
       {
         hostname = "mbp2012";
         system = "x86_64-darwin";
-        users = [alex];
-      }
-      {
-        hostname = "finishers";
-        system = "x86_64-linux";
-        users = [(alex // {modules = ["hyprland"];})];
-      }
-      {
-        hostname = "kavval";
-        system = "x86_64-linux";
-        isManagedByHomeManager = true;
-        users = [alex];
-      }
-      {
-        hostname = "pop-os";
-        system = "x86_64-linux";
-        isManagedByHomeManager = true;
-        users = [alex];
-      }
-      {
-        hostname = "pangolin";
-        system = "x86_64-linux";
-        users = [(alex // {modules = ["hyprland"];})];
       }
       {
         hostname = "kavval-silicon";
         system = "aarch64-darwin";
-        users = [alex];
+      }
+    ];
+    nixosConfigurations = mkSystems [
+      {
+        hostname = "finishers";
+        system = "x86_64-linux";
+      }
+      {
+        hostname = "pangolin";
+        system = "x86_64-linux";
       }
       {
         hostname = "raspie";
         system = "aarch64-linux";
-        users = [alex];
       }
     ];
+    homeConfigurations = mkHomes [
+      {
+        hostname = "pop-os";
+        system = "x86_64-linux";
+      }
+      {
+        hostname = "kavval";
+        system = "x86_64-linux";
+      }
+    ];
+  };
 }

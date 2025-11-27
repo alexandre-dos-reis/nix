@@ -1,10 +1,11 @@
 {
   pkgs,
-  user,
+  users,
   inputs,
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin;
+  user = users.alex;
 
   # Handle vim mode correctly with oh-my-posh
   vimMode = ''

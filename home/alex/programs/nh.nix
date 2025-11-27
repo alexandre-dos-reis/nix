@@ -1,4 +1,6 @@
-{user, ...}: {
+{users, ...}: let
+  user = users.alex;
+in {
   programs.nh = {
     enable = true;
     clean.enable = true;

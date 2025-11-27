@@ -1,9 +1,10 @@
 {
-  user,
+  users,
   pkgs,
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin;
+  user = users.alex;
   inherit (user) email fullname editor;
 in {
   home.packages = with pkgs; [

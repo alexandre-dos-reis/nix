@@ -1,11 +1,13 @@
 {
   pkgs,
-  user,
+  users,
   ...
 }: let
   # term = "xterm-kitty";
   # https://github.com/craftzdog/dotfiles-public/blob/master/.config/tmux/tmux.conf
   # term = "xterm-256color";
+  user = users.alex;
+
   term = "xterm-ghostty";
   bg = user.colors.background;
   fg = user.colors.palette.base2-hex;

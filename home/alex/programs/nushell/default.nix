@@ -1,8 +1,10 @@
 {
   pkgs,
-  user,
+  users,
   ...
-}: {
+}: let 
+user = users.alex;
+in {
   home.packages = with pkgs; [
     carapace # completions
   ];

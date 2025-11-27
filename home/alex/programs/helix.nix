@@ -10,10 +10,6 @@
       keys.normal = {
         "S-k" = "hover";
       };
-      # ui = {
-      #   background = user.colors.background;
-      #   cursor = user.colors.cursor;
-      # };
     };
   };
 }
