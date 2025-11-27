@@ -66,7 +66,6 @@
         isNormalUser = true;
         description = u.fullname;
         extraGroups = ["networkmanager" "wheel" "audio" "video"];
-        # packages = [] Managed by home-manager
       };
     })
     users);

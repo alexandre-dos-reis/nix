@@ -1,17 +1,16 @@
 {
   users,
   pkgs,
-  host,
+  useNixGl,
   config,
   ...
-}: let 
-
-user = users.alex;
+}: let
+  user = users.alex;
 in {
   programs.ghostty = {
     enable = true;
     package =
-      if host.useNixGL
+      if useNixGl
       then config.lib.nixGL.wrap pkgs.ghostty
       else pkgs.ghostty;
     enableFishIntegration = true;

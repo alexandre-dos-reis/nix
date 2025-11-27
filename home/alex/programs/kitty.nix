@@ -1,8 +1,8 @@
 {
   pkgs,
   users,
-  host,
   config,
+  useNixGl,
   ...
 }: let
   user = users.alex;
@@ -12,7 +12,7 @@ in {
     enable = true;
     shellIntegration.enableFishIntegration = true;
     package =
-      if host.useNixGL
+      if useNixGl
       then config.lib.nixGL.wrap pkgs.kitty
       else pkgs.kitty;
     font = {

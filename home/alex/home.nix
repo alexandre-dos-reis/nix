@@ -30,14 +30,11 @@ in {
       if pkgs.stdenv.isDarwin
       then "/Users/${config.home.username}"
       else "/home/${config.home.username}";
-    file = {
-      "dev/.keep".text = "keep"; # Create folders
-    };
 
     sessionVariables = {
       EDITOR = user.editor;
       TERMINAL_BG = user.colors.background;
-      CAROOT = "${user.homeDir}/.local/share/mkcert";
+      CAROOT = "${config.home.homeDirectory}/.local/share/mkcert";
     };
 
     # https://mipmip.github.io/home-manager-option-search/?query=keyboard

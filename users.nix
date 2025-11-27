@@ -1,4 +1,7 @@
 [
+  # TODO: split this file in 2:
+  # - data that os needs: username.
+  # - data that home-manager needs.
   {
     username = "alex";
     email = "ajm.dosreis.daponte@gmail.com";
