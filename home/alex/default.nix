@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   users,
+  config,
   ...
 }: let
   user = users.alex;
@@ -25,8 +26,10 @@ in {
   home = {
     stateVersion = "23.11"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     username = user.username;
-    homeDirectory = user.homeDir;
-
+    homeDirectory =
+      if pkgs.stdenv.isDarwin
+      then "/Users/${config.home.username}"
+      else "/home/${config.home.username}";
     file = {
       "dev/.keep".text = "keep"; # Create folders
     };
