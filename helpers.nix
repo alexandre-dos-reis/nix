@@ -3,13 +3,13 @@ inputs: let
   users = import ./users.nix;
   nixpkgs = inputs.nixpkgs;
   flattenList = nixpkgs.lib.lists.flatten;
-  getIsDarwin = system: inputs.nixpkgs.lib.strings.hasSuffix "darwin" system;
+  isDarwinFromSystem = system: inputs.nixpkgs.lib.strings.hasSuffix "darwin" system;
 in {
   mkHomes = list:
     builtins.listToAttrs (flattenList (map (host: (map (user: {
         name = "${user.username}@${host.hostname}";
         value = let
-          isDarwin = getIsDarwin host.system;
+          isDarwin = isDarwinFromSystem host.system;
         in
           inputs.home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.${host.system};
@@ -51,7 +51,7 @@ in {
     builtins.listToAttrs (map (host: {
         name = host.hostname;
         value = let
-          isDarwin = getIsDarwin host.system;
+          isDarwin = isDarwinFromSystem host.system;
           systemFunc =
             if isDarwin
             then inputs.nix-darwin.lib.darwin
