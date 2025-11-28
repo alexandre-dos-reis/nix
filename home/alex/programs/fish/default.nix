@@ -1,11 +1,10 @@
 {
   pkgs,
-  users,
   inputs,
   ...
 }: let
   inherit (pkgs.stdenv) isDarwin;
-  user = users.alex;
+  constants = import ../../constants.nix;
 
   # Handle vim mode correctly with oh-my-posh
   vimMode = ''
@@ -45,13 +44,13 @@ in {
     generateCompletions = true;
     shellInit = ''
       set fish_greeting ""
-      set -gx EDITOR ${user.editor}
+      set -gx EDITOR ${constants.editor}
       set -gx PATH bin $PATH
       set -gx PATH ~/bin $PATH
       set -gx PATH ~/.local/bin $PATH
       set -gx PATH ~/.pulumi/bin $PATH
       set -gx PATH ~/go/bin $PATH
-      set -gx PATH ${user.npm.packages.path}/bin $PATH
+      set -gx PATH ${constants.npm.packages.path}/bin $PATH
 
       set -g theme_color_scheme terminal-dark
       set -g fish_prompt_pwd_dir_length 1
@@ -75,7 +74,7 @@ in {
       end
     '';
 
-    shellAliases = user.shellAliases;
+    shellAliases = constants.shellAliases;
     # https://search.nixos.org/packages?channel=unstable&show=fishPlugins.z&from=0&size=50&sort=relevance&type=packages&query=fishPlugins
     plugins = with pkgs.fishPlugins;
       [

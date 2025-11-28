@@ -50,39 +50,47 @@
 
   outputs = inputs: let
     inherit (import ./helpers.nix inputs) mkSystems mkHomes;
+    users = [(import ./users.nix).alex];
   in {
     darwinConfigurations = mkSystems [
       {
         hostname = "mbp2012";
         system = "x86_64-darwin";
+        inherit users;
       }
       {
         hostname = "kavval-silicon";
         system = "aarch64-darwin";
+        inherit users;
       }
     ];
     nixosConfigurations = mkSystems [
       {
         hostname = "finishers";
         system = "x86_64-linux";
+        inherit users;
       }
       {
         hostname = "pangolin";
         system = "x86_64-linux";
+        inherit users;
       }
       {
         hostname = "raspie";
         system = "aarch64-linux";
+        inherit users;
       }
     ];
     homeConfigurations = mkHomes [
       {
         hostname = "pop-os";
         system = "x86_64-linux";
+        inherit users;
       }
       {
         hostname = "kavval";
         system = "x86_64-linux";
+        inherit users;
       }
     ];
   };

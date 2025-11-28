@@ -1,18 +1,24 @@
 {
   inputs,
   pkgs,
-  users,
   config,
+  useNixGl,
   ...
 }: let
-  user = users.alex;
+  constants = import ./constants.nix;
 in {
-  imports = [
-    ./programs
-    ./packages.nix
-    ./files
-    ./scripts
-  ];
+  imports =
+    [
+      ./programs
+      ./packages.nix
+      ./files
+      ./scripts
+    ]
+    ++ (
+      if !useNixGl
+      then [./hyprland]
+      else []
+    );
 
   nixpkgs.config.allowUnfree = true;
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
@@ -25,15 +31,14 @@ in {
 
   home = {
     stateVersion = "23.11"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-    username = user.username;
     homeDirectory =
       if pkgs.stdenv.isDarwin
       then "/Users/${config.home.username}"
       else "/home/${config.home.username}";
 
     sessionVariables = {
-      EDITOR = user.editor;
-      TERMINAL_BG = user.colors.background;
+      EDITOR = constants.editor;
+      TERMINAL_BG = constants.colors.background;
       CAROOT = "${config.home.homeDirectory}/.local/share/mkcert";
     };
 

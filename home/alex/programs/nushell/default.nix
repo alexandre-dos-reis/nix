@@ -1,9 +1,5 @@
-{
-  pkgs,
-  users,
-  ...
-}: let 
-user = users.alex;
+{pkgs, ...}: let
+  constants = import ../../constants.nix;
 in {
   home.packages = with pkgs; [
     carapace # completions
@@ -40,7 +36,7 @@ in {
       $env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = $vi_normal_icon
       $env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = $vi_insert_icon
 
-      $env.config.buffer_editor = "${user.editor}"
+      $env.config.buffer_editor = "${constants.editor}"
       $env.config.keybindings = [
         ${mkAutopair "AutoParen" "(" ")"}
         ${mkAutopair "AutoSquared" "[" "]"}
@@ -50,7 +46,7 @@ in {
       ]
     '';
     shellAliases =
-      user.shellAliases
+      constants.shellAliases
       // {
         g = "git";
         gst = "git status";

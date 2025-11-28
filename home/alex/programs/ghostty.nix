@@ -1,11 +1,10 @@
 {
-  users,
   pkgs,
   useNixGl,
   config,
   ...
 }: let
-  user = users.alex;
+  constants = import ../constants.nix;
 in {
   programs.ghostty = {
     enable = true;
@@ -20,10 +19,10 @@ in {
       theme = "Solarized Dark Higher Contrast";
       maximize = true;
       font-size = 16; # 22
-      font-family = user.font;
-      background = user.colors.background;
+      font-family = constants.font;
+      background = constants.colors.background;
       shell-integration-features = "no-cursor, sudo, title";
-      cursor-color = user.colors.cursor;
+      cursor-color = constants.colors.cursor;
       cursor-style = "block";
       cursor-style-blink = false;
       window-decoration = false;

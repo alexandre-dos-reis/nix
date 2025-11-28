@@ -1,6 +1,5 @@
 inputs: let
   outputs = inputs.self.outputs;
-  users = import ./users.nix;
   nixpkgs = inputs.nixpkgs;
   flattenList = nixpkgs.lib.lists.flatten;
   isDarwinFromSystem = system: inputs.nixpkgs.lib.strings.hasSuffix "darwin" system;
@@ -26,9 +25,9 @@ in {
                   systemDirs.data = ["${config.home.homeDirectory}/.nix-profile/share/applications"];
                 };
               })
+              # Usefull for non-nixos linux system
               (
                 {pkgs, ...}:
-                # Usefull for non-nixos linux system
                   if pkgs.stdenv.isLinux
                   then {
                     targets.genericLinux.enable = true;
@@ -36,15 +35,12 @@ in {
                   }
                   else {}
               )
-              ./home/${user.username}/${
-                if isDarwin
-                then "darwin"
-                else "linux"
-              }.nix
+              # Load home config
+              ./home/${user.username}
             ];
           };
       })
-      users))
+      host.users))
     list));
 
   mkSystems = list:
@@ -56,22 +52,23 @@ in {
             if isDarwin
             then inputs.nix-darwin.lib.darwin
             else inputs.nixpkgs.lib.nixosSystem;
+          os =
+            if isDarwin
+            then "darwin"
+            else "nixos";
         in
           systemFunc {
             system = host.system;
             specialArgs = {
-              inherit inputs host users outputs;
+              inherit inputs host outputs;
+              users = host.users;
             };
             modules = [
               # Allow unfree packages.
               {nixpkgs.config.allowUnfree = true;}
 
               # Call host config
-              ./hosts/${
-                if isDarwin
-                then "darwin"
-                else "nixos"
-              }/${host.hostname}
+              ./hosts/${os}/${host.hostname}
 
               # Call Home-manager module
               inputs.home-manager.nixosModules.home-manager
@@ -81,22 +78,17 @@ in {
                   useUserPackages = true;
                   users = builtins.listToAttrs (map (user: {
                       name = user.username;
-                      value =
-                        ./home/${user.username}/${
-                          if isDarwin
-                          then "darwin"
-                          else "linux"
-                        }.nix;
+                      value = {
+                        home.username = user.username;
+                        imports = [
+                          ./home/${user.username}
+                        ];
+                      };
                     })
-                    users);
+                    host.users);
                   extraSpecialArgs = {
                     inherit inputs outputs host;
                     useNixGl = false;
-                    users = builtins.listToAttrs (map (user: {
-                        name = user.username;
-                        value = user;
-                      })
-                      users);
                   };
                 };
               }

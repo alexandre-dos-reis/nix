@@ -1,8 +1,8 @@
-{users, ...}: let
-  user = users.alex;
+let
+  constants = import ../constants.nix;
 in {
   # See user.nix files
   home.file.".npmrc".text = ''
-    prefix=${user.npm.packages.path}
+    prefix=${constants.npm.packages.path}
   '';
 }

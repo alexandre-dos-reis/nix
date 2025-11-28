@@ -85,7 +85,7 @@
       name = u.username;
       value = {
         isNormalUser = true;
-        description = u.fullname;
+        description = u.description;
         extraGroups = ["networkmanager" "wheel" "audio" "video"];
       };
     })

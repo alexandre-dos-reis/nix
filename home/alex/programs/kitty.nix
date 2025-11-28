@@ -1,11 +1,10 @@
 {
   pkgs,
-  users,
   config,
   useNixGl,
   ...
 }: let
-  user = users.alex;
+  constants = import ../constants.nix;
 in {
   # https://mipmip.github.io/home-manager-option-search/?query=kitty
   programs.kitty = {
@@ -17,7 +16,7 @@ in {
       else pkgs.kitty;
     font = {
       # Show current fonts installed : kitty --debug-font-fallback
-      name = user.font;
+      name = constants.font;
       size = 16; # 14 - 20
     };
     settings = {
@@ -32,8 +31,8 @@ in {
     };
     themeFile = "Solarized_Dark_Higher_Contrast";
     extraConfig = ''
-      background ${user.colors.background}
-      cursor ${user.colors.cursor}
+      background ${constants.colors.background}
+      cursor ${constants.colors.cursor}
     '';
   };
 }

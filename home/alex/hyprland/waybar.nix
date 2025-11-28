@@ -1,11 +1,7 @@
-{
-  pkgs,
-  users,
-  ...
-}: let
-  user = users.alex;
+{pkgs, ...}: let
+  constants = import ../constants.nix;
 
-  colors = user.colors.palette;
+  colors = constants.colors.palette;
   cyan = colors.cyan500-hex;
   yellow = colors.yellow500-hex;
   orange = colors.orange-hex;
@@ -189,7 +185,7 @@ in {
         box-shadow: inherit;
         text-shadow: inherit;
         font-weight: 800;
-        font-family: ${user.font};
+        font-family: ${constants.font};
         font-size: 30px;
         margin-top: -8px;
         margin-bottom: -8px;

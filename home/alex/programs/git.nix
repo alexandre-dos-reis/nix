@@ -1,11 +1,6 @@
-{
-  users,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   inherit (pkgs.stdenv) isDarwin;
-  user = users.alex;
-  inherit (user) email fullname editor;
+  inherit (import ../constants.nix) email fullname editor;
 in {
   home.packages = with pkgs; [
     delta # https://github.com/dandavison/delta

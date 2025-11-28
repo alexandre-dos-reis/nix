@@ -1,12 +1,11 @@
 {
   pkgs,
-  users,
   inputs,
   config,
   lib,
   ...
 }: let
-  user = users.alex;
+  constants = import ../constants.nix;
 in {
   imports = [
     # make vscode settings writable : https://github.com/nix-community/home-manager/issues/1800#issuecomment-1924321850
@@ -50,8 +49,8 @@ in {
 
     userSettings = {
       "workbench.colorTheme" = "poimandres";
-      "terminal.integrated.fontFamily" = user.font;
-      "editor.fontFamily" = user.font;
+      "terminal.integrated.fontFamily" = constants.font;
+      "editor.fontFamily" = constants.font;
       "editor.lineHeight" = 14;
       "editor.fontSize" = 11;
       "editor.fontLigatures" = true;

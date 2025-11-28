@@ -1,14 +1,10 @@
-{
-  pkgs,
-  users,
-  ...
-}: let
-  user = users.alex;
+{pkgs, ...}: let
+  constants = import ../constants.nix;
 
   attrsToList = pkgs.lib.attrsets.attrsToList;
   join = pkgs.lib.strings.concatStringsSep;
 
-  colors = user.colors.palette;
+  colors = constants.colors.palette;
   borderActiveColor = colors.base02-rgbhex;
   borderInativeColor = "rgba(07354100)";
 
@@ -95,7 +91,7 @@ in {
               "swaync"
               "hyprpaper"
               "clipse -listen"
-              "hyprctl setcursor ${user.cursor.theme} ${toString user.cursor.size}"
+              "hyprctl setcursor ${constants.cursor.theme} ${toString constants.cursor.size}"
             ]
             ++
             # Apps
@@ -344,19 +340,19 @@ in {
   };
 
   home.pointerCursor = {
-    name = user.cursor.theme;
-    size = user.cursor.size;
+    name = constants.cursor.theme;
+    size = constants.cursor.size;
     gtk.enable = true;
     x11.enable = true;
-    package = pkgs.${user.cursor.pkgs};
+    package = pkgs.${constants.cursor.pkgs};
   };
 
   gtk = {
     enable = true;
     cursorTheme = {
-      name = user.cursor.theme;
-      size = user.cursor.size;
-      package = pkgs.${user.cursor.pkgs};
+      name = constants.cursor.theme;
+      size = constants.cursor.size;
+      package = pkgs.${constants.cursor.pkgs};
     };
   };
 
