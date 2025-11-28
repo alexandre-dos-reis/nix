@@ -1,6 +1,6 @@
 {
   pkgs,
-  useNixGl,
+  useNixGL,
   ...
 }: let
   discord = pkgs.discord;
@@ -11,7 +11,7 @@ in {
   ];
 
   xdg.dataFile."applications/discord.desktop" = {
-    enable = useNixGl;
+    enable = useNixGL;
     text = ''
       [Desktop Entry]
       Version=1.0

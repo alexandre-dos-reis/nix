@@ -1,7 +1,7 @@
 {
   pkgs,
   config,
-  useNixGl,
+  useNixGL,
   ...
 }: let
   constants = import ../constants.nix;
@@ -11,7 +11,7 @@ in {
     enable = true;
     shellIntegration.enableFishIntegration = true;
     package =
-      if useNixGl
+      if useNixGL
       then config.lib.nixGL.wrap pkgs.kitty
       else pkgs.kitty;
     font = {

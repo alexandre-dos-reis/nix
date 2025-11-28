@@ -2,7 +2,7 @@ inputs: let
   outputs = inputs.self.outputs;
   nixpkgs = inputs.nixpkgs;
   flattenList = nixpkgs.lib.lists.flatten;
-  isDarwinFromSystem = system: inputs.nixpkgs.lib.strings.hasSuffix "darwin" system;
+  isDarwinFromSystem = system: nixpkgs.lib.strings.hasSuffix "darwin" system;
 in {
   mkHomes = list:
     builtins.listToAttrs (flattenList (map (host: (map (user: {
@@ -14,7 +14,7 @@ in {
             pkgs = nixpkgs.legacyPackages.${host.system};
             extraSpecialArgs = {
               inherit inputs outputs host user;
-              useNixGl = !isDarwin;
+              useNixGL = !isDarwin;
             };
             modules = [
               # Link applications defined by Home-Manager to host
@@ -88,7 +88,7 @@ in {
                     host.users);
                   extraSpecialArgs = {
                     inherit inputs outputs host;
-                    useNixGl = false;
+                    useNixGL = false;
                   };
                 };
               }

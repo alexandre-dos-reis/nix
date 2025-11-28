@@ -2,7 +2,7 @@
   inputs,
   pkgs,
   config,
-  useNixGl,
+  useNixGL,
   ...
 }: let
   constants = import ./constants.nix;
@@ -15,7 +15,7 @@ in {
       ./scripts
     ]
     ++ (
-      if !useNixGl
+      if !useNixGL
       then [./hyprland]
       else []
     );

@@ -1,10 +1,10 @@
-{useNixGl, ...}: {
+{useNixGL, ...}: {
   imports =
     [
       ./home.nix
     ]
     ++ (
-      if !useNixGl
+      if !useNixGL
       then [./hyprland]
       else []
     );

@@ -1,6 +1,6 @@
 {
   pkgs,
-  useNixGl,
+  useNixGL,
   config,
   ...
 }: let
@@ -9,7 +9,7 @@ in {
   programs.ghostty = {
     enable = true;
     package =
-      if useNixGl
+      if useNixGL
       then config.lib.nixGL.wrap pkgs.ghostty
       else pkgs.ghostty;
     enableFishIntegration = true;
