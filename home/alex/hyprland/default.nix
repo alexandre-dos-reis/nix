@@ -28,6 +28,8 @@ in {
 
   imports = [./waybar.nix];
 
+  home.file.".config/hypr/scripts/lid.sh".source = ./lid.sh;
+
   wayland.windowManager.hyprland = {
     enable = true;
     # package and portalPackage are backed by nixos
@@ -100,14 +102,6 @@ in {
 
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=$XDG_CURRENT_DESKTOP PATH"
       ];
-
-      # Set wallpapers
-      # Sometime services.hyprpaper isn't working...
-      # execr-once = builtins.genList (i: let
-      #   mon = builtins.elemAt monitors i;
-      #   wallpaper = builtins.elemAt wallpapers i;
-      # in "hyprctl hyprpaper reload ${mon.name}, \"${wallpaper}\"")
-      # 2;
 
       # Default monitor for workspaces
       workspace =
@@ -192,6 +186,9 @@ in {
         ", XF86AudioPause, exec, playerctl play-pause"
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPrev, exec, playerctl previous"
+        # lid script taken from: https://www.youtube.com/shorts/deZlxPWVuN4
+        ", switch:on:Lid Switch, exec, ~/.config/hypr/script/lid.sh"
+        ", switch:off:Lid Switch, exec, ~/.config/hypr/script/lid.sh"
       ];
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more

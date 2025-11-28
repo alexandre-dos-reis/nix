@@ -4,6 +4,7 @@
     nix-inspect # inspect flake in a nice interface
     nixos-rebuild
     devenv # Dev
+    devbox
 
     # fonts
     maple-mono.NF-unhinted
@@ -38,6 +39,9 @@
     gzip
     nmap
     openssl
+
+    # tui
+    ranger
 
     # code
     jujutsu # Alternative to git, use with `jj`
