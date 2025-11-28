@@ -6,6 +6,7 @@
   ...
 }: let
   constants = import ./constants.nix;
+  isDarwin = pkgs.stdenv.isDarwin;
 in {
   imports =
     [
@@ -32,7 +33,7 @@ in {
   home = {
     stateVersion = "23.11"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     homeDirectory =
-      if pkgs.stdenv.isDarwin
+      if isDarwin
       then "/Users/${config.home.username}"
       else "/home/${config.home.username}";
 
@@ -46,7 +47,7 @@ in {
     # https://dev.to/tallesl/change-caps-lock-to-ctrl-3c4
     # https://www.reddit.com/r/NixOS/comments/trkfyz/overriding_configurationnix_with_homemanager/
     keyboard.layout =
-      if pkgs.stdenv.isDarwin
+      if isDarwin
       then "Unicode Hex Input"
       else "us";
   };

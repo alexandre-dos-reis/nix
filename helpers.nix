@@ -52,10 +52,6 @@ in {
             if isDarwin
             then inputs.nix-darwin.lib.darwin
             else inputs.nixpkgs.lib.nixosSystem;
-          os =
-            if isDarwin
-            then "darwin"
-            else "nixos";
         in
           systemFunc {
             system = host.system;
@@ -68,7 +64,11 @@ in {
               {nixpkgs.config.allowUnfree = true;}
 
               # Call host config
-              ./hosts/${os}/${host.hostname}
+              ./hosts/${
+                if isDarwin
+                then "darwin"
+                else "nixos"
+              }/${host.hostname}
 
               # Call Home-manager module
               inputs.home-manager.nixosModules.home-manager
@@ -81,7 +81,11 @@ in {
                       value = {
                         home.username = user.username;
                         imports = [
-                          ./home/${user.username}
+                          ./home/${user.username}/${
+                            if isDarwin
+                            then "darwin"
+                            else "linux"
+                          }
                         ];
                       };
                     })

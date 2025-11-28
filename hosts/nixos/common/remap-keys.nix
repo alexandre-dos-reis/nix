@@ -25,6 +25,7 @@
           # The main layer, if you choose to declare it in Nix
           main = {
             capslock = "layer(control)"; # you might need to also enclose the key in quotes if it contains non-alphabetical symbols
+            rightalt = "layer(french)";
           };
 
           otherlayer = {};
@@ -36,6 +37,42 @@
           [control:C]
           ' = esc
 
+          [french]
+          f = æ
+          ; = œ
+          c = ç
+          a = à
+          g = â
+          w = è
+          r = é
+          e = ê
+          d = ë
+          i = î
+          l = ï
+          o = ô
+          u = ù
+          j = û
+          k = ü
+          y = ÿ
+          s = €
+
+          [french+shift]
+          f = Æ
+          ; = Œ
+          c = Ç
+          a = À
+          h = Â
+          w = È
+          r = É
+          d = Ë
+          e = Ê
+          i = Î
+          l = Ï
+          o = Ô
+          u = Ù
+          j = Û
+          k = Ü
+          y = Ÿ
         '';
       };
     };
