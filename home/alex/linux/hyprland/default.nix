@@ -88,14 +88,14 @@ in {
         ++ builtins.genList (i: "${toString (i + 1 + 10)}, monitor:${monitors.lg.name}") 9;
 
       bind = let
-        moveToWorkspaceScript = ws: cl: "~/.config/hypr/scripts/moveToWorkspace ${toString ws} ${cl}";
+        moveToWorkspace = ws: cl: "~/.config/hypr/scripts/moveToWorkspace ${toString ws} ${cl}";
       in
         [
           # >>> Presets
-          "$mainMod, u, exec, ${moveToWorkspaceScript 11 apps.ghostty.class}"
-          "$mainMod, i, exec, ${moveToWorkspaceScript 12 apps.chrome.class}"
-          "$mainMod, o, exec, ${moveToWorkspaceScript 13 apps.vscode.class}"
-          "$mainMod, p, exec, ${moveToWorkspaceScript 14 apps.chrome.class}"
+          "$mainMod, u, exec, ${moveToWorkspace 11 apps.ghostty.class}"
+          "$mainMod, i, exec, ${moveToWorkspace 12 apps.chrome.class}"
+          "$mainMod, o, exec, ${moveToWorkspace 13 apps.vscode.class}"
+          "$mainMod, p, exec, ${moveToWorkspace 14 apps.chrome.class}"
           # <<< Presets
 
           # Apps
@@ -131,10 +131,6 @@ in {
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
-
-      # TODO: try that for screen brightness, need to install `brightnessctl`
-      # binde = , XF86MonBrightnessUp, exec, brightnessctl set +15%
-      # binde = , XF86MonBrightnessDown, exec, brightnessctl set 15%-
 
       bindel = [
         ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"

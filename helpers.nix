@@ -36,7 +36,11 @@ in {
                   else {}
               )
               # Load home config
-              ./home/${user.username}
+              ./home/${user.username}/${
+                if isDarwin
+                then "darwin"
+                else "linux"
+              }
             ];
           };
       })
