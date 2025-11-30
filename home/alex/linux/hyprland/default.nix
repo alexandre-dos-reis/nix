@@ -21,15 +21,10 @@
     };
   };
 in {
-  # TODO: https://www.youtube.com/watch?v=zt3hgSBs11g
-  # Example of script using pid
-  # https://www.emadelsaid.com/Open%20application%20in%20workspace%20Hyprland/
-  # https://blogs.kde.org/2024/10/09/cursor-size-problems-in-wayland-explained/
-
   imports = [./waybar.nix];
 
   home.file.".config/hypr/scripts/lid".source = ./scripts/lid.sh;
-  home.file.".config/hypr/scripts/moveToWorkspace".source = ./scripts/moveToWorkspace.ts;
+  home.file.".config/hypr/scripts/moveToWorkspace".source = ./scripts/moveToWorkspace.sh;
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -93,7 +88,7 @@ in {
         ++ builtins.genList (i: "${toString (i + 1 + 10)}, monitor:${monitors.lg.name}") 9;
 
       bind = let
-        moveToWorkspaceScript = ws: cl: "~/.config/hypr/scripts/moveToWorkspace --workspace ${toString ws} --class ${cl}";
+        moveToWorkspaceScript = ws: cl: "~/.config/hypr/scripts/moveToWorkspace ${toString ws} ${cl}";
       in
         [
           # >>> Presets
