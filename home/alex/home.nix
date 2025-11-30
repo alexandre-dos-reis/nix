@@ -8,18 +8,12 @@
   constants = import ./constants.nix;
   isDarwin = pkgs.stdenv.isDarwin;
 in {
-  imports =
-    [
-      ./programs
-      ./packages.nix
-      ./files
-      ./scripts
-    ]
-    ++ (
-      if !useNixGL
-      then [./hyprland]
-      else []
-    );
+  imports = [
+    ./programs
+    ./packages.nix
+    ./files
+    ./scripts
+  ];
 
   nixpkgs.config.allowUnfree = true;
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];

@@ -6,7 +6,7 @@
     ]
     ++ (
       if !useNixGL
-      then [../hyprland]
+      then [./hyprland]
       else []
     );
 }

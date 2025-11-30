@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  constants = import ../constants.nix;
+  constants = import ../../constants.nix;
 
   attrsToList = pkgs.lib.attrsets.attrsToList;
   join = pkgs.lib.strings.concatStringsSep;
@@ -28,7 +28,8 @@ in {
 
   imports = [./waybar.nix];
 
-  home.file.".config/hypr/scripts/lid.sh".source = ./lid.sh;
+  home.file.".config/hypr/scripts/lid".source = ./scripts/lid.sh;
+  home.file.".config/hypr/scripts/moveToWorkspace".source = ./scripts/moveToWorkspace.ts;
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -55,27 +56,10 @@ in {
           class = "google-chrome";
         };
       };
-      # wallPath = "~/dev/nix-config/home/alex/files/wallpapers";
-      # wallpapers = [
-      #   "${wallPath}/solarized_dots.jpg"
-      #   "${wallPath}/solarized_triangle.jpg"
-      # ];
     in {
       "$terminal" = "ghostty -e fish";
 
       "$mainMod" = "SUPER";
-
-      # Taken from here : https://wiki.hyprland.org/Nvidia/
-      # CLI debug to check if nvidia drivers are running:
-      #
-      # `nvidia-settings`
-      # `glxinfo | egrep "OpenGL"`
-      # `nvidia-smi`
-
-      # env = [
-      #   "LIBVA_DRIVER_NAME,nvidia"
-      #   "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-      # ];
 
       env = [
         "GTK_CURSOR_BLINK,1"
@@ -108,29 +92,15 @@ in {
         builtins.genList (i: "${toString (i + 1)}, monitor:${monitors.laptop.name}") 9
         ++ builtins.genList (i: "${toString (i + 1 + 10)}, monitor:${monitors.lg.name}") 9;
 
-      bind =
+      bind = let
+        moveToWorkspaceScript = ws: cl: "~/.config/hypr/scripts/moveToWorkspace --workspace ${toString ws} --class ${cl}";
+      in
         [
           # >>> Presets
-          "$mainMod, u, movetoworkspace, 1, class:^(${apps.chrome.class})$"
-          "$mainMod, u, movetoworkspace, 11, class:^(${apps.ghostty.class})$"
-          "$mainMod, u, workspace, 1"
-          "$mainMod, u, workspace, 11"
-
-          "$mainMod, i, movetoworkspace, 2, class:^(${apps.chrome.class})$"
-          # "$mainMod, i, movetoworkspace, 12, class:^(Slack)$"
-          "$mainMod, i, movetoworkspace, 12, class:^(${apps.chrome.class})$"
-          "$mainMod, i, workspace, 2"
-          "$mainMod, i, workspace, 12"
-
-          "$mainMod, o, movetoworkspace, 3, class:^(${apps.ghostty.class})$"
-          "$mainMod, o, movetoworkspace, 13, class:^(${apps.vscode.class})$"
-          "$mainMod, o, workspace, 3"
-          "$mainMod, o, workspace, 13"
-
-          "$mainMod, p, movetoworkspace, 4, class:^(${apps.ghostty.class})$"
-          "$mainMod, p, movetoworkspace, 14, class:^(${apps.chrome.class})$"
-          "$mainMod, p, workspace, 4"
-          "$mainMod, p, workspace, 14"
+          "$mainMod, u, exec, ${moveToWorkspaceScript 11 apps.ghostty.class}"
+          "$mainMod, i, exec, ${moveToWorkspaceScript 12 apps.chrome.class}"
+          "$mainMod, o, exec, ${moveToWorkspaceScript 13 apps.vscode.class}"
+          "$mainMod, p, exec, ${moveToWorkspaceScript 14 apps.chrome.class}"
           # <<< Presets
 
           # Apps
@@ -187,8 +157,8 @@ in {
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPrev, exec, playerctl previous"
         # lid script taken from: https://www.youtube.com/shorts/deZlxPWVuN4
-        ", switch:on:Lid Switch, exec, ~/.config/hypr/script/lid.sh"
-        ", switch:off:Lid Switch, exec, ~/.config/hypr/script/lid.sh"
+        ", switch:on:Lid Switch, exec, ~/.config/hypr/script/lid"
+        ", switch:off:Lid Switch, exec, ~/.config/hypr/script/lid"
       ];
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more

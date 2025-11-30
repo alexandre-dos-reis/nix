@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  constants = import ../constants.nix;
+  constants = import ../../constants.nix;
 
   colors = constants.colors.palette;
   cyan = colors.cyan500-hex;
