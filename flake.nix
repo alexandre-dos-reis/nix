@@ -49,49 +49,18 @@
   };
 
   outputs = inputs: let
-    inherit (import ./helpers.nix inputs) mkSystems mkHomes;
-    users = [(import ./users.nix).alex];
-  in {
-    darwinConfigurations = mkSystems [
-      {
-        hostname = "mbp2012";
-        system = "x86_64-darwin";
-        inherit users;
-      }
-      {
-        hostname = "kavval-silicon";
-        system = "aarch64-darwin";
-        inherit users;
-      }
-    ];
-    nixosConfigurations = mkSystems [
-      {
-        hostname = "finishers";
-        system = "x86_64-linux";
-        inherit users;
-      }
-      {
-        hostname = "pangolin";
-        system = "x86_64-linux";
-        inherit users;
-      }
-      {
-        hostname = "raspie";
-        system = "aarch64-linux";
-        inherit users;
-      }
-    ];
-    homeConfigurations = mkHomes [
-      {
-        hostname = "pop-os";
-        system = "x86_64-linux";
-        inherit users;
-      }
-      {
-        hostname = "kavval";
-        system = "x86_64-linux";
-        inherit users;
-      }
-    ];
-  };
+    inherit (import ./helpers.nix inputs) mkConfig mkFlake;
+    mkEntry = system: options: mkConfig system [(import ./users.nix).alex] options;
+  in
+    mkFlake {
+      mbp2012 = mkEntry "x86_64-darwin";
+      kavval-silicon = mkEntry "aarch64-darwin";
+
+      finishers = mkEntry "x86_64-linux";
+      pangolin = mkEntry "x86_64-linux";
+      raspie = mkEntry "aarch64-linux";
+
+      pop-os = mkEntry "x86_64-linux" {isHomeOnly = true;};
+      kavval = mkEntry "x86_64-linux" {isHomeOnly = true;};
+    };
 }

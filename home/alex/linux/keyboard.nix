@@ -1,5 +1,5 @@
 {
-  # See man keyd
+  # See `man keyd`
   home.file.".XCompose".text = ''
     <Cancel> <0> <1> <y> : "Æ"
     <Cancel> <0> <2> <u> : "æ"

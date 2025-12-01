@@ -104,4 +104,10 @@ in {
           };
       })
       list);
+
+  mkEntry = system: users: {isHomeOnly ? false, ...}: "TODO";
+  mkFlake = entries: nixpkgs.lib.attrsets.mapAttrsToList (hostname: entry: {
+
+
+    }) entries
 }
