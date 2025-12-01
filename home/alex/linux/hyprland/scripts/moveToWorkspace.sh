@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# --- This script get all clients by their classes and moved then to the specified workspace.
+# --- This script get all clients by their classes and moved then to a specific workspace.
 # $1 is the workspace
 # $2 is the class
 
@@ -15,7 +15,7 @@ while IFS= read -r addr; do
 done <<< "$clients"
 
 # Add final workspace switch
-commands+="; dispatch workspace $1"
+commands+="dispatch workspace $1"
 
 # --- Execute batch command ---
 hyprctl --batch "$commands"

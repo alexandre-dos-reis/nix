@@ -23,7 +23,6 @@
 in {
   imports = [./waybar.nix];
 
-  home.file.".config/hypr/scripts/lid".source = ./scripts/lid.sh;
   home.file.".config/hypr/scripts/moveToWorkspace".source = ./scripts/moveToWorkspace.sh;
 
   wayland.windowManager.hyprland = {
@@ -84,41 +83,49 @@ in {
 
       # Default monitor for workspaces
       workspace =
-        builtins.genList (i: "${toString (i + 1)}, monitor:${monitors.laptop.name}") 9
-        ++ builtins.genList (i: "${toString (i + 1 + 10)}, monitor:${monitors.lg.name}") 9;
+        builtins.genList (i: "${toString (i + 1)}, monitor:${monitors.laptop.name}") 4
+        ++ builtins.genList (i: "${toString (i + 11)}, monitor:${monitors.lg.name}") 4;
 
       bind = let
         moveToWorkspace = ws: cl: "~/.config/hypr/scripts/moveToWorkspace ${toString ws} ${cl}";
-      in
-        [
-          # >>> Presets
-          "$mainMod, u, exec, ${moveToWorkspace 11 apps.ghostty.class}"
-          "$mainMod, i, exec, ${moveToWorkspace 12 apps.chrome.class}"
-          "$mainMod, o, exec, ${moveToWorkspace 13 apps.vscode.class}"
-          "$mainMod, p, exec, ${moveToWorkspace 14 apps.chrome.class}"
-          # <<< Presets
+      in [
+        # >>> Presets
+        "$mainMod, u, exec, ${moveToWorkspace 1 apps.ghostty.class}"
+        "$mainMod, i, exec, ${moveToWorkspace 2 apps.chrome.class}"
+        "$mainMod, o, exec, ${moveToWorkspace 3 apps.vscode.class}"
+        "$mainMod, p, exec, ${moveToWorkspace 4 apps.chrome.class}"
+        # <<< Presets
 
-          # Apps
-          "$mainMod, E, exec, nautilus"
-          "$mainMod, G, exec, $terminal"
-          "$mainMod, W, killactive,"
-          "$mainMod, M, exit,"
-          "$mainMod, T, togglefloating,"
-          "$mainMod, SPACE, execr, wofi --show drun"
-          "$mainMod, C, exec, kitty --class clipse -e clipse"
+        # Apps
+        "$mainMod, E, exec, nautilus"
+        "$mainMod, G, exec, $terminal"
+        "$mainMod, W, killactive,"
+        "$mainMod, M, exit,"
+        "$mainMod, T, togglefloating,"
+        "$mainMod, SPACE, execr, wofi --show drun"
+        "$mainMod, C, exec, kitty --class clipse -e clipse"
 
-          # Movements
-          "$mainMod, h, movefocus, l"
-          "$mainMod, j, movefocus, d"
-          "$mainMod, k, movefocus, u"
-          "$mainMod, l, movefocus, r"
+        # Movements
+        "$mainMod, h, movefocus, l"
+        "$mainMod, j, movefocus, d"
+        "$mainMod, k, movefocus, u"
+        "$mainMod, l, movefocus, r"
 
-          "$mainMod CTRL, h, swapwindow, l"
-          "$mainMod CTRL, l, swapwindow, r"
-          "$mainMod CTRL, k, swapwindow, u"
-          "$mainMod CTRL, j, swapwindow, d"
-        ]
-        ++ builtins.genList (i: "$mainMod SHIFT, ${toString i}, movetoworkspace, ${toString i}") 9;
+        "$mainMod CTRL, h, swapwindow, l"
+        "$mainMod CTRL, l, swapwindow, r"
+        "$mainMod CTRL, k, swapwindow, u"
+        "$mainMod CTRL, j, swapwindow, d"
+
+        "$mainMod SHIFT, u, movetoworkspace, 1"
+        "$mainMod SHIFT, i, movetoworkspace, 2"
+        "$mainMod SHIFT, o, movetoworkspace, 3"
+        "$mainMod SHIFT, p, movetoworkspace, 4"
+
+        "$mainMod SHIFT CTRL, u, movetoworkspace, 11"
+        "$mainMod SHIFT CTRL, i, movetoworkspace, 12"
+        "$mainMod SHIFT CTRL, o, movetoworkspace, 13"
+        "$mainMod SHIFT CTRL, p, movetoworkspace, 14"
+      ];
 
       binde = [
         "$mainMod CTRL, h, moveactive, -50 0  "
@@ -141,15 +148,17 @@ in {
         ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
       ];
 
-      bindl = [
+      bindl = let
+        laptop = monitors.laptop;
+      in [
         # Requires playerctl
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPause, exec, playerctl play-pause"
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPrev, exec, playerctl previous"
         # lid script taken from: https://www.youtube.com/shorts/deZlxPWVuN4
-        ", switch:on:Lid Switch, exec, ~/.config/hypr/script/lid"
-        ", switch:off:Lid Switch, exec, ~/.config/hypr/script/lid"
+        ", switch:on:Lid Switch, exec, hyprctl keyword monitor \"${laptop.name}, disable\""
+        ", switch:off:Lid Switch, exec, hyprctl keyword monitor \"${laptop.name}, preferred, ${laptop.position}, ${laptop.scale}\""
       ];
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
@@ -321,11 +330,13 @@ in {
     style = builtins.readFile ./swaync.css;
   };
 
+  home.file.".config/hypr/files/solarized_dots.jpg".source = ../../files/wallpapers/solarized_dots.jpg;
+  home.file.".config/hypr/files/solarized_triangle.jpg".source = ../../files/wallpapers/solarized_triangle.jpg;
+
   services.hyprpaper = {
     enable = true;
     settings = let
-      # TODO: Put this in the global config.
-      path = "~/dev/nix-config/home/alex/files/wallpapers";
+      path = "~/.config/hypr/files";
       dots_img = "${path}/solarized_dots.jpg";
       triangle_img = "${path}/solarized_triangle.jpg";
     in {
