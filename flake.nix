@@ -52,18 +52,6 @@
     inherit (import ./helpers.nix inputs) mkSystems mkHomes;
     users = [(import ./users.nix).alex];
   in {
-    darwinConfigurations = mkSystems [
-      {
-        hostname = "mbp2012";
-        system = "x86_64-darwin";
-        inherit users;
-      }
-      {
-        hostname = "kavval-silicon";
-        system = "aarch64-darwin";
-        inherit users;
-      }
-    ];
     nixosConfigurations = mkSystems [
       {
         hostname = "finishers";
