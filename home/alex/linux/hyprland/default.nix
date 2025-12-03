@@ -89,36 +89,16 @@ in {
       bind = let
         # TODO: Detect if we have one monitor active "laptop only"
         # As changing workspace not in use are not handled properly.
-        moveToWorkspace = key: array: "$mainMod, ${key}, exec, ~/.config/hypr/scripts/moveToWorkspace '${builtins.toJSON array}'";
+        moveToWorkspace = key: ws: array: "$mainMod, ${key}, exec, ~/.config/hypr/scripts/moveToWorkspace ${toString ws} '${builtins.toJSON array}'";
       in [
         # >>> Presets
-        (moveToWorkspace "u" [
-          {
-            space = 1;
-            class = apps.ghostty.class;
-          }
-        ])
+        (moveToWorkspace "u" 1 [apps.ghostty.class])
 
-        (moveToWorkspace "i" [
-          {
-            space = 2;
-            class = apps.chrome.class;
-          }
-        ])
+        (moveToWorkspace "i" 2 [apps.chrome.class])
 
-        (moveToWorkspace "o" [
-          {
-            space = 3;
-            class = apps.vscode.class;
-          }
-        ])
+        (moveToWorkspace "o" 3 [apps.vscode.class])
 
-        (moveToWorkspace "p" [
-          {
-            space = 4;
-            class = apps.chrome.class;
-          }
-        ])
+        (moveToWorkspace "p" 4 [apps.chrome.class])
         # <<< Presets
 
         # Apps

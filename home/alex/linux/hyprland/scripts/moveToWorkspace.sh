@@ -1,32 +1,35 @@
 #!/usr/bin/env bash
 
-json="$1"
+# Usage: moveToWorkspace <workspace> '<json-array-of-classes>'
+# Example: moveToWorkspace 1 '["com.mitchellh.ghostty","Google-chrome"]'
+
+space="$1"
+json_classes="$2"
 
 # Fetch all clients once
 all_clients=$(hyprctl clients -j)
 
 commands=""
 
-# Loop through rules from your JSON argument
-while read -r rule; do
-    space=$(jq -r '.space' <<< "$rule")
-    class=$(jq -r '.class' <<< "$rule")
+# Loop through classes from the JSON array
+while read -r class; do
+    # Remove quotes from class string
+    class=$(jq -r '.' <<< "$class")
 
-    # Filter from preloaded clients JSON
+    # --- Find clients of this class ---
     clients=$(jq -r --arg class "$class" '
         .[] | select(.class == $class) | .address
     ' <<< "$all_clients")
 
-    # Build commands
+    # --- Build commands ---
     while read -r addr; do
         [ -n "$addr" ] || continue
         commands+="dispatch movetoworkspace $space,address:$addr ; "
     done <<< "$clients"
+done < <(jq -c '.[]' <<< "$json_classes")
 
-    # Optionally switch to that workspace last
-    commands+="dispatch workspace $space ; "
+# Switch to the workspace last
+commands+="dispatch workspace $space ; "
 
-done < <(jq -c '.[]' <<< "$json")
-
-# Execute the whole batch at once
+# --- Execute batch command ---
 hyprctl --batch "$commands"
