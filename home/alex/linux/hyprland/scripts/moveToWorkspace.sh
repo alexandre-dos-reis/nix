@@ -4,6 +4,19 @@
 # Example: moveToWorkspace 1 '["com.mitchellh.ghostty","Google-chrome"]'
 
 space="$1"
+
+# all_monitors=$(hyprctl monitors -j)
+
+# --- Early exit if workspace not active on any monitor ---
+# ws_active=$(jq -r --arg space "$space" '
+#     any(.[]; .activeWorkspace.id == ($space|tonumber))
+# ' <<< "$all_monitors")
+#
+# if [ "$ws_active" != "true" ]; then
+#     echo "Workspace $space is not active on any monitor — exiting."
+#     exit 1
+# fi
+
 json_classes="$2"
 
 # Fetch all clients once
@@ -11,7 +24,7 @@ all_clients=$(hyprctl clients -j)
 
 commands=""
 
-# Loop through classes from the JSON array
+# Parse each rule from the JSON array without creating a subshell
 while read -r class; do
     # Remove quotes from class string
     class=$(jq -r '.' <<< "$class")
@@ -21,15 +34,15 @@ while read -r class; do
         .[] | select(.class == $class) | .address
     ' <<< "$all_clients")
 
-    # --- Build commands ---
-    while read -r addr; do
-        [ -n "$addr" ] || continue
-        commands+="dispatch movetoworkspace $space,address:$addr ; "
+    # --- Build batch commands for this rule ---
+    while IFS= read -r addr; do
+        commands+="dispatch movetoworkspace $space,address:${addr} ; "
     done <<< "$clients"
+
+    # Final workspace switch
+    commands+="dispatch workspace $space ; "
+
 done < <(jq -c '.[]' <<< "$json_classes")
 
-# Switch to the workspace last
-commands+="dispatch workspace $space ; "
-
-# --- Execute batch command ---
+# --- Execute once ---
 hyprctl --batch "$commands"
