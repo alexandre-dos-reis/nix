@@ -1,21 +1,32 @@
 #!/usr/bin/env bash
 
-# --- This script get all clients by their classes and moved then to a specific workspace.
-# $1 is the workspace
-# $2 is the class
+json="$1"
 
-# --- Fetch and filter clients by class ---
-clients=$(hyprctl clients -j \
-    | jq -r --arg cls "$2" '.[] | select(.class == $cls) | .address')
+# Fetch all clients once
+all_clients=$(hyprctl clients -j)
 
-# --- Build batch commands ---
 commands=""
-while IFS= read -r addr; do
-    commands+="dispatch movetoworkspace $1,address:${addr} ; "
-done <<< "$clients"
 
-# Add final workspace switch
-commands+="dispatch workspace $1"
+# Loop through rules from your JSON argument
+while read -r rule; do
+    space=$(jq -r '.space' <<< "$rule")
+    class=$(jq -r '.class' <<< "$rule")
 
-# --- Execute batch command ---
+    # Filter from preloaded clients JSON
+    clients=$(jq -r --arg class "$class" '
+        .[] | select(.class == $class) | .address
+    ' <<< "$all_clients")
+
+    # Build commands
+    while read -r addr; do
+        [ -n "$addr" ] || continue
+        commands+="dispatch movetoworkspace $space,address:$addr ; "
+    done <<< "$clients"
+
+    # Optionally switch to that workspace last
+    commands+="dispatch workspace $space ; "
+
+done < <(jq -c '.[]' <<< "$json")
+
+# Execute the whole batch at once
 hyprctl --batch "$commands"

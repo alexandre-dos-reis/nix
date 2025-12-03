@@ -87,13 +87,38 @@ in {
         ++ builtins.genList (i: "${toString (i + 11)}, monitor:${monitors.lg.name}") 4;
 
       bind = let
-        moveToWorkspace = ws: cl: "~/.config/hypr/scripts/moveToWorkspace ${toString ws} ${cl}";
+        # TODO: Detect if we have one monitor active "laptop only"
+        # As changing workspace not in use are not handled properly.
+        moveToWorkspace = key: array: "$mainMod, ${key}, exec, ~/.config/hypr/scripts/moveToWorkspace '${builtins.toJSON array}'";
       in [
         # >>> Presets
-        "$mainMod, u, exec, ${moveToWorkspace 1 apps.ghostty.class}"
-        "$mainMod, i, exec, ${moveToWorkspace 2 apps.chrome.class}"
-        "$mainMod, o, exec, ${moveToWorkspace 3 apps.vscode.class}"
-        "$mainMod, p, exec, ${moveToWorkspace 4 apps.chrome.class}"
+        (moveToWorkspace "u" [
+          {
+            space = 1;
+            class = apps.ghostty.class;
+          }
+        ])
+
+        (moveToWorkspace "i" [
+          {
+            space = 2;
+            class = apps.chrome.class;
+          }
+        ])
+
+        (moveToWorkspace "o" [
+          {
+            space = 3;
+            class = apps.vscode.class;
+          }
+        ])
+
+        (moveToWorkspace "p" [
+          {
+            space = 4;
+            class = apps.chrome.class;
+          }
+        ])
         # <<< Presets
 
         # Apps
