@@ -13,6 +13,7 @@
     ../common/docker.nix
     ./bluetooth.nix
     ./hosts.nix
+    ./models.nix
   ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
 

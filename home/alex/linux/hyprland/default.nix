@@ -33,7 +33,7 @@ in {
 
     settings = let
       apps = {
-        ghostty = {
+        terminal = {
           name = "ghostty";
           class = "com.mitchellh.ghostty";
         };
@@ -45,9 +45,13 @@ in {
         #   name = "slack";
         #   class = "Slack";
         # };
-        chrome = {
+        browser = {
           name = "google-chrome-stable";
           class = "google-chrome";
+        };
+        firefox = {
+          name = "firefox";
+          class = "firefox";
         };
       };
     in {
@@ -92,13 +96,13 @@ in {
         moveToWorkspace = key: ws: array: "$mainMod, ${key}, exec, ~/.config/hypr/scripts/moveToWorkspace ${toString ws} '${builtins.toJSON array}'";
       in [
         # >>> Presets
-        (moveToWorkspace "u" 1 [apps.ghostty.class])
+        (moveToWorkspace "u" 1 [apps.terminal.class])
 
-        (moveToWorkspace "i" 2 [apps.chrome.class])
+        (moveToWorkspace "i" 2 [apps.browser.class apps.terminal.class])
 
-        (moveToWorkspace "o" 3 [apps.vscode.class])
+        (moveToWorkspace "o" 3 [apps.firefox.class])
 
-        (moveToWorkspace "p" 4 [apps.chrome.class])
+        (moveToWorkspace "p" 4 [apps.browser.class])
         # <<< Presets
 
         # Apps

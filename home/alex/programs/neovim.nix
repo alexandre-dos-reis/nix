@@ -14,6 +14,9 @@
   home.packages = with pkgs; let
     zig = inputs.zig.packages.${pkgs.stdenv.hostPlatform.system}."0.15.2";
   in [
+    # Code
+    opencode
+
     # Deps for Lazy
     luajitPackages.luarocks
 
@@ -96,7 +99,11 @@
     pgformatter
 
     # Php
-    phpactor
+    php
+    phpactor # lsp
+    symfony-cli
+    php84Packages.composer # package manager
+    php84Packages.php-cs-fixer # formatter
 
     # C
     gcc # or clang
