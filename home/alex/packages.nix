@@ -74,5 +74,6 @@
     vlc
     libreoffice
     blender
+    audacity
   ];
 }

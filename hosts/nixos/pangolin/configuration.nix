@@ -8,9 +8,10 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../common/remap-keys.nix
+    # ../common/remap-keys.nix
     ../common/hyprland.nix
     ../common/docker.nix
+    ../common/printers.nix
     ./bluetooth.nix
     ./hosts.nix
     ./models.nix
@@ -25,6 +26,12 @@
   services.desktopManager = {
     cosmic.enable = true;
     gnome.enable = true;
+  };
+
+  # This is mandatory for unicode characters to work from keyboard qmk.
+  i18n.inputMethod = {
+    enable = true;
+    type = "ibus";
   };
 
   # Enable the GNOME Desktop Environment.
@@ -68,8 +75,7 @@
     };
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  hardware.sane.extraBackends = [pkgs.epsonscan2];
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
