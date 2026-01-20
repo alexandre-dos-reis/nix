@@ -28,7 +28,9 @@
     gnome.enable = true;
   };
 
-  # This is mandatory for unicode characters to work from keyboard qmk.
+  boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 0;
+
+  # This is mandatory for unicode characters to be inputed correctly
   i18n.inputMethod = {
     enable = true;
     type = "ibus";
