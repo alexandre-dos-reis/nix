@@ -11,7 +11,7 @@ in {
           isDarwin = isDarwinFromSystem host.system;
         in
           inputs.home-manager.lib.homeManagerConfiguration {
-            pkgs = nixpkgs.legacyPackages.${host.system};
+            pkgs = inputs.nixpkgs.legacyPackages.${host.system};
             extraSpecialArgs = {
               inherit inputs outputs host user;
               useNixGL = !isDarwin;
@@ -78,7 +78,7 @@ in {
               inputs.home-manager.nixosModules.home-manager
               {
                 home-manager = {
-                  useGlobalPkgs = false;
+                  useGlobalPkgs = true;
                   useUserPackages = true;
                   users = builtins.listToAttrs (map (user: {
                       name = user.username;
@@ -97,6 +97,7 @@ in {
                   extraSpecialArgs = {
                     inherit inputs outputs host;
                     useNixGL = false;
+                    nixpkgs-unstable = inputs.nixpkgs-unstable;
                   };
                 };
               }

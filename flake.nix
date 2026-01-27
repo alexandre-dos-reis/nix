@@ -3,12 +3,9 @@
 
   # https://nixos-and-flakes.thiscute.world/other-usage-of-flakes/inputs
   inputs = {
-    # Nix
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    nix-darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Nix ecosystem
+    nixpkgs.url = "nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

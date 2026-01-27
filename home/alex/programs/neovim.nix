@@ -6,8 +6,8 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    viAlias = true;
-    vimAlias = false;
+    # viAlias = true;
+    # vimAlias = false;
   };
 
   # LSPs and executable
