@@ -82,7 +82,7 @@
 
     # Zig
     zig
-    zls
+    # zls
 
     # Dotnet
     dotnetCorePackages.sdk_9_0
