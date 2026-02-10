@@ -97,15 +97,12 @@ in {
       in [
         # >>> Presets
         (moveToWorkspace "u" 1 [apps.terminal.class])
-        # (moveToWorkspace "u" 11 [apps.browser.class])
 
-        (moveToWorkspace "i" 2 [])
-        # (moveToWorkspace "i" 12 [apps.browser.class apps.terminal.class])
+        (moveToWorkspace "i" 2 [apps.browser.class apps.terminal.class])
 
         (moveToWorkspace "o" 3 [apps.firefox.class])
 
         (moveToWorkspace "p" 4 [apps.browser.class])
-        # (moveToWorkspace "p" 14 [apps.terminal.class])
         # <<< Presets
 
         # Apps

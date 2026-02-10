@@ -114,7 +114,6 @@
     usbutils
     pciutils
     pavucontrol
-    anydesk
   ];
 
   services.logind.settings.Login = {
