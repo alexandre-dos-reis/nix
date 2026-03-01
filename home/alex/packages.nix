@@ -61,9 +61,11 @@
     qmk
     qmk_hid
 
-    # Postgres
+    # SQL
     postgresql # needed for psql
     tbls
+    lazysql
+    pgweb
 
     # containers
     lazydocker

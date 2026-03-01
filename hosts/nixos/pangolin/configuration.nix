@@ -4,6 +4,7 @@
 {
   pkgs,
   users,
+  inputs,
   ...
 }: {
   imports = [
@@ -114,6 +115,7 @@
     usbutils
     pciutils
     pavucontrol
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   services.logind.settings.Login = {

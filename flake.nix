@@ -21,6 +21,12 @@
     # Hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    # Browser
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Fish
     kubectx = {
       # For completions

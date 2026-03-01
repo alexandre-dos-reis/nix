@@ -649,6 +649,7 @@
         "nixpkgs": "nixpkgs_2",
         "ssh-agent-macos": "ssh-agent-macos",
         "vscode-extensions": "vscode-extensions",
+        "zen-browser": "zen-browser",
         "zig": "zig"
       }
     },
@@ -769,6 +770,26 @@
       "original": {
         "owner": "hyprwm",
         "repo": "xdg-desktop-portal-hyprland",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1772340029,
+        "narHash": "sha256-4KmL71wCRrkooDKEClMrKgG0QBAcBYYPnFNltYXyhYg=",
+        "owner": "youwen5",
+        "repo": "zen-browser-flake",
+        "rev": "0ffb3ae574f1048ecfce7e3ffc25693f8cd7ee91",
+        "type": "github"
+      },
+      "original": {
+        "owner": "youwen5",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     },

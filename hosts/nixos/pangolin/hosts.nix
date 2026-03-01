@@ -14,5 +14,5 @@
   # It will generate a public and private root certificate authority keys.
   # - import the rootCa here, don't `git add` the rootCA-key.pem file,
   # it's the private key !
-  security.pki.certificateFiles = [./certificates/rootCA.pem];
+  security.pki.certificateFiles = [./certificates/rootCA.pem ./certificates/ea-rootCA.pem];
 }
