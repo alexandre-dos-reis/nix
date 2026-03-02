@@ -15,6 +15,10 @@ in {
             extraSpecialArgs = {
               inherit inputs outputs host user;
               useNixGL = !isDarwin;
+              pkgs-unstable = import inputs.nixpkgs-unstable {
+                system = host.system;
+                config.allowUnfree = true;
+              };
             };
             modules = [
               # Link applications defined by Home-Manager to host
@@ -97,6 +101,10 @@ in {
                   extraSpecialArgs = {
                     inherit inputs outputs host;
                     useNixGL = false;
+                    pkgs-unstable = import inputs.nixpkgs-unstable {
+                      system = host.system;
+                      config.allowUnfree = true;
+                    };
                   };
                 };
               }

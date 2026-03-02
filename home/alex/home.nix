@@ -2,7 +2,6 @@
   inputs,
   pkgs,
   config,
-  useNixGL,
   ...
 }: let
   constants = import ./constants.nix;

@@ -4,16 +4,16 @@
   # https://nixos-and-flakes.thiscute.world/other-usage-of-flakes/inputs
   inputs = {
     # Nix
-    nixpkgs.url = "nixpkgs/nixos-25.11";
+    # We use unstable for packages only.
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixgl = {
-      url = "github:nix-community/nixGL";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Make sure releases of home-manager matches nixpkgs
+    nixpkgs.url = "nixpkgs/nixos-25.11";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Grafical utils for home-manager standalone
+    nixgl.url = "github:nix-community/nixGL";
+    nixgl.inputs.nixpkgs.follows = "nixpkgs";
 
     # Hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -41,7 +41,6 @@
     };
 
     # Editors
-    # nvim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
     # Langs

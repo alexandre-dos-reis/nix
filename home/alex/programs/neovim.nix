@@ -1,7 +1,6 @@
 {
-  pkgs,
   inputs,
-  # unstable-pkgs,
+  pkgs-unstable,
   ...
 }: {
   programs.neovim = {
@@ -12,8 +11,8 @@
   };
 
   # LSPs and executable
-  home.packages = with pkgs; let
-    zig = inputs.zig.packages.${pkgs.stdenv.hostPlatform.system}."0.15.2";
+  home.packages = with pkgs-unstable; let
+    zig = inputs.zig.packages.${pkgs-unstable.stdenv.hostPlatform.system}."0.15.2";
   in [
     # Code
     opencode
