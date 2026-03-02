@@ -173,22 +173,22 @@ in {
       ];
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-      windowrulev2 = [
-        # files
-        "float, class:(org.gnome.Nautilus)"
-        "size 50% 50%, class:(org.gnome.Nautilus)"
-        "stayfocused, class:(org.gnome.Nautilus)"
+      windowrule = [
+        # Nautilus
+        "match:class org.gnome.Nautilus, float on"
+        "match:class org.gnome.Nautilus, size (monitor_w*0.5) (monitor_h*0.5)"
+        "match:class org.gnome.Nautilus, stay_focused on"
 
-        # clipboard manager
-        "float, class:(clipse)"
-        "size 50% 50%, class:(clipse)"
-        "stayfocused, class:(clipse)"
+        # clipse
+        "match:class clipse, float on"
+        "match:class clipse, size (monitor_w*0.5) (monitor_h*0.5)"
+        "match:class clipse, stay_focused on"
 
-        # Ignore maximize requests from apps. You'll probably like this.
-        "suppressevent maximize, class:.*"
+        # Ignore maximize requests
+        "match:class .*, suppress_event maximize"
 
-        # Fix some dragging issues with XWayland
-        "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+        # XWayland dragging workaround (exact equivalent possible now)
+        "match:class ^$, match:title ^$, match:xwayland 1, match:float 1, match:fullscreen 0, match:pin 0, no_focus on"
       ];
 
       general = {

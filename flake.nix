@@ -4,13 +4,10 @@
   # https://nixos-and-flakes.thiscute.world/other-usage-of-flakes/inputs
   inputs = {
     # Nix
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    nix-darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs.url = "nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl = {

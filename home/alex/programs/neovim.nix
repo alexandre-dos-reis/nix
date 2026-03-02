@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  # unstable-pkgs,
   ...
 }: {
   programs.neovim = {
@@ -35,7 +36,7 @@
     corepack_24
     nodePackages.nodemon
     nodePackages.prettier
-    nodePackages.vercel
+    # nodePackages.vercel
     nodePackages."@astrojs/language-server"
     bun
     deno

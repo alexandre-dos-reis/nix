@@ -78,7 +78,7 @@ in {
               inputs.home-manager.nixosModules.home-manager
               {
                 home-manager = {
-                  useGlobalPkgs = false;
+                  useGlobalPkgs = true;
                   useUserPackages = true;
                   users = builtins.listToAttrs (map (user: {
                       name = user.username;

@@ -38,8 +38,8 @@
   };
 
   # Enable the GNOME Desktop Environment.
-  # services.displayManager.gdm.enable = true;
-  services.displayManager.cosmic-greeter.enable = true;
+  services.displayManager.gdm.enable = true;
+  # services.displayManager.cosmic-greeter.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
