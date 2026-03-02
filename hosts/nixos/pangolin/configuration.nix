@@ -13,6 +13,7 @@
     ../common/hyprland.nix
     ../common/docker.nix
     ../common/printers.nix
+    ./input.nix
     ./bluetooth.nix
     ./hosts.nix
     ./models.nix
@@ -31,12 +32,6 @@
 
   boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 0;
 
-  # This is mandatory for unicode characters to be inputed correctly
-  i18n.inputMethod = {
-    enable = true;
-    type = "ibus";
-  };
-
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
   # services.displayManager.cosmic-greeter.enable = true;
@@ -51,22 +46,6 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
-
-  # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "fr_FR.UTF-8";
-      LC_IDENTIFICATION = "fr_FR.UTF-8";
-      LC_MEASUREMENT = "fr_FR.UTF-8";
-      LC_MONETARY = "fr_FR.UTF-8";
-      LC_NAME = "fr_FR.UTF-8";
-      LC_NUMERIC = "fr_FR.UTF-8";
-      LC_PAPER = "fr_FR.UTF-8";
-      LC_TELEPHONE = "fr_FR.UTF-8";
-      LC_TIME = "fr_FR.UTF-8";
-    };
-  };
 
   # Configure keymap in X11
   services.xserver = {

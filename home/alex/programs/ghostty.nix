@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-unstable,
   useNixGL,
   config,
   ...
@@ -10,8 +11,8 @@ in {
     enable = true;
     package =
       if useNixGL
-      then config.lib.nixGL.wrap pkgs.ghostty
-      else pkgs.ghostty;
+      then config.lib.nixGL.wrap pkgs-unstable.ghostty
+      else pkgs-unstable.ghostty;
     enableFishIntegration = true;
     settings = {
       command = "${pkgs.fish}/bin/fish";
