@@ -9,7 +9,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../common/remap-keys.nix
+    ../common/keyboard
     ../common/hyprland.nix
     ../common/docker.nix
     ../common/printers.nix

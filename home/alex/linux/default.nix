@@ -2,7 +2,6 @@
   imports =
     [
       ../home.nix
-      ./keyboard.nix
     ]
     ++ (
       if !useNixGL

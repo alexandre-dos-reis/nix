@@ -1,10 +1,8 @@
-{config, ...}: {
-  home.sessionVariables = {
-    XCOMPOSEFILE = "${config.home.homeDirectory}/.XCompose";
-  };
+{
+  environment.sessionVariables.XCOMPOSEFILE = "/etc/XCompose";
 
-  # See man keyd
-  home.file.".XCompose".text = ''
+  # See `man keyd`;
+  environment.etc."XCompose".text = ''
     <Cancel> <0> <1> <y> : "Æ"
     <Cancel> <0> <2> <u> : "æ"
 

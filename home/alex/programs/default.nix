@@ -13,7 +13,7 @@
     ./tmux.nix
     ./direnv.nix
     ./git.nix
-    ./vscode.nix
+    # ./vscode.nix
     ./ssh.nix
     ./mise.nix
     ./oh-my-posh

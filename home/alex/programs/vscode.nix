@@ -27,147 +27,149 @@ in {
     mutableExtensionsDir = true;
     enable = true;
 
-    # https://code.visualstudio.com/docs/getstarted/keybindings
-    keybindings = [
-      {
-        key = "alt+1";
-        command = "multiCommand.makeRoom";
-      }
-      {
-        key = "tab";
-        command = "workbench.action.nextEditor";
-      }
-      {
-        key = "shift+tab";
-        command = "workbench.action.previousEditor";
-      }
-      {
-        key = "shift+k";
-        command = "editor.action.showHover";
-      }
-    ];
+    profiles.default = {
+      # https://code.visualstudio.com/docs/getstarted/keybindings
+      keybindings = [
+        {
+          key = "alt+1";
+          command = "multiCommand.makeRoom";
+        }
+        {
+          key = "tab";
+          command = "workbench.action.nextEditor";
+        }
+        {
+          key = "shift+tab";
+          command = "workbench.action.previousEditor";
+        }
+        {
+          key = "shift+k";
+          command = "editor.action.showHover";
+        }
+      ];
 
-    userSettings = {
-      "workbench.colorTheme" = "poimandres";
-      "terminal.integrated.fontFamily" = constants.font;
-      "editor.fontFamily" = constants.font;
-      "editor.lineHeight" = 14;
-      "editor.fontSize" = 11;
-      "editor.fontLigatures" = true;
-      "workbench.iconTheme" = "material-icon-theme";
-      "material-icon-theme.hidesExplorerArrows" = true;
-      "editor.minimap.enabled" = false;
-      "editor.formatOnSave" = true;
-      "editor.formatOnPaste" = false;
-      "editor.formatOnType" = true;
-      "editor.renderWhitespace" = "trailing";
-      "editor.linkedEditing" = true;
-      "editor.occurrencesHighlight" = false;
-      "editor.suggest.insertMode" = "replace";
-      "editor.acceptSuggestionOnCommitCharacter" = false;
-      "files.autoSave" = "afterDelay";
-      "explorer.autoReveal" = true;
-      "explorer.confirmDragAndDrop" = true;
-      "explorer.confirmDelete" = true;
-      "explorer.confirmUndo" = "default";
-      "workbench.tree.indent" = 15;
-      "workbench.tree.renderIndentGuides" = "always";
-      "workbench.editor.enablePreview" = true;
-      "emmet.triggerExpansionOnTab" = true;
-      "editor.bracketPairColorization.enabled" = true;
-      "scm.defaultViewMode" = "tree";
+      userSettings = {
+        "workbench.colorTheme" = "poimandres";
+        "terminal.integrated.fontFamily" = constants.font;
+        "editor.fontFamily" = constants.font;
+        "editor.lineHeight" = 14;
+        "editor.fontSize" = 11;
+        "editor.fontLigatures" = true;
+        "workbench.iconTheme" = "material-icon-theme";
+        "material-icon-theme.hidesExplorerArrows" = true;
+        "editor.minimap.enabled" = false;
+        "editor.formatOnSave" = true;
+        "editor.formatOnPaste" = false;
+        "editor.formatOnType" = true;
+        "editor.renderWhitespace" = "trailing";
+        "editor.linkedEditing" = true;
+        "editor.occurrencesHighlight" = false;
+        "editor.suggest.insertMode" = "replace";
+        "editor.acceptSuggestionOnCommitCharacter" = false;
+        "files.autoSave" = "afterDelay";
+        "explorer.autoReveal" = true;
+        "explorer.confirmDragAndDrop" = true;
+        "explorer.confirmDelete" = true;
+        "explorer.confirmUndo" = "default";
+        "workbench.tree.indent" = 15;
+        "workbench.tree.renderIndentGuides" = "always";
+        "workbench.editor.enablePreview" = true;
+        "emmet.triggerExpansionOnTab" = true;
+        "editor.bracketPairColorization.enabled" = true;
+        "scm.defaultViewMode" = "tree";
 
-      # Vim preference
-      "editor.lineNumbers" = "relative";
-      "editor.cursorStyle" = "block";
-      "vim.leader" = " ";
-      "vim.insertModeKeyBindings" = [
-        {
-          "before" = ["j" "j;"];
-          "after" = ["<Esc>"];
-        }
-      ];
-      "vim.normalModeKeyBindingsNonRecursive" = [
-        {
-          before = ["<C-d>"];
-          after = ["<C-d>" "z" "z"];
-        }
-        {
-          before = ["<C-u>"];
-          after = ["<C-u>" "z" "z"];
-        }
-        {
-          before = ["<Tab>"];
-          commands = ["workbench.action.nextEditor"];
-        }
-        {
-          before = ["<S-Tab>"];
-          commands = ["workbench.action.nextEditor"];
-        }
-        {
-          before = ["<Esc>"];
-          commands = [
-            "workbench.action.closeSidebar"
-          ];
-        }
-        {
-          before = ["<leader>" "e"];
-          commands = [
-            "workbench.action.toggleActivityBarVisibility"
-            "workbench.action.toggleSidebarVisibility"
-            "workbench.view.explorer"
-          ];
-        }
-        {
-          before = ["<leader>" "z"];
-          commands = [
-            "workbench.action.toggleZenMode"
-          ];
-        }
-      ];
-      "vim.statusBarColorControl" = true;
-      "editor.cursorSmoothCaretAnimation" = "on";
-      # End vim preference
-      #
-      "multiCommand.commands" = [
-        {
-          "command" = "multiCommand.makeRoom";
-          "sequence" = [
-            "workbench.action.toggleSidebarVisibility"
-            "workbench.action.toggleActivityBarVisibility"
-          ];
-        }
-      ];
-      "[typescriptreact]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        # Vim preference
+        "editor.lineNumbers" = "relative";
+        "editor.cursorStyle" = "block";
+        "vim.leader" = " ";
+        "vim.insertModeKeyBindings" = [
+          {
+            "before" = ["j" "j;"];
+            "after" = ["<Esc>"];
+          }
+        ];
+        "vim.normalModeKeyBindingsNonRecursive" = [
+          {
+            before = ["<C-d>"];
+            after = ["<C-d>" "z" "z"];
+          }
+          {
+            before = ["<C-u>"];
+            after = ["<C-u>" "z" "z"];
+          }
+          {
+            before = ["<Tab>"];
+            commands = ["workbench.action.nextEditor"];
+          }
+          {
+            before = ["<S-Tab>"];
+            commands = ["workbench.action.nextEditor"];
+          }
+          {
+            before = ["<Esc>"];
+            commands = [
+              "workbench.action.closeSidebar"
+            ];
+          }
+          {
+            before = ["<leader>" "e"];
+            commands = [
+              "workbench.action.toggleActivityBarVisibility"
+              "workbench.action.toggleSidebarVisibility"
+              "workbench.view.explorer"
+            ];
+          }
+          {
+            before = ["<leader>" "z"];
+            commands = [
+              "workbench.action.toggleZenMode"
+            ];
+          }
+        ];
+        "vim.statusBarColorControl" = true;
+        "editor.cursorSmoothCaretAnimation" = "on";
+        # End vim preference
+        #
+        "multiCommand.commands" = [
+          {
+            "command" = "multiCommand.makeRoom";
+            "sequence" = [
+              "workbench.action.toggleSidebarVisibility"
+              "workbench.action.toggleActivityBarVisibility"
+            ];
+          }
+        ];
+        "[typescriptreact]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        # Problème avec Prettier
+        "files.saveConflictResolution" = "overwriteFileOnDisk";
+        "eslint.lintTask.enable" = true;
+        "[typescript]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "totalTypeScript.hideAllTips" = true;
+        "totalTypeScript.hideBasicTips" = true;
+        "totalTypeScript.showTLDRTranslation" = true;
+        "totalTypeScript.showFullTranslation" = true;
+        "totalTypeScript.hiddenTips" = ["passing-generics-to-types"];
+        "window.zoomLevel" = 1;
+        "[css]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "workbench.colorCustomizations" = {
+          "statusBar.background" = "#005f5f";
+          "statusBar.noFolderBackground" = "#005f5f";
+          "statusBar.debuggingBackground" = "#005f5f";
+          "editor.selectionBackground" = "#717cb483";
+          "statusBar.foreground" = "#ffffff";
+          "statusBar.debuggingForeground" = "#ffffff";
+        };
+        "[html]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "nxConsole.showNodeVersionOnStartup" = false;
       };
-      # Problème avec Prettier
-      "files.saveConflictResolution" = "overwriteFileOnDisk";
-      "eslint.lintTask.enable" = true;
-      "[typescript]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
-      "totalTypeScript.hideAllTips" = true;
-      "totalTypeScript.hideBasicTips" = true;
-      "totalTypeScript.showTLDRTranslation" = true;
-      "totalTypeScript.showFullTranslation" = true;
-      "totalTypeScript.hiddenTips" = ["passing-generics-to-types"];
-      "window.zoomLevel" = 1;
-      "[css]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
-      "workbench.colorCustomizations" = {
-        "statusBar.background" = "#005f5f";
-        "statusBar.noFolderBackground" = "#005f5f";
-        "statusBar.debuggingBackground" = "#005f5f";
-        "editor.selectionBackground" = "#717cb483";
-        "statusBar.foreground" = "#ffffff";
-        "statusBar.debuggingForeground" = "#ffffff";
-      };
-      "[html]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
-      "nxConsole.showNodeVersionOnStartup" = false;
     };
 
     extensions = let
