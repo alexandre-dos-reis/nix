@@ -14,7 +14,7 @@ in {
     ./scripts
   ];
 
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   xdg.enable = true;
