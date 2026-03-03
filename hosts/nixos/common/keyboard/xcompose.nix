@@ -1,8 +1,14 @@
 {
-  environment.sessionVariables.XCOMPOSEFILE = "/etc/XCompose";
+  environment.sessionVariables.XCOMPOSEFILE = "/etc/X11/XCompose";
+
+  system.userActivationScripts.linkXCompose = {
+    text = ''
+      ln -sfn /etc/X11/XCompose $HOME/.XCompose
+    '';
+  };
 
   # See `man keyd`;
-  environment.etc."XCompose".text = ''
+  environment.etc."X11/XCompose".text = ''
     <Cancel> <0> <1> <y> : "Æ"
     <Cancel> <0> <2> <u> : "æ"
 

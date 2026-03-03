@@ -101,7 +101,7 @@ in {
 
         (moveToWorkspace "i" 2 [apps.browser.class apps.terminal.class])
 
-        (moveToWorkspace "o" 3 [apps.firefox.class])
+        (moveToWorkspace "o" 3 [])
 
         (moveToWorkspace "p" 4 [apps.browser.class])
         # (moveToWorkspace "p" 14 [apps.terminal.class])
