@@ -1,13 +1,11 @@
 {
-  networking.extraHosts = let
-    domain = "dev.eurorack-3d.com";
-  in
-    toString (map (subDomain: "127.0.0.1 ${
-        if subDomain == ""
-        then domain
-        else "${subDomain}.${domain}"
-      }\n")
-      ["" "api" "admin" "assets" "minio" "email"]);
+  networking.hosts = let
+    makeHosts = topDomain: subdomains: ([topDomain] ++ map (subDomain: "${subDomain}.${topDomain}") subdomains);
+  in {
+    "127.0.0.1" =
+      makeHosts "dev.eurorack-3d.com" ["api" "admin" "assets" "minio" "email"]
+      ++ makeHosts "everywhere-app.dev" ["api" "admin" "s3" "minio" "emails" "jobs" "db-ui" "storybook"];
+  };
 
   # NOTE: For mkcert generate run:
   # - mkcert -install in ~/.local/share/mkcert
