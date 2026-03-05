@@ -41,6 +41,10 @@ in {
           name = "code";
           class = "code";
         };
+        chrome = {
+          name = "google-chrome-stable";
+          class = "google-chrome";
+        };
         # slack = {
         #   name = "slack";
         #   class = "Slack";
@@ -93,18 +97,18 @@ in {
       bind = let
         # TODO: Detect if we have one monitor active "laptop only"
         # As changing workspace not in use are not handled properly.
-        moveToWorkspace = key: ws: array: "$mainMod, ${key}, exec, ~/.config/hypr/scripts/moveToWorkspace ${toString ws} '${builtins.toJSON array}'";
+        moveToWorkspace = key: ws: apps: "$mainMod, ${key}, exec, ~/.config/hypr/scripts/moveToWorkspace ${toString ws} '${builtins.toJSON (map (app: app.class) apps)}'";
       in [
         # >>> Presets
-        (moveToWorkspace "u" 1 [apps.terminal.class])
-        # (moveToWorkspace "u" 11 [apps.browser.class])
+        (moveToWorkspace "u" 1 [apps.terminal])
+        (moveToWorkspace "u" 11 [apps.browser])
 
-        (moveToWorkspace "i" 2 [apps.browser.class apps.terminal.class])
+        (moveToWorkspace "i" 2 [apps.browser apps.terminal])
 
-        (moveToWorkspace "o" 3 [])
+        (moveToWorkspace "o" 3 [apps.chrome])
 
-        (moveToWorkspace "p" 4 [apps.browser.class])
-        # (moveToWorkspace "p" 14 [apps.terminal.class])
+        (moveToWorkspace "p" 4 [apps.browser])
+        (moveToWorkspace "p" 14 [apps.terminal])
         # <<< Presets
 
         # Apps
