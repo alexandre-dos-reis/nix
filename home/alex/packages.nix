@@ -1,10 +1,13 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   home.packages = with pkgs; [
     # nix helpers
     nix-inspect # inspect flake in a nice interface
     nixos-rebuild
     devenv # Dev
-    devbox
 
     # fonts
     maple-mono.NF-unhinted
@@ -54,6 +57,7 @@
     tig
     lazygit
     gh # github cli
+    gh-dash
     # sops
     # ssh-to-age
 

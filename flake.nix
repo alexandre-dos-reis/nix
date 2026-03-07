@@ -1,14 +1,11 @@
 {
   description = "My Nix config";
-
   # https://nixos-and-flakes.thiscute.world/other-usage-of-flakes/inputs
   inputs = {
     # Nix
-    # We use unstable for packages only.
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    # Make sure releases of home-manager matches nixpkgs
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable"; # We use unstable to get the lastest packages only.
     nixpkgs.url = "nixpkgs/nixos-25.11";
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.url = "github:nix-community/home-manager/release-25.11"; # Make sure releases of home-manager matches nixpkgs
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Grafical utils for home-manager standalone
