@@ -10,10 +10,9 @@
   vimMode = ''
     fish_vi_key_bindings
 
-    # Replace default vim visual mode
-    # with visual mode
-    bind -M default v 'tmux copy-mode'
-    bind -M default V 'tmux copy-mode'
+    # Replace default vim visual mode tmux with visual mode and begin selection
+    bind -M default v 'tmux copy-mode \; send -X begin-selection'
+    bind -M default V 'tmux copy-mode \; send -X begin-selection'
 
     set fish_cursor_default block
     set fish_cursor_insert block
