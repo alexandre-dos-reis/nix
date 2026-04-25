@@ -74,7 +74,8 @@ in {
         (
           join " & "
           # Hyprland ecosystem
-          ([
+          (
+            [
               "waybar"
               "swaync"
               "hyprpaper"
@@ -83,7 +84,8 @@ in {
             ]
             ++
             # Apps
-            (map ({value, ...}: value.name) (attrsToList apps)))
+            (map (app: app.name) [apps.terminal apps.browser])
+          )
         )
 
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=$XDG_CURRENT_DESKTOP PATH"
@@ -101,14 +103,15 @@ in {
       in [
         # >>> Presets
         (moveToWorkspace "u" 1 [apps.terminal])
-        (moveToWorkspace "u" 11 [apps.browser])
+        # (moveToWorkspace "u" 11 [apps.browser])
 
         (moveToWorkspace "i" 2 [apps.browser apps.terminal])
+        # (moveToWorkspace "i" 12 [apps.browser apps.terminal])
 
         (moveToWorkspace "o" 3 [apps.chrome])
 
         (moveToWorkspace "p" 4 [apps.browser])
-        (moveToWorkspace "p" 14 [apps.terminal])
+        # (moveToWorkspace "p" 14 [apps.terminal])
         # <<< Presets
 
         # Apps

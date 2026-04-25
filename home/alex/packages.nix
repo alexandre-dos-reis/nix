@@ -7,7 +7,7 @@
     # nix helpers
     nix-inspect # inspect flake in a nice interface
     nixos-rebuild
-    devenv # Dev
+    pkgs-unstable.devenv # Dev
 
     # fonts
     maple-mono.NF-unhinted
@@ -81,5 +81,6 @@
     libreoffice
     blender
     audacity
+    deluge
   ];
 }

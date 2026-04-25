@@ -21,7 +21,7 @@
     luajitPackages.luarocks
 
     # bash
-    nodePackages.bash-language-server
+    bash-language-server
     beautysh
 
     # HTML/CSS/JSON/ESLint
@@ -33,10 +33,6 @@
     # Javascript / Typescript
     nodejs_24
     corepack_24
-    nodePackages.nodemon
-    nodePackages.prettier
-    # nodePackages.vercel
-    nodePackages."@astrojs/language-server"
     bun
     deno
     typescript-language-server
@@ -54,7 +50,6 @@
 
     # Tailwind
     tailwindcss-language-server
-    # nodePackages.neovim # Needed for tailwind-tools
 
     # Lua
     lua-language-server
