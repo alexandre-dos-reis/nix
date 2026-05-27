@@ -3,9 +3,11 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
+
     matchBlocks."*" = {
-      forwardAgent = false;
+      identityFile = "~/.ssh/id_ed25519";
       addKeysToAgent = "yes";
+      forwardAgent = false;
       compression = false;
       serverAliveInterval = 0;
       serverAliveCountMax = 3;
