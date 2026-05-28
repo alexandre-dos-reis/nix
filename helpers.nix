@@ -66,6 +66,10 @@ in {
             specialArgs = {
               inherit inputs host outputs;
               users = host.users;
+              pkgs-unstable = import inputs.nixpkgs-unstable {
+                system = host.system;
+                config.allowUnfree = true;
+              };
             };
             modules = [
               # Allow unfree packages.

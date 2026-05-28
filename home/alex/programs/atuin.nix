@@ -1,6 +1,7 @@
-{
+{pkgs-unstable, ...}: {
   programs.atuin = {
     enable = true;
+    package = pkgs-unstable.atuin;
     enableFishIntegration = true;
     # enableNushellIntegration = true;
     flags = [
