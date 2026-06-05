@@ -4,8 +4,8 @@
   inputs = {
     # Nix
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable"; # We use unstable to get the lastest packages only.
-    nixpkgs.url = "nixpkgs/nixos-25.11";
-    home-manager.url = "github:nix-community/home-manager/release-25.11"; # Make sure releases of home-manager matches nixpkgs
+    nixpkgs.url = "nixpkgs/nixos-26.05";
+    home-manager.url = "github:nix-community/home-manager/release-26.05"; # Make sure releases of home-manager matches nixpkgs
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Grafical utils for home-manager standalone
