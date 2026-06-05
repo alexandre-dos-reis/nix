@@ -175,8 +175,8 @@ in {
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPrev, exec, playerctl previous"
         # lid script taken from: https://www.youtube.com/shorts/deZlxPWVuN4
-        ", switch:on:Lid Switch, exec, hyprctl keyword monitor \"${laptop.name}, disable\""
-        ", switch:off:Lid Switch, exec, hyprctl keyword monitor \"${laptop.name}, preferred, ${laptop.position}, ${laptop.scale}\""
+        # ", switch:on:Lid Switch, exec, hyprctl keyword monitor \"${laptop.name}, disable\""
+        # ", switch:off:Lid Switch, exec, hyprctl keyword monitor \"${laptop.name}, preferred, ${laptop.position}, ${laptop.scale}\""
       ];
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more

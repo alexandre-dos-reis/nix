@@ -100,6 +100,7 @@
     pciutils
     pavucontrol
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    kooha # TODO: install codecs
   ];
 
   services.logind.settings.Login = {
