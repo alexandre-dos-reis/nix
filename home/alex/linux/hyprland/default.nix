@@ -200,9 +200,9 @@ in {
 
       general = {
         gaps_in = 5;
-        gaps_out = 10;
+        gaps_out = 0;
 
-        border_size = 8;
+        border_size = 0;
 
         # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
         "col.active_border" = borderActiveColor;
@@ -227,7 +227,7 @@ in {
         inactive_opacity = 1.0;
 
         shadow = {
-          enabled = true;
+          enabled = false;
           range = 4;
           render_power = 3;
           color = "rgba(1a1a1aee)";
