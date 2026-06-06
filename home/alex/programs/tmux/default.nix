@@ -2,7 +2,7 @@
   # term = "xterm-kitty";
   # https://github.com/craftzdog/dotfiles-public/blob/master/.config/tmux/tmux.conf
   # term = "xterm-256color";
-  constants = import ../constants.nix;
+  constants = import ../../constants.nix;
 
   term = "xterm-ghostty";
   bg = constants.colors.background;
@@ -90,6 +90,13 @@ in {
       # `-n` bypass the prefix-key
       bind-key -n C-f run-shell "tmux neww ~/bin/tmux-sessionizer"
       bind-key -n C-m run-shell "tmux copy-mode"
+
+      # Open claude in a tmux session
+      bind-key -n C-i run-shell '\
+        SESSION="claude-$(echo #{pane_current_path} | md5sum | cut -c1-8)"; \
+        tmux has-session -t "$SESSION" 2>/dev/null || \
+        tmux new-session -d -s "$SESSION" -c "#{pane_current_path}" "claude"; \
+        tmux display-popup -w80% -h80% -E "tmux attach-session -t $SESSION"'
 
       # Enable kitty image protocol to work, see: https://www.youtube.com/watch?v=nYDMXI-yFTA
       set -gq allow-passthrough on

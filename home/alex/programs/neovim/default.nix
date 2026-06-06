@@ -8,6 +8,7 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = false;
+    initLua = builtins.readFile ./init.lua;
   };
 
   # LSPs and executable

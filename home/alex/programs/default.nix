@@ -2,7 +2,7 @@
   imports = [
     ./fish
     ./nushell
-    ./neovim.nix
+    ./neovim
     ./vim
     ./helix.nix
     ./nh.nix
@@ -10,7 +10,7 @@
     ./ghostty.nix
     ./atuin.nix
     ./npm.nix
-    ./tmux.nix
+    ./tmux
     ./direnv.nix
     ./git.nix
     # ./vscode.nix
