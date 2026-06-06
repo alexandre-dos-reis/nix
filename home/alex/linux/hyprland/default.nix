@@ -167,7 +167,7 @@ in {
       ];
 
       bindl = let
-        laptop = monitors.laptop;
+        # laptop = monitors.laptop;
       in [
         # Requires playerctl
         ", XF86AudioNext, exec, playerctl next"
@@ -357,11 +357,15 @@ in {
       dots_img = "${path}/solarized_dots.jpg";
       triangle_img = "${path}/solarized_triangle.jpg";
     in {
-      ipc = "on";
-      preload = [dots_img triangle_img];
       wallpaper = [
-        "${monitors.laptop.name},${dots_img}"
-        "${monitors.lg.name},${triangle_img}"
+        {
+          monitor = monitors.laptop.name;
+          path = triangle_img;
+        }
+        {
+          monitor = monitors.lg.name;
+          path = dots_img;
+        }
       ];
     };
   };
