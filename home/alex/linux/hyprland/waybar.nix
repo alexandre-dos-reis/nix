@@ -24,7 +24,7 @@ in {
       mainBar = {
         layer = "top";
         position = "top";
-        height = 30;
+        # height = 30;
         modules-left = [
           "memory"
           "cpu"
@@ -169,7 +169,7 @@ in {
         background: none;
         margin: 0;
         padding: 0 5px;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 400;
         font-family: CaskaydiaMono Nerd Font;
       }
@@ -223,7 +223,7 @@ in {
       #workspaces {
         background: none;
         padding: 0;
-        margin: 10px 12px 5px;
+        margin: 10px 12px 10px;
       }
 
     '';
