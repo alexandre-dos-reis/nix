@@ -26,6 +26,7 @@ in {
   home.file.".config/hypr/scripts/moveToWorkspace".source = ./scripts/moveToWorkspace.sh;
 
   wayland.windowManager.hyprland = {
+    configType = "hyprlang";
     enable = true;
     # package and portalPackage are backed by nixos
     package = null;

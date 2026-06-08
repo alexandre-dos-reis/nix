@@ -9,6 +9,8 @@
     viAlias = true;
     vimAlias = false;
     initLua = builtins.readFile ./init.lua;
+    withRuby = false;
+    withPython3 = false;
   };
 
   # LSPs and executable

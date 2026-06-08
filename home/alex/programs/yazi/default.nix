@@ -3,6 +3,7 @@
     # https://mynixos.com/home-manager/options/programs.yazi
     enable = true;
     enableFishIntegration = true;
+    shellWrapperName = "yy";
     initLua = ./init.lua;
     plugins = {
       smart-enter = pkgs.yaziPlugins.smart-enter;
