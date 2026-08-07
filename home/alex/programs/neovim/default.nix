@@ -8,7 +8,12 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = false;
-    initLua = builtins.readFile ./init.lua;
+    initLua = ''
+      local user_config = vim.fn.stdpath("config") .. "/lua/init.lua"
+      if vim.uv.fs_stat(user_config) then
+        dofile(user_config)
+      end
+    '';
     withRuby = false;
     withPython3 = false;
   };
@@ -17,6 +22,9 @@
   home.packages = with pkgs-unstable; let
     zig = inputs.zig.packages.${pkgs-unstable.stdenv.hostPlatform.system}."0.15.2";
   in [
+    # Treesitter
+    tree-sitter
+
     # Code
     opencode
 
@@ -41,11 +49,11 @@
     typescript-language-server
     typescript-go
     vtsls
-    typescript
     prettierd
     eslint_d
     biome
     oxlint
+    astro-language-server
     # dart # for sass
 
     # Graphql

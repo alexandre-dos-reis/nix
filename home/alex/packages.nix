@@ -7,7 +7,6 @@
     # nix helpers
     nix-inspect # inspect flake in a nice interface
     nixos-rebuild
-    pkgs-unstable.devenv # Dev
 
     # fonts
     maple-mono.NF-unhinted
@@ -42,6 +41,8 @@
     gzip
     nmap
     openssl
+
+    pkgs-unstable.herdr
 
     # tui
     ranger

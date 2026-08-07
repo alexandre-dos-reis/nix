@@ -293,6 +293,11 @@ in {
         disable_hyprland_logo = true; # If true disables the random hyprland logo / anime girl background. :(
       };
 
+      # https://wiki.hyprland.org/Configuring/Variables/#cursor
+      cursor = {
+        no_hardware_cursors = true; # Render cursor in software (replaces WLR_NO_HARDWARE_CURSORS=1)
+      };
+
       # https://wiki.hyprland.org/Configuring/Variables/#input
       input = {
         kb_layout = "us";
