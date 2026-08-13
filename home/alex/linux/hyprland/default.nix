@@ -42,6 +42,10 @@ in {
           name = "code";
           class = "code";
         };
+        zed = {
+          name = "zed";
+          class = "dev.zed.Zed";
+        };
         chrome = {
           name = "google-chrome-stable";
           class = "google-chrome";
@@ -112,6 +116,8 @@ in {
         (moveToWorkspace "o" 3 [apps.chrome])
 
         (moveToWorkspace "p" 4 [apps.browser])
+
+        (moveToWorkspace "y" 5 [apps.zed])
         # (moveToWorkspace "p" 14 [apps.terminal])
         # <<< Presets
 

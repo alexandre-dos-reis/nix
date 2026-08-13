@@ -1,6 +1,10 @@
 {
   programs.zed-editor = {
     enable = true;
+    extensions = [
+      "nix"
+      "lua"
+    ];
     userSettings = {
       features = {
         copilot = false;

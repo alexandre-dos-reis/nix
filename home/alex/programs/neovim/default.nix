@@ -40,6 +40,7 @@
 
     # Yaml
     yaml-language-server
+    cue
 
     # Javascript / Typescript
     nodejs_24
