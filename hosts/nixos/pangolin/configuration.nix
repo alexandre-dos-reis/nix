@@ -14,6 +14,7 @@
     ../common/hyprland.nix
     ../common/docker.nix
     ../common/printers.nix
+    ../common/nh.nix
     ./input.nix
     ./bluetooth.nix
     ./hosts.nix

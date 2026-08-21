@@ -4,7 +4,7 @@
     enable = true;
     enableDefaultConfig = false;
 
-    matchBlocks."*" = {
+    settings."*" = {
       identityFile = "~/.ssh/id_ed25519";
       addKeysToAgent = "yes";
       forwardAgent = false;
