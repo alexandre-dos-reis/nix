@@ -91,15 +91,11 @@ in {
       bind-key -n C-f run-shell "tmux neww ~/bin/tmux-sessionizer"
       bind-key -n C-m run-shell "tmux copy-mode"
 
-      # Open/close claude popover
+      # Toggle a centered claude popup. All instances live in one shared
+      # "claude" session, one window per directory (see ~/bin/tmux-claude-toggle).
       bind-key -n C-o if-shell -F '#{?@is_popover,1,0}' \
         'detach-client' \
-        'run-shell "SESSION=\"claude-\$(echo #{pane_current_path} | md5sum | cut -c1-8)\"; \
-          tmux has-session -t \"\$SESSION\" 2>/dev/null || \
-          tmux new-session -d -s \"\$SESSION\" -c \"#{pane_current_path}\" \"claude\"; \
-          tmux set-option -t \"\$SESSION\" status off; \
-          tmux set-option -t \"\$SESSION\" @is_popover \"1\"; \
-          tmux display-popup -w80% -h80% -E \"tmux attach-session -t \$SESSION\""'
+        'run-shell "~/bin/tmux-claude-toggle \"#{pane_current_path}\""'
 
       # Enable kitty image protocol to work, see: https://www.youtube.com/watch?v=nYDMXI-yFTA
       set -gq allow-passthrough on

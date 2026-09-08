@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#
+# Open a centered claude popup for the CURRENT directory.
+#
+# All claude instances live in a single shared session ("claude"); each
+# directory gets its own window inside it (named by a hash of the path), so
+# instances stay separated and their state survives closing the popup.
+#
+# Closing the popup (toggle off) is handled in the tmux binding via the
+# @is_popover session flag — this script only handles opening.
+
+set -euo pipefail
+
+dir="${1:-$PWD}"
+session="claude"
+win="$dir"  # window name is the directory path itself: stable and unique
+
+# Ensure the single shared session exists, with a window for this directory.
+if ! tmux has-session -t "$session" 2>/dev/null; then
+    tmux new-session -d -s "$session" -c "$dir" -n "$win" claude
+elif ! tmux list-windows -t "$session" -F '#{window_name}' | grep -Fqx "$win"; then
+    tmux new-window -d -t "$session:" -c "$dir" -n "$win" claude
+fi
+
+tmux set-option -t "$session" status off
+tmux set-option -t "$session" @is_popover 1
+tmux select-window -t "$session:=$win"
+tmux display-popup -w80% -h80% -E "tmux attach-session -t '$session'"
