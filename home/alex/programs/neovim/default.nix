@@ -1,22 +1,26 @@
 {
   inputs,
   pkgs-unstable,
+  config,
   ...
-}: {
+}: let
+  inherit (config.lib.file) mkOutOfStoreSymlink;
+  inherit (import ../../constants.nix) flakeDir;
+in {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = false;
-    initLua = ''
-      local user_config = vim.fn.stdpath("config") .. "/lua/init.lua"
-      if vim.uv.fs_stat(user_config) then
-        dofile(user_config)
-      end
-    '';
     withRuby = false;
     withPython3 = false;
+    # Manage init.lua ourselves via the out-of-store symlink below; don't let
+    # home-manager write its own ~/.config/nvim/init.lua (it would collide with
+    # the whole-directory symlink and fail with "outside $HOME").
+    sideloadInitLua = true;
   };
+
+  home.file.".config/nvim".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/${flakeDir}/home/alex/dotfiles/nvim";
 
   # LSPs and executable
   home.packages = with pkgs-unstable; let
@@ -44,7 +48,8 @@
 
     # Javascript / Typescript
     nodejs_24
-    corepack_24
+    # corepack_24
+    pnpm
     bun
     deno
     typescript-language-server
@@ -54,6 +59,7 @@
     eslint_d
     biome
     oxlint
+    oxfmt
     astro-language-server
     # dart # for sass
 
@@ -90,6 +96,12 @@
     # Zig
     zig
     zls
+
+    # Ruby
+    ruby
+    rubocop
+    ruby-lsp
+    solargraph
 
     # Dotnet
     dotnetCorePackages.sdk_9_0

@@ -1,6 +1,10 @@
 {
   email = "ajm.dosreis.daponte@gmail.com";
   fullname = "Alexandre Dos Reis";
+  # Where this repo is checked out on disk, relative to $HOME. Nix only sees the
+  # flake's store copy, not the working tree, so out-of-store symlinks and nh must
+  # be told the live location explicitly.
+  flakeDir = "dev/nix-config";
   # This is not the nix package name but rather the name installed on the system
   font = "Maple Mono NF";
   editor = "nvim";

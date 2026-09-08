@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+nvim_version="$(nvim --version | grep 'NVIM')"
+sed -i -u "s/version: .*/version: $nvim_version/g" README.md

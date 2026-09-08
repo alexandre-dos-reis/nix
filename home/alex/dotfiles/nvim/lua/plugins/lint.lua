@@ -1,0 +1,130 @@
+return {}
+-- local linters = {
+--   eslint = "eslint",
+--   -- oxlint = "oxlint", // NOTE: oxlint provide linting via lsp
+--   -- biome = "biomejs",
+--   clippy = "clippy",
+--   golangcilint = "golangcilint",
+-- }
+--
+-- local config_files_by_linters = {
+--   [linters.eslint] = {
+--     "eslint.config.js",
+--     "eslint.config.mjs",
+--     "eslint.config.cjs",
+--     "eslint.config.ts",
+--     "eslint.config.mts",
+--     "eslint.config.cts",
+--   },
+--   -- [linters.oxlint] = { ".oxlintrc.json" },
+--   -- [linters.biome] = { "biome.json", "biome.jsonc" },
+--   [linters.clippy] = { "clippy.toml", ".clippy.toml" },
+--   [linters.golangcilint] = {
+--     ".golangci.yml",
+--     ".golangci.yaml",
+--     ".golangci.toml",
+--     ".golangci.json",
+--   },
+-- }
+--
+-- local js_linters = {
+--   linters.oxlint,
+--   linters.eslint,
+--   -- linters.biome,
+-- }
+--
+-- local linters_by_ft = {
+--   javascript = js_linters,
+--   typescript = js_linters,
+--   javascriptreact = js_linters,
+--   typescriptreact = js_linters,
+--   rust = { linters.clippy },
+--   go = { linters.golangcilint },
+-- }
+--
+-- -- This resolve the linter name based on the project config file
+-- local resolve_linter = function(buffer, file)
+--   local ft = vim.bo[buffer].ft
+--
+--   -- Only check buffer related to a file.
+--   if ft == "" or file == "" then
+--     return nil
+--   end
+--
+--   local linters_tbl = linters_by_ft[ft]
+--
+--   if linters_tbl == nil then
+--     error(
+--       "filetype : " .. ft .. ", is not present in the linters table! Is this a mistake ?"
+--     )
+--     return nil
+--   end
+--
+--   if vim.tbl_count(linters_tbl) == 1 then
+--     -- No need to continue as we have 1 entry.
+--     return linters_tbl[0] or linters_tbl[1]
+--   end
+--
+--   for _, _linter in pairs(linters_tbl) do
+--     local found = vim.fs.find(
+--       config_files_by_linters[_linter],
+--       { upward = true, path = file, stop = "./dev/" }
+--     )
+--     if not vim.tbl_isempty(found) then
+--       return _linter
+--     end
+--   end
+--
+--   -- No config file found
+--   return nil
+-- end
+--
+-- return {
+--   "mfussenegger/nvim-lint",
+--   event = { "BufReadPre", "BufNewFile" },
+--   config = function()
+--     local lint = require("lint")
+--
+--     lint.linters_by_ft = linters_by_ft
+--
+--     require("utils").augroup("lint", function(autocmd)
+--       autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+--         callback = function(e)
+--           local ft = vim.bo[e.buf].ft
+--
+--           if linters_by_ft[ft] == nil then
+--             return
+--           end
+--
+--           local resolved_linter = resolve_linter(e.buf, e.file)
+--           if resolved_linter ~= nil then
+--             lint.try_lint(resolved_linter)
+--           else
+--             lint.try_lint()
+--           end
+--         end,
+--       })
+--     end)
+--
+--     vim.keymap.set("n", "<leader>lt", function()
+--       local buf = vim.api.nvim_get_current_buf()
+--       local linter_resolved = resolve_linter(buf, vim.api.nvim_buf_get_name(buf))
+--
+--       if linter_resolved ~= nil then
+--         print("󰦕  Lint launched with : " .. linter_resolved)
+--         lint.try_lint(linter_resolved)
+--       else
+--         lint.try_lint()
+--       end
+--     end, { desc = "Trigger linting for current file." })
+--
+--     vim.keymap.set("n", "<leader>lp", function()
+--       local running_linters = require("lint").get_running()
+--       if #running_linters == 0 then
+--         print("󰦕  No linters running.")
+--       else
+--         print("󱉶  linters running: " .. table.concat(linters, ", "))
+--       end
+--     end, { desc = "Get the current running linters for the current buffer" })
+--   end,
+-- }
