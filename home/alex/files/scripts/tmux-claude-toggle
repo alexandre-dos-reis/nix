@@ -3,7 +3,7 @@
 # Open a centered claude popup for the CURRENT directory.
 #
 # All claude instances live in a single shared session ("claude"); each
-# directory gets its own window inside it (named by a hash of the path), so
+# directory gets its own window inside it (named by the directory path), so
 # instances stay separated and their state survives closing the popup.
 #
 # Closing the popup (toggle off) is handled in the tmux binding via the
@@ -24,5 +24,8 @@ fi
 
 tmux set-option -t "$session" status off
 tmux set-option -t "$session" @is_popover 1
+# When any claude instance's window closes, detach the popup (close the modal)
+# instead of letting tmux switch to a sibling window.
+tmux set-hook -t "$session" window-unlinked 'detach-client -s claude'
 tmux select-window -t "$session:=$win"
-tmux display-popup -w80% -h80% -E "tmux attach-session -t '$session'"
+tmux display-popup -w90% -h90% -E "tmux attach-session -t '$session'"

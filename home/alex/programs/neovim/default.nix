@@ -24,7 +24,7 @@ in {
 
   # LSPs and executable
   home.packages = with pkgs-unstable; let
-    zig = inputs.zig.packages.${pkgs-unstable.stdenv.hostPlatform.system}."0.15.2";
+    zig = inputs.zig.packages.${pkgs-unstable.stdenv.hostPlatform.system}."0.16.0";
   in [
     # Treesitter
     tree-sitter
@@ -53,7 +53,7 @@ in {
     bun
     deno
     typescript-language-server
-    typescript-go
+    typescript
     vtsls
     prettierd
     eslint_d

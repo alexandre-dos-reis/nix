@@ -4,6 +4,7 @@ vim.lsp.enable({
   "ansiblels",
   "lua_ls",
   "tsgo", -- "tsgo" or "vtsls" or "ts_ls"
+  "oxfmt",
   -- "oxlint",
   "prismals",
   "cue",
