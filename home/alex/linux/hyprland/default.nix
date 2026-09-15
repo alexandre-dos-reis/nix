@@ -1,24 +1,22 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}: let
   constants = import ../../constants.nix;
-
-  attrsToList = pkgs.lib.attrsets.attrsToList;
-  join = pkgs.lib.strings.concatStringsSep;
-
   colors = constants.colors.palette;
-  borderActiveColor = colors.base02-rgbhex;
-  borderInativeColor = "rgba(07354100)";
+
+  # Lua API stubs (hl.meta.lua) that ship with Hyprland, for lua_ls / LSP.
+  hyprStubs = "${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland}/share/hypr/stubs";
+
+  # Absolute path to the hand-maintained Lua config in this repo, symlinked live
+  # so edits apply on `hyprctl reload` without a rebuild.
+  repoLuaConfig = "${config.home.homeDirectory}/dev/nix-config/home/alex/linux/hyprland/config.lua";
 
   monitors = {
-    laptop = {
-      name = "eDP-1";
-      scale = "2";
-      position = "auto";
-    };
-    lg = {
-      name = "DP-3"; # Plugged on the top left usbc input.
-      scale = "1.666667";
-      position = "auto-left";
-    };
+    laptop.name = "eDP-1";
+    lg.name = "DP-3"; # Plugged on the top left usbc input.
   };
 in {
   imports = [./waybar.nix];
@@ -26,313 +24,35 @@ in {
   home.file.".config/hypr/scripts/moveToWorkspace".source = ./scripts/moveToWorkspace.sh;
 
   wayland.windowManager.hyprland = {
-    configType = "hyprlang";
+    # Hyprland 0.55+ Lua config. The actual config is hand-written in config.lua;
+    # home-manager only generates a thin hyprland.lua (systemd hook + require).
+    configType = "lua";
     enable = true;
     # package and portalPackage are backed by nixos
     package = null;
     portalPackage = null;
 
-    settings = let
-      apps = {
-        terminal = {
-          name = "ghostty";
-          class = "com.mitchellh.ghostty";
-        };
-        vscode = {
-          name = "code";
-          class = "code";
-        };
-        zed = {
-          name = "zed";
-          class = "dev.zed.Zed";
-        };
-        chrome = {
-          name = "google-chrome-stable";
-          class = "google-chrome";
-        };
-        # slack = {
-        #   name = "slack";
-        #   class = "Slack";
-        # };
-        browser = {
-          name = "zen";
-          class = "zen";
-        };
-        firefox = {
-          name = "firefox";
-          class = "firefox";
-        };
-      };
-    in {
-      "$terminal" = "ghostty -e fish";
+    settings = {};
 
-      "$mainMod" = "SUPER";
+    # Load the hand-maintained config. config.lua is symlinked into
+    # ~/.config/hypr below, and require() resolves it from there.
+    extraConfig = ''
+      package.path = package.path .. ";${config.home.homeDirectory}/.config/hypr/?.lua"
+      require("config")
+    '';
+  };
 
-      env = [
-        "GTK_CURSOR_BLINK,1"
-        "GTK_CURSOR_BLINK_TIME,1200"
-      ];
+  # Live-editable Lua config: edits to the repo file apply on `hyprctl reload`.
+  xdg.configFile."hypr/config.lua".source =
+    config.lib.file.mkOutOfStoreSymlink repoLuaConfig;
 
-      monitor = map ({value, ...}: "${value.name}, preferred, ${value.position}, ${value.scale}") (attrsToList monitors);
-
-      exec-once = [
-        (
-          join " & "
-          # Hyprland ecosystem
-          (
-            [
-              "waybar"
-              "swaync"
-              "hyprpaper"
-              "clipse -listen"
-              "hyprctl setcursor ${constants.cursor.theme} ${toString constants.cursor.size}"
-            ]
-            ++
-            # Apps
-            (map (app: app.name) [apps.terminal apps.browser])
-          )
-        )
-
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=$XDG_CURRENT_DESKTOP PATH"
-      ];
-
-      # Default monitor for workspaces
-      workspace =
-        builtins.genList (i: "${toString (i + 1)}, monitor:${monitors.laptop.name}") 4
-        ++ builtins.genList (i: "${toString (i + 11)}, monitor:${monitors.lg.name}") 4;
-
-      bind = let
-        # TODO: Detect if we have one monitor active "laptop only"
-        # As changing workspace not in use are not handled properly.
-        moveToWorkspace = key: ws: apps: "$mainMod, ${key}, exec, ~/.config/hypr/scripts/moveToWorkspace ${toString ws} '${builtins.toJSON (map (app: app.class) apps)}'";
-      in [
-        # >>> Presets
-        (moveToWorkspace "u" 1 [apps.terminal])
-        # (moveToWorkspace "u" 11 [apps.browser])
-
-        (moveToWorkspace "i" 2 [apps.browser apps.terminal])
-        # (moveToWorkspace "i" 12 [apps.browser apps.terminal])
-
-        (moveToWorkspace "o" 3 [apps.chrome])
-
-        (moveToWorkspace "p" 4 [apps.browser])
-
-        (moveToWorkspace "y" 5 [apps.zed])
-        # (moveToWorkspace "p" 14 [apps.terminal])
-        # <<< Presets
-
-        # Apps
-        "$mainMod, E, exec, nautilus"
-        "$mainMod, G, exec, $terminal"
-        "$mainMod, W, killactive,"
-        "$mainMod, M, exit,"
-        "$mainMod, T, togglefloating,"
-        "$mainMod, SPACE, execr, wofi --show drun"
-        "$mainMod, C, exec, kitty --class clipse -e clipse"
-
-        # Movements
-        "$mainMod, h, movefocus, l"
-        "$mainMod, j, movefocus, d"
-        "$mainMod, k, movefocus, u"
-        "$mainMod, l, movefocus, r"
-
-        "$mainMod CTRL, h, swapwindow, l"
-        "$mainMod CTRL, l, swapwindow, r"
-        "$mainMod CTRL, k, swapwindow, u"
-        "$mainMod CTRL, j, swapwindow, d"
-
-        "$mainMod SHIFT, u, movetoworkspace, 1"
-        "$mainMod SHIFT, i, movetoworkspace, 2"
-        "$mainMod SHIFT, o, movetoworkspace, 3"
-        "$mainMod SHIFT, p, movetoworkspace, 4"
-
-        "$mainMod SHIFT CTRL, u, movetoworkspace, 11"
-        "$mainMod SHIFT CTRL, i, movetoworkspace, 12"
-        "$mainMod SHIFT CTRL, o, movetoworkspace, 13"
-        "$mainMod SHIFT CTRL, p, movetoworkspace, 14"
-      ];
-
-      binde = [
-        "$mainMod CTRL, h, moveactive, -50 0  "
-        "$mainMod CTRL, l, moveactive, 50 0  "
-        "$mainMod CTRL, k, moveactive, 0 -50  "
-        "$mainMod CTRL, j, moveactive, 0 50"
-      ];
-
-      bindm = [
-        "$mainMod, mouse:272, movewindow"
-        "$mainMod, mouse:273, resizewindow"
-      ];
-
-      bindel = [
-        ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-        ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-        ",XF86MonBrightnessUp, exec, brightnessctl s 10%+"
-        ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
-      ];
-
-      bindl = let
-        # laptop = monitors.laptop;
-      in [
-        # Requires playerctl
-        ", XF86AudioNext, exec, playerctl next"
-        ", XF86AudioPause, exec, playerctl play-pause"
-        ", XF86AudioPlay, exec, playerctl play-pause"
-        ", XF86AudioPrev, exec, playerctl previous"
-        # lid script taken from: https://www.youtube.com/shorts/deZlxPWVuN4
-        # ", switch:on:Lid Switch, exec, hyprctl keyword monitor \"${laptop.name}, disable\""
-        # ", switch:off:Lid Switch, exec, hyprctl keyword monitor \"${laptop.name}, preferred, ${laptop.position}, ${laptop.scale}\""
-      ];
-
-      # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-      windowrule = [
-        # Nautilus
-        "match:class org.gnome.Nautilus, float on"
-        "match:class org.gnome.Nautilus, size (monitor_w*0.5) (monitor_h*0.5)"
-        "match:class org.gnome.Nautilus, stay_focused on"
-
-        # clipse
-        "match:class clipse, float on"
-        "match:class clipse, size (monitor_w*0.5) (monitor_h*0.5)"
-        "match:class clipse, stay_focused on"
-
-        # Ignore maximize requests
-        "match:class .*, suppress_event maximize"
-
-        # XWayland dragging workaround (exact equivalent possible now)
-        "match:class ^$, match:title ^$, match:xwayland 1, match:float 1, match:fullscreen 0, match:pin 0, no_focus on"
-      ];
-
-      general = {
-        gaps_in = 5;
-        gaps_out = 0;
-
-        border_size = 0;
-
-        # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-        "col.active_border" = borderActiveColor;
-        "col.inactive_border" = borderInativeColor;
-
-        # Set to true enable resizing windows by clicking and dragging on borders and gaps
-        resize_on_border = true;
-
-        # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
-        allow_tearing = false;
-
-        layout = "dwindle";
-      };
-
-      # https://wiki.hyprland.org/Configuring/Variables/#decoration
-      decoration = {
-        rounding = 0;
-        rounding_power = 2;
-
-        # Change transparency of focused and unfocused windows
-        active_opacity = 1.0;
-        inactive_opacity = 1.0;
-
-        shadow = {
-          enabled = false;
-          range = 4;
-          render_power = 3;
-          color = "rgba(1a1a1aee)";
-        };
-
-        # https://wiki.hyprland.org/Configuring/Variables/#blur
-        blur = {
-          enabled = true;
-          size = 3;
-          passes = 1;
-
-          vibrancy = 0.1696;
-        };
-      };
-
-      # https://wiki.hyprland.org/Configuring/Variables/#animations
-      animations = {
-        enabled = "yes";
-
-        # Default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
-        bezier = [
-          "easeOutQuint,0.23,1,0.32,1"
-          "easeInOutCubic,0.65,0.05,0.36,1"
-          "linear,0,0,1,1"
-          "almostLinear,0.5,0.5,0.75,1.0"
-          "quick,0.15,0,0.1,1"
-        ];
-
-        animation = [
-          "global, 1, 10, default"
-          "border, 1, 5.39, easeOutQuint"
-          "windows, 1, 4.79, easeOutQuint"
-          "windowsIn, 1, 4.1, easeOutQuint, popin 87%"
-          "windowsOut, 1, 1.49, linear, popin 87%"
-          "fadeIn, 1, 1.73, almostLinear"
-          "fadeOut, 1, 1.46, almostLinear"
-          "fade, 1, 3.03, quick"
-          "layers, 1, 3.81, easeOutQuint"
-          "layersIn, 1, 4, easeOutQuint, fade"
-          "layersOut, 1, 1.5, linear, fade"
-          "fadeLayersIn, 1, 1.79, almostLinear"
-          "fadeLayersOut, 1, 1.39, almostLinear"
-          "workspaces, 1, 1.94, almostLinear, fade"
-          "workspacesIn, 1, 1.21, almostLinear, fade"
-          "workspacesOut, 1, 1.94, almostLinear, fade"
-        ];
-      };
-
-      # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-      dwindle = {
-        preserve_split = true; # You probably want this
-      };
-
-      # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-      master = {
-        new_status = "master";
-      };
-
-      # https://wiki.hyprland.org/Configuring/Variables/#misc
-      misc = {
-        force_default_wallpaper = 0; # Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo = true; # If true disables the random hyprland logo / anime girl background. :(
-      };
-
-      # https://wiki.hyprland.org/Configuring/Variables/#cursor
-      cursor = {
-        no_hardware_cursors = true; # Render cursor in software (replaces WLR_NO_HARDWARE_CURSORS=1)
-      };
-
-      # https://wiki.hyprland.org/Configuring/Variables/#input
-      input = {
-        kb_layout = "us";
-
-        follow_mouse = 1;
-
-        repeat_rate = 55;
-        repeat_delay = 200;
-        sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
-
-        natural_scroll = true;
-
-        touchpad = {
-          natural_scroll = true;
-        };
-      };
-
-      # https://wiki.hyprland.org/Configuring/Variables/#gestures
-      # gestures = {
-      #   workspace_swipe = false;
-      # };
-
-      # Example per-device config
-      # See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
-      device = {
-        name = "epic-mouse-v1";
-        sensitivity = -0.5;
-      };
-    };
+  # --- LSP support for editing config.lua ---
+  # Expose the Hyprland Lua stubs at a stable path and point lua_ls at them.
+  xdg.configFile."hypr/stubs".source = hyprStubs;
+  xdg.configFile."hypr/.luarc.json".text = builtins.toJSON {
+    "runtime.version" = "LuaJIT";
+    "workspace.library" = [hyprStubs];
+    "diagnostics.globals" = ["hl"];
   };
 
   home.pointerCursor = {
