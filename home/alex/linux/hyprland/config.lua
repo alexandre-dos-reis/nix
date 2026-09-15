@@ -11,7 +11,7 @@ local terminal    = "ghostty -e fish"
 local fileManager = "nautilus"
 local menu        = "wofi --show drun"
 
--- App window classes, used by the moveToWorkspace helper script.
+-- App window classes, used by moveToWorkspace below.
 local class = {
   terminal = "com.mitchellh.ghostty",
   zed      = "dev.zed.Zed",
@@ -121,11 +121,22 @@ hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "a
 ---- KEYBINDINGS ----
 ---------------------
 
--- Move a set of apps to a workspace via the helper script.
+-- Gather every window whose class is in `classes` onto workspace `ws`, then
+-- switch to it. Native reimplementation of the old moveToWorkspace.sh: no
+-- shelling out to hyprctl/jq, so it's a single in-process pass per keypress.
+--
+-- `class` is matched exactly (same as the old `jq .class == $class`).
+-- `follow = false` moves silently, so we don't flicker through workspaces
+-- window-by-window; one focus at the end lands us there.
 local function moveToWorkspace(key, ws, classes)
-  local json = '["' .. table.concat(classes, '","') .. '"]'
-  hl.bind(mod .. " + " .. key,
-    hl.dsp.exec_cmd("~/.config/hypr/scripts/moveToWorkspace " .. ws .. " '" .. json .. "'"))
+  hl.bind(mod .. " + " .. key, function()
+    for _, cls in ipairs(classes) do
+      for _, win in ipairs(hl.get_windows({ class = cls })) do
+        hl.dispatch(hl.dsp.window.move({ window = win, workspace = ws, follow = false }))
+      end
+    end
+    hl.dispatch(hl.dsp.focus({ workspace = ws }))
+  end)
 end
 
 -- >>> Presets

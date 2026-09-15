@@ -21,8 +21,6 @@
 in {
   imports = [./waybar.nix];
 
-  home.file.".config/hypr/scripts/moveToWorkspace".source = ./scripts/moveToWorkspace.sh;
-
   wayland.windowManager.hyprland = {
     # Hyprland 0.55+ Lua config. The actual config is hand-written in config.lua;
     # home-manager only generates a thin hyprland.lua (systemd hook + require).
