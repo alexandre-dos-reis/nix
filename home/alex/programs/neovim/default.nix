@@ -23,9 +23,7 @@ in {
   home.file.".config/nvim".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/${flakeDir}/home/alex/dotfiles/nvim";
 
   # LSPs and executable
-  home.packages = with pkgs-unstable; let
-    zig = inputs.zig.packages.${pkgs-unstable.stdenv.hostPlatform.system}."0.16.0";
-  in [
+  home.packages = with pkgs-unstable; [
     # Treesitter
     tree-sitter
 
@@ -94,8 +92,8 @@ in {
     rust-analyzer
 
     # Zig
-    zig
-    zls
+    (inputs.zig.packages.${pkgs-unstable.stdenv.hostPlatform.system}."0.16.0")
+    zls_0_16 # zls version has to match the zig version
 
     # Ruby
     ruby
