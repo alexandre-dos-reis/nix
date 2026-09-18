@@ -16,10 +16,19 @@ session="claude"
 win="$dir"  # window name is the directory path itself: stable and unique
 
 # Ensure the single shared session exists, with a window for this directory.
+# Windows are always addressed by their window id (@N), never by name: tmux
+# target syntax treats "." as the window/pane separator, so a directory such as
+# "~/dev/gille-agri.fr" would be read as window "…/gille-agri", pane "fr".
 if ! tmux has-session -t "$session" 2>/dev/null; then
-    tmux new-session -d -s "$session" -c "$dir" -n "$win" claude
-elif ! tmux list-windows -t "$session" -F '#{window_name}' | grep -Fqx "$win"; then
-    tmux new-window -d -t "$session:" -c "$dir" -n "$win" claude
+    win_id=$(tmux new-session -d -s "$session" -c "$dir" -n "$win" \
+        -P -F '#{window_id}' claude)
+else
+    win_id=$(tmux list-windows -t "$session" -F '#{window_id} #{window_name}' \
+        | awk -v n="$win" '{ id = $1; sub(/^[^ ]* /, ""); if ($0 == n) { print id; exit } }')
+    if [ -z "$win_id" ]; then
+        win_id=$(tmux new-window -d -t "$session:" -c "$dir" -n "$win" \
+            -P -F '#{window_id}' claude)
+    fi
 fi
 
 tmux set-option -t "$session" status off
@@ -27,5 +36,5 @@ tmux set-option -t "$session" @is_popover 1
 # When any claude instance's window closes, detach the popup (close the modal)
 # instead of letting tmux switch to a sibling window.
 tmux set-hook -t "$session" window-unlinked 'detach-client -s claude'
-tmux select-window -t "$session:=$win"
+tmux select-window -t "$win_id"
 tmux display-popup -w90% -h90% -E "tmux attach-session -t '$session'"
