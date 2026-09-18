@@ -15,6 +15,7 @@
     ../common/docker.nix
     ../common/printers.nix
     ../common/nh.nix
+    ../common/devenv.nix
     ./input.nix
     ./bluetooth.nix
     ./hosts.nix
@@ -103,7 +104,6 @@
     pavucontrol
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     kooha # TODO: install codecs
-    pkgs-unstable.devenv # Dev
   ];
 
   services.logind.settings.Login = {

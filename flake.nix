@@ -12,6 +12,14 @@
     nixgl.url = "github:nix-community/nixGL";
     nixgl.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Dev
+    # Pinned to the upstream flake, NOT nixpkgs: the nixpkgs build of devenv 2.3.1
+    # links an ABI-incompatible libghostty-vt and crashes the interactive shell.
+    # https://github.com/NixOS/nixpkgs/issues/563507
+    # Deliberately no `inputs.nixpkgs.follows` — overriding it would invalidate
+    # devenv.cachix.org and force a from-source Rust build.
+    devenv.url = "github:cachix/devenv/v2.3.1";
+
     # Hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 

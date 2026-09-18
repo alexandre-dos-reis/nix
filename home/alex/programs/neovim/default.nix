@@ -47,7 +47,7 @@ in {
     # Javascript / Typescript
     nodejs_24
     # corepack_24
-    pnpm
+    pnpm_12
     bun
     deno
     typescript-language-server

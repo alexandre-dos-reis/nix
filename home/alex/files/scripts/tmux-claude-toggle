@@ -15,21 +15,28 @@ dir="${1:-$PWD}"
 session="claude"
 win="$dir"  # window name is the directory path itself: stable and unique
 
-# Ensure the single shared session exists, with a window for this directory.
 # Windows are always addressed by their window id (@N), never by name: tmux
 # target syntax treats "." as the window/pane separator, so a directory such as
 # "~/dev/gille-agri.fr" would be read as window "…/gille-agri", pane "fr".
-if ! tmux has-session -t "$session" 2>/dev/null; then
-    win_id=$(tmux new-session -d -s "$session" -c "$dir" -n "$win" \
-        -P -F '#{window_id}' claude)
-else
-    win_id=$(tmux list-windows -t "$session" -F '#{window_id} #{window_name}' \
-        | awk -v n="$win" '{ id = $1; sub(/^[^ ]* /, ""); if ($0 == n) { print id; exit } }')
-    if [ -z "$win_id" ]; then
-        win_id=$(tmux new-window -d -t "$session:" -c "$dir" -n "$win" \
-            -P -F '#{window_id}' claude)
-    fi
-fi
+#
+# Prints nothing when the session or the window doesn't exist yet, so this
+# doubles as the "does it already exist?" check.
+find_window() {
+    local id name
+    while read -r id name; do
+        [ "$name" = "$win" ] && { printf '%s' "$id"; return 0; }
+    done < <(tmux list-windows -t "$session" -F '#{window_id} #{window_name}' 2>/dev/null)
+    return 0
+}
+
+# Ensure the single shared session exists, with a window for this directory:
+# start the session, or — if it is already running — just add a window to it.
+spawn=(-d -c "$dir" -n "$win" -P -F '#{window_id}' claude)
+win_id=$(find_window)
+[ -n "$win_id" ] || win_id=$(
+    tmux new-session -s "$session"  "${spawn[@]}" 2>/dev/null ||
+    tmux new-window  -t "$session:" "${spawn[@]}"
+)
 
 tmux set-option -t "$session" status off
 tmux set-option -t "$session" @is_popover 1
