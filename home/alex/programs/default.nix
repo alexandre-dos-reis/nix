@@ -11,7 +11,7 @@
     ./atuin.nix
     ./npm.nix
     ./tmux
-    ./devenv.nix
+    ./direnv.nix
     ./git.nix
     # ./vscode.nix
     ./ssh.nix

@@ -4,7 +4,8 @@
   in {
     "127.0.0.1" =
       makeHosts "dev.eurorack-3d.com" ["api" "admin" "assets" "minio" "email"]
-      ++ makeHosts "everywhere-jobs.dev" ["api" "admin" "s3" "s3-console" "files" "emails" "inngest" "db-ui" "storybook" "typesense"];
+      ++ makeHosts "everywhere-app.dev" ["api" "admin" "s3" "s3-console" "files" "emails" "inngest" "db-ui" "storybook" "typesense"]
+      ++ makeHosts "everywhere-jobs.dev" [];
   };
 
   # NOTE: For mkcert generate run:

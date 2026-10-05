@@ -7,6 +7,7 @@
     # nix helpers
     nix-inspect # inspect flake in a nice interface
     nixos-rebuild
+    pkgs-unstable.devenv
 
     # fonts
     maple-mono.NF-unhinted
@@ -46,6 +47,7 @@
 
     # tui
     ranger
+    tuios
 
     # code
     claude-code
