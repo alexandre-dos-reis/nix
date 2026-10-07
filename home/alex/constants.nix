@@ -42,5 +42,8 @@
     kns = "kubens";
     kx = "kubectx";
     y = "yazi";
+    pn = "pnpm";
+    hr = "hyprshot -m region";
+    hw = "hyprshot -m window";
   };
 }
