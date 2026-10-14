@@ -149,10 +149,12 @@ moveToWorkspace("y", 5, { class.zed })
 -- <<< Presets
 
 -- Apps
+hl.bind(mod .. " + n", hl.dsp.exec_cmd("hyprshot --mode window"))
+hl.bind(mod .. " + m", hl.dsp.exec_cmd("hyprshot --mode region"))
 hl.bind(mod .. " + e", hl.dsp.exec_cmd(fileManager))
 hl.bind(mod .. " + g", hl.dsp.exec_cmd(terminal))
 hl.bind(mod .. " + w", hl.dsp.window.close())
-hl.bind(mod .. " + m", hl.dsp.exit())
+-- hl.bind(mod .. " + m", hl.dsp.exit())
 hl.bind(mod .. " + t", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mod .. " + SPACE", hl.dsp.exec_raw(menu))
 hl.bind(mod .. " + c", hl.dsp.exec_cmd("kitty --class clipse -e clipse"))

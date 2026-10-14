@@ -105,6 +105,7 @@ in {
     wl-clipboard
     hyprshot
     nautilus
+    file-roller # Archive manager, MIME handler so Nautilus can open zip/tar/etc.
     hyprpaper # services.hyprpaper doesn't seems to run launch hyprpaper
     brightnessctl # Control brightness display
     playerctl # Control audio
