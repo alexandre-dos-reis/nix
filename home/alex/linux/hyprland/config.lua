@@ -149,8 +149,8 @@ moveToWorkspace("y", 5, { class.zed })
 -- <<< Presets
 
 -- Apps
-hl.bind(mod .. " + n", hl.dsp.exec_cmd("hyprshot --mode window"))
-hl.bind(mod .. " + m", hl.dsp.exec_cmd("hyprshot --mode region"))
+hl.bind(mod .. " + n", hl.dsp.exec_cmd("hyprshot --mode output --mode active --clipboard-only"))
+hl.bind(mod .. " + m", hl.dsp.exec_cmd("hyprshot --mode region --clipboard-only"))
 hl.bind(mod .. " + e", hl.dsp.exec_cmd(fileManager))
 hl.bind(mod .. " + g", hl.dsp.exec_cmd(terminal))
 hl.bind(mod .. " + w", hl.dsp.window.close())
