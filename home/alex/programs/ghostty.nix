@@ -19,7 +19,7 @@ in {
       gtk-single-instance = false; # On linux enable multi instances
       theme = "Solarized Dark Higher Contrast";
       maximize = true;
-      font-size = 16; # 22
+      font-size = 12; # 22
       font-family = constants.font;
       background = constants.colors.background;
       shell-integration-features = "no-cursor, sudo, title";

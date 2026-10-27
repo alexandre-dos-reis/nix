@@ -92,8 +92,8 @@ in {
     rust-analyzer
 
     # Zig
-    (inputs.zig.packages.${pkgs-unstable.stdenv.hostPlatform.system}."0.16.0")
-    zls_0_16 # zls version has to match the zig version
+    (inputs.zig.packages.${pkgs-unstable.stdenv.hostPlatform.system}."0.17.0")
+    zls_0_17 # zls version has to match the zig version
 
     # Ruby
     ruby
