@@ -63,7 +63,7 @@ Each host has a `default.nix` (entry, just imports `configuration.nix`) and a `c
 
 ### Two nixpkgs channels
 
-- `pkgs` → `nixpkgs` (stable, currently 25.11) — used for most packages
+- `pkgs` → `nixpkgs` (stable, currently `nixos-26.05`; `home-manager` tracks the matching `release-26.05`) — used for most packages
 - `pkgs-unstable` → `nixpkgs-unstable` — injected as `extraSpecialArgs`; use it for packages that need a newer version than stable provides
 
 ### `useNixGL` flag

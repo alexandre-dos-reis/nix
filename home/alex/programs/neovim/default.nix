@@ -28,7 +28,7 @@ in {
     tree-sitter
 
     # Code
-    opencode
+    # opencode
 
     # Deps for Lazy
     luajitPackages.luarocks

@@ -17,6 +17,7 @@ local class = {
 	zed = "dev.zed.Zed",
 	chrome = "google-chrome",
 	browser = "zen",
+	herdr = "herdr-app",
 }
 
 ------------------
@@ -145,7 +146,7 @@ moveToWorkspace("u", 1, { class.terminal })
 moveToWorkspace("i", 2, { class.browser, class.terminal })
 moveToWorkspace("o", 3, { class.chrome })
 moveToWorkspace("p", 4, { class.browser })
-moveToWorkspace("y", 5, { class.zed })
+moveToWorkspace("y", 5, { class.herdr })
 -- <<< Presets
 
 -- Apps

@@ -43,14 +43,16 @@
     nmap
     openssl
 
-    pkgs-unstable.herdr
-
     # tui
     ranger
     tuios
 
     # code
     claude-code
+    # pkgs-unstable.t3code
+
+    pkgs-unstable.herdr
+    pkgs-unstable.herdr-desktop
     jujutsu # Alternative to git, use with `jj`
     tokei # Stats about code
     woff2
