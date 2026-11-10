@@ -41,6 +41,9 @@ in {
   programs.fish = {
     enable = true;
     generateCompletions = true;
+    interactiveShellInit = ''
+      mise activate fish | source
+    '';
     shellInit = ''
       set fish_greeting ""
       set -gx EDITOR ${constants.editor}

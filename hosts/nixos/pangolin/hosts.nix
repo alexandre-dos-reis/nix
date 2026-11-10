@@ -4,7 +4,7 @@
   in {
     "127.0.0.1" =
       makeHosts "dev.eurorack-3d.com" ["api" "admin" "assets" "minio" "email"]
-      ++ makeHosts "everywhere-app.dev" ["api" "admin" "s3" "s3-console" "files" "emails" "inngest" "db-ui" "storybook" "typesense"]
+      ++ makeHosts "everywhere-app.dev" ["api" "admin" "s3" "s3-console" "files" "emails" "inngest" "erd" "og" "storybook" "typesense"]
       ++ makeHosts "everywhere-jobs.dev" [];
   };
 
@@ -13,7 +13,10 @@
   # It will generate a public and private root certificate authority keys.
   # - import the rootCa here, don't `git add` the rootCA-key.pem file,
   # it's the private key !
-  security.pki.certificateFiles = [./certificates/rootCA.pem ./certificates/ea-rootCA.pem];
+  security.pki.certificateFiles = [
+    ./certificates/rootCA.pem
+    ./certificates/ea-rootCA.pem
+  ];
 
   # Wildcard resolution for *.homelab -> 127.0.0.1 (any subdomain, no need to
   # list them). /etc/hosts can't do wildcards, so dnsmasq handles it.

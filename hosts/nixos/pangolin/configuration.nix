@@ -5,7 +5,6 @@
   pkgs,
   users,
   inputs,
-  pkgs-unstable,
   ...
 }: {
   imports = [
