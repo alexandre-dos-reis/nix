@@ -15,6 +15,7 @@
     ../common/printers.nix
     ../common/nh.nix
     ../common/devenv.nix
+    ../common/fish.nix
     ./input.nix
     ./bluetooth.nix
     ./hosts.nix

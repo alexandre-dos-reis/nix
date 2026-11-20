@@ -10,9 +10,14 @@
   vimMode = ''
     fish_vi_key_bindings
 
-    # Replace default vim visual mode tmux with visual mode and begin selection
-    bind -M default v 'tmux copy-mode \; send -X begin-selection'
-    bind -M default V 'tmux copy-mode \; send -X begin-selection'
+    # Visual mode hands off to the surrounding multiplexer's copy mode, but only
+    # where there is one. Fish is the login shell everywhere now (including Herdr
+    # panes), so outside tmux these would just error; leave fish's own visual
+    # mode in place there.
+    if set -q TMUX
+        bind -M default v 'tmux copy-mode \; send -X begin-selection'
+        bind -M default V 'tmux copy-mode \; send -X begin-selection'
+    end
 
     set fish_cursor_default block
     set fish_cursor_insert block

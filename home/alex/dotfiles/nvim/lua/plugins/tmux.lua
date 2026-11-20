@@ -1,27 +1,11 @@
 return {
   "christoomey/vim-tmux-navigator",
   lazy = false,
-  keys = {
-    {
-      "<C-k>",
-      "<cmd>TmuxNavigateUp<cr><esc>",
-      desc = "Move cursor to top pane",
-    },
-    {
-      "<C-j>",
-      "<cmd>TmuxNavigateDown<cr><esc>",
-      desc = "Move cursor to bottom pane",
-    },
-    {
-      "<C-h>",
-      "<cmd>TmuxNavigateLeft<cr><esc>",
-      desc = "Move cursor to left pane",
-    },
-    {
-      "<C-l>",
-      "<cmd>TmuxNavigateRight<cr><esc>",
-      desc = "Move cursor to right pane",
-    },
-    -- { "<C-\\>", "<cmd>TmuxNavigatePrevious<cr><esc>", desc = "Move cursor to previous pane" },
-  },
+  -- The <C-h/j/k/l> mappings now live in after/plugin/herdr_nav.lua, which
+  -- picks tmux, herdr or the Herdr app depending on what we are running in.
+  -- The plugin is still loaded eagerly so its TmuxNavigate* commands exist
+  -- for that file's tmux branch; it just no longer claims the keys itself.
+  init = function()
+    vim.g.tmux_navigator_no_mappings = 1
+  end,
 }

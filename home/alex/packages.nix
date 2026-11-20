@@ -49,6 +49,7 @@
 
     # code
     claude-code
+    pi-coding-agent
     # pkgs-unstable.t3code
 
     pkgs-unstable.herdr
