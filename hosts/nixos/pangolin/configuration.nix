@@ -18,6 +18,7 @@
     ../common/fish.nix
     ./input.nix
     ./bluetooth.nix
+    ./dev-libraries.nix
     ./hosts.nix
     ./models.nix
   ];
