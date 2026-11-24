@@ -1,12 +1,8 @@
 {
   inputs,
   pkgs-unstable,
-  config,
   ...
-}: let
-  inherit (config.lib.file) mkOutOfStoreSymlink;
-  inherit (import ../../constants.nix) flakeDir;
-in {
+}: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -19,8 +15,6 @@ in {
     # the whole-directory symlink and fail with "outside $HOME").
     sideloadInitLua = true;
   };
-
-  home.file.".config/nvim".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/${flakeDir}/home/alex/dotfiles/nvim";
 
   # LSPs and executable
   home.packages = with pkgs-unstable; [

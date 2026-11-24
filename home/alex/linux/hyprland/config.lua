@@ -18,6 +18,7 @@ local class = {
 	chrome = "google-chrome",
 	browser = "zen",
 	herdr = "herdr-app",
+	-- https://github.com/zenodea/renux
 	rex = "dev.renux", -- TODO: switch to official rex client when out
 }
 

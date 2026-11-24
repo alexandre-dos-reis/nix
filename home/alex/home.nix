@@ -12,6 +12,7 @@ in {
     ./packages.nix
     ./files
     ./scripts
+    ./dotfiles.nix
   ];
 
   # nixpkgs.config.allowUnfree = true;
