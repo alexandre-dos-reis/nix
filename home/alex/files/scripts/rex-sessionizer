@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+# Rex port of tmux-sessionizer, see ./tmux-sessionizer
+#
+# One session per directory, labelled after its path, holding two side-by-side
+# shells. A directory that already has a session is switched to, so what each
+# shell is running survives jumping away and coming back.
+#
+# With no argument, fzf asks which directory: the ones that already have a
+# session sort first, marked, and every live session is named in the footer
+# below the list. With one, it is used as given, so the script is scriptable:
+# rex-sessionizer ~/dev/renux
+
+set -euo pipefail
+
+# A session is keyed on its directory's full path, so two directories sharing a
+# basename, as ~/.config/rex and ~/dev/rex do, get a session each. Labels take
+# slashes, so the path is the label: relative to $HOME where it sits under it,
+# absolute otherwise, and ~ for $HOME itself.
+label_of() {
+	local dir=${1%/}
+	if [[ $dir == "$HOME" ]]; then
+		printf '~\n'
+	else
+		printf '%s\n' "${dir/#$HOME\//}"
+	fi
+}
+
+active_labels() { rex session ls --json 2>/dev/null | jq -r '.sessions[].label'; }
+
+# The directories that already have a session come first, each marked, so the
+# list opens on what is already running. The path is a second tab-separated
+# field, the only one fzf matches on and the only one read back out.
+pick() {
+	local -A active=()
+	local label dir dirs=() live=() dead=() footer
+
+	while read -r label; do active[$label]=1; done < <(active_labels)
+
+	mapfile -t dirs < <(find ~ ~/.config ~/dev -mindepth 1 -maxdepth 1 -type d | sort)
+	for dir in "${dirs[@]}"; do
+		if [[ -n ${active[$(label_of "$dir")]:-} ]]; then
+			live+=("$(printf '\033[32m●\033[0m\t%s' "$dir")")
+		else
+			dead+=("$(printf ' \t%s' "$dir")")
+		fi
+	done
+
+	footer=$(active_labels | paste -sd ' ' -)
+	[[ -n $footer ]] && footer="sessions: $footer"
+
+	printf '%s\n' "${live[@]}" "${dead[@]}" |
+		fzf --ansi --delimiter='\t' --nth=2 \
+			--footer="$footer" --footer-border=rounded |
+		cut -f2
+}
+
+session=${1:-$(pick)}
+[[ -n $session ]] || exit 0 # fzf was cancelled
+session_name=$(label_of "$session")
+
+# rex session inspect exits 3 when nothing has that label, which is the
+# has-session check.
+if ! rex session inspect "$session_name" >/dev/null 2>&1; then
+	rex new "$session_name" --window "$session_name" -c "$session" >/dev/null
+	# Rex splits to the right of the focused block by default, as -h does.
+	rex split -s "$session_name" -c "$session" >/dev/null
+	# rex split -s "$session_name" --split=below -c "$session" >/dev/null
+fi
+
+# tmux's switch-client. Rex's server-side focus only moves focus within the
+# session an app already shows, so the switch is an action the app performs,
+# with -s naming the session to go to.
+rex do session.select -s "$session_name"

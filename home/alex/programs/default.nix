@@ -20,5 +20,6 @@
     ./zellij.nix
     ./zed.nix
     ./yazi
+    ./rex
   ];
 }

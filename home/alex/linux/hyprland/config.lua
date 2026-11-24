@@ -18,6 +18,7 @@ local class = {
 	chrome = "google-chrome",
 	browser = "zen",
 	herdr = "herdr-app",
+	rex = "dev.renux", -- TODO: switch to official rex client when out
 }
 
 ------------------
@@ -142,11 +143,11 @@ local function moveToWorkspace(key, ws, classes)
 end
 
 -- >>> Presets
-moveToWorkspace("u", 1, { class.terminal })
+moveToWorkspace("u", 1, { class.rex })
 moveToWorkspace("i", 2, { class.browser, class.terminal })
 moveToWorkspace("o", 3, { class.chrome })
 moveToWorkspace("p", 4, { class.browser })
-moveToWorkspace("y", 5, { class.herdr })
+-- moveToWorkspace("y", 5, { class.rex })
 -- <<< Presets
 
 -- Apps
