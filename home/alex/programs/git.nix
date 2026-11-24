@@ -1,6 +1,10 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   inherit (pkgs.stdenv) isDarwin;
-  inherit (import ../constants.nix) email fullname editor;
+  inherit (import ../constants.nix) email fullname editor flakeDir;
 in {
   home.packages = with pkgs; [
     delta # https://github.com/dandavison/delta
@@ -27,6 +31,11 @@ in {
       push.autoSetupRemote = true;
       rerere.enabled = true; # Enable the recording of resolved conflicts, so that identical hunks can be resolved automatically later on.
       advice.addIgnoredFile = false;
+      # Renux rewrites settings.ini on every cd, and the [paths] group it writes
+      # is a recent-folders cache. The filter keeps that group out of what git
+      # stores, so the file stays tracked without a diff per cd. Bound to the
+      # file by dotfiles/renux/.gitattributes.
+      filter.renux-settings.clean = "${config.home.homeDirectory}/${flakeDir}/home/alex/dotfiles/renux/settings-clean.sh";
       # https://www.reddit.com/r/NixOS/comments/qwu3d1/confused_about_git_gnomekeyring_and_libsecret/
       # https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage
       credential.helper =

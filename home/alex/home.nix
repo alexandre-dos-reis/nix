@@ -13,6 +13,7 @@ in {
     ./files
     ./scripts
     ./dotfiles.nix
+    ./claude
   ];
 
   # nixpkgs.config.allowUnfree = true;
