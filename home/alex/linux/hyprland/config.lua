@@ -145,7 +145,7 @@ end
 
 -- >>> Presets
 moveToWorkspace("u", 1, { class.rex })
-moveToWorkspace("i", 2, { class.browser, class.terminal })
+moveToWorkspace("i", 2, { class.browser, class.rex })
 moveToWorkspace("o", 3, { class.chrome })
 moveToWorkspace("p", 4, { class.browser })
 -- moveToWorkspace("y", 5, { class.rex })
@@ -260,6 +260,6 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("clipse -listen")
 	hl.exec_cmd("hyprctl setcursor Bibata-Modern-Ice 32")
-	hl.exec_cmd("ghostty")
+	hl.exec_cmd("renux")
 	hl.exec_cmd("zen")
 end)
