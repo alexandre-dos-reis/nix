@@ -84,7 +84,11 @@ hl.config({
 		disable_hyprland_logo = true,
 	},
 
-	cursor = { no_hardware_cursors = true }, -- replaces WLR_NO_HARDWARE_CURSORS=1
+	cursor = {
+		no_hardware_cursors = true, -- replaces WLR_NO_HARDWARE_CURSORS=1
+		hide_on_key_press = true, -- hide the pointer while typing, back on the next mouse move
+		inactive_timeout = 3, -- and hide it after three idle seconds
+	},
 
 	input = {
 		kb_layout = "us",
