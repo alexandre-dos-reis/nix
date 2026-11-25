@@ -1,13 +1,18 @@
 -- Actions https://www.superlogical.com/rex/docs/reference/ios-actions
 
 local claude = require("claude-toggle")
+local nav = require("editor-nav")
 require("sessionizer")
 
 -- tmux behavior: moving focus out of a zoomed pane unzooms it.
 -- Rex zoom follows focus, so unzoom first, then move.
+--
+-- Separate from focus_pane so an editor can ask for the move without the
+-- editor check handing the key straight back to it. This is what
+-- nvim/after/plugin/herdr_nav.lua calls.
 rex.action({
-	name = "focus_pane",
-	title = "Focus Pane",
+	name = "focus_pane_direct",
+	title = "Focus Pane (ignoring the editor)",
 	args = { direction = "string" },
 	run = function(ctx, args)
 		-- From inside a floating popup: hide it, then move as usual.
@@ -27,6 +32,22 @@ rex.action({
 		end
 		rex.session.focus_direction({ direction = args.direction })
 		return true
+	end,
+})
+
+-- What ctrl+h/j/k/l run. In an editor the key is typed into the pane instead,
+-- so the editor moves its own window and calls focus_pane_direct back when it
+-- has none left that way. See editor-nav.lua.
+rex.action({
+	name = "focus_pane",
+	title = "Focus Pane",
+	args = { direction = "string" },
+	run = function(ctx, args)
+		if nav.handles_movement(ctx.block_id) then
+			nav.send_movement(ctx.session_id, ctx.block_id, args.direction)
+			return true
+		end
+		return rex.invoke("focus_pane_direct", { direction = args.direction })
 	end,
 })
 

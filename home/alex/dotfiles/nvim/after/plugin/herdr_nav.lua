@@ -4,10 +4,16 @@
 --
 -- <C-h/j/k/l> move between Neovim splits; at a split edge they hand off to
 -- whatever is around us:
+--   REX_BLOCK      -> Rex/Renux (rex do focus_pane_direct)
 --   HERDR_PANE_ID  -> the herdr TUI (herdr pane focus)
 --   HC_TERMINAL_ID -> the Herdr desktop app (herdr-app do pane.go)
 --   TMUX           -> vim-tmux-navigator, exactly as before
--- Outside all three the keys just move splits.
+-- Outside all four the keys just move splits.
+--
+-- Rex binds the same keys itself, so it only gets this far because its
+-- focus_pane action types the key into the pane when an editor is running in
+-- it; see rex/editor-nav.lua. We call focus_pane_direct rather than
+-- focus_pane so it doesn't do that again and bounce the key back here.
 
 local function nav(wincmd, dir)
   local prev = vim.api.nvim_get_current_win()
@@ -16,7 +22,23 @@ local function nav(wincmd, dir)
     return -- moved within Neovim
   end
   -- At a split edge: cross into the surrounding multiplexer.
-  if vim.env.HERDR_PANE_ID and vim.env.HERDR_PANE_ID ~= "" then
+  if vim.env.REX_BLOCK and vim.env.REX_BLOCK ~= "" then
+    -- Name our own block twice: -b is the block the action applies to, and -s
+    -- takes a block ID too and resolves it to the session holding it, so this
+    -- works whatever Rex variables the shell passed on. Detached, so the
+    -- editor never blocks on the round trip.
+    local id = vim.env.REX_BLOCK
+    local act = "focus_pane_direct"
+    local argv = { "rex", "do", act, "direction=" .. dir, "-s", id, "-b", id }
+    vim.system(argv, nil, function(res)
+      if res.code ~= 0 then
+        local msg = "rex " .. act .. ": " .. (res.stderr or "")
+        vim.schedule(function()
+          vim.notify(msg, vim.log.levels.WARN)
+        end)
+      end
+    end)
+  elseif vim.env.HERDR_PANE_ID and vim.env.HERDR_PANE_ID ~= "" then
     local herdr = vim.env.HERDR_BIN_PATH
     if herdr == nil or herdr == "" then
       herdr = "herdr"
