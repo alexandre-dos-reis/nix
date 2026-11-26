@@ -38,6 +38,18 @@
       flake = false;
     };
 
+    # Rex
+    # Fork branch off upstream ed6915b, carrying the undercurl patch: upstream
+    # decodes an underline as a bool, so SGR 4:3 and SGR 58 are both dropped and
+    # Neovim's diagnostics underline straight and uncolored. Submitted as
+    # zenodea/renux#34; point this back at github:zenodea/renux once it lands.
+    # The nixpkgs follows is load-bearing: built against renux's own nixpkgs, the
+    # GTK it links mismatches this system's compositor and it dies with Wayland
+    # error 71. (Its third_party/ghostty submodule is only needed for a plain
+    # zig build; the nix package takes ghostty from its own flake input.)
+    renux.url = "github:alexandre-dos-reis/renux/undercurl";
+    renux.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
     # Editors
     vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 

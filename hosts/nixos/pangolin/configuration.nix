@@ -18,7 +18,6 @@
     ../common/fish.nix
     ./input.nix
     ./bluetooth.nix
-    ./dev-libraries.nix
     ./hosts.nix
     ./models.nix
   ];
@@ -111,6 +110,7 @@
     pavucontrol
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     kooha
+    inputs.renux.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   services.logind.settings.Login = {

@@ -99,6 +99,23 @@
         "type": "github"
       }
     },
+    "ghostty": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793829875,
+        "narHash": "sha256-ZIxZbL9eyflMf3166FFyxC0hajUz4kmNnnIZ1Bhevc8=",
+        "owner": "ghostty-org",
+        "repo": "ghostty",
+        "rev": "e95bed63330cc921f3cf2fe3d14e024396b09d43",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ghostty-org",
+        "repo": "ghostty",
+        "rev": "e95bed63330cc921f3cf2fe3d14e024396b09d43",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -603,6 +620,28 @@
         "type": "github"
       }
     },
+    "renux": {
+      "inputs": {
+        "ghostty": "ghostty",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795683424,
+        "narHash": "sha256-VzOliuAhAAHiOZRH9HfpmfzMIyMggqFNW+TpRjbuYuQ=",
+        "owner": "alexandre-dos-reis",
+        "repo": "renux",
+        "rev": "3bf894948a8b7fa4a4ef6a8b1907faba09675aaf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "alexandre-dos-reis",
+        "ref": "undercurl",
+        "repo": "renux",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "fish-ssh-agent": "fish-ssh-agent",
@@ -613,6 +652,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "renux": "renux",
         "ssh-agent-macos": "ssh-agent-macos",
         "vscode-extensions": "vscode-extensions",
         "zen-browser": "zen-browser",
