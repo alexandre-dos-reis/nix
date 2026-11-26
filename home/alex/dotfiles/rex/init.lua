@@ -72,7 +72,7 @@ rex.bind("ctrl+o", "claude_toggle")
 
 -- Agent board: every agent across sessions and windows, in Idle/Running/
 -- Attention/Done columns. Needs agent-board=true in Renux's settings.
-rex.bind("ctrl+i", "client.board.toggle")
+rex.bind("ctrl+;", "client.board.toggle")
 
 -- Projects
 rex.bind("ctrl+f", "sessionizer")
