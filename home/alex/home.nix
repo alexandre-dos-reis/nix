@@ -12,7 +12,7 @@ in {
     ./packages.nix
     ./files
     ./scripts
-    ./dotfiles.nix
+    ./dotfiles
     ./claude
   ];
 

@@ -9,7 +9,7 @@
   # all it takes — no list to keep in sync here.
   names =
     builtins.attrNames
-    (lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./dotfiles));
+    (lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./.));
 
   # Symlink ~/.config/<name> to dotfiles/<name>, out of the store so edits take
   # effect without a rebuild. The tools themselves may or may not be installed
