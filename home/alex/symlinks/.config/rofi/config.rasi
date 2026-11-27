@@ -1,0 +1,13 @@
+// Hand-written, linked into ~/.config/rofi by ../../default.nix.
+
+configuration {
+	font: "Maple Mono NF 12";
+	terminal: "ghostty";
+	modes: [ "drun" ];
+	show-icons: true;
+	drun-display-format: "{name}";
+	case-sensitive: false;
+	hide-scrollbar: true;
+}
+
+@theme "theme.rasi"
