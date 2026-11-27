@@ -54,38 +54,32 @@ in {
     playerctl # Control audio
   ];
 
-  # App launcher
-  programs.wofi = {
+  # App launcher. rofi 2.0 speaks Wayland natively — the old rofi-wayland fork
+  # was merged back into pkgs.rofi, so no override is needed here.
+  xdg.dataFile."rofi/themes/solarized.rasi".source = pkgs.replaceVars ./rofi.rasi {
+    font = constants.font;
+    bgColor = colors.base03-hex; # Background
+    fgColor = colors.base0-hex; # Foreground
+    mgColor = colors.base02-hex; # Selected row background
+    selectedColor = colors.cyan500-hex; # Selected row text, matching wayle's accent
+  };
+
+  programs.rofi = {
     enable = true;
-    style = pkgs.replaceVars ./wofi.css {
-      bgColor = colors.base03-hex; # Background color
-      fgColor = colors.base0-hex; # Foreground color
-      mgColor = colors.base00-hex; # Middleground color
-    };
-    settings = {
-      width = 700;
-      height = 400;
-      location = "center";
-      columns = 2;
-      show = "drun";
-      prompt = "";
-      filter_rate = 100;
-      allow_markup = true;
-      dmenu-parse_actions = true;
-      no_actions = false;
-      halign = "fill";
-      orientation = "vertical";
-      content_halign = "fill";
-      insensitive = true;
-      allow_images = true;
-      image_size = 24;
-      gtk_dark = true;
-      layer = "top";
-      term = "ghostty";
-      hide_scroll = true;
-      normal_window = true;
-      line_wrap = "word_char";
-      dymanic_lines = true;
+    terminal = "${pkgs.ghostty}/bin/ghostty";
+    font = "${constants.font} 12";
+    modes = ["drun"];
+    # Referenced by name, not by path: home-manager's `theme` option treats any
+    # attrset as inline rasi, and a replaceVars derivation *is* an attrset, so
+    # handing it the derivation aborts the eval. Installing the file ourselves
+    # and naming it sidesteps that — rofi resolves bare names against
+    # $XDG_DATA_HOME/rofi/themes.
+    theme = "solarized";
+    extraConfig = {
+      show-icons = true;
+      drun-display-format = "{name}";
+      case-sensitive = false;
+      hide-scrollbar = true;
     };
   };
 }

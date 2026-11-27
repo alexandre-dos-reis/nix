@@ -9,7 +9,7 @@
 local mod = "SUPER"
 local terminal = "ghostty -e fish"
 local fileManager = "nautilus"
-local menu = "wofi --show drun"
+local menu = "rofi -show drun"
 
 -- App window classes, used by moveToWorkspace below.
 local class = {
