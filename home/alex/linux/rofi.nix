@@ -5,7 +5,17 @@
 }: let
   constants = import ../constants.nix;
   colors = constants.colors.palette;
+
+  # Palette entries the theme reads from the environment.
+  themeColors = ["base0" "base02" "base03" "cyan500"];
+  envName = name: "PALETTE_${pkgs.lib.toUpper name}";
 in {
+  home.sessionVariables = builtins.listToAttrs (map (name: {
+      name = envName name;
+      value = colors."${name}-hex";
+    })
+    themeColors);
+
   # App launcher. rofi 2.0 speaks Wayland natively — the old rofi-wayland fork
   # was merged back into pkgs.rofi, so no override is needed here.
   programs.rofi = {
@@ -29,19 +39,22 @@ in {
     # quoted, which rofi rejects for colors and sizes.
     theme = let
       inherit (config.lib.formats.rasi) mkLiteral;
+      # rofi resolves env() at launch. The fallback covers processes that
+      # don't have the session variables.
+      envColor = name: mkLiteral "env(${envName name}, ${colors."${name}-hex"})";
     in {
       "*" = {
         background-color = mkLiteral "transparent";
-        text-color = mkLiteral colors.base0-hex;
+        text-color = envColor "base0";
       };
 
       window = {
         width = mkLiteral "700px";
         height = mkLiteral "400px";
         border = mkLiteral "1px";
-        border-color = mkLiteral colors.base0-hex;
+        border-color = envColor "base0";
         border-radius = mkLiteral "7px";
-        background-color = mkLiteral colors.base03-hex;
+        background-color = envColor "base03";
         padding = mkLiteral "10px";
       };
 
@@ -82,8 +95,8 @@ in {
 
       # Selection highlight; wofi's was transparent, i.e. invisible.
       "element selected" = {
-        background-color = mkLiteral colors.base02-hex;
-        text-color = mkLiteral colors.cyan500-hex;
+        background-color = envColor "base02";
+        text-color = envColor "cyan500";
       };
     };
   };
