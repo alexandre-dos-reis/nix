@@ -5,7 +5,7 @@
     ]
     ++ (
       if !useNixGL
-      then [./hyprland.nix ./wayle.nix ./rofi.nix]
+      then [./hyprland.nix ./wayle.nix]
       else []
     );
 }

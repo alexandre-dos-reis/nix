@@ -1,4 +1,4 @@
-// PALETTE_* are exported by ../../../linux/rofi.nix. The fallbacks cover
+// PALETTE_* are exported by ../../../linux/hyprland.nix. The fallbacks cover
 // processes that don't have the session variables.
 
 * {
