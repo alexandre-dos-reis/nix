@@ -64,6 +64,7 @@ rex.bind("ctrl+k", "focus_pane", { direction = "up" })
 rex.bind("ctrl+a>-", "pane.split.down")
 rex.bind("ctrl+a>shift+\\", "pane.split.right")
 rex.bind("ctrl+a>z", "pane.zoom")
+rex.bind("ctrl+a>x", "pane.close")
 
 rex.bind("ctrl+a>s", "client.sidebar.toggle")
 
