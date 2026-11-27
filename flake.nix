@@ -43,10 +43,12 @@
     # decodes an underline as a bool, so SGR 4:3 and SGR 58 are both dropped and
     # Neovim's diagnostics underline straight and uncolored. Submitted as
     # zenodea/renux#34; point this back at github:zenodea/renux once it lands.
-    # The nixpkgs follows is load-bearing: built against renux's own nixpkgs, the
-    # GTK it links mismatches this system's compositor and it dies with Wayland
-    # error 71. (Its third_party/ghostty submodule is only needed for a plain
-    # zig build; the nix package takes ghostty from its own flake input.)
+    # The nixpkgs follows keeps renux off its own pinned unstable, but unstable's
+    # GTK 4.24 still breaks it under Hyprland 0.57 (Wayland error 71) — see the
+    # overrideAttrs in hosts/nixos/pangolin/configuration.nix, which rebuilds it
+    # against stable's GTK. This follows cannot point at "nixpkgs": stable has no
+    # zig_0_17. (Its third_party/ghostty submodule is only needed for a plain zig
+    # build; the nix package takes ghostty from its own flake input.)
     renux.url = "github:alexandre-dos-reis/renux/undercurl";
     renux.inputs.nixpkgs.follows = "nixpkgs-unstable";
 

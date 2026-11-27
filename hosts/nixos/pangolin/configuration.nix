@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   pkgs,
+  pkgs-unstable,
   users,
   inputs,
   ...
@@ -110,7 +111,20 @@
     pavucontrol
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     kooha
-    inputs.renux.packages.${pkgs.stdenv.hostPlatform.system}.default
+    # Rebuilt against stable's GTK: renux's own flake takes everything from
+    # nixpkgs-unstable, whose GTK 4.24 binds ext_background_effect_manager_v1
+    # twice for one surface. Hyprland 0.57 rightly rejects the second
+    # get_background_effect with "BackgroundEffect already present", so renux
+    # dies on startup with Wayland error 71. GTK 4.22 has no background-effect
+    # code at all, so pinning the whole GTK stack to stable sidesteps it and
+    # matches the GTK every other app here uses. Only zig stays on unstable —
+    # it is the compiler, not a runtime dep, and stable has no zig_0_17, which
+    # is why `renux.inputs.nixpkgs.follows = "nixpkgs"` cannot work on its own.
+    # Drop this override once GTK stops double-binding the manager.
+    (inputs.renux.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (_: {
+      nativeBuildInputs = [pkgs-unstable.zig_0_17 pkgs.pkg-config pkgs.wrapGAppsHook4];
+      buildInputs = with pkgs; [gtk4 libadwaita librsvg poppler libepoxy fontconfig];
+    }))
   ];
 
   services.logind.settings.Login = {
