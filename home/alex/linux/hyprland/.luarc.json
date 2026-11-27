@@ -1,5 +1,0 @@
-{
-  "runtime.version": "LuaJIT",
-  "workspace.library": ["/home/alex/.config/hypr/stubs"],
-  "diagnostics.globals": ["hl"]
-}

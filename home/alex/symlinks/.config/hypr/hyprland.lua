@@ -257,8 +257,18 @@ hl.device({ name = "epic-mouse-v1", sensitivity = -0.5 })
 ---- AUTOSTART ----
 -------------------
 
--- dbus-update-activation-environment is handled by home-manager's systemd hook.
 hl.on("hyprland.start", function()
+	-- Hands the session env to systemd --user, then brings up
+	-- hyprland-session.target (declared in nix), which pulls in
+	-- graphical-session.target and with it every user service hanging off it.
+	-- home-manager's hyprland module used to generate this; the config dir is
+	-- ours now, so it lives here.
+	hl.exec_cmd(
+		"dbus-update-activation-environment --systemd DISPLAY HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE"
+			.. " && systemctl --user stop hyprland-session.target"
+			.. " && systemctl --user start hyprland-session.target"
+	)
+
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("swaync")
 	hl.exec_cmd("hyprpaper")

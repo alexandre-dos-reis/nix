@@ -1,57 +1,30 @@
-{
-  pkgs,
-  config,
-  inputs,
-  ...
-}: let
+{pkgs, ...}: let
   constants = import ../../constants.nix;
   colors = constants.colors.palette;
-
-  # Lua API stubs (hl.meta.lua) that ship with Hyprland, for lua_ls / LSP.
-  hyprStubs = "${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland}/share/hypr/stubs";
-
-  # Absolute path to the hand-maintained Lua config in this repo, symlinked live
-  # so edits apply on `hyprctl reload` without a rebuild.
-  repoLuaConfig = "${config.home.homeDirectory}/dev/nix-config/home/alex/linux/hyprland/config.lua";
-
-  monitors = {
-    laptop.name = "eDP-1";
-    lg.name = "DP-3"; # Plugged on the top left usbc input.
-  };
 in {
   imports = [./waybar.nix];
 
   wayland.windowManager.hyprland = {
-    # Hyprland 0.55+ Lua config. The actual config is hand-written in config.lua;
-    # home-manager only generates a thin hyprland.lua (systemd hook + require).
-    configType = "lua";
     enable = true;
+    configType = "lua";
     # package and portalPackage are backed by nixos
     package = null;
     portalPackage = null;
 
-    settings = {};
-
-    # Load the hand-maintained config. config.lua is symlinked into
-    # ~/.config/hypr below, and require() resolves it from there.
-    extraConfig = ''
-      package.path = package.path .. ";${config.home.homeDirectory}/.config/hypr/?.lua"
-      require("config")
-    '';
+    # Kept for hyprland-session.target and the portal wiring, not for the
+    # config: ~/.config/hypr is linked whole out of the repo by ../../symlinks,
+    # and home-manager refuses to install through that link. extraConfig only
+    # silences the module's "no configuration" warning — it lands in the file
+    # disabled just below, which is never written.
+    extraConfig = "-- Unused. The real config is hyprland.lua, hand-written in ../../symlinks/.config/hypr.";
   };
 
-  # Live-editable Lua config: edits to the repo file apply on `hyprctl reload`.
-  xdg.configFile."hypr/config.lua".source =
-    config.lib.file.mkOutOfStoreSymlink repoLuaConfig;
-
-  # --- LSP support for editing config.lua ---
-  # Expose the Hyprland Lua stubs at a stable path and point lua_ls at them.
-  xdg.configFile."hypr/stubs".source = hyprStubs;
-  xdg.configFile."hypr/.luarc.json".text = builtins.toJSON {
-    "runtime.version" = "LuaJIT";
-    "workspace.library" = [hyprStubs];
-    "diagnostics.globals" = ["hl"];
-  };
+  # The one thing the module must not do. Everything else it sets up — the
+  # session target that starts graphical-session.target, xdg.portal — stays.
+  # hyprland.lua itself carries the dbus/systemctl start hook the generated
+  # file used to.
+  xdg.configFile."hypr/hyprland.lua".enable = false;
+  xdg.configFile."hypr/.luarc.json".enable = false;
 
   home.pointerCursor = {
     name = constants.cursor.theme;
@@ -70,43 +43,19 @@ in {
     };
   };
 
-  # Notifications daemon
-  services.swaync = {
-    enable = true;
-    settings = builtins.fromJSON (builtins.readFile ./swaync.json);
-    style = builtins.readFile ./swaync.css;
-  };
-
-  home.file.".config/hypr/files/solarized_dots.jpg".source = ../../files/wallpapers/solarized_dots.jpg;
-  home.file.".config/hypr/files/solarized_triangle.jpg".source = ../../files/wallpapers/solarized_triangle.jpg;
-
-  services.hyprpaper = {
-    enable = true;
-    settings = let
-      path = "~/.config/hypr/files";
-      dots_img = "${path}/solarized_dots.jpg";
-      triangle_img = "${path}/solarized_triangle.jpg";
-    in {
-      wallpaper = [
-        {
-          monitor = monitors.laptop.name;
-          path = triangle_img;
-        }
-        {
-          monitor = monitors.lg.name;
-          path = dots_img;
-        }
-      ];
-    };
-  };
-
   home.packages = with pkgs; [
+    # Notifications daemon. Configured by hand in ../../symlinks/.config/swaync
+    # and launched from hyprland.lua's start hook, so services.swaync would only
+    # add a second, racing launcher — same reasoning as hyprpaper below.
+    swaynotificationcenter
     clipse
     wl-clipboard
     hyprshot
     nautilus
     file-roller # Archive manager, MIME handler so Nautilus can open zip/tar/etc.
-    hyprpaper # services.hyprpaper doesn't seems to run launch hyprpaper
+    hyprpaper # launched from hyprland.lua's start hook, not services.hyprpaper:
+    # its unit starts at graphical-session.target, racing the
+    # dbus-update-activation-environment that gives it WAYLAND_DISPLAY
     brightnessctl # Control brightness display
     playerctl # Control audio
   ];
