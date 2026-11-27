@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Applying changes
 
-**NixOS hosts** (finishers, pangolin, raspie):
+**NixOS hosts** (pangolin):
 ```bash
 sudo nixos-rebuild switch --flake ".#<hostname>"
 # or with nh (preferred, configured in home/alex/programs/nh.nix):

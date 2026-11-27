@@ -49,8 +49,10 @@
     # against stable's GTK. This follows cannot point at "nixpkgs": stable has no
     # zig_0_17. (Its third_party/ghostty submodule is only needed for a plain zig
     # build; the nix package takes ghostty from its own flake input.)
-    renux.url = "github:alexandre-dos-reis/renux/undercurl";
-    renux.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    renux = {
+      url = "github:alexandre-dos-reis/renux/undercurl";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     # Editors
     vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
@@ -68,18 +70,8 @@
   in {
     nixosConfigurations = mkSystems [
       {
-        hostname = "finishers";
-        system = "x86_64-linux";
-        inherit users;
-      }
-      {
         hostname = "pangolin";
         system = "x86_64-linux";
-        inherit users;
-      }
-      {
-        hostname = "raspie";
-        system = "aarch64-linux";
         inherit users;
       }
     ];
