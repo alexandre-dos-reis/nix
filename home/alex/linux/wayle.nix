@@ -14,7 +14,7 @@
 # `nh os switch` rewrites config.toml but leaves the running unit on the old
 # one — follow it with `systemctl --user restart wayle`.
 {pkgs, ...}: let
-  constants = import ../../constants.nix;
+  constants = import ../constants.nix;
   colors = constants.colors.palette;
 
   # The font waybar used to run at 16px/400. It left with waybar.nix, so the

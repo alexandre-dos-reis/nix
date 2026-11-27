@@ -6,6 +6,7 @@
       makeHosts "dev.eurorack-3d.com" ["api" "admin" "assets" "minio" "email"]
       ++ makeHosts "everywhere-app.dev" ["api" "admin" "s3" "s3-console" "files" "emails" "inngest" "erd" "og" "storybook" "typesense"]
       ++ makeHosts "everywhere-jobs.dev" []
+      ++ makeHosts "reconature.dev" []
       ++ makeHosts "boudous-et-cie.dev" ["medias" "erd" "emails"];
   };
 

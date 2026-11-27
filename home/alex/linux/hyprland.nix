@@ -1,6 +1,5 @@
 {pkgs, ...}: let
-  constants = import ../../constants.nix;
-  colors = constants.colors.palette;
+  constants = import ../constants.nix;
 in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -53,33 +52,4 @@ in {
     brightnessctl # Control brightness display
     playerctl # Control audio
   ];
-
-  # App launcher. rofi 2.0 speaks Wayland natively — the old rofi-wayland fork
-  # was merged back into pkgs.rofi, so no override is needed here.
-  xdg.dataFile."rofi/themes/solarized.rasi".source = pkgs.replaceVars ./rofi.rasi {
-    font = constants.font;
-    bgColor = colors.base03-hex; # Background
-    fgColor = colors.base0-hex; # Foreground
-    mgColor = colors.base02-hex; # Selected row background
-    selectedColor = colors.cyan500-hex; # Selected row text, matching wayle's accent
-  };
-
-  programs.rofi = {
-    enable = true;
-    terminal = "${pkgs.ghostty}/bin/ghostty";
-    font = "${constants.font} 12";
-    modes = ["drun"];
-    # Referenced by name, not by path: home-manager's `theme` option treats any
-    # attrset as inline rasi, and a replaceVars derivation *is* an attrset, so
-    # handing it the derivation aborts the eval. Installing the file ourselves
-    # and naming it sidesteps that — rofi resolves bare names against
-    # $XDG_DATA_HOME/rofi/themes.
-    theme = "solarized";
-    extraConfig = {
-      show-icons = true;
-      drun-display-format = "{name}";
-      case-sensitive = false;
-      hide-scrollbar = true;
-    };
-  };
 }
