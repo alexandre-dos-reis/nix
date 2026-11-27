@@ -20,6 +20,10 @@
   # The font waybar used to run at 16px/400. It left with waybar.nix, so the
   # bar has to bring it back itself or fontconfig silently falls back.
   barFont = "CaskaydiaMono Nerd Font";
+
+  # Icon chips sit on the wallpaper-matching background rather than a lighter
+  # elevated token, so they read as cut out of the bar instead of raised.
+  iconBg = constants.colors.background;
 in {
   home.packages = [pkgs.nerd-fonts.caskaydia-mono];
 
@@ -60,70 +64,78 @@ in {
         ];
       };
 
-      # Every module below paints its icon in `accent` on a `bg-elevated` chip;
-      # the bar itself sits on `bg-base`. Both are tokens resolved out of
-      # styling.palette, not literal colors.
+      # Every module below paints its icon in the `accent` token on an `iconBg`
+      # chip; the bar itself sits on `bg-base`, which styling.palette resolves
+      # to that same color.
       modules = {
         battery = {
           border-color = "accent";
-          button-bg-color = "bg-elevated";
-          icon-bg-color = "bg-elevated";
+          button-bg-color = iconBg;
+          icon-bg-color = iconBg;
           icon-color = "accent";
           label-color = "accent";
         };
         bluetooth = {
-          icon-bg-color = "bg-elevated";
+          button-bg-color = iconBg;
+          icon-bg-color = iconBg;
           icon-color = "accent";
           label-color = "accent";
         };
         clock = {
           format = "%H:%M";
           dropdown-show-seconds = false;
-          icon-bg-color = "bg-elevated";
+          button-bg-color = iconBg;
+          icon-bg-color = iconBg;
           icon-color = "accent";
         };
         cpu = {
-          icon-bg-color = "bg-elevated";
+          button-bg-color = iconBg;
+          icon-bg-color = iconBg;
           icon-color = "accent";
           label-color = "accent";
         };
         dashboard = {
           border-color = "bg-elevated";
-          icon-bg-color = "bg-elevated";
+          button-bg-color = iconBg;
+          icon-bg-color = iconBg;
           icon-color = "accent";
         };
         network = {
-          icon-bg-color = "bg-elevated";
+          button-bg-color = iconBg;
+          icon-bg-color = iconBg;
           icon-color = "accent";
         };
         notifications = {
-          button-bg-color = "bg-elevated";
-          icon-bg-color = "bg-elevated";
+          button-bg-color = iconBg;
+          icon-bg-color = iconBg;
           icon-color = "accent";
           label-show = false;
           popup-position = "top-center";
         };
         ram = {
-          button-bg-color = "bg-elevated";
-          icon-bg-color = "bg-elevated";
+          button-bg-color = iconBg;
+          icon-bg-color = iconBg;
           icon-color = "accent";
           label-color = "accent";
         };
         storage = {
           mount-point = "/";
-          icon-bg-color = "bg-elevated";
+          button-bg-color = iconBg;
+          icon-bg-color = iconBg;
           icon-color = "accent";
           label-color = "accent";
         };
         volume = {
-          icon-bg-color = "bg-elevated";
+          button-bg-color = iconBg;
+          icon-bg-color = iconBg;
           icon-color = "accent";
           label-color = "accent";
         };
         weather = {
           location = "Blèves";
           units = "metric";
-          icon-bg-color = "bg-elevated";
+          icon-bg-color = iconBg;
+          button-bg-color = iconBg;
           icon-color = "accent";
         };
       };
