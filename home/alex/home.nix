@@ -11,9 +11,7 @@ in {
     ./programs
     ./packages.nix
     ./files
-    ./scripts
-    ./dotfiles
-    ./claude
+    ./symlinks
   ];
 
   # nixpkgs.config.allowUnfree = true;

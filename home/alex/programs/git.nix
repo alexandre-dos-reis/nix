@@ -34,8 +34,8 @@ in {
       # Renux rewrites settings.ini on every cd, and the [paths] group it writes
       # is a recent-folders cache. The filter keeps that group out of what git
       # stores, so the file stays tracked without a diff per cd. Bound to the
-      # file by dotfiles/renux/.gitattributes.
-      filter.renux-settings.clean = "${config.home.homeDirectory}/${flakeDir}/home/alex/dotfiles/renux/settings-clean.sh";
+      # file by symlinks/.config/renux/.gitattributes.
+      filter.renux-settings.clean = "${config.home.homeDirectory}/${flakeDir}/home/alex/symlinks/.config/renux/settings-clean.sh";
       # https://www.reddit.com/r/NixOS/comments/qwu3d1/confused_about_git_gnomekeyring_and_libsecret/
       # https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage
       credential.helper =
