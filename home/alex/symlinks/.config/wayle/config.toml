@@ -1,0 +1,123 @@
+# Hand-written, linked into ~/.config/wayle by ../../default.nix.
+#
+# The settings GUI (`wayle panel settings`) writes its edits to runtime.toml,
+# next to this file. To keep them, copy them here and delete runtime.toml so it
+# stops shadowing this file.
+
+# styling.palette, generated from the Nix palette by
+# ../../../linux/hyprland.nix. Wayle only expands $VAR in weather API keys, so
+# colors can't come from env vars. The path must be absolute: a relative one
+# would be resolved through the ~/.config/wayle symlink.
+imports = ["/home/alex/.config/wayle-palette.toml"]
+
+# The font waybar used to run at 16px/400. It left with waybar.nix, so the
+# bar has to bring it back itself or fontconfig silently falls back.
+[general]
+font-mono = "CaskaydiaMono Nerd Font"
+font-sans = "CaskaydiaMono Nerd Font"
+
+[bar]
+bg = "bg-base"
+button-gap = 1.65
+# Wayle has no px font size — label text is this multiplier off the
+# theme's base size. 0.8 lands near waybar's old 16px, and "normal"
+# matches the 400 weight it used instead of wayle's semibold default.
+button-icon-size = 0.8
+button-label-padding = 0.6
+button-label-size = 0.8
+button-label-weight = "normal"
+button-variant = "basic"
+padding = 0.5
+
+# "*" covers both eDP-1 and DP-3; a per-monitor layout would be an
+# extra entry with `extends = "*"`.
+[[bar.layout]]
+center = []
+left = ["dashboard", "ram", "cpu", "storage", "battery"]
+monitor = "*"
+right = ["bluetooth", "volume", "network", "weather", "notifications", "systray", "clock"]
+show = true
+
+# Every module below paints its icon in the `accent` token on a `bg-base`
+# chip, the same color as the bar, so chips read as cut out of it instead of
+# raised.
+[modules.battery]
+border-color = "accent"
+button-bg-color = "bg-base"
+icon-bg-color = "bg-base"
+icon-color = "accent"
+label-color = "accent"
+
+[modules.bluetooth]
+button-bg-color = "bg-base"
+icon-bg-color = "bg-base"
+icon-color = "accent"
+label-color = "accent"
+
+[modules.clock]
+button-bg-color = "bg-base"
+dropdown-show-seconds = false
+format = "%H:%M"
+icon-bg-color = "bg-base"
+icon-color = "accent"
+
+[modules.cpu]
+button-bg-color = "bg-base"
+icon-bg-color = "bg-base"
+icon-color = "accent"
+label-color = "accent"
+
+[modules.dashboard]
+border-color = "bg-elevated"
+button-bg-color = "bg-base"
+icon-bg-color = "bg-base"
+icon-color = "accent"
+
+[modules.network]
+button-bg-color = "bg-base"
+icon-bg-color = "bg-base"
+icon-color = "accent"
+
+[modules.notifications]
+button-bg-color = "bg-base"
+icon-bg-color = "bg-base"
+icon-color = "accent"
+label-show = false
+popup-position = "top-center"
+
+[modules.ram]
+button-bg-color = "bg-base"
+icon-bg-color = "bg-base"
+icon-color = "accent"
+label-color = "accent"
+
+[modules.storage]
+button-bg-color = "bg-base"
+icon-bg-color = "bg-base"
+icon-color = "accent"
+label-color = "accent"
+mount-point = "/"
+
+[modules.volume]
+button-bg-color = "bg-base"
+icon-bg-color = "bg-base"
+icon-color = "accent"
+label-color = "accent"
+
+[modules.weather]
+button-bg-color = "bg-base"
+icon-bg-color = "bg-base"
+icon-color = "accent"
+location = "Blèves"
+units = "metric"
+
+# Volume / brightness / caps-lock overlay, so the keybinds in
+# hyprland.lua get feedback without a separate swayosd.
+[osd]
+enabled = true
+position = "bottom"
+
+[styling]
+# Dropdowns and popovers, which don't follow bar.scale.
+scale = 0.9
+theme-provider = "wayle"
