@@ -269,8 +269,8 @@ hl.on("hyprland.start", function()
 			.. " && systemctl --user start hyprland-session.target"
 	)
 
-	hl.exec_cmd("waybar")
-	hl.exec_cmd("swaync")
+	-- waybar and swaync are gone: wayle covers the bar, the notification
+	-- daemon and the OSD, started by the session target above.
 	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("clipse -listen")
 	hl.exec_cmd("hyprctl setcursor Bibata-Modern-Ice 32")

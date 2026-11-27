@@ -65,7 +65,8 @@
       value = {
         isNormalUser = true;
         description = u.fullname;
-        extraGroups = ["networkmanager" "wheel" "audio" "video"];
+        # "input" lets wayle read the keyboard LEDs for its caps/num-lock OSD.
+        extraGroups = ["networkmanager" "wheel" "audio" "video" "input"];
       };
     })
     users);

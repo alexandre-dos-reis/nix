@@ -2,8 +2,6 @@
   constants = import ../../constants.nix;
   colors = constants.colors.palette;
 in {
-  imports = [./waybar.nix];
-
   wayland.windowManager.hyprland = {
     enable = true;
     configType = "lua";
@@ -44,10 +42,6 @@ in {
   };
 
   home.packages = with pkgs; [
-    # Notifications daemon. Configured by hand in ../../symlinks/.config/swaync
-    # and launched from hyprland.lua's start hook, so services.swaync would only
-    # add a second, racing launcher — same reasoning as hyprpaper below.
-    swaynotificationcenter
     clipse
     wl-clipboard
     hyprshot
