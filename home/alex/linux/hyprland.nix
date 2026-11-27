@@ -9,8 +9,43 @@
   paletteVars = lib.mapAttrs' (name: value:
     lib.nameValuePair "PALETTE_${lib.toUpper (lib.removeSuffix "-hex" name)}" value)
   (lib.filterAttrs (name: _: lib.hasSuffix "-hex" name) constants.colors.palette);
+
+  colors = constants.colors.palette;
 in {
   home.sessionVariables = paletteVars;
+
+  # Wayle replaces waybar (bar), swaync (notification daemon) and the volume /
+  # brightness OSD in one shell. It runs as a systemd user service hanging off
+  # wayland.systemd.target (graphical-session.target), which hyprland.lua's start
+  # hook brings up *after* dbus-update-activation-environment, so unlike
+  # hyprpaper it gets WAYLAND_DISPLAY and needs no exec_cmd of its own.
+  #
+  # No `settings`: config.toml is hand-written in ../symlinks/.config/wayle.
+  # After changing it or the palette, if the bar doesn't pick it up:
+  # `systemctl --user restart wayle`.
+  services.wayle = {
+    enable = true;
+    # Soft deps pulled in from the config: nothing extra while theme-provider
+    # is "wayle" and the wallpaper engine is off (hyprpaper still owns that).
+    autoInstallDependencies = true;
+  };
+
+  # Imported by wayle's config.toml. It sits outside ~/.config/wayle because
+  # that whole directory is a link into the repo.
+  xdg.configFile."wayle-palette.toml".source = (pkgs.formats.toml {}).generate "wayle-palette.toml" {
+    styling.palette = {
+      bg = constants.colors.background;
+      surface = colors.base03-hex;
+      elevated = colors.base02-hex;
+      fg = colors.base0-hex;
+      fg-muted = colors.base01-hex;
+      primary = colors.cyan500-hex;
+      red = colors.red500-hex;
+      yellow = colors.yellow500-hex;
+      green = colors.green500-hex;
+      blue = colors.blue500-hex;
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -56,6 +91,7 @@ in {
     # was merged back into pkgs.rofi, so no override is needed here. Not
     # programs.rofi: the config is hand-written in ../symlinks/.config/rofi.
     rofi
+    nerd-fonts.caskaydia-mono # wayle's font, set in its config.toml
     clipse
     wl-clipboard
     hyprshot
