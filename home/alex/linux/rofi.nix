@@ -1,15 +1,16 @@
-{pkgs, ...}: let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   constants = import ../constants.nix;
-  colors = constants.colors.palette;
 
-  # Palette entries the theme reads from the environment.
-  themeColors = ["base0" "base02" "base03" "cyan500"];
+  # Every hex color of the palette, e.g. base0-hex -> PALETTE_BASE0.
+  paletteVars = lib.mapAttrs' (name: value:
+    lib.nameValuePair "PALETTE_${lib.toUpper (lib.removeSuffix "-hex" name)}" value)
+  (lib.filterAttrs (name: _: lib.hasSuffix "-hex" name) constants.colors.palette);
 in {
-  home.sessionVariables = builtins.listToAttrs (map (name: {
-      name = "PALETTE_${pkgs.lib.toUpper name}";
-      value = colors."${name}-hex";
-    })
-    themeColors);
+  home.sessionVariables = paletteVars;
 
   # App launcher. rofi 2.0 speaks Wayland natively — the old rofi-wayland fork
   # was merged back into pkgs.rofi, so no override is needed here. Not
